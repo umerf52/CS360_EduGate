@@ -2,4 +2,5 @@
 
 Welcome to devalopment part devalopers. 
 
-Now get your ass to work.
+
+May the odds be ever in your favour.
