@@ -3,5 +3,6 @@
     <string name="emailpassword_status_fmt">Email User: %1$s (verified: %2$b)</string>
     <string name="firebase_status_fmt">Firebase User: %s</string>
     <string name="already_have_an_account"><u>Already Have An Account?</u></string>
-    <string name="degree_prompt"><u>Select last degree you finished</u></string>
+    <string name="account_already_exists_firebase_error">The email address is already in use by another account.</string>
+    <string name="forgot_password"><u>Forgot Your Password?</u></string>
 </resources>

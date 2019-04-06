@@ -3,8 +3,6 @@ package com.apps.edu_gate;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -29,10 +27,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mEmailField = findViewById(R.id.fieldEmail3);
-        mPasswordField = findViewById(R.id.fieldPassword3);
+        mEmailField = findViewById(R.id.fieldEmail);
+        mPasswordField = findViewById(R.id.fieldPassword);
 
-        findViewById(R.id.loginbutton).setOnClickListener(this);
+        findViewById(R.id.loginButton).setOnClickListener(this);
 
         FirebaseApp.initializeApp(this);
         mAuth = FirebaseAuth.getInstance();
@@ -115,6 +113,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
-        loginuser(mEmailField.getText().toString(), mPasswordField.getText().toString());
+        int i = v.getId();
+        if (i == R.id.loginButton) {
+            loginuser(mEmailField.getText().toString(), mPasswordField.getText().toString());
+        } else if (i == R.id.signupButton) {
+            Intent myIntent = new Intent(LoginActivity.this, SignupEmailPasswordActivity.class);
+            LoginActivity.this.startActivity(myIntent);
+        }
     }
 }

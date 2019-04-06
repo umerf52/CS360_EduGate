@@ -47,8 +47,6 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="20dp"
         android:entries="@array/degreeOptions"
-        android:prompt="@string/degree_prompt"
-        android:spinnerMode="dialog"
         app:layout_constraintBottom_toTopOf="@+id/institution"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
