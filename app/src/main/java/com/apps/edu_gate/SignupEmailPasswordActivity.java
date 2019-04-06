@@ -61,7 +61,6 @@ public class SignupEmailPasswordActivity extends BaseActivity implements
 
         // Buttons
         findViewById(R.id.emailCreateAccountButton).setOnClickListener(this);
-        findViewById(R.id.signOutButton).setOnClickListener(this);
 
         // [START initialize_auth]
         // Initialize Firebase Auth
@@ -119,13 +118,6 @@ public class SignupEmailPasswordActivity extends BaseActivity implements
                     }
                 });
         // [END create_user_with_email]
-    }
-
-    private void signOut() {
-        mAuth.signOut();
-        updateUI(null);
-        Toast.makeText(SignupEmailPasswordActivity.this, "Signed Out",
-                Toast.LENGTH_SHORT).show();
     }
 
     private void sendEmailVerification() {
@@ -196,8 +188,6 @@ public class SignupEmailPasswordActivity extends BaseActivity implements
         int i = v.getId();
         if (i == R.id.emailCreateAccountButton) {
             createAccount(mEmailField.getText().toString(), mPasswordField.getText().toString());
-        } else if (i == R.id.signOutButton) {
-            signOut();
         } else if (i == R.id.accountAlreadyExists) {
             Intent myIntent = new Intent(SignupEmailPasswordActivity.this, LoginActivity.class);
             SignupEmailPasswordActivity.this.startActivity(myIntent);

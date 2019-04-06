@@ -104,7 +104,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         if (user != null) {
             Toast.makeText(LoginActivity.this,
                     "User signed in: " + user.getEmail(), Toast.LENGTH_SHORT).show();
-            Intent myIntent = new Intent(LoginActivity.this, TutorProfile.class);
+            Intent myIntent = new Intent(LoginActivity.this, TutorProfileActivity.class);
             LoginActivity.this.startActivity(myIntent);
         } else {
 

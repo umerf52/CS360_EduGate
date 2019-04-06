@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".TutorProfile"
+            android:name=".TutorProfileActivity"
             android:label="Tutor Profile"></activity>
         <activity
             android:name=".SignupEducationActivity"
