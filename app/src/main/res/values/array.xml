@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="genderOptions">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+    <string-array name="degreeOptions">
+        <item>O Levels</item>
+        <item>A Levels</item>
+        <item>Matriculation</item>
+        <item>Intermediate</item>
+        <item>Bachelors</item>
+        <item>Masters</item>
+        <item>Doctorate</item>
+    </string-array>
+
+    <string-array name="gradeOptions">
+        <item>Primary</item>
+        <item>Secondary</item>
+        <item>Higher Secondary</item>
+        <item>Matriculation</item>
+        <item>O Levels</item>
+        <item>Intermediate</item>
+        <item>A Levels</item>
+        <item>Bachelors</item>
+        <item>Masters</item>
+        <item>Doctorate</item>
+    </string-array>
+
+    <string-array name="subjectOptions">
+        <item>Maths</item>
+        <item>English</item>
+        <item>Urdu</item>
+        <item>General Science</item>
+        <item>Physics</item>
+        <item>Chemistry</item>
+        <item>Biology</item>
+        <item>Computer Science</item>
+        <item>Calculus</item>
+        <item>Accounting</item>
+        <item>Other</item>
+    </string-array>
+</resources>

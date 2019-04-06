@@ -10,13 +10,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".SignupEducationActivity"
+            android:label="Educational Information"></activity>
+        <activity
+            android:name=".SignupPersonalActivity"
+            android:label="Personal Information" />
+        <activity android:name=".SignupEmailPasswordActivity" />
+        <activity
             android:name=".SearchActivity"
             android:label="Search"
-            android:parentActivityName="com.apps.edu_gate.StartupActivity"></activity>
+            android:parentActivityName=".StartupActivity" />
         <activity
             android:name=".LoginActivity"
             android:label="Login"
-            android:parentActivityName="com.apps.edu_gate.StartupActivity"></activity>
+            android:parentActivityName=".StartupActivity" />
         <activity android:name=".StartupActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

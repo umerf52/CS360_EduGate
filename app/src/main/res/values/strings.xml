@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Edu-Gate</string>
+    <string name="emailpassword_status_fmt">Email User: %1$s (verified: %2$b)</string>
+    <string name="firebase_status_fmt">Firebase User: %s</string>
+    <string name="already_have_an_account"><u>Already Have An Account?</u></string>
+    <string name="degree_prompt"><u>Select last degree you finished</u></string>
 </resources>
