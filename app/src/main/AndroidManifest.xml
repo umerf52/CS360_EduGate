@@ -18,7 +18,9 @@
         <activity
             android:name=".SignupPersonalActivity"
             android:label="Personal Information" />
-        <activity android:name=".SignupEmailPasswordActivity" />
+        <activity
+            android:name=".SignupEmailPasswordActivity"
+            android:label="Sign Up" />
         <activity
             android:name=".SearchActivity"
             android:label="Search"
