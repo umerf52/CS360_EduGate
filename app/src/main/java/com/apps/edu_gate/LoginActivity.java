@@ -138,5 +138,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             Intent myIntent = new Intent(LoginActivity.this, SignupEmailPasswordActivity.class);
             LoginActivity.this.startActivity(myIntent);
         }
+        else if (i == R.id.forgotPassword){
+            Intent myintent = new Intent(LoginActivity.this, ForgotPassword.class);
+            LoginActivity.this.startActivity(myintent);
+        }
     }
 }
