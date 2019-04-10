@@ -36,6 +36,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class SignupEmailPasswordActivity extends BaseActivity implements
         View.OnClickListener {
 
@@ -79,52 +82,19 @@ public class SignupEmailPasswordActivity extends BaseActivity implements
     }
     // [END on_start_check_user]
 
-    private void createAccount(String email, String password) {
-        Log.d(TAG, "createAccount:" + email);
-        if (!validateForm()) {
-            return;
-        }
+    public static boolean isValidPassword(final String password) {
 
-        showProgressDialog();
+        Pattern pattern;
+        Matcher matcher;
+        final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{4,}$";
+        pattern = Pattern.compile(PASSWORD_PATTERN);
+        matcher = pattern.matcher(password);
 
-        // [START create_user_with_email]
-        mAuth.createUserWithEmailAndPassword(email, password).
-                addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
+        return matcher.matches();
 
-                        if (!task.isSuccessful()) {
-                            Toast.makeText(SignupEmailPasswordActivity.this, "Error making account.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                })
-                .addOnFailureListener(this, new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.d(TAG, e.getMessage());
-                        hideProgressDialog();
-                        new AlertDialog.Builder(SignupEmailPasswordActivity.this)
-                                .setTitle("Account already exists")
-                                .setMessage(e.getMessage())
-
-                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        // Continue with delete operation
-                                    }
-                                })
-                                .show();
-                    }
-                });
-        // [END create_user_with_email]
     }
 
     private void sendEmailVerification() {
-        // Disable button
-
-        // Send verification email
-        // [START send_email_verification]
         final FirebaseUser user = mAuth.getCurrentUser();
         user.sendEmailVerification()
                 .addOnCompleteListener(this, new OnCompleteListener<Void>() {
@@ -143,32 +113,51 @@ public class SignupEmailPasswordActivity extends BaseActivity implements
                                     "Failed to send verification email.",
                                     Toast.LENGTH_SHORT).show();
                         }
-                        // [END_EXCLUDE]
                     }
                 });
-        // [END send_email_verification]
     }
 
-    private boolean validateForm() {
-        boolean valid = true;
-
-        String email = mEmailField.getText().toString();
-        if (TextUtils.isEmpty(email)) {
-            mEmailField.setError("Required.");
-            valid = false;
-        } else {
-            mEmailField.setError(null);
+    private void createAccount(String email, String password) {
+        Log.d(TAG, "createAccount:" + email);
+        if (!validateForm()) {
+            return;
         }
 
-        String password = mPasswordField.getText().toString();
-        if (TextUtils.isEmpty(password)) {
-            mPasswordField.setError("Required.");
-            valid = false;
-        } else {
-            mPasswordField.setError(null);
-        }
+        showProgressDialog();
 
-        return valid;
+        // [START create_user_with_email]
+        mAuth.createUserWithEmailAndPassword(email, password).
+                addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
+
+                        if (!task.isSuccessful()) {
+                            Toast.makeText(SignupEmailPasswordActivity.this, "Error making account.",
+                                    Toast.LENGTH_SHORT).show();
+                        } else {
+                            sendEmailVerification();
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            updateUI(user);
+                        }
+                    }
+                })
+                .addOnFailureListener(this, new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d(TAG, e.getMessage());
+                        hideProgressDialog();
+                        new AlertDialog.Builder(SignupEmailPasswordActivity.this)
+                                .setTitle("Error")
+                                .setMessage(e.getMessage())
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                    }
+                                })
+                                .show();
+                    }
+                });
+        // [END create_user_with_email]
     }
 
     private void updateUI(FirebaseUser user) {
@@ -192,5 +181,40 @@ public class SignupEmailPasswordActivity extends BaseActivity implements
             Intent myIntent = new Intent(SignupEmailPasswordActivity.this, LoginActivity.class);
             SignupEmailPasswordActivity.this.startActivity(myIntent);
         }
+    }
+
+    private boolean validateForm() {
+        boolean valid = true;
+
+        String email = mEmailField.getText().toString();
+        if (TextUtils.isEmpty(email)) {
+            mEmailField.setError("Required.");
+            valid = false;
+        } else {
+            mEmailField.setError(null);
+        }
+        if (!isEmailValid(email)) {
+            mEmailField.setError("Invalid email address.");
+            valid = false;
+        }
+
+        String password = mPasswordField.getText().toString();
+        if (TextUtils.isEmpty(password)) {
+            mPasswordField.setError("Required.");
+            valid = false;
+        } else {
+            mPasswordField.setError(null);
+        }
+
+//        if(!isValidPassword(password)) {
+//            mPasswordField.setError("Password requirements not met.");
+//            valid = false;
+//        }
+
+        return valid;
+    }
+
+    boolean isEmailValid(CharSequence email) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 }

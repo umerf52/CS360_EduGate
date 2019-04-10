@@ -1,8 +1,10 @@
 package com.apps.edu_gate;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -61,7 +63,23 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "Login:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
+                            if (user.isEmailVerified()) {
+                                Log.d(TAG, "This was a verified user");
+                                updateUI(user);
+                            } else {
+                                Log.d(TAG, "UNVERIFIED USER");
+                                new AlertDialog.Builder(LoginActivity.this)
+                                        .setTitle("Email not verified")
+                                        .setMessage("Your account has not been verified yet.\nCheck the email sent to you to verify your account.")
+                                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int which) {
+                                            }
+                                        })
+                                        .show();
+                                mAuth.signOut();
+                                updateUI(null);
+                            }
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "Login Failed:failure", task.getException());
