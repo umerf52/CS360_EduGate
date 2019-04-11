@@ -1,5 +1,6 @@
 package com.apps.edu_gate;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,9 +13,10 @@ import android.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class ForgotPassword extends AppCompatActivity {
+public class ForgotPassword extends BaseActivity implements View.OnClickListener {
 
 
     private EditText userEmail;
@@ -25,17 +27,18 @@ public class ForgotPassword extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
 
+        findViewById(R.id.resetPasswordButton).setOnClickListener(this);
         userEmail = findViewById(R.id.userEmail);
-
+        FirebaseApp.initializeApp(this);
         firebaseAuth = FirebaseAuth.getInstance();
     }
 
 
-    public void resetPassword(View v){
-        if (!validateInput()){
-            return;
-        }
-        firebaseAuth.sendPasswordResetEmail(userEmail.getText().toString())
+    public void resetPassword(String email){
+//        if (!validateInput()){
+//            return;
+//        }
+        firebaseAuth.sendPasswordResetEmail(email)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -63,5 +66,12 @@ public class ForgotPassword extends AppCompatActivity {
             userEmail.setError(null);
         }
         return temp;
+    }
+
+    @Override
+    public void onClick(View v) {
+        resetPassword(userEmail.getText().toString());
+        Intent myIntent = new Intent(ForgotPassword.this, LoginActivity.class);
+        ForgotPassword.this.startActivity(myIntent);
     }
 }

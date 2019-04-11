@@ -26,6 +26,10 @@
             android:label="Search"
             android:parentActivityName=".StartupActivity" />
         <activity
+            android:name=".ForgotPassword"
+            android:label="Forgot"
+            android:parentActivityName=".LoginActivity" />
+        <activity
             android:name=".LoginActivity"
             android:label="Login"
             android:parentActivityName=".StartupActivity" />
