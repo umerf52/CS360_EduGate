@@ -139,7 +139,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             LoginActivity.this.startActivity(myIntent);
         }
         else if (i == R.id.forgotPassword){
-            Intent myintent = new Intent(LoginActivity.this, ForgotPassword.class);
+            Intent myintent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
             LoginActivity.this.startActivity(myintent);
         }
     }

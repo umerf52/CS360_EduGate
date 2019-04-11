@@ -206,6 +206,11 @@ public class SignupEmailPasswordActivity extends BaseActivity implements
             mPasswordField.setError(null);
         }
 
+        if (password.length() < 8) {
+            mPasswordField.setError("Password should be 8 characters long.");
+            valid = false;
+        }
+
 //        if(!isValidPassword(password)) {
 //            mPasswordField.setError("Password requirements not met.");
 //            valid = false;

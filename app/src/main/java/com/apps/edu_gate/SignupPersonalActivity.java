@@ -28,14 +28,14 @@ public class SignupPersonalActivity extends BaseActivity {
         mAddress = (EditText) findViewById(R.id.houseAddress);
         mContact = (EditText) findViewById(R.id.phoneNumber);
 
-        mNextButton = findViewById(R.id.nextButton);
+        mNextButton = findViewById(R.id.finishButton);
 
         mContact.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
     }
 
     public void onClick(View v) {
         int i = v.getId();
-        if (i == R.id.nextButton) {
+        if (i == R.id.finishButton) {
             Intent myIntent = new Intent(SignupPersonalActivity.this, SignupEducationActivity.class);
             SignupPersonalActivity.this.startActivity(myIntent);
         }

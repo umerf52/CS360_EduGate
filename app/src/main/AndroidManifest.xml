@@ -11,23 +11,26 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".TutorProfileActivity"
-            android:label="Tutor Profile"></activity>
+            android:label="Tutor Profile"
+            android:parentActivityName=".StartupActivity"></activity>
         <activity
             android:name=".SignupEducationActivity"
-            android:label="Educational Information" />
+            android:label="Educational Information"
+            android:parentActivityName=".SignupPersonalActivity" />
         <activity
             android:name=".SignupPersonalActivity"
             android:label="Personal Information" />
         <activity
             android:name=".SignupEmailPasswordActivity"
-            android:label="Sign Up" />
+            android:label="Sign Up"
+            android:parentActivityName=".LoginActivity" />
         <activity
             android:name=".SearchActivity"
             android:label="Search"
             android:parentActivityName=".StartupActivity" />
         <activity
-            android:name=".ForgotPassword"
-            android:label="Forgot"
+            android:name=".ForgotPasswordActivity"
+            android:label="Forgot Password"
             android:parentActivityName=".LoginActivity" />
         <activity
             android:name=".LoginActivity"
