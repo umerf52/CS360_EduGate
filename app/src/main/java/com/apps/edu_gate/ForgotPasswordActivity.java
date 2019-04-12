@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -16,7 +17,7 @@ import androidx.annotation.NonNull;
 
 public class ForgotPasswordActivity extends BaseActivity implements View.OnClickListener {
 
-
+    private TextInputLayout inputLayoutEmail;
     private EditText userEmail;
     private FirebaseAuth firebaseAuth;
 
@@ -27,6 +28,7 @@ public class ForgotPasswordActivity extends BaseActivity implements View.OnClick
 
         findViewById(R.id.resetPasswordButton).setOnClickListener(this);
         userEmail = findViewById(R.id.userEmail);
+        inputLayoutEmail = (TextInputLayout) findViewById(R.id.userEmailLayout);
 
         FirebaseApp.initializeApp(this);
         firebaseAuth = FirebaseAuth.getInstance();
@@ -37,10 +39,12 @@ public class ForgotPasswordActivity extends BaseActivity implements View.OnClick
         if (!validateInput()) {
             return;
         }
+        showProgressDialog();
         firebaseAuth.sendPasswordResetEmail(email)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
+                        hideProgressDialog();
                         if(task.isSuccessful()){
                             Toast.makeText(ForgotPasswordActivity.this,
                                     "Password reset link sent to your email", Toast.LENGTH_LONG).show();
@@ -58,15 +62,18 @@ public class ForgotPasswordActivity extends BaseActivity implements View.OnClick
     private boolean validateInput(){
         boolean valid = true;
 
-        String email = userEmail.getText().toString();
+        String email = userEmail.getText().toString().trim();
         if (TextUtils.isEmpty(email)) {
-            userEmail.setError("Required.");
+            inputLayoutEmail.setErrorEnabled(true);
+            inputLayoutEmail.setError("Required");
             valid = false;
         } else if (!isEmailValid(email)) {
-            userEmail.setError("Invalid email address.");
+            inputLayoutEmail.setErrorEnabled(true);
+            inputLayoutEmail.setError("Invalid email address");
             valid = false;
         } else {
-            userEmail.setError(null);
+            inputLayoutEmail.setErrorEnabled(false);
+            inputLayoutEmail.setError(null);
         }
         return valid;
     }
