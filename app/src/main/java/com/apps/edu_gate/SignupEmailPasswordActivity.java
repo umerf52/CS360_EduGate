@@ -19,8 +19,6 @@ package com.apps.edu_gate;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -38,6 +36,9 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 
 public class SignupEmailPasswordActivity extends BaseActivity implements
         View.OnClickListener {
