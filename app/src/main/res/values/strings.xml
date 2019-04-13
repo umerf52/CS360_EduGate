@@ -5,4 +5,12 @@
     <string name="already_have_an_account"><u>Already Have An Account?</u></string>
     <string name="account_already_exists_firebase_error">The email address is already in use by another account.</string>
     <string name="forgot_password"><u>Forgot Your Password?</u></string>
+    <string name="search_prompt">Search By</string>
+
+    <string-array name="search_items">
+        <item>Class</item>
+        <item>Subject</item>
+        <item>Location</item>
+        <item>Name</item>
+    </string-array>
 </resources>
