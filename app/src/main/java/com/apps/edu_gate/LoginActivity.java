@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,13 +26,18 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private FirebaseAuth mAuth;
     private EditText mEmailField;
     private EditText mPasswordField;
+    private TextInputLayout emailLayout;
+    private TextInputLayout passwordLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mEmailField = findViewById(R.id.fieldEmail);
-        mPasswordField = findViewById(R.id.fieldPassword);
+        mEmailField = findViewById(R.id.email);
+        mPasswordField = findViewById(R.id.password);
+        emailLayout = (TextInputLayout) findViewById(R.id.emailLayout);
+        passwordLayout = (TextInputLayout) findViewById(R.id.passwordLayout);
 
         findViewById(R.id.loginButton).setOnClickListener(this);
 
@@ -101,17 +107,21 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
         String email = mEmailField.getText().toString();
         if (TextUtils.isEmpty(email)) {
-            mEmailField.setError("Required.");
+            emailLayout.setErrorEnabled(true);
+            emailLayout.setError("Required");
             valid = false;
         } else {
+            emailLayout.setErrorEnabled(false);
             mEmailField.setError(null);
         }
 
         String password = mPasswordField.getText().toString();
         if (TextUtils.isEmpty(password)) {
-            mPasswordField.setError("Required.");
+            passwordLayout.setErrorEnabled(true);
+            passwordLayout.setError("Required");
             valid = false;
         } else {
+            passwordLayout.setErrorEnabled(false);
             mPasswordField.setError(null);
         }
 

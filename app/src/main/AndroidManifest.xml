@@ -24,12 +24,9 @@
             android:name=".SignupEmailPasswordActivity"
             android:label="Sign Up"
             android:parentActivityName=".LoginActivity" />
-        <activity android:name=".SearchActivity" android:parentActivityName=".StartupActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <activity
+            android:name=".SearchActivity"
+            android:parentActivityName=".StartupActivity">
         </activity>
         <activity
             android:name=".ForgotPasswordActivity"

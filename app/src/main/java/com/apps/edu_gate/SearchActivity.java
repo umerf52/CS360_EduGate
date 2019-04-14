@@ -1,13 +1,12 @@
 package com.apps.edu_gate;
 
 import android.os.Bundle;
-
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Toast;
-import android.view.View.OnClickListener;
-import android.view.View;
 
 
 
@@ -23,8 +22,6 @@ public class SearchActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         searchView = findViewById(R.id.searchBar);
-        searchView.setQueryHint("Search View");
-        searchView.setIconifiedByDefault(false);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -53,7 +50,7 @@ public class SearchActivity extends BaseActivity {
     public void addListenerOnButton() {
 
         spinner1 = (Spinner) findViewById(R.id.spinner1);
-        btnSubmit = (Button) findViewById(R.id.search);
+        btnSubmit = (Button) findViewById(R.id.searchButton);
         btnSubmit.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {

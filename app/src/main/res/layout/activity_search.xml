@@ -7,20 +7,24 @@
 
     <SearchView
         android:id="@+id/searchBar"
-        android:layout_width="wrap_content"
-        android:elevation="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="#fff"
-        android:layout_height="wrap_content">
-    </SearchView>
+        android:elevation="5dp"
+        android:iconifiedByDefault="false"
+        android:queryHint="Search" />
     <Spinner
         android:id="@+id/spinner1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:entries="@array/search_items"
         android:prompt="@string/search_prompt" />
+
     <Button
-        android:id="@+id/search"
+        android:id="@+id/searchButton"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical"
         android:text="Search" />
 </LinearLayout>
