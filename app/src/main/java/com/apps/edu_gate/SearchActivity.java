@@ -8,13 +8,15 @@ import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 
 public class SearchActivity extends BaseActivity {
 
     SearchView searchView;
     private Spinner spinner1;
-    private Button btnSubmit;
+    private Button searchButton;
     String searching;
 
     @Override
@@ -28,9 +30,12 @@ public class SearchActivity extends BaseActivity {
                 searching = query;
                 if(searching != null && !searching.isEmpty()){
                     Toast.makeText(getBaseContext(),String.valueOf(spinner1.getSelectedItem())+ query, Toast.LENGTH_LONG).show();
+                    Query q = FirebaseDatabase.getInstance().getReference("Tutors")
+                            .orderByChild(String.valueOf(spinner1.getSelectedItem()))
+                            .equalTo(searching);
                 }
                 else{
-                    Toast.makeText(getBaseContext(),"Please add item to search!", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getBaseContext(),"Please add item to search!", Toast.LENGTH_LONG).show();
                 }
 
                 return false;
@@ -50,12 +55,15 @@ public class SearchActivity extends BaseActivity {
     public void addListenerOnButton() {
 
         spinner1 = (Spinner) findViewById(R.id.spinner1);
-        btnSubmit = (Button) findViewById(R.id.searchButton);
-        btnSubmit.setOnClickListener(new OnClickListener() {
+        searchButton = (Button) findViewById(R.id.searchButton);
+        searchButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(searching != null && !searching.isEmpty()){
                     Toast.makeText(SearchActivity.this,String.valueOf(spinner1.getSelectedItem())+ searching, Toast.LENGTH_SHORT).show();
+                    Query q = FirebaseDatabase.getInstance().getReference("Tutors")
+                            .orderByChild(String.valueOf(spinner1.getSelectedItem()))
+                            .equalTo(searching);
                 }
                 else{
                     Toast.makeText(SearchActivity.this,"Please add item to search!", Toast.LENGTH_SHORT).show();

@@ -12,7 +12,7 @@
         <activity
             android:name=".TutorProfileActivity"
             android:label="Tutor Profile"
-            android:parentActivityName=".StartupActivity"></activity>
+            android:parentActivityName=".StartupActivity" />
         <activity
             android:name=".SignupEducationActivity"
             android:label="Educational Information"
@@ -25,9 +25,8 @@
             android:label="Sign Up"
             android:parentActivityName=".LoginActivity" />
         <activity
-            android:name=".SearchActivity"
-            android:parentActivityName=".StartupActivity">
-        </activity>
+            android:name=".SearchPageActivity"
+            android:parentActivityName=".StartupActivity"></activity>
         <activity
             android:name=".ForgotPasswordActivity"
             android:label="Forgot Password"

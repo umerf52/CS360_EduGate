@@ -29,7 +29,7 @@ public class StartupActivity extends AppCompatActivity {
 
         student_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent myIntent = new Intent(StartupActivity.this, SearchActivity.class);
+                Intent myIntent = new Intent(StartupActivity.this, SearchPageActivity.class);
                 StartupActivity.this.startActivity(myIntent);
             }
         });

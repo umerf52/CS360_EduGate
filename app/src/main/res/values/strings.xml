@@ -13,4 +13,5 @@
         <item>Location</item>
         <item>Name</item>
     </string-array>
+    <string name="title_activity_tutorattr">Tutorattr</string>
 </resources>
