@@ -1,5 +1,6 @@
 package com.apps.edu_gate;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.SearchView;
@@ -26,12 +27,10 @@ public class SearchPageActivity extends BaseActivity {
     private Spinner spinner1;
     String searching;
     private RecyclerView recyclerView;
-//    private TutorAdapter adapter;
     private List<Tutorinfo> tutorList;
 
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-//    DatabaseReference dbTutors;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +85,9 @@ public class SearchPageActivity extends BaseActivity {
             public void onItemClick(int position, View v) {
                 Tutorinfo x = tutorList.get(position);
                 Toast.makeText(getBaseContext(),"CLicked"+x.Address, Toast.LENGTH_LONG).show();
+                Intent myIntent = new Intent(SearchPageActivity.this, TutorSearchProfile.class);
+                myIntent.putExtra("result",x);
+                SearchPageActivity.this.startActivity(myIntent);
 //                Log.i(LOG_TAG, " Clicked on Item " + position);
             }
         });

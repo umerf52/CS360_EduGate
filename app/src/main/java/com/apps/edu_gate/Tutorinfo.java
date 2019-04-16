@@ -1,7 +1,10 @@
 package com.apps.edu_gate;
-public class Tutorinfo {
 
-    public String Name, Address;
+import java.io.Serializable;
+
+public class Tutorinfo implements Serializable {
+
+    public String Name, Address, Institution;
 
     public Tutorinfo() {
     }
