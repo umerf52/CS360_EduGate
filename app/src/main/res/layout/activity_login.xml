@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/relativeLayout"
@@ -13,19 +13,16 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/emailLayout"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="9dp"
-        android:layout_marginTop="231dp"
-        android:layout_marginEnd="9dp"
+        android:layout_gravity = "center_horizontal"
+        android:layout_marginTop="250dp"
         android:hint="Email"
         android:inputType="textEmailAddress"
         app:errorEnabled="true"
         app:hintAnimationEnabled="true"
         app:hintEnabled="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/email"
@@ -37,19 +34,14 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/passwordLayout"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="9dp"
-        android:layout_marginTop="21dp"
-        android:layout_marginEnd="9dp"
+        android:layout_below = "@id/emailLayout"
         android:hint="Password"
         app:endIconMode="password_toggle"
         app:errorEnabled="true"
         app:hintAnimationEnabled="true"
         app:hintEnabled="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailLayout"
         app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -63,39 +55,38 @@
     <Button
         android:id="@+id/loginButton"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="37dp"
+        android:layout_below="@id/passwordLayout"
+        android:layout_centerHorizontal="true"
         android:text="Sign in"
-        app:layout_constraintBottom_toTopOf="@+id/forgotPassword"
-        app:layout_constraintEnd_toEndOf="@+id/signupButton"
-        app:layout_constraintStart_toStartOf="@+id/signupButton" />
+         />
 
 
     <TextView
         android:id="@+id/forgotPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="6dp"
-        android:layout_marginBottom="193dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/loginButton"
+        android:layout_alignParentRight="true"
         android:clickable="true"
         android:focusable="true"
         android:onClick="onClick"
         android:text="@string/forgot_password"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:textColor="@android:color/holo_blue_dark" />
 
     <Button
         android:id="@+id/signupButton"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="31dp"
+
         android:onClick="onClick"
         android:text="Sign Up for a Tutor Account"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"/>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</android.widget.RelativeLayout>

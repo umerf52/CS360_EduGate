@@ -19,7 +19,8 @@
             android:parentActivityName=".SignupPersonalActivity" />
         <activity
             android:name=".SignupPersonalActivity"
-            android:label="Personal Information" />
+            android:label="Personal Information"
+            />
         <activity
             android:name=".SignupEmailPasswordActivity"
             android:label="Sign Up"
