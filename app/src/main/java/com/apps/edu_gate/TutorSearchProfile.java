@@ -29,8 +29,6 @@ public class TutorSearchProfile extends AppCompatActivity {
     TextView address;
     TextView ins;
     View itemView;
-    Intent i = getIntent();
-    Tutorinfo x = (Tutorinfo)i.getSerializableExtra("result");
 
     private RecyclerView recyclerView;
     private List<Admininfo> adminList;
@@ -42,6 +40,8 @@ public class TutorSearchProfile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Tutorinfo x = (Tutorinfo) getIntent().getSerializableExtra("result");
         setContentView(R.layout.activity_tutor_search_profile);
         fname = (TextView) itemView.findViewById(R.id.person_fname);
         fname.setText(x.Name);

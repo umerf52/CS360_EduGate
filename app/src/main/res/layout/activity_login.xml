@@ -1,101 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="10dp"
-    android:paddingTop="12dp"
-    android:paddingRight="10dp"
-    android:paddingBottom="12dp"
     tools:context=".LoginActivity">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/emailLayout"
-        android:layout_width="0dp"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="9dp"
-        android:layout_marginTop="231dp"
-        android:layout_marginEnd="9dp"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
-        app:errorEnabled="true"
-        app:hintAnimationEnabled="true"
-        app:hintEnabled="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_centerInParent="true">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/email"
+        <TextView
+            android:id="@+id/tv_login"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Login"
+            android:textColor="@color/black"
+            android:textSize="30sp" />
+
+        <LinearLayout
+            android:id="@+id/linlay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:padding="8dp" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_below="@id/tv_login"
+            android:layout_marginTop="58dp"
+            android:orientation="vertical">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/passwordLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="9dp"
-        android:layout_marginTop="21dp"
-        android:layout_marginEnd="9dp"
-        android:hint="Password"
-        app:endIconMode="password_toggle"
-        app:errorEnabled="true"
-        app:hintAnimationEnabled="true"
-        app:hintEnabled="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailLayout"
-        app:passwordToggleEnabled="true">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/password"
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="5dp"
+                    android:hint="Email"
+                    android:id="@+id/email"
+                    android:background="@drawable/et"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:id="@+id/password"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/et"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/loginButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:padding="8dp" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_below="@+id/linlay"
+            android:layout_marginTop="50dp"
+            android:text="Sign In"
+            android:textAllCaps="false"
+            android:background="@drawable/btn"
+            android:textColor="@color/white"
+            android:paddingLeft="100dp"
+            android:paddingRight="100dp"
+            android:layout_centerHorizontal="true"
+            android:textSize="16sp"/>
 
-    <Button
-        android:id="@+id/loginButton"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="37dp"
-        android:text="Sign in"
-        app:layout_constraintBottom_toTopOf="@+id/forgotPassword"
-        app:layout_constraintEnd_toEndOf="@+id/signupButton"
-        app:layout_constraintStart_toStartOf="@+id/signupButton" />
+        android:layout_alignParentBottom="true">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="100dp"
+            android:text="Forgot Your Password?"
+            android:onClick="onClick"
+            android:focusable="true"
+            android:id="@+id/forgotPassword"
+            android:textAllCaps="false"
+            android:textColor="@color/gradEnd" />
 
-    <TextView
-        android:id="@+id/forgotPassword"
-        android:layout_width="wrap_content"
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="6dp"
-        android:layout_marginBottom="193dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:onClick="onClick"
-        android:text="@string/forgot_password"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_alignParentBottom="true">
 
-    <Button
-        android:id="@+id/signupButton"
-        style="@style/Widget.AppCompat.Button.Borderless.Colored"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="31dp"
-        android:onClick="onClick"
-        android:text="Sign Up for a Tutor Account"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/signupButton"
+            android:layout_height="wrap_content"
+            android:text="Sign Up with a Tutor Account"
+            android:onClick="onClick"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="60dp"/>
 
+    </RelativeLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
