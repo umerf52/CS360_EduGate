@@ -1,6 +1,7 @@
 package com.apps.edu_gate;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -25,9 +26,11 @@ public class SearchPageActivity extends BaseActivity {
     private Spinner spinner1;
     String searching;
     private RecyclerView recyclerView;
-    private TutorAdapter adapter;
+//    private TutorAdapter adapter;
     private List<Tutorinfo> tutorList;
 
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 //    DatabaseReference dbTutors;
 
     @Override
@@ -37,10 +40,12 @@ public class SearchPageActivity extends BaseActivity {
         setContentView(R.layout.activity_search_page);
         recyclerView = findViewById(R.id.rv);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(mLayoutManager);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         tutorList = new ArrayList<>();
-        adapter = new TutorAdapter(this, tutorList);
-        recyclerView.setAdapter(adapter);
+        mAdapter = new TutorAdapter(this, tutorList);
+        recyclerView.setAdapter(mAdapter);
 
 //        dbTutors = FirebaseDatabase.getInstance().getReference("Tutors");
         spinner1 = (Spinner) findViewById(R.id.spinner1);
@@ -58,7 +63,7 @@ public class SearchPageActivity extends BaseActivity {
                     q.addListenerForSingleValueEvent(valueEventListener);
                 }
                 else{
-//                    Toast.makeText(getBaseContext(),"Please add item to search!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getBaseContext(),"Please add item to search!", Toast.LENGTH_LONG).show();
                 }
 
                 return false;
@@ -72,6 +77,20 @@ public class SearchPageActivity extends BaseActivity {
             }
         });
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ((TutorAdapter) mAdapter).setOnItemClickListener(new TutorAdapter.MyClickListener() {
+            @Override
+            public void onItemClick(int position, View v) {
+                Tutorinfo x = tutorList.get(position);
+                Toast.makeText(getBaseContext(),"CLicked"+x.Address, Toast.LENGTH_LONG).show();
+//                Log.i(LOG_TAG, " Clicked on Item " + position);
+            }
+        });
+    }
+
     ValueEventListener valueEventListener = new ValueEventListener() {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
@@ -81,7 +100,7 @@ public class SearchPageActivity extends BaseActivity {
                     Tutorinfo tutor = snapshot.getValue(Tutorinfo.class);
                     tutorList.add(tutor);
                 }
-                adapter.notifyDataSetChanged();
+                mAdapter.notifyDataSetChanged();
             }
         }
 
@@ -91,5 +110,3 @@ public class SearchPageActivity extends BaseActivity {
         }
     };
 }
-
-
