@@ -41,4 +41,11 @@
         <item>Accounting</item>
         <item>Other</item>
     </string-array>
+
+    <!--<string-array name="search_items">-->
+        <!--<item>Class</item>-->
+        <!--<item>Grade</item>-->
+        <!--<item>Name</item>-->
+        <!--<item>Location</item>-->
+    <!--</string-array>-->
 </resources>
