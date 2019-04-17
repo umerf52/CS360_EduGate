@@ -8,10 +8,10 @@
     <string name="search_prompt">Search By</string>
 
     <string-array name="search_items">
-        <item>Class</item>
+        <item>Name</item>
         <item>Subject</item>
         <item>Address</item>
-        <item>Name</item>
+        <item>Class</item>
     </string-array>
     <string name="title_activity_tutorattr">Tutorattr</string>
 </resources>

@@ -1,17 +1,14 @@
 package com.apps.edu_gate;
 
 import android.content.Intent;
-import android.hardware.camera2.TotalCaptureResult;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -30,7 +27,7 @@ public class SignupEducationActivity extends AppCompatActivity {
     private EditText mTuitionLocation;
     private FirebaseAuth mAuth;
 
-    DatabaseReference databaseTutor;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +47,7 @@ public class SignupEducationActivity extends AppCompatActivity {
         mTuitionLocation = (EditText) findViewById(R.id.location);
 
         FirebaseApp.initializeApp(this);
-        mAuth = FirebaseAuth.getInstance();
-        databaseTutor = FirebaseDatabase.getInstance().getReference("Tutors");
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Tutors");
     }
 
     public void onClick(View v) {
@@ -61,8 +57,9 @@ public class SignupEducationActivity extends AppCompatActivity {
 
         int i = v.getId();
         if (i == R.id.finishButton) {
-            //addTutor();
-            //mAuth.signOut();
+            mAuth = FirebaseAuth.getInstance();
+            addTutor();
+            mAuth.signOut();
             Intent myIntent = new Intent(SignupEducationActivity.this, StartupActivity.class);
             SignupEducationActivity.this.startActivity(myIntent);
         }
@@ -70,19 +67,18 @@ public class SignupEducationActivity extends AppCompatActivity {
 
 
     private void addTutor(){
-        Log.d("msg", "addtutor() trigggered");
         String Institution = mInstitution.getText().toString();
         String Location = mTuitionLocation.getText().toString();
 
-        FirebaseUser user = mAuth.getCurrentUser();
-        //String id = databaseTutor.push().getKey();
+        String key = databaseReference.push().getKey();
 
         Tutor tutor = new Tutor(FirstName, LastName, CnicNo, Address, ContactNo,
                 Gender, Institution, Location);
 
-        databaseTutor.setValue(tutor);
+        tutor.setKey(key);
+
+        databaseReference.child(key).setValue(tutor);
         Toast.makeText(this, "Profile data stored", Toast.LENGTH_LONG).show();
-        Log.d("msg", "left addtutor()");
     }
 
 

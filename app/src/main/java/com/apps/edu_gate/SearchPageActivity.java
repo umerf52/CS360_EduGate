@@ -2,6 +2,7 @@ package com.apps.edu_gate;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.SearchView;
 import android.widget.Spinner;
@@ -9,7 +10,6 @@ import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
@@ -23,6 +23,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class SearchPageActivity extends BaseActivity {
 
+    private static final String TAG = "SearchPageActivity";
+
     SearchView searchView;
     private Spinner spinner1;
     String searching;
@@ -31,6 +33,25 @@ public class SearchPageActivity extends BaseActivity {
 
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    ValueEventListener valueEventListener = new ValueEventListener() {
+        @Override
+        public void onDataChange(DataSnapshot dataSnapshot) {
+            tutorList.clear();
+            if (dataSnapshot.exists()) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Tutorinfo tutor = snapshot.getValue(Tutorinfo.class);
+                    tutorList.add(tutor);
+                }
+                mAdapter.notifyDataSetChanged();
+            }
+            hideProgressDialog();
+        }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +75,7 @@ public class SearchPageActivity extends BaseActivity {
             public boolean onQueryTextSubmit(String query) {
                 searching = query;
                 if(searching != null && !searching.isEmpty()){
+                    showProgressDialog();
                     String s = String.valueOf(spinner1.getSelectedItem());
                     Toast.makeText(getBaseContext(),String.valueOf(spinner1.getSelectedItem())+ query, Toast.LENGTH_LONG).show();
                     Query q = FirebaseDatabase.getInstance().getReference("Tutors")
@@ -87,28 +109,10 @@ public class SearchPageActivity extends BaseActivity {
                 Toast.makeText(getBaseContext(),"CLicked"+x.Address, Toast.LENGTH_LONG).show();
                 Intent myIntent = new Intent(SearchPageActivity.this, TutorSearchProfile.class);
                 myIntent.putExtra("result",x);
+                Log.d(TAG, "I'm here");
                 SearchPageActivity.this.startActivity(myIntent);
 //                Log.i(LOG_TAG, " Clicked on Item " + position);
             }
         });
     }
-
-    ValueEventListener valueEventListener = new ValueEventListener() {
-        @Override
-        public void onDataChange(DataSnapshot dataSnapshot) {
-            tutorList.clear();
-            if (dataSnapshot.exists()) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Tutorinfo tutor = snapshot.getValue(Tutorinfo.class);
-                    tutorList.add(tutor);
-                }
-                mAdapter.notifyDataSetChanged();
-            }
-        }
-
-        @Override
-        public void onCancelled(DatabaseError databaseError) {
-
-        }
-    };
 }
