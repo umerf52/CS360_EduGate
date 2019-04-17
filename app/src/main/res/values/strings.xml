@@ -10,7 +10,7 @@
     <string-array name="search_items">
         <item>Class</item>
         <item>Subject</item>
-        <item>Location</item>
+        <item>Address</item>
         <item>Name</item>
     </string-array>
     <string name="title_activity_tutorattr">Tutorattr</string>
