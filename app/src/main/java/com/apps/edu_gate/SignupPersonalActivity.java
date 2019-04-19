@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.Dictionary;
 import java.util.Hashtable;
@@ -20,6 +21,7 @@ public class SignupPersonalActivity extends BaseActivity {
     private EditText mAddress;
     private Spinner mGender;
     private EditText mContact;
+    private String email;
 
     private Button mNextButton;
 
@@ -28,36 +30,42 @@ public class SignupPersonalActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_personal);
 
-        mFirstName = (EditText) findViewById(R.id.location);
-        mLastName = (EditText) findViewById(R.id.institution);
-        mCnicNumber = (EditText) findViewById(R.id.cnicNumber);
-        mAddress = (EditText) findViewById(R.id.houseAddress);
-        mGender = (Spinner) findViewById(R.id.educationDropdown);
-        mContact = (EditText) findViewById(R.id.phoneNumber);
+        Intent prevIntent = getIntent();
 
-        mNextButton = findViewById(R.id.finishButton);
+        email = prevIntent.getStringExtra("email");
+        Toast.makeText(this, email, Toast.LENGTH_LONG).show();
+
+        mFirstName = (EditText) findViewById(R.id.first_name);
+        mLastName = (EditText) findViewById(R.id.institution);
+        mCnicNumber = (EditText) findViewById(R.id.cnic_number);
+        mAddress = (EditText) findViewById(R.id.house_address);
+        mGender = (Spinner) findViewById(R.id.my_education_dropdown);
+        mContact = (EditText) findViewById(R.id.contact_number);
+
+        mNextButton = findViewById(R.id.submit_button);
 
         mContact.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
     }
 
     public void onClick(View v) {
-        if (!validateForm()){
+        if (!validateForm()) {
             return;
         }
 
-        String FirstName = mFirstName.getText().toString();
-        String LastName = mLastName.getText().toString();
+        String FirstName = mFirstName.getText().toString().trim();
+        String LastName = mLastName.getText().toString().trim();
         String CnicNo = mCnicNumber.getText().toString();
-        String Address = mAddress.getText().toString();
+        String Address = mAddress.getText().toString().trim();
         String Gender = mGender.getSelectedItem().toString();
         String Contact = mContact.getText().toString();
 
         int i = v.getId();
-        if (i == R.id.finishButton) {
-            Dictionary<String, String> data = AddPresonalInfo();
+        if (i == R.id.submit_button) {
+//            Dictionary<String, String> data = AddPresonalInfo();
             Intent myIntent = new Intent(SignupPersonalActivity.this, SignupEducationActivity.class);
             myIntent.putExtra("Fname", FirstName);
             myIntent.putExtra("Lname", LastName);
+            myIntent.putExtra("email", email);
             myIntent.putExtra("Cnic", CnicNo);
             myIntent.putExtra("Address", Address);
             myIntent.putExtra("Gender", Gender);
@@ -66,11 +74,11 @@ public class SignupPersonalActivity extends BaseActivity {
         }
     }
 
-    private Dictionary<String, String> AddPresonalInfo(){
-        String FirstName = mFirstName.getText().toString();
-        String LastName = mLastName.getText().toString();
+    private Dictionary<String, String> AddPresonalInfo() {
+        String FirstName = mFirstName.getText().toString().trim();
+        String LastName = mLastName.getText().toString().trim();
         String CnicNo = mCnicNumber.getText().toString();
-        String Address = mAddress.getText().toString();
+        String Address = mAddress.getText().toString().trim();
         String Gender = mGender.getSelectedItem().toString();
         String Contact = mContact.getText().toString();
 
@@ -135,20 +143,6 @@ public class SignupPersonalActivity extends BaseActivity {
             mContact.setError(null);
         }
 
-//        if (password.length() < 8) {
-//            mPasswordField.setError("Password should be 8 characters long.");
-//            valid = false;
-//        }
-
-//        if(!isValidPassword(password)) {
-//            mPasswordField.setError("Password requirements not met.");
-//            valid = false;
-//        }
-
         return valid;
     }
-
-//    boolean isNameValid(CharSequence email) {
-//        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
-//    }
 }

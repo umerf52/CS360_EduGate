@@ -105,9 +105,9 @@ public class SignupEmailPasswordActivity extends BaseActivity implements
                         // Re-enable button
 
                         if (task.isSuccessful()) {
-                            Toast.makeText(SignupEmailPasswordActivity.this,
-                                    "Verification email sent to " + user.getEmail(),
-                                    Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(SignupEmailPasswordActivity.this,
+//                                    "Verification email sent to " + user.getEmail(),
+//                                    Toast.LENGTH_SHORT).show();
                         } else {
                             Log.e(TAG, "sendEmailVerification", task.getException());
                             Toast.makeText(SignupEmailPasswordActivity.this,
@@ -167,6 +167,8 @@ public class SignupEmailPasswordActivity extends BaseActivity implements
             Toast.makeText(SignupEmailPasswordActivity.this,
                     "User signed in: " + user.getEmail(), Toast.LENGTH_SHORT).show();
             Intent myIntent = new Intent(SignupEmailPasswordActivity.this, SignupPersonalActivity.class);
+            String email = mEmailField.getText().toString();
+            myIntent.putExtra("email", email);
             SignupEmailPasswordActivity.this.startActivity(myIntent);
         } else {
 
