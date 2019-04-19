@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.firebase.FirebaseApp;
@@ -23,9 +24,11 @@ public class SignupEducationActivity extends AppCompatActivity {
     String Address;
     String Gender;
     String ContactNo;
+    private String email;
     private EditText mInstitution;
     private EditText mTuitionLocation;
-    private FirebaseAuth mAuth;
+    private Spinner gradeDropdown;
+    private Spinner subjectDropdown;
 
     private DatabaseReference databaseReference;
 
@@ -38,13 +41,16 @@ public class SignupEducationActivity extends AppCompatActivity {
 
         FirstName = prevIntent.getStringExtra("Fname");
         LastName = prevIntent.getStringExtra("Lname");
+        email = prevIntent.getStringExtra("email");
         CnicNo = prevIntent.getStringExtra("Cnic");
         Address = prevIntent.getStringExtra("Address");
         Gender = prevIntent.getStringExtra("Gender");
         ContactNo = prevIntent.getStringExtra("Contact");
 
         mInstitution = (EditText) findViewById(R.id.institution);
-        mTuitionLocation = (EditText) findViewById(R.id.location);
+        mTuitionLocation = (EditText) findViewById(R.id.tuition_location);
+        gradeDropdown = findViewById(R.id.tuition_grade);
+        subjectDropdown = findViewById(R.id.tuition_subject);
 
         FirebaseApp.initializeApp(this);
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Tutors");
@@ -56,8 +62,8 @@ public class SignupEducationActivity extends AppCompatActivity {
         }
 
         int i = v.getId();
-        if (i == R.id.finishButton) {
-            mAuth = FirebaseAuth.getInstance();
+        if (i == R.id.submit_button) {
+            FirebaseAuth mAuth = FirebaseAuth.getInstance();
             addTutor();
             mAuth.signOut();
             Intent myIntent = new Intent(SignupEducationActivity.this, StartupActivity.class);
@@ -69,11 +75,13 @@ public class SignupEducationActivity extends AppCompatActivity {
     private void addTutor(){
         String Institution = mInstitution.getText().toString();
         String Location = mTuitionLocation.getText().toString();
+        String grade = gradeDropdown.getSelectedItem().toString();
+        String subject = subjectDropdown.getSelectedItem().toString();
 
         String key = databaseReference.push().getKey();
 
-        Tutor tutor = new Tutor(FirstName, LastName, CnicNo, Address, ContactNo,
-                Gender, Institution, Location);
+        Tutor tutor = new Tutor(FirstName, LastName, email, CnicNo, Address, ContactNo,
+                Gender, Institution, Location, grade, subject);
 
         tutor.setKey(key);
 
@@ -103,7 +111,5 @@ public class SignupEducationActivity extends AppCompatActivity {
 
         return valid;
     }
-
-
 
 }

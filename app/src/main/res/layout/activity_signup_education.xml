@@ -17,13 +17,13 @@
         android:hint="Institution"
         android:inputType="textPersonName"
         android:singleLine="true"
-        app:layout_constraintBottom_toTopOf="@+id/location"
+        app:layout_constraintBottom_toTopOf="@+id/tuition_location"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/educationDropdown" />
+        app:layout_constraintTop_toBottomOf="@+id/my_education_dropdown" />
 
     <EditText
-        android:id="@+id/location"
+        android:id="@+id/tuition_location"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -39,7 +39,7 @@
         app:layout_constraintTop_toBottomOf="@+id/institution" />
 
     <Spinner
-        android:id="@+id/educationDropdown"
+        android:id="@+id/my_education_dropdown"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -53,7 +53,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/finishButton"
+        android:id="@+id/submit_button"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -74,27 +74,27 @@
         android:text="Subjects and Grades"
         app:layout_constraintBottom_toTopOf="@+id/subjects_grades_layout"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/location" />
+        app:layout_constraintTop_toBottomOf="@+id/tuition_location" />
 
     <LinearLayout
         android:id="@+id/subjects_grades_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="195dp"
-        app:layout_constraintBottom_toTopOf="@+id/finishButton"
+        app:layout_constraintBottom_toTopOf="@+id/submit_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/subjects_grades">
 
         <Spinner
-            android:id="@+id/grade"
+            android:id="@+id/tuition_grade"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:entries="@array/gradeOptions" />
 
         <Spinner
-            android:id="@+id/subject"
+            android:id="@+id/tuition_subject"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
