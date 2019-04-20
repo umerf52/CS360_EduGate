@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AdminMainPageActivity">
+
+    <Button
+        android:id="@+id/delete_tutor_profile"
+        android:layout_width="169dp"
+        android:layout_height="118dp"
+        android:layout_marginStart="212dp"
+        android:layout_marginTop="46dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="85dp"
+        android:text="DELETE TUTOR PROFILE"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/change_password" />
+
+    <Button
+        android:id="@+id/add_new_administrator"
+        android:layout_width="169dp"
+        android:layout_height="118dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="46dp"
+        android:layout_marginEnd="27dp"
+        android:layout_marginBottom="85dp"
+        android:text="ADD NEW ADMINISTRATOR"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/delete_tutor_profile"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rate_tutor" />
+
+    <Button
+        android:id="@+id/search"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="169dp"
+        android:layout_height="118dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="204dp"
+        android:layout_marginEnd="27dp"
+        android:layout_marginBottom="31dp"
+        android:text="SEARCH"
+        app:layout_constraintBottom_toTopOf="@+id/rate_tutor"
+        app:layout_constraintEnd_toStartOf="@+id/verify_profile"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/rate_tutor"
+        android:layout_width="169dp"
+        android:layout_height="118dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="46dp"
+        android:layout_marginEnd="27dp"
+        android:layout_marginBottom="260dp"
+        android:text="RATE TUTOR"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/change_password"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search" />
+
+    <Button
+        android:id="@+id/verify_profile"
+        android:layout_width="169dp"
+        android:layout_height="118dp"
+        android:layout_marginStart="212dp"
+        android:layout_marginTop="204dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="31dp"
+        android:text="VERIFY PROFILES"
+        app:layout_constraintBottom_toTopOf="@+id/change_password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/change_password"
+        android:layout_width="169dp"
+        android:layout_height="118dp"
+        android:layout_marginStart="212dp"
+        android:layout_marginTop="46dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="260dp"
+        android:text="CHANGE PASSWORD"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.48"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/verify_profile" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
