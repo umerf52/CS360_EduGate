@@ -36,7 +36,7 @@ public class SignupPersonalActivity extends BaseActivity {
         Toast.makeText(this, email, Toast.LENGTH_LONG).show();
 
         mFirstName = (EditText) findViewById(R.id.first_name);
-        mLastName = (EditText) findViewById(R.id.institution);
+        mLastName = (EditText) findViewById(R.id.last_name);
         mCnicNumber = (EditText) findViewById(R.id.cnic_number);
         mAddress = (EditText) findViewById(R.id.house_address);
         mGender = (Spinner) findViewById(R.id.my_education_dropdown);
