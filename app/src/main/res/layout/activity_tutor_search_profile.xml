@@ -5,26 +5,102 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".TutorSearchProfile">
-    <TextView
-        android:id="@+id/person_fname"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Name"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+    <!--<TextView-->
+        <!--android:id="@+id/address"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Address"-->
+        <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/cnicNo"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="CNIC"-->
+        <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/contactNo"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Contact Number"-->
+        <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/email"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Email Address"-->
+        <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>-->
 
     <TextView
-        android:id="@+id/person_address"
+        android:id="@+id/fname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Address"
+        android:text="First Name"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
     <TextView
-        android:id="@+id/person_ins"
+        android:id="@+id/gender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Gender"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
+    <TextView
+        android:id="@+id/lname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Last Name"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
+    <TextView
+        android:id="@+id/institution"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Institution"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
+    <TextView
+        android:id="@+id/location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Location"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
+    <!--<TextView-->
+        <!--android:id="@+id/status"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Profile Status"-->
+        <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>-->
+
+    <TextView
+        android:id="@+id/grades"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Grades"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
+    <TextView
+        android:id="@+id/subject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Subjects"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
+    <TextView
+        android:id="@+id/rating"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Rating"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
+    <ImageView
+        android:id="@+id/imageTutor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
 
     <Button
         android:id="@+id/callbutton"

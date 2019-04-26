@@ -19,7 +19,7 @@
         android:hint="Email"
         android:inputType="textEmailAddress"
         app:errorEnabled="true"
-        app:hintAnimationEnabled="true"
+        app:hintAnimationEnabled="false"
         app:hintEnabled="true"
         >
 
@@ -41,7 +41,7 @@
         app:endIconMode="password_toggle"
         app:errorEnabled="true"
         app:hintAnimationEnabled="true"
-        app:hintEnabled="true"
+        app:hintEnabled="false"
         app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText

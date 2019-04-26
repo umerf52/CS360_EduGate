@@ -11,7 +11,6 @@ public class Tutorinfo implements Serializable {
     public HashMap<String, String> subject;
     public HashMap<String, Double> rating;
 
-
     public Tutorinfo() {
     }
 }

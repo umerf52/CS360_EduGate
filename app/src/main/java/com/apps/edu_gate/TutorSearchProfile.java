@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -23,8 +24,15 @@ public class TutorSearchProfile extends AppCompatActivity {
 
     Button forcall;
     TextView fname;
-    TextView address;
-    TextView ins;
+    TextView gender;
+    TextView lastname;
+    TextView instituion;
+    TextView location;
+    TextView grades;
+    TextView subjects;
+    TextView rating;
+    ImageView imageTutor;
+
     View itemView;
 
     private RecyclerView recyclerView;
@@ -38,12 +46,16 @@ public class TutorSearchProfile extends AppCompatActivity {
 
         Tutorinfo x = (Tutorinfo) getIntent().getSerializableExtra("result");
         setContentView(R.layout.activity_tutor_search_profile);
-        fname = (TextView) findViewById(R.id.person_fname);
-        fname.setText(x.Name);
-        address = (TextView) findViewById(R.id.person_address);
-        address.setText(x.Address);
-        ins = (TextView) findViewById(R.id.person_ins);
-        ins.setText(x.Institution);
+        fname = (TextView) findViewById(R.id.fname);
+        fname.setText(x.firstName);
+        gender = (TextView) findViewById(R.id.gender);
+        gender.setText(x.gender);
+        lastname = (TextView) findViewById(R.id.lname);
+        lastname.setText(x.lastName);
+        instituion = (TextView) findViewById(R.id.institution);
+        instituion.setText(x.recentInstitution);
+        location = (TextView) findViewById(R.id.location);
+        location.setText(x.tutionLocation);
         forcall = findViewById(R.id.callbutton);
         Query q = FirebaseDatabase.getInstance().getReference("Admin")
                 .orderByChild("Number");

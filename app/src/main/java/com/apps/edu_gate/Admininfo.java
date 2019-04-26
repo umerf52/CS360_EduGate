@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Admininfo implements Serializable {
 
-    public String Number;
+    public String number;
 
     public Admininfo() {
     }
