@@ -1,15 +1,20 @@
 package com.apps.edu_gate;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.w3c.dom.Text;
 
 public class TutorAdapter extends RecyclerView.Adapter<TutorAdapter.TutorViewHolder> {
 
@@ -21,12 +26,19 @@ public class TutorAdapter extends RecyclerView.Adapter<TutorAdapter.TutorViewHol
             implements View
             .OnClickListener {
         TextView fname;
-        TextView address;
+        TextView lname;
+        TextView institution;
+        TextView rating;
+        TextView location;
+//        TextView myimage;
 
         public TutorViewHolder(View itemView) {
             super(itemView);
-            fname = (TextView) itemView.findViewById(R.id.person_fname);
-            address = (TextView) itemView.findViewById(R.id.person_address);
+            fname = (TextView) itemView.findViewById(R.id.fname);
+            lname = (TextView) itemView.findViewById(R.id.lname);
+            institution = (TextView) itemView.findViewById(R.id.institution);
+            rating = (TextView) itemView.findViewById(R.id.rating);
+            location = (TextView) itemView.findViewById(R.id.location);
             itemView.setOnClickListener(this);
         }
 
@@ -55,8 +67,25 @@ public class TutorAdapter extends RecyclerView.Adapter<TutorAdapter.TutorViewHol
     @Override
     public void onBindViewHolder(@NonNull TutorViewHolder holder, int position) {
         Tutorinfo tutor = tutorList.get(position);
-        holder.fname.setText(tutor.Name);
-        holder.address.setText(tutor.Address);
+        Iterator it = tutor.rating.entrySet().iterator();
+        double x = 0;
+        int count = 0;
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry)it.next();
+            count++;
+            x = x + (double) pair.getValue();
+//            Log.d("TAG","grade: "+pair.getKey() +  " = "  + pair.getValue());
+            it.remove(); // avoids a ConcurrentModificationException
+        }
+        double avgrate = x/count;
+        String rate = String.valueOf(avgrate);
+        holder.fname.setText(tutor.firstName);
+        holder.location.setText(tutor.tuitionLocation);
+        holder.lname.setText(tutor.lastName);
+        holder.institution.setText(tutor.recentInstitution);
+        holder.rating.setText(rate);
+        tutor.tempr = avgrate;
+//        holder.instituttion.setText(tutor.urlImage);
     }
 
     @Override
