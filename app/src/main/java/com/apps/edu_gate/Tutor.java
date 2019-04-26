@@ -1,5 +1,7 @@
 package com.apps.edu_gate;
 
+import java.util.ArrayList;
+
 public class Tutor {
     private String mFirstName;
     private String mLastName;
@@ -12,15 +14,17 @@ public class Tutor {
     private String mEmailAddress;
     private int mProfileStatus;
     private String key;
-    private String mGrade;
-    private String mSubject;
+    private ArrayList<String> mGrade = new ArrayList<String>();
+    private ArrayList<String> mSubject = new ArrayList<String>();
+    private double mRating;
+    private int timesRated;
 
     public Tutor() {
     }
 
 
     public Tutor(String first_name, String last_name, String email, String cnic_no, String address, String contact_no,
-                 String gender, String recent_institution, String tuition_location, String grade, String subject) {
+                 String gender, String recent_institution, String tuition_location, ArrayList<String> grade, ArrayList<String> subject) {
         this.mFirstName = first_name;
         this.mLastName = last_name;
         this.mCnicNo = cnic_no;
@@ -30,9 +34,11 @@ public class Tutor {
         this.mRecentInstitution = recent_institution;
         this.mTuitionLocation = tuition_location;
         this.mProfileStatus = -1;
+        this.mEmailAddress = email;
         this.mGrade = grade;
         this.mSubject = subject;
-        this.mEmailAddress = email;
+        this.mRating = 5.0;
+        this.timesRated = 0;
     }
 
     public String getFirstName() {
@@ -55,11 +61,11 @@ public class Tutor {
         return mRecentInstitution;
     }
 
-    public String getGrade() {
+    public ArrayList<String> getGrade() {
         return mGrade;
     }
 
-    public String getSubject() {
+    public ArrayList<String> getSubject() {
         return mSubject;
     }
 
@@ -89,5 +95,13 @@ public class Tutor {
 
     public void setKey(String key) {
         this.key = key;
+    }
+
+    public double getRating() {
+        return mRating;
+    }
+
+    public float getTimesRated() {
+        return timesRated;
     }
 }

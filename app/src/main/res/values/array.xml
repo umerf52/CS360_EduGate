@@ -16,6 +16,7 @@
     </string-array>
 
     <string-array name="gradeOptions">
+        <item>Grade</item>
         <item>Primary</item>
         <item>Secondary</item>
         <item>Higher Secondary</item>
@@ -29,6 +30,7 @@
     </string-array>
 
     <string-array name="subjectOptions">
+        <item>Subject</item>
         <item>Maths</item>
         <item>English</item>
         <item>Urdu</item>

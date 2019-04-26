@@ -8,6 +8,9 @@ import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -16,9 +19,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 
 public class SearchPageActivity extends BaseActivity {
@@ -111,7 +111,6 @@ public class SearchPageActivity extends BaseActivity {
                 myIntent.putExtra("result",x);
                 Log.d(TAG, "I'm here");
                 SearchPageActivity.this.startActivity(myIntent);
-//                Log.i(LOG_TAG, " Clicked on Item " + position);
             }
         });
     }
