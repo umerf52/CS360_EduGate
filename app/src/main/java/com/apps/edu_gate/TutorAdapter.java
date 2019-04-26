@@ -69,7 +69,7 @@ public class TutorAdapter extends RecyclerView.Adapter<TutorAdapter.TutorViewHol
         Tutorinfo tutor = tutorList.get(position);
         Iterator it = tutor.rating.entrySet().iterator();
         double x = 0;
-        int count = 0;
+        double count = 0;
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry)it.next();
             count++;
@@ -78,13 +78,13 @@ public class TutorAdapter extends RecyclerView.Adapter<TutorAdapter.TutorViewHol
             it.remove(); // avoids a ConcurrentModificationException
         }
         double avgrate = x/count;
+        tutor.tempr = avgrate;
         String rate = String.valueOf(avgrate);
         holder.fname.setText(tutor.firstName);
         holder.location.setText(tutor.tuitionLocation);
         holder.lname.setText(tutor.lastName);
         holder.institution.setText(tutor.recentInstitution);
         holder.rating.setText(rate);
-        tutor.tempr = avgrate;
 //        holder.instituttion.setText(tutor.urlImage);
     }
 

@@ -13,12 +13,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class SearchPageActivity extends BaseActivity {
@@ -56,6 +59,101 @@ public class SearchPageActivity extends BaseActivity {
         }
     };
 
+    ValueEventListener valueEventListener2 = new ValueEventListener() {
+        @Override
+        public void onDataChange(DataSnapshot dataSnapshot) {
+            tutorList.clear();
+            if (dataSnapshot.exists()) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    String subjects = snapshot.child("subject").getValue(String.class);
+//
+                    if(subjects.length()>0){
+                        Log.e("dsdasd", subjects);
+                        String[] splited = subjects.split("-");
+                        for(int i=0; i<splited.length; i++){
+                            Log.e("lolz", splited[i]);
+                            if(searching.equals(splited[i])){
+                                Tutorinfo tutor = new Tutorinfo();
+                                tutor.grade = snapshot.child("grade").getValue(String.class);
+                                tutor.subject = subjects;
+                                tutor.address = snapshot.child("address").getValue(String.class);
+                                tutor.cnicNo = snapshot.child("cnicNo").getValue(String.class);
+                                tutor.contactNo = snapshot.child("contactNo").getValue(String.class);
+                                tutor.emailAddress = snapshot.child("emailAddress").getValue(String.class);
+                                tutor.firstName = snapshot.child("firstName").getValue(String.class);
+                                tutor.gender = snapshot.child("gender").getValue(String.class);
+                                tutor.lastName = snapshot.child("lastName").getValue(String.class);
+                                tutor.recentInstitution = snapshot.child("recentInstitution").getValue(String.class);
+                                tutor.tuitionLocation = snapshot.child("tuitionLocation").getValue(String.class);
+                                tutor.rating = (Map<String, Double>) snapshot.child("rating").getValue();
+                                tutorList.add(tutor);
+                                break;
+                            }
+                        }
+                    }
+                }
+                mAdapter.notifyDataSetChanged();
+            }
+            else{
+                Toast.makeText(getBaseContext(),"No such results!", Toast.LENGTH_LONG).show();
+            }
+            hideProgressDialog();
+        }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+
+        }
+    };
+
+    ValueEventListener valueEventListener3 = new ValueEventListener() {
+        @Override
+        public void onDataChange(DataSnapshot dataSnapshot) {
+            tutorList.clear();
+            if (dataSnapshot.exists()) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    String subjects = snapshot.child("grade").getValue(String.class);
+//
+                    if(subjects.length()>0){
+                        Log.e("dsdasd", subjects);
+                        String[] splited = subjects.split("-");
+                        for(int i=0; i<splited.length; i++){
+                            Log.e("lolz", splited[i]);
+                            if(searching.equals(splited[i])){
+                                Tutorinfo tutor = new Tutorinfo();
+                                tutor.grade = subjects;
+                                tutor.subject = snapshot.child("subject").getValue(String.class);
+                                tutor.address = snapshot.child("address").getValue(String.class);
+                                tutor.cnicNo = snapshot.child("cnicNo").getValue(String.class);
+                                tutor.contactNo = snapshot.child("contactNo").getValue(String.class);
+                                tutor.emailAddress = snapshot.child("emailAddress").getValue(String.class);
+                                tutor.firstName = snapshot.child("firstName").getValue(String.class);
+                                tutor.gender = snapshot.child("gender").getValue(String.class);
+                                tutor.lastName = snapshot.child("lastName").getValue(String.class);
+                                tutor.recentInstitution = snapshot.child("recentInstitution").getValue(String.class);
+                                tutor.tuitionLocation = snapshot.child("tuitionLocation").getValue(String.class);
+                                tutor.rating = (Map<String, Double>) snapshot.child("rating").getValue();
+                                tutorList.add(tutor);
+                                break;
+                            }
+                        }
+                    }
+                }
+                mAdapter.notifyDataSetChanged();
+            }
+            else{
+                Toast.makeText(getBaseContext(),"No such results!", Toast.LENGTH_LONG).show();
+            }
+            hideProgressDialog();
+        }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+
+        }
+    };
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +173,7 @@ public class SearchPageActivity extends BaseActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 searching = query;
+                searching = searching.toLowerCase();
                 if(searching != null && !searching.isEmpty()){
                     showProgressDialog();
                     String s = String.valueOf(spinner1.getSelectedItem());
@@ -89,10 +188,20 @@ public class SearchPageActivity extends BaseActivity {
                         s = "grade";
                     }
                     Toast.makeText(getBaseContext(), s+ query, Toast.LENGTH_LONG).show();
-                    Query q = FirebaseDatabase.getInstance().getReference("Tutors")
-                            .orderByChild(s)
-                            .equalTo(searching);
-                    q.addListenerForSingleValueEvent(valueEventListener);
+                    if(s.equals("firstName")||s.equals("tuitionLocation")){
+                        Query q = FirebaseDatabase.getInstance().getReference("Tutors")
+                                .orderByChild(s)
+                                .equalTo(searching);
+                        q.addListenerForSingleValueEvent(valueEventListener);
+                    }
+                    else if(s.equals("subject")){
+                        Query q = FirebaseDatabase.getInstance().getReference("Tutors");
+                        q.addListenerForSingleValueEvent(valueEventListener2);
+                    }
+                    else{
+                        Query q = FirebaseDatabase.getInstance().getReference("Tutors");
+                        q.addListenerForSingleValueEvent(valueEventListener3);
+                    }
                 }
                 else{
                     Toast.makeText(getBaseContext(),"Please add item to search!", Toast.LENGTH_LONG).show();
