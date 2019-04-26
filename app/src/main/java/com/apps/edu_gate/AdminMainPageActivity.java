@@ -63,7 +63,7 @@ public class AdminMainPageActivity extends AppCompatActivity {
         });
         change_password.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent myIntent = new Intent(AdminMainPageActivity.this, LoginActivity.class);
+                Intent myIntent = new Intent(AdminMainPageActivity.this, Change_password.class);
                 AdminMainPageActivity.this.startActivity(myIntent);
             }
         });
