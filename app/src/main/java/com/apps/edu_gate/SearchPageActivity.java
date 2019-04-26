@@ -106,7 +106,7 @@ public class SearchPageActivity extends BaseActivity {
             @Override
             public void onItemClick(int position, View v) {
                 Tutorinfo x = tutorList.get(position);
-                Toast.makeText(getBaseContext(),"CLicked"+x.address, Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(),"CLicked"+x.Address, Toast.LENGTH_LONG).show();
                 Intent myIntent = new Intent(SearchPageActivity.this, TutorSearchProfile.class);
                 myIntent.putExtra("result",x);
                 Log.d(TAG, "I'm here");

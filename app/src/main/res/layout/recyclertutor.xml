@@ -14,22 +14,41 @@
             android:orientation="vertical"
             android:padding="7dp">
 
-
             <TextView
-                android:id="@+id/person_fname"
+                android:id="@+id/fname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Name"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
-            <!--android:layout_toRightOf="@+id/person_photo"-->
-
-            <TextView
-                android:id="@+id/person_address"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Address"
+                android:text="First Name"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
-            <!--android:layout_toRightOf="@+id/person_photo" />-->
+
+            <TextView
+                android:id="@+id/lname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Last Name"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
+            <TextView
+                android:id="@+id/institution"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Institution"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
+            <TextView
+                android:id="@+id/location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Location"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
+            <TextView
+                android:id="@+id/rating"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Rating"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
