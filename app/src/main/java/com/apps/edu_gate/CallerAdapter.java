@@ -54,7 +54,7 @@ public class CallerAdapter extends RecyclerView.Adapter<CallerAdapter.CallerView
     @Override
     public void onBindViewHolder(@NonNull CallerAdapter.CallerViewHolder holder, int position) {
         Admininfo admin = adminList.get(position);
-        holder.number.setText(admin.Number);
+        holder.number.setText(admin.number);
     }
 
     @Override

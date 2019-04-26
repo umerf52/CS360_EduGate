@@ -5,12 +5,12 @@ import java.util.HashMap;
 
 public class Tutorinfo implements Serializable {
 
-    public String address, cnicNo, contactNo, emailAddress, firstName, gender, lastName, recentInstitution, tutionLocation, urlImage;
+    public String address, cnicNo, contactNo, emailAddress, firstName, gender, lastName, recentInstitution, tuitionLocation, urlImage;
     public int profileStatus;
     public HashMap<String, String> grade;
     public HashMap<String, String> subject;
     public HashMap<String, Double> rating;
-
+    public double tempr = 0;
     public Tutorinfo() {
     }
 }

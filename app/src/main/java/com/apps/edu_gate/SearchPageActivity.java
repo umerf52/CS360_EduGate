@@ -44,6 +44,9 @@ public class SearchPageActivity extends BaseActivity {
                 }
                 mAdapter.notifyDataSetChanged();
             }
+            else{
+                Toast.makeText(getBaseContext(),"No such results!", Toast.LENGTH_LONG).show();
+            }
             hideProgressDialog();
         }
 
@@ -62,12 +65,10 @@ public class SearchPageActivity extends BaseActivity {
         recyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         tutorList = new ArrayList<>();
         mAdapter = new TutorAdapter(this, tutorList);
         recyclerView.setAdapter(mAdapter);
 
-//        dbTutors = FirebaseDatabase.getInstance().getReference("Tutors");
         spinner1 = (Spinner) findViewById(R.id.spinner1);
         searchView = findViewById(R.id.searchBar);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -77,7 +78,17 @@ public class SearchPageActivity extends BaseActivity {
                 if(searching != null && !searching.isEmpty()){
                     showProgressDialog();
                     String s = String.valueOf(spinner1.getSelectedItem());
-                    Toast.makeText(getBaseContext(),String.valueOf(spinner1.getSelectedItem())+ query, Toast.LENGTH_LONG).show();
+                    s = s.toLowerCase();
+                    if(s.equals("name")){
+                        s = "firstName";
+                    }
+                    if(s.equals("address")){
+                        s = "tuitionLocation";
+                    }
+                    if(s.equals("class")){
+                        s = "grade";
+                    }
+                    Toast.makeText(getBaseContext(), s+ query, Toast.LENGTH_LONG).show();
                     Query q = FirebaseDatabase.getInstance().getReference("Tutors")
                             .orderByChild(s)
                             .equalTo(searching);
@@ -93,7 +104,6 @@ public class SearchPageActivity extends BaseActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
                 searching = newText;
-                //Toast.makeText(getBaseContext(), String.valueOf(spinner1.getSelectedItem())+ newText, Toast.LENGTH_LONG).show();
                 return false;
             }
         });
@@ -106,7 +116,6 @@ public class SearchPageActivity extends BaseActivity {
             @Override
             public void onItemClick(int position, View v) {
                 Tutorinfo x = tutorList.get(position);
-                Toast.makeText(getBaseContext(),"CLicked"+x.Address, Toast.LENGTH_LONG).show();
                 Intent myIntent = new Intent(SearchPageActivity.this, TutorSearchProfile.class);
                 myIntent.putExtra("result",x);
                 Log.d(TAG, "I'm here");
