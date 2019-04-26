@@ -4,10 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 
 public class AdminMainPageActivity extends AppCompatActivity {
+
+    private FirebaseAuth mAuth;
 
     Button search;
     Button verify_profile;
@@ -15,9 +22,15 @@ public class AdminMainPageActivity extends AppCompatActivity {
     Button change_password;
     Button add_new_administrator;
     Button delete_tutor_profile;
+    Button signoutButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        FirebaseApp.initializeApp(this);
+        mAuth = FirebaseAuth.getInstance();
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_main_page);
 
@@ -27,10 +40,12 @@ public class AdminMainPageActivity extends AppCompatActivity {
         change_password = findViewById(R.id.change_password);
         add_new_administrator = findViewById(R.id.add_new_administrator);
         delete_tutor_profile = findViewById(R.id.delete_tutor_profile);
+        signoutButton = findViewById(R.id.signoutButton);
+
 
         search.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent myIntent = new Intent(AdminMainPageActivity.this, LoginActivity.class);
+                Intent myIntent = new Intent(AdminMainPageActivity.this, SearchPageActivity.class);
                 AdminMainPageActivity.this.startActivity(myIntent);
             }
         });
@@ -64,6 +79,12 @@ public class AdminMainPageActivity extends AppCompatActivity {
                 AdminMainPageActivity.this.startActivity(myIntent);
             }
         });
+        signoutButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent myIntent = new Intent(AdminMainPageActivity.this, LoginActivity.class);
+                AdminMainPageActivity.this.startActivity(myIntent);
+            }
+        });
     }
 
     @Override
@@ -75,4 +96,27 @@ public class AdminMainPageActivity extends AppCompatActivity {
     }
 
 
+
+
+    private void updateUI(FirebaseUser user) {
+        if (user == null) {
+            Toast.makeText(AdminMainPageActivity.this, "Signed Out",
+                    Toast.LENGTH_SHORT).show();
+            Intent myIntent = new Intent(AdminMainPageActivity.this, StartupActivity.class);
+            AdminMainPageActivity.this.startActivity(myIntent);
+        }
+    }
+
+    public void onClick(View v) {
+        int i = v.getId();
+        if (i == R.id.signoutButton) {
+            signOut();
+        }
+    }
+
+    private void signOut() {
+        mAuth.signOut();
+        updateUI(null);
+    }
 }
+
