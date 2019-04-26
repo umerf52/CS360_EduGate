@@ -55,8 +55,8 @@ public class TutorAdapter extends RecyclerView.Adapter<TutorAdapter.TutorViewHol
     @Override
     public void onBindViewHolder(@NonNull TutorViewHolder holder, int position) {
         Tutorinfo tutor = tutorList.get(position);
-        holder.fname.setText(tutor.Name);
-        holder.address.setText(tutor.Address);
+        holder.fname.setText(tutor.firstName);
+        holder.address.setText(tutor.address);
     }
 
     @Override

@@ -81,8 +81,7 @@ public class AdminMainPageActivity extends AppCompatActivity {
         });
         signoutButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent myIntent = new Intent(AdminMainPageActivity.this, LoginActivity.class);
-                AdminMainPageActivity.this.startActivity(myIntent);
+               signOut();
             }
         });
     }
@@ -96,21 +95,12 @@ public class AdminMainPageActivity extends AppCompatActivity {
     }
 
 
-
-
     private void updateUI(FirebaseUser user) {
         if (user == null) {
             Toast.makeText(AdminMainPageActivity.this, "Signed Out",
                     Toast.LENGTH_SHORT).show();
             Intent myIntent = new Intent(AdminMainPageActivity.this, StartupActivity.class);
             AdminMainPageActivity.this.startActivity(myIntent);
-        }
-    }
-
-    public void onClick(View v) {
-        int i = v.getId();
-        if (i == R.id.signoutButton) {
-            signOut();
         }
     }
 
