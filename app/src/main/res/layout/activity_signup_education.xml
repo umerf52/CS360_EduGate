@@ -18,7 +18,28 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <LinearLayout
+                android:id="@+id/image_stuff"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/image_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add Image" />
+
+                <TextView
+                    android:id="@+id/image_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="FILE NAME" />
+
+            </LinearLayout>
+
             <EditText
+                android:layout_below="@id/image_stuff"
                 android:id="@+id/institution"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

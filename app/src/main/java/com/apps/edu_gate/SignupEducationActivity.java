@@ -1,32 +1,48 @@
 package com.apps.edu_gate;
 
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class SignupEducationActivity extends AppCompatActivity {
+public class SignupEducationActivity extends BaseActivity {
 
     ArrayList<Spinner> grade_spinners = new ArrayList<Spinner>();
     ArrayList<Spinner> subject_spinners = new ArrayList<Spinner>();
-    ArrayList<String> grade_values = new ArrayList<String>();
-    ArrayList<String> subject_values = new ArrayList<String>();
+//    ArrayList<String> grade_values = new ArrayList<String>();
+//    ArrayList<String> subject_values = new ArrayList<String>();
+
+    private static final int PICK_IMAGE_REQUEST = 1;
+    Uri profileImageUri;
+    Uri transcriptImageUri;
 
     String FirstName;
     String LastName;
@@ -34,9 +50,15 @@ public class SignupEducationActivity extends AppCompatActivity {
     String Address;
     String Gender;
     String ContactNo;
+    private StorageReference mStorageRef;
+    private StorageTask mUploadTask;
     private String email;
     private EditText mInstitution;
     private EditText mTuitionLocation;
+    private FirebaseAuth mAuth;
+    private String grade_values;
+    private String subject_values;
+    private TextView imageName;
 
     private DatabaseReference databaseReference;
 
@@ -56,52 +78,62 @@ public class SignupEducationActivity extends AppCompatActivity {
         Address = prevIntent.getStringExtra("Address");
         Gender = prevIntent.getStringExtra("Gender");
         ContactNo = prevIntent.getStringExtra("Contact");
+        String profileImageString = prevIntent.getStringExtra("myImageUriString");
+        profileImageUri = Uri.parse(profileImageString);
+
+        mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
 
         mInstitution = (EditText) findViewById(R.id.institution);
         mTuitionLocation = (EditText) findViewById(R.id.tuition_location);
         FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
+        Button imageButton = findViewById(R.id.image_button);
+        imageName = findViewById(R.id.image_name);
+
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFileChooser();
+            }
+        });
 
         FirebaseApp.initializeApp(this);
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Tutors");
     }
 
     public void onClick(View v) {
-        if(!validateForm()){
+        if (!validateForm()) {
             return;
         }
 
         int i = v.getId();
         if (i == R.id.submit_button) {
             if (!getSpinnerValues()) return;
-            FirebaseAuth mAuth = FirebaseAuth.getInstance();
+            mAuth = FirebaseAuth.getInstance();
             addTutor();
-            mAuth.signOut();
-            Intent myIntent = new Intent(SignupEducationActivity.this, StartupActivity.class);
-            SignupEducationActivity.this.startActivity(myIntent);
         } else if (i == R.id.fab) {
             addSpinners();
         }
     }
 
 
-    private void addTutor(){
+    private void addTutor() {
+        showProgressDialog();
         String Institution = mInstitution.getText().toString();
         String Location = mTuitionLocation.getText().toString();
-
-        String key = databaseReference.push().getKey();
 
         Tutor tutor = new Tutor(FirstName, LastName, email, CnicNo, Address, ContactNo,
                 Gender, Institution, Location, grade_values, subject_values);
 
-        tutor.setKey(key);
-
-        databaseReference.child(key).setValue(tutor);
-        Toast.makeText(this, "Profile data stored", Toast.LENGTH_LONG).show();
+        uploadFileProfile(profileImageUri, tutor);
     }
 
 
     private boolean validateForm() {
         boolean valid = true;
+
+        if (transcriptImageUri == null) {
+            valid = false;
+        }
 
         String Institute = mInstitution.getText().toString();
         if (TextUtils.isEmpty(Institute)) {
@@ -151,18 +183,18 @@ public class SignupEducationActivity extends AppCompatActivity {
     }
 
     private boolean getSpinnerValues() {
-        subject_values.clear();
-        grade_values.clear();
+        subject_values = "";
+        grade_values = "";
         Iterator i = grade_spinners.iterator();
         while (i.hasNext()) {
             Spinner tmp = (Spinner) i.next();
             String val = String.valueOf(tmp.getSelectedItem());
             if (val.equals("Grade")) {
                 Toast.makeText(this, "Invalid value for Grade", Toast.LENGTH_SHORT).show();
-                grade_values.clear();
+                grade_values = "";
                 return false;
             }
-            grade_values.add(String.valueOf(tmp.getSelectedItem()));
+            grade_values += ((String.valueOf(tmp.getSelectedItem()).toLowerCase()) + "-");
         }
 
         Iterator j = subject_spinners.iterator();
@@ -171,13 +203,114 @@ public class SignupEducationActivity extends AppCompatActivity {
             String val = String.valueOf(tmp.getSelectedItem());
             if (val.equals("Subject")) {
                 Toast.makeText(this, "Invalid value for Subject", Toast.LENGTH_SHORT).show();
-                subject_values.clear();
+                subject_values = "";
                 return false;
             }
-            subject_values.add(String.valueOf(tmp.getSelectedItem()));
+            subject_values += ((String.valueOf(tmp.getSelectedItem()).toLowerCase()) + "-");
         }
 
         return true;
     }
 
+    private void openFileChooser() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, PICK_IMAGE_REQUEST);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
+                && data != null && data.getData() != null) {
+            transcriptImageUri = data.getData();
+
+            String temp_filename = data.getData().getPath();
+            temp_filename = temp_filename.substring(temp_filename.lastIndexOf("/") + 1);
+            imageName.setText(temp_filename);
+        }
+    }
+
+    private String getFileExtension(Uri uri) {
+        ContentResolver cR = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(cR.getType(uri));
+    }
+
+    private void uploadFileProfile(final Uri fileUri, final Tutor tutor) {
+        if (fileUri != null) {
+            final StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
+                    + "." + getFileExtension(fileUri));
+
+            mUploadTask = fileReference.putFile(fileUri);
+
+            Task<Uri> urlTask = mUploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                @Override
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    if (!task.isSuccessful()) {
+                        throw task.getException();
+                    }
+                    return fileReference.getDownloadUrl();
+                }
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    if (task.isSuccessful()) {
+                        Uri downloadUri = task.getResult();
+                        tutor.setProfileImage(downloadUri.toString());
+
+                        uploadFileTranscript(transcriptImageUri, tutor);
+                    } else {
+                        hideProgressDialog();
+                        Toast.makeText(SignupEducationActivity.this, "Error uploading Profile Image",
+                                Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+        }
+    }
+
+    private void uploadFileTranscript(final Uri fileUri, final Tutor tutor) {
+        if (fileUri != null) {
+            final StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
+                    + "." + getFileExtension(fileUri));
+
+            mUploadTask = fileReference.putFile(fileUri);
+
+            Task<Uri> urlTask = mUploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                @Override
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    if (!task.isSuccessful()) {
+                        throw task.getException();
+                    }
+                    return fileReference.getDownloadUrl();
+                }
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    if (task.isSuccessful()) {
+                        Uri downloadUri = task.getResult();
+                        tutor.setTranscriptImage(downloadUri.toString());
+
+                        String key = databaseReference.push().getKey();
+                        tutor.setKey(key);
+                        databaseReference.child(key).setValue(tutor);
+
+                        hideProgressDialog();
+                        Toast.makeText(SignupEducationActivity.this, "Successfully added to database",
+                                Toast.LENGTH_LONG).show();
+                        mAuth.signOut();
+                        Intent myIntent = new Intent(SignupEducationActivity.this, LoginActivity.class);
+                        SignupEducationActivity.this.startActivity(myIntent);
+                    } else {
+                        hideProgressDialog();
+                        Toast.makeText(SignupEducationActivity.this, "Error uploading Transcript Image",
+                                Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+        }
+    }
 }

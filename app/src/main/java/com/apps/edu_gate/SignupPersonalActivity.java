@@ -1,6 +1,7 @@
 package com.apps.edu_gate;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.text.TextUtils;
@@ -8,10 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.Dictionary;
-import java.util.Hashtable;
 
 public class SignupPersonalActivity extends BaseActivity {
 
@@ -24,6 +23,10 @@ public class SignupPersonalActivity extends BaseActivity {
     private String email;
 
     private Button mNextButton;
+    private static final int PICK_IMAGE_REQUEST = 1;
+    private Button imageButton;
+    private TextView imageName;
+    private Uri mImageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +44,20 @@ public class SignupPersonalActivity extends BaseActivity {
         mAddress = (EditText) findViewById(R.id.house_address);
         mGender = (Spinner) findViewById(R.id.my_education_dropdown);
         mContact = (EditText) findViewById(R.id.contact_number);
+        imageButton = findViewById(R.id.image_button);
+        imageName = findViewById(R.id.image_name);
 
         mNextButton = findViewById(R.id.submit_button);
 
+
         mContact.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
+
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFileChooser();
+            }
+        });
     }
 
     public void onClick(View v) {
@@ -70,32 +83,18 @@ public class SignupPersonalActivity extends BaseActivity {
             myIntent.putExtra("Address", Address);
             myIntent.putExtra("Gender", Gender);
             myIntent.putExtra("Contact", Contact);
+            myIntent.putExtra("myImageUriString", mImageUri.toString());
             SignupPersonalActivity.this.startActivity(myIntent);
         }
     }
 
-    private Dictionary<String, String> AddPresonalInfo() {
-        String FirstName = mFirstName.getText().toString().trim();
-        String LastName = mLastName.getText().toString().trim();
-        String CnicNo = mCnicNumber.getText().toString();
-        String Address = mAddress.getText().toString().trim();
-        String Gender = mGender.getSelectedItem().toString();
-        String Contact = mContact.getText().toString();
-
-
-        Dictionary<String, String> data = new Hashtable<String, String>();
-        data.put("kFirstName", FirstName);
-        data.put("kLastName", LastName);
-        data.put("kCnicNo", CnicNo);
-        data.put("kAddress", Address);
-        data.put("kGender", Gender);
-        data.put("kContact", Contact);
-
-        return data;
-    }
 
     private boolean validateForm() {
         boolean valid = true;
+
+        if (mImageUri == null) {
+            valid = false;
+        }
 
         String FName = mFirstName.getText().toString();
         if (TextUtils.isEmpty(FName)) {
@@ -145,4 +144,26 @@ public class SignupPersonalActivity extends BaseActivity {
 
         return valid;
     }
+
+    private void openFileChooser() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, PICK_IMAGE_REQUEST);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
+                && data != null && data.getData() != null) {
+            mImageUri = data.getData();
+
+            String temp_filename = data.getData().getPath();
+            temp_filename = temp_filename.substring(temp_filename.lastIndexOf("/") + 1);
+            imageName.setText(temp_filename);
+        }
+    }
+
 }

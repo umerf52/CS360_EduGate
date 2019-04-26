@@ -14,19 +14,22 @@ public class Tutor {
     private String mEmailAddress;
     private int mProfileStatus;
     private String key;
-    private ArrayList<String> mGrade = new ArrayList<String>();
-    private ArrayList<String> mSubject = new ArrayList<String>();
-    private double mRating;
+    ArrayList<Double> mRating = new ArrayList<Double>();
+    private String mGrade;
+    private String mSubject;
     private int timesRated;
+    private String mProfileImage;
+    private String mTranscriptImage;
 
     public Tutor() {
     }
 
 
     public Tutor(String first_name, String last_name, String email, String cnic_no, String address, String contact_no,
-                 String gender, String recent_institution, String tuition_location, ArrayList<String> grade, ArrayList<String> subject) {
-        this.mFirstName = first_name;
-        this.mLastName = last_name;
+                 String gender, String recent_institution, String tuition_location, String grade,
+                 String subject) {
+        this.mFirstName = first_name.toLowerCase();
+        this.mLastName = last_name.toLowerCase();
         this.mCnicNo = cnic_no;
         this.mAddress = address;
         this.mContactNo = contact_no;
@@ -37,7 +40,7 @@ public class Tutor {
         this.mEmailAddress = email;
         this.mGrade = grade;
         this.mSubject = subject;
-        this.mRating = 5.0;
+        this.mRating.add(5.0);
         this.timesRated = 0;
     }
 
@@ -61,11 +64,11 @@ public class Tutor {
         return mRecentInstitution;
     }
 
-    public ArrayList<String> getGrade() {
+    public String getGrade() {
         return mGrade;
     }
 
-    public ArrayList<String> getSubject() {
+    public String getSubject() {
         return mSubject;
     }
 
@@ -85,10 +88,6 @@ public class Tutor {
         return mProfileStatus;
     }
 
-    public String getKey() {
-        return key;
-    }
-
     public String getContactNo() {
         return mContactNo;
     }
@@ -97,11 +96,32 @@ public class Tutor {
         this.key = key;
     }
 
-    public double getRating() {
+    public String getKey() {
+        return key;
+    }
+
+    public ArrayList<Double> getRating() {
         return mRating;
     }
 
     public float getTimesRated() {
         return timesRated;
     }
+
+    public String getProfileImage() {
+        return mProfileImage;
+    }
+
+    public void setProfileImage(String file) {
+        mProfileImage = file;
+    }
+
+    public String getTranscriptImage() {
+        return mTranscriptImage;
+    }
+
+    public void setTranscriptImage(String file) {
+        mTranscriptImage = file;
+    }
+
 }
