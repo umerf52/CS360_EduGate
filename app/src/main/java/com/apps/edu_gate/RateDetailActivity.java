@@ -1,20 +1,9 @@
 package com.apps.edu_gate;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,66 +11,28 @@ import java.util.List;
 public class RateDetailActivity extends BaseActivity {
 
     private List<Double> ratings = new ArrayList<>();
-    ListView listView = null;
-    CustomAdapter adapter;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+    private RecyclerView recyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Tutorinfo x = (Tutorinfo) getIntent().getSerializableExtra("result");
-        ratings = x.rating;
         setContentView(R.layout.activity_rate_detail);
+        recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(mLayoutManager);
 
-        listView = (ListView) findViewById(R.id.listView1);
-        adapter = new CustomAdapter(this);
-        listView.setAdapter(adapter);
-    }
+        Tutorinfo x = (Tutorinfo) getIntent().getSerializableExtra("result");
+        setTitle((x.firstName.substring(0, 1).toUpperCase() + x.firstName.substring(1)) + " " +
+                x.lastName.substring(0, 1).toUpperCase() + x.firstName.substring(1));
+        ratings = x.rating;
 
-    class CustomAdapter extends BaseAdapter {
-        public CustomAdapter(Context convertView) {
+        mAdapter = new RateDetailAdapter(this, ratings);
+        recyclerView.setAdapter(mAdapter);
 
-        }
-        @Override
-        public int getCount() {
-
-            return 0;
-        }
-
-        @Override
-        public Object getItem(int position) {
-
-            return null;
-        }
-
-        @Override
-        public long getItemId(int position) {
-
-            return 0;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            LayoutInflater inflater = LayoutInflater
-                    .from(getApplicationContext());
-            View view = inflater.inflate(R.layout.list3, null);
-            final Button btn1 = (Button) view.findViewById(R.id.button1);
-            final EditText edt = (EditText) view.findViewById(R.id.txt_item);
-            TextView btnEdit = (TextView) view.findViewById(R.id.editrate);
-
-            btnEdit.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    btn1.setVisibility(View.VISIBLE);
-                    edt.setEnabled(true);
-                }
-            });
-            btnEdit.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    Toast.makeText(RateDetailActivity.this,"clicked!",Toast.LENGTH_LONG).show();
-                }
-            });
-
-            return view;
-        }
-
+        mAdapter.notifyDataSetChanged();
     }
 
 

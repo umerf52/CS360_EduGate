@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -57,7 +58,7 @@ public class AdminMainPageActivity extends AppCompatActivity {
         });
         rate_tutor.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent myIntent = new Intent(AdminMainPageActivity.this, RateMainActivity.class);
+                Intent myIntent = new Intent(AdminMainPageActivity.this, RateTutorActivity.class);
                 AdminMainPageActivity.this.startActivity(myIntent);
             }
         });

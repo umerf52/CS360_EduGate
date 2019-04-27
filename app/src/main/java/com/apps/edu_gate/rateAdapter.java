@@ -1,13 +1,10 @@
 package com.apps.edu_gate;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,8 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -84,17 +81,12 @@ class rateAdapter extends RecyclerView.Adapter<rateAdapter.rateViewHolder> {
         holder.fname.setText(tutor.firstName.substring(0,1).toUpperCase()+tutor.firstName.substring(1));
         holder.lname.setText(tutor.lastName.substring(0,1).toUpperCase()+tutor.lastName.substring(1));
         holder.rating.setText(rate);
-//        storageReference = FirebaseStorage.getInstance().getReference();
-//        mDatabase = FirebaseDatabase.getInstance().getReference(tutor.profileImage);
-        try {
-            Bitmap bitmap = MediaStore.Images.Media.getBitmap(mCtx.getContentResolver(), android.net.Uri.parse((tutor.profileImage).toString()));
-            holder.profileImage.setImageBitmap(bitmap);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-//        holder.profileImage.setImageResource(tutor.profileImage);
-//        holder.instituttion.setText(tutor.urlImage);
+        Picasso.get()
+                .load(tutor.getProfileImage())
+                .placeholder(R.drawable.ic_launcher_foreground)
+                .fit()
+                .centerCrop()
+                .into(holder.profileImage);
     }
 
     @Override

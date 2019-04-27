@@ -146,7 +146,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_margin="8dp"
+            android:padding="8dp"
             android:onClick="showDialogListView"
             android:src="@android:drawable/ic_menu_call" />
 
