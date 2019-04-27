@@ -8,65 +8,82 @@
         android:layout_height="wrap_content"
         android:layout_margin="3dp">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:orientation="horizontal"
+            android:background="@drawable/et"
             android:padding="7dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/person_photo"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginRight="16dp"
-                />
+            <RelativeLayout
+                android:id="@+id/lin"
+                android:layout_width="150dp"
+                android:layout_height="150dp">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ye"
+                    android:cropToPadding="true"
+                    android:id="@+id/person_photo"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="16dp"
+                    />
+            </RelativeLayout>
 
             <TextView
                 android:id="@+id/fname"
-                android:layout_width="match_parent"
+                android:layout_toRightOf="@+id/lin"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="First Name"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
             <TextView
                 android:id="@+id/lname"
+                android:layout_toRightOf="@id/lin"
+                android:layout_below="@+id/fname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Last Name"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
-            <TextView
-                android:id="@+id/institution"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Institution"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                <TextView
+                    android:id="@+id/institution"
+                    android:layout_toRightOf="@id/lin"
+                    android:layout_width="match_parent"
+                    android:layout_below="@id/lname"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="Institution"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
-            <TextView
-                android:id="@+id/location"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Location"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                <TextView
+                    android:id="@+id/location"
+                    android:layout_toRightOf="@+id/lin"
+                    android:layout_below="@id/institution"
+                    android:textSize="18sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Location"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
-            <!--<TextView-->
+                <!--<TextView-->
                 <!--android:id="@+id/rating"-->
                 <!--android:layout_width="match_parent"-->
                 <!--android:layout_height="wrap_content"-->
                 <!--android:text="Rating"-->
                 <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>-->
-            <RatingBar
-                android:id="@+id/ratingBar"
-                android:isIndicator="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:numStars="5"
-                android:stepSize="1.0"/>
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    android:layout_toRightOf="@id/lin"
+                    android:layout_below="@id/location"
+                    android:isIndicator="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
+                    android:stepSize="1.0"/>
 
-
-        </LinearLayout>
+        </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
 </RelativeLayout>

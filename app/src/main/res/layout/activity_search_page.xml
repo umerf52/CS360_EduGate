@@ -9,7 +9,7 @@
         android:id="@+id/searchBar"
         android:layout_width="match_parent"
         android:elevation="2dp"
-        android:background="#fff"
+        android:background="@drawable/et"
         android:layout_height="wrap_content"
         android:iconifiedByDefault="false">
 
