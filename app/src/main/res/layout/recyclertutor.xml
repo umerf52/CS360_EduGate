@@ -16,8 +16,8 @@
             android:padding="7dp">
             <RelativeLayout
                 android:id="@+id/lin"
-                android:layout_width="150dp"
-                android:layout_height="150dp">
+                android:layout_width="120dp"
+                android:layout_height="120dp">
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -41,8 +41,7 @@
 
             <TextView
                 android:id="@+id/lname"
-                android:layout_toRightOf="@id/lin"
-                android:layout_below="@+id/fname"
+                android:layout_toRightOf="@id/fname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
@@ -88,7 +87,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
                     android:numStars="5"
-                    android:stepSize="1.0"/>
+                    android:stepSize="0.5"/>
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
