@@ -79,10 +79,12 @@
                 <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>-->
                 <RatingBar
                     android:id="@+id/ratingBar"
+                    android:layout_marginTop="5dp"
                     android:layout_toRightOf="@id/lin"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
                     android:layout_below="@id/location"
                     android:isIndicator="true"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
                     android:numStars="5"
