@@ -1,6 +1,10 @@
 package com.apps.edu_gate;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,7 +14,7 @@ import java.util.List;
 
 public class RateDetailActivity extends BaseActivity {
 
-    private List<Double> ratings = new ArrayList<>();
+    private ArrayList<Double> ratings = new ArrayList<>();
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private RecyclerView recyclerView;
@@ -28,12 +32,22 @@ public class RateDetailActivity extends BaseActivity {
         setTitle((x.firstName.substring(0, 1).toUpperCase() + x.firstName.substring(1)) + " " +
                 x.lastName.substring(0, 1).toUpperCase() + x.firstName.substring(1));
         ratings = x.rating;
+//        Log.e("wow", String.valueOf(x.rating.get(0)));
+
 
         mAdapter = new RateDetailAdapter(this, ratings);
         recyclerView.setAdapter(mAdapter);
-
-        mAdapter.notifyDataSetChanged();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ((RateDetailAdapter) mAdapter).setOnItemClickListener(new RateDetailAdapter.MyClickListener() {
+            @Override
+            public void onItemClick(int position, View v) {
+                Toast.makeText(getBaseContext(),"Clicked!", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
 
 }

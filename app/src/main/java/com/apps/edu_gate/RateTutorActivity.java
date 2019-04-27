@@ -2,6 +2,7 @@ package com.apps.edu_gate;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -78,6 +79,8 @@ public class RateTutorActivity extends BaseActivity {
                 Tutorinfo x = tutorList.get(position);
                 Intent myIntent = new Intent(RateTutorActivity.this, RateDetailActivity.class);
                 myIntent.putExtra("result", x);
+                Log.e("wow", "sent ");
+
                 RateTutorActivity.this.startActivity(myIntent);
             }
         });
