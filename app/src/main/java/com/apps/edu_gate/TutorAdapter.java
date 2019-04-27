@@ -99,9 +99,9 @@ public class TutorAdapter extends RecyclerView.Adapter<TutorAdapter.TutorViewHol
         double avgrate = x/count;
         tutor.tempr = avgrate;
         String rate = String.valueOf(avgrate);
-        holder.fname.setText(tutor.firstName);
-        holder.location.setText(tutor.tuitionLocation);
-        holder.lname.setText(tutor.lastName);
+        holder.fname.setText(tutor.firstName.substring(0,1).toUpperCase()+tutor.firstName.substring(1));
+        holder.location.setText(tutor.tuitionLocation.substring(0,1).toUpperCase()+tutor.tuitionLocation.substring(1));
+        holder.lname.setText(tutor.lastName.substring(0,1).toUpperCase()+tutor.lastName.substring(1));
         holder.institution.setText(tutor.recentInstitution);
         holder.rating.setText(rate);
 //        storageReference = FirebaseStorage.getInstance().getReference();
