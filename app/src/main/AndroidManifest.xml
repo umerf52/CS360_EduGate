@@ -42,6 +42,10 @@
             android:name=".LoginActivity"
             android:label="Login"
             android:parentActivityName=".StartupActivity" />
+        <activity
+            android:name=".RateTutorActivity"
+            android:label="Rate Tutors"
+            android:parentActivityName=".AdminMainPageActivity" />
         <activity android:name=".StartupActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

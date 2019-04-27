@@ -1,9 +1,9 @@
 package com.apps.edu_gate;
 
 import java.io.Serializable;
-//import java.util.HashMap;
 import java.util.ArrayList;
-import java.util.Map;
+
+//import java.util.HashMap;
 
 public class Tutorinfo implements Serializable {
 
@@ -14,5 +14,9 @@ public class Tutorinfo implements Serializable {
     public ArrayList<Double> rating;
     public double tempr = 0;
     public Tutorinfo() {
+    }
+
+    public String getProfileImage() {
+        return profileImage;
     }
 }
