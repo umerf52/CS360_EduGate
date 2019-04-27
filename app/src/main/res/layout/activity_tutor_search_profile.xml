@@ -106,6 +106,7 @@
         android:id="@+id/callbutton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="showDialogListView"
         android:text="Call Admin" />
 
 </LinearLayout>
