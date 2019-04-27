@@ -118,17 +118,6 @@ public class TutorSearchProfile extends AppCompatActivity {
         subList = (ListView) findViewById(R.id.sub_list);
         subList.setAdapter(adapter1);
 
-//        ArrayAdapter adapter2 = new ArrayAdapter<String>(this,
-//                R.layout.listitem2, R.id.txtitem, gradesTur);
-//
-//        gradList = (ListView) findViewById(R.id.grad_list);
-//        gradList.setAdapter(adapter2);
-
-//        subject = (TextView) findViewById(R.id.subject);
-//        subject.setText(x.subject);
-//        grades = (TextView) findViewById(R.id.grades);
-//        grades.setText(x.grade);
-
 //        mAuth.signInAnonymously()
 //                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
 //                    @Override
@@ -194,23 +183,6 @@ public class TutorSearchProfile extends AppCompatActivity {
 
         dialog.show();
     }
-
-
-//        forcall.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                final Dialog dialog = new Dialog(TutorSearchProfile.this);
-//                dialog.setContentView(R.layout.dialogbox_call);
-//                recyclerView = dialog.findViewById(R.id.rv);
-//                recyclerView.setHasFixedSize(true);
-//                mLayoutManager = new LinearLayoutManager(getApplicationContext());
-//                recyclerView.setLayoutManager(mLayoutManager);
-//                adminList = new ArrayList<>();
-//                mAdapter = new CallerAdapter(getApplicationContext(), adminList);
-//                recyclerView.setAdapter(mAdapter);
-//                dialog.show();
-//
-//            }
-//        });
 
 
     ValueEventListener valueEventListener = new ValueEventListener() {

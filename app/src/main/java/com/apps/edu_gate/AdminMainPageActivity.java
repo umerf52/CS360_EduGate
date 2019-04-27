@@ -57,7 +57,7 @@ public class AdminMainPageActivity extends AppCompatActivity {
         });
         rate_tutor.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent myIntent = new Intent(AdminMainPageActivity.this, LoginActivity.class);
+                Intent myIntent = new Intent(AdminMainPageActivity.this, RateMainActivity.class);
                 AdminMainPageActivity.this.startActivity(myIntent);
             }
         });

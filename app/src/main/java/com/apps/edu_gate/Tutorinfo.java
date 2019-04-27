@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class Tutorinfo implements Serializable {
 
-    public String subject, grade, address, cnicNo, contactNo, emailAddress, firstName, gender, lastName, recentInstitution, tuitionLocation, profileImage;
+    public String key, subject, grade, address, cnicNo, contactNo, emailAddress, firstName, gender, lastName, recentInstitution, tuitionLocation, profileImage;
     public int profileStatus;
 //    public HashMap<String, String> grade;
 
