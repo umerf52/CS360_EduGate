@@ -13,15 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 public class SearchPageActivity extends BaseActivity {
@@ -42,8 +39,6 @@ public class SearchPageActivity extends BaseActivity {
             tutorList.clear();
             if (dataSnapshot.exists()) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-//                    Tutorinfo tutor = snapshot.getValue(Tutorinfo.class);
-//                    tutorList.add(tutor);
                     Tutorinfo tutor = new Tutorinfo();
                     tutor.grade = snapshot.child("grade").getValue(String.class);
                     tutor.subject = snapshot.child("subject").getValue(String.class);
@@ -129,12 +124,9 @@ public class SearchPageActivity extends BaseActivity {
             if (dataSnapshot.exists()) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     String subjects = snapshot.child("grade").getValue(String.class);
-//
                     if(subjects.length()>0){
-                        Log.e("dsdasd", subjects);
                         String[] splited = subjects.split("-");
                         for(int i=0; i<splited.length; i++){
-                            Log.e("lolz", splited[i]);
                             if(searching.equals(splited[i])){
                                 Tutorinfo tutor = new Tutorinfo();
                                 tutor.grade = subjects;
