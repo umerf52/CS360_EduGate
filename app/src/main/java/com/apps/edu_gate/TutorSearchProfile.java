@@ -17,6 +17,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -29,7 +30,7 @@ import java.util.List;
 
 public class TutorSearchProfile extends AppCompatActivity {
 
-    Button forcall;
+//    Button forcall;
     TextView fname;
     TextView gender;
     TextView lastname;
@@ -90,7 +91,7 @@ public class TutorSearchProfile extends AppCompatActivity {
         subList = (ListView) findViewById(R.id.sub_list);
         subList.setAdapter(adapter1);
 
-        forcall = findViewById(R.id.callbutton);
+        FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
         Query q = FirebaseDatabase.getInstance().getReference("Admin")
                 .orderByChild("number");
         q.addListenerForSingleValueEvent(valueEventListener);
