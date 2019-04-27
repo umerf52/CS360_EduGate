@@ -75,7 +75,7 @@ public class AdminMainPageActivity extends AppCompatActivity {
         });
         delete_tutor_profile.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent myIntent = new Intent(AdminMainPageActivity.this, LoginActivity.class);
+                Intent myIntent = new Intent(AdminMainPageActivity.this, ProfileDeleteActivity.class);
                 AdminMainPageActivity.this.startActivity(myIntent);
             }
         });
