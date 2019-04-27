@@ -42,7 +42,22 @@ public class SearchPageActivity extends BaseActivity {
             tutorList.clear();
             if (dataSnapshot.exists()) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Tutorinfo tutor = snapshot.getValue(Tutorinfo.class);
+//                    Tutorinfo tutor = snapshot.getValue(Tutorinfo.class);
+//                    tutorList.add(tutor);
+                    Tutorinfo tutor = new Tutorinfo();
+                    tutor.grade = snapshot.child("grade").getValue(String.class);
+                    tutor.subject = snapshot.child("subject").getValue(String.class);
+                    tutor.address = snapshot.child("address").getValue(String.class);
+                    tutor.cnicNo = snapshot.child("cnicNo").getValue(String.class);
+                    tutor.contactNo = snapshot.child("contactNo").getValue(String.class);
+                    tutor.emailAddress = snapshot.child("emailAddress").getValue(String.class);
+                    tutor.firstName = snapshot.child("firstName").getValue(String.class);
+                    tutor.gender = snapshot.child("gender").getValue(String.class);
+                    tutor.lastName = snapshot.child("lastName").getValue(String.class);
+                    tutor.recentInstitution = snapshot.child("recentInstitution").getValue(String.class);
+                    tutor.tuitionLocation = snapshot.child("tuitionLocation").getValue(String.class);
+                    tutor.rating = (ArrayList<Double>) snapshot.child("rating").getValue();
+                    tutor.profileImage = snapshot.child("profileImage").getValue(String.class);
                     tutorList.add(tutor);
                 }
                 mAdapter.notifyDataSetChanged();
@@ -85,7 +100,8 @@ public class SearchPageActivity extends BaseActivity {
                                 tutor.lastName = snapshot.child("lastName").getValue(String.class);
                                 tutor.recentInstitution = snapshot.child("recentInstitution").getValue(String.class);
                                 tutor.tuitionLocation = snapshot.child("tuitionLocation").getValue(String.class);
-                                tutor.rating = (Map<String, Double>) snapshot.child("rating").getValue();
+                                tutor.rating = (ArrayList<Double>) snapshot.child("rating").getValue();
+                                tutor.profileImage = snapshot.child("profileImage").getValue(String.class);
                                 tutorList.add(tutor);
                                 break;
                             }
@@ -132,7 +148,8 @@ public class SearchPageActivity extends BaseActivity {
                                 tutor.lastName = snapshot.child("lastName").getValue(String.class);
                                 tutor.recentInstitution = snapshot.child("recentInstitution").getValue(String.class);
                                 tutor.tuitionLocation = snapshot.child("tuitionLocation").getValue(String.class);
-                                tutor.rating = (Map<String, Double>) snapshot.child("rating").getValue();
+                                tutor.rating = (ArrayList<Double>) snapshot.child("rating").getValue();
+                                tutor.profileImage = snapshot.child("profileImage").getValue(String.class);
                                 tutorList.add(tutor);
                                 break;
                             }
