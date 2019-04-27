@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.io.File;
@@ -47,7 +48,7 @@ public class TutorAdapter extends RecyclerView.Adapter<TutorAdapter.TutorViewHol
         TextView fname;
         TextView lname;
         TextView institution;
-        TextView rating;
+        RatingBar rating;
         TextView location;
         ImageView profileImage;
 
@@ -56,7 +57,7 @@ public class TutorAdapter extends RecyclerView.Adapter<TutorAdapter.TutorViewHol
             fname = (TextView) itemView.findViewById(R.id.fname);
             lname = (TextView) itemView.findViewById(R.id.lname);
             institution = (TextView) itemView.findViewById(R.id.institution);
-            rating = (TextView) itemView.findViewById(R.id.rating);
+            rating = (RatingBar) itemView.findViewById(R.id.ratingBar);
             location = (TextView) itemView.findViewById(R.id.location);
             profileImage = (ImageView)itemView.findViewById(R.id.person_photo);
             itemView.setOnClickListener(this);
@@ -103,7 +104,7 @@ public class TutorAdapter extends RecyclerView.Adapter<TutorAdapter.TutorViewHol
         holder.location.setText(tutor.tuitionLocation.substring(0,1).toUpperCase()+tutor.tuitionLocation.substring(1));
         holder.lname.setText(tutor.lastName.substring(0,1).toUpperCase()+tutor.lastName.substring(1));
         holder.institution.setText(tutor.recentInstitution);
-        holder.rating.setText(rate);
+        holder.rating.setRating((float)avgrate);
 //        storageReference = FirebaseStorage.getInstance().getReference();
 //        mDatabase = FirebaseDatabase.getInstance().getReference(tutor.profileImage);
         try {

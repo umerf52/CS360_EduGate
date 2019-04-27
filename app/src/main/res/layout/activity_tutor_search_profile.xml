@@ -100,6 +100,15 @@
         <!--android:layout_height="wrap_content"-->
         <!--android:layout_weight="0.5" />-->
 
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:isIndicator="true"
+        android:numStars="5"
+        android:stepSize="1.0"/>
+        <!--android:rating="2.0" />-->
+
     <ListView
         android:id="@+id/sub_list"
 
@@ -114,12 +123,12 @@
         <!--android:layout_height="wrap_content" >-->
     <!--</ListView>-->
 
-    <TextView
-        android:id="@+id/rating"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Rating"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+    <!--<TextView-->
+        <!--android:id="@+id/rating"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Rating"-->
+        <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>-->
 
     <ImageView
         android:id="@+id/imageTutor"

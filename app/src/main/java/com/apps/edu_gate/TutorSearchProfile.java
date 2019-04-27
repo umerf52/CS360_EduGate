@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,9 +52,9 @@ public class TutorSearchProfile extends AppCompatActivity {
     TextView lastname;
     TextView instituion;
     TextView location;
-    TextView grades;
-    TextView subject;
-    TextView rating;
+//    TextView grades;
+//    TextView subject;
+//    TextView rating;
     ImageView imageTutor;
 
     View itemView;
@@ -65,6 +66,7 @@ public class TutorSearchProfile extends AppCompatActivity {
     private  List<String> gradesTur = new ArrayList<>();
     private  List<String> lastList = new ArrayList<>();
     private RecyclerView.LayoutManager mLayoutManager;
+
     ListView listView = null;
     ListView subList = null;
 //    ListView gradList = null;
@@ -77,10 +79,12 @@ public class TutorSearchProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         listView = new ListView(this);
 
+
 //        mAuth = FirebaseAuth.getInstance();
 //        FirebaseUser currentUser = mAuth.getCurrentUser();
         Tutorinfo x = (Tutorinfo) getIntent().getSerializableExtra("result");
         setContentView(R.layout.activity_tutor_search_profile);
+        RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingBar);
         String sub = x.subject;
         String grad = x.grade;
         String[] splited = sub.split("-");
@@ -104,9 +108,10 @@ public class TutorSearchProfile extends AppCompatActivity {
         instituion.setText(x.recentInstitution);
         location = (TextView) findViewById(R.id.location);
         location.setText(x.tuitionLocation.substring(0,1).toUpperCase()+x.tuitionLocation.substring(1));
-        rating = (TextView) findViewById(R.id.rating);
-        rating.setText(String.valueOf(x.tempr));
-
+//        rating = (TextView) findViewById(R.id.rating);
+//        rating.setText(String.valueOf(x.tempr));
+//        String rt = String.valueOf(x.tempr);
+        ratingBar.setRating((float)x.tempr);
         ArrayAdapter adapter1 = new ArrayAdapter<String>(this,
                 R.layout.listitem,R.id.txtitem, lastList);
 

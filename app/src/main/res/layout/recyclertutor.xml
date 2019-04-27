@@ -51,12 +51,19 @@
                 android:text="Location"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
-            <TextView
-                android:id="@+id/rating"
-                android:layout_width="match_parent"
+            <!--<TextView-->
+                <!--android:id="@+id/rating"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Rating"-->
+                <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>-->
+            <RatingBar
+                android:id="@+id/ratingBar"
+                android:isIndicator="true"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rating"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                android:numStars="5"
+                android:stepSize="1.0"/>
 
 
         </LinearLayout>
