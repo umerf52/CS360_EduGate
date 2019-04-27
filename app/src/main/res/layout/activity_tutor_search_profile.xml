@@ -75,19 +75,44 @@
         <!--android:text="Profile Status"-->
         <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>-->
 
-    <TextView
-        android:id="@+id/grades"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Grades"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+    <!--<TextView-->
+        <!--android:id="@+id/grades"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Grades"-->
+        <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>-->
 
-    <TextView
-        android:id="@+id/subject"
+    <!--<TextView-->
+        <!--android:id="@+id/subject"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Subjects"-->
+        <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>-->
+    <!--<ListView-->
+        <!--android:id="@+id/sub_list"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="0.5" />-->
+
+    <!--<ListView-->
+        <!--android:id="@+id/grad_list"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="0.5" />-->
+
+    <ListView
+        android:id="@+id/sub_list"
+
+        android:layout_marginRight="40dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Subjects"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+        android:layout_height="wrap_content" >
+    </ListView>
+
+    <!--<ListView-->
+        <!--android:id="@+id/grad_list"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content" >-->
+    <!--</ListView>-->
 
     <TextView
         android:id="@+id/rating"

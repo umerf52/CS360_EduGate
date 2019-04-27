@@ -61,8 +61,13 @@ public class TutorSearchProfile extends AppCompatActivity {
     private RecyclerView recyclerView;
     private List<String> adminNumbers = new ArrayList<>();
     private RecyclerView.Adapter mAdapter;
+    private  List<String> subjectsTur = new ArrayList<>();
+    private  List<String> gradesTur = new ArrayList<>();
+    private  List<String> lastList = new ArrayList<>();
     private RecyclerView.LayoutManager mLayoutManager;
     ListView listView = null;
+    ListView subList = null;
+//    ListView gradList = null;
 //    private FirebaseAuth mAuth;
 
 
@@ -71,26 +76,53 @@ public class TutorSearchProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         listView = new ListView(this);
+
 //        mAuth = FirebaseAuth.getInstance();
 //        FirebaseUser currentUser = mAuth.getCurrentUser();
         Tutorinfo x = (Tutorinfo) getIntent().getSerializableExtra("result");
         setContentView(R.layout.activity_tutor_search_profile);
+        String sub = x.subject;
+        String grad = x.grade;
+        String[] splited = sub.split("-");
+        String[] split2 = grad.split("-");
+        for(int i=0; i<splited.length; i++){
+            subjectsTur.add(splited[i].substring(0,1).toUpperCase()+splited[i].substring(1));
+            gradesTur.add(split2[i].substring(0,1).toUpperCase()+split2[i].substring(1));
+            String f = split2[i].substring(0,1).toUpperCase()+split2[i].substring(1) + ": " + splited[i].substring(0,1).toUpperCase()+splited[i].substring(1);
+            lastList.add(f);
+            Log.e("grad",split2[i]);
+            Log.e("sub",splited[i]);
+        }
+//        String cap = str.substring(0, 1).toUpperCase() + str.substring(1);
         fname = (TextView) findViewById(R.id.fname);
-        fname.setText(x.firstName);
+        fname.setText(x.firstName.substring(0,1).toUpperCase()+x.firstName.substring(1));
         gender = (TextView) findViewById(R.id.gender);
         gender.setText(x.gender);
         lastname = (TextView) findViewById(R.id.lname);
-        lastname.setText(x.lastName);
+        lastname.setText(x.lastName.substring(0,1).toUpperCase()+x.lastName.substring(1));
         instituion = (TextView) findViewById(R.id.institution);
         instituion.setText(x.recentInstitution);
         location = (TextView) findViewById(R.id.location);
-        location.setText(x.tuitionLocation);
+        location.setText(x.tuitionLocation.substring(0,1).toUpperCase()+x.tuitionLocation.substring(1));
         rating = (TextView) findViewById(R.id.rating);
         rating.setText(String.valueOf(x.tempr));
-        subject = (TextView) findViewById(R.id.subject);
-        subject.setText(x.subject);
-        grades = (TextView) findViewById(R.id.grades);
-        grades.setText(x.grade);
+
+        ArrayAdapter adapter1 = new ArrayAdapter<String>(this,
+                R.layout.listitem,R.id.txtitem, lastList);
+
+        subList = (ListView) findViewById(R.id.sub_list);
+        subList.setAdapter(adapter1);
+
+//        ArrayAdapter adapter2 = new ArrayAdapter<String>(this,
+//                R.layout.listitem2, R.id.txtitem, gradesTur);
+//
+//        gradList = (ListView) findViewById(R.id.grad_list);
+//        gradList.setAdapter(adapter2);
+
+//        subject = (TextView) findViewById(R.id.subject);
+//        subject.setText(x.subject);
+//        grades = (TextView) findViewById(R.id.grades);
+//        grades.setText(x.grade);
 
 //        mAuth.signInAnonymously()
 //                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
