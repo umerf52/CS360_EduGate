@@ -26,7 +26,7 @@ import java.util.List;
 
 class RateDetailAdapter extends RecyclerView.Adapter<RateDetailAdapter.RateDetailViewHolder> {
     private Context mCtx;
-    private ArrayList<Double> ratings;
+    private List<Double> ratings;
     private static RateDetailAdapter.MyClickListener myClickListener;
 
     public static class RateDetailViewHolder extends RecyclerView.ViewHolder
@@ -52,7 +52,7 @@ class RateDetailAdapter extends RecyclerView.Adapter<RateDetailAdapter.RateDetai
         this.myClickListener = myClickListener;
     }
 
-    public RateDetailAdapter(Context mCtx, ArrayList<Double> ratings) {
+    public RateDetailAdapter(Context mCtx, List<Double> ratings) {
         this.mCtx = mCtx;
         this.ratings = ratings;
     }

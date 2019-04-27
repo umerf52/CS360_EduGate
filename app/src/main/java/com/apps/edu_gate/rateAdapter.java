@@ -73,7 +73,7 @@ class rateAdapter extends RecyclerView.Adapter<rateAdapter.rateViewHolder> {
         while (it.hasNext()) {
             count++;
             x = x + (long)it.next();
-            it.remove(); // avoids a ConcurrentModificationException
+//            it.remove(); // avoids a ConcurrentModificationException
         }
         double avgrate = x/count;
         tutor.tempr = avgrate;

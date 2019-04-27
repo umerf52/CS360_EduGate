@@ -14,7 +14,7 @@ import java.util.List;
 
 public class RateDetailActivity extends BaseActivity {
 
-    private ArrayList<Double> ratings = new ArrayList<>();
+    private List<Double> ratings = new ArrayList<>();
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private RecyclerView recyclerView;
@@ -32,7 +32,7 @@ public class RateDetailActivity extends BaseActivity {
         setTitle((x.firstName.substring(0, 1).toUpperCase() + x.firstName.substring(1)) + " " +
                 x.lastName.substring(0, 1).toUpperCase() + x.firstName.substring(1));
         ratings = x.rating;
-//        Log.e("wow", String.valueOf(x.rating.get(0)));
+        Log.e("wow", String.valueOf(x.rating.get(0)));
 
 
         mAdapter = new RateDetailAdapter(this, ratings);
