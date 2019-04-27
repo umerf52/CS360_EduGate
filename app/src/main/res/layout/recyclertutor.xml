@@ -82,7 +82,7 @@
                     android:layout_toRightOf="@id/lin"
                     android:layout_below="@id/location"
                     android:isIndicator="true"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
                     android:numStars="5"
