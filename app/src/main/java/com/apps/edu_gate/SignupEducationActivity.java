@@ -119,7 +119,7 @@ public class SignupEducationActivity extends BaseActivity {
     private void addTutor() {
         showProgressDialog();
         String Institution = mInstitution.getText().toString();
-        String Location = mTuitionLocation.getText().toString();
+        String Location = mTuitionLocation.getText().toString().toLowerCase();
 
         Tutor tutor = new Tutor(FirstName, LastName, email, CnicNo, Address, ContactNo,
                 Gender, Institution, Location, grade_values, subject_values);
