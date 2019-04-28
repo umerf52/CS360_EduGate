@@ -213,7 +213,7 @@ public class SearchPageActivity extends BaseActivity {
                     if(s.equals("name")){
                         s = "firstName";
                     }
-                    if(s.equals("address")){
+                    if(s.equals("location")){
                         s = "tuitionLocation";
                     }
                     if(s.equals("class")){
