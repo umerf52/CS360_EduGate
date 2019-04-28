@@ -17,6 +17,14 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+
+
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
@@ -26,6 +34,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private EditText mPasswordField;
     private TextInputLayout emailLayout;
     private TextInputLayout passwordLayout;
+    private int found1 = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,18 +137,65 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         if (user != null) {
             Toast.makeText(LoginActivity.this,
                     "User signed in: " + user.getEmail(), Toast.LENGTH_SHORT).show();
-            Intent myIntent = new Intent(LoginActivity.this, ViewYourProfileActivity.class);
-            LoginActivity.this.startActivity(myIntent);
+            if(found1==1){
+                Intent myIntent = new Intent(LoginActivity.this, ViewYourProfileActivity.class);
+                LoginActivity.this.startActivity(myIntent);
+            }else{
+                Intent myIntent = new Intent(LoginActivity.this, AdminMainPageActivity.class);
+                LoginActivity.this.startActivity(myIntent);
+            }
         } else {
 
         }
     }
+    ValueEventListener valueEventListener2 = new ValueEventListener() {
+        @Override
+        public void onDataChange(DataSnapshot dataSnapshot) {
+            if (dataSnapshot.exists()) {
+                Log.e("dsds", "second");
+                found1 = 1;
+                loginuser(mEmailField.getText().toString(), mPasswordField.getText().toString());
+            }
+            else{
+                found1 = -1;
+                Toast.makeText(LoginActivity.this, "Invalid Login", Toast.LENGTH_SHORT).show();
+                Intent myIntent = new Intent(LoginActivity.this, StartupActivity.class);
+                LoginActivity.this.startActivity(myIntent);
+            }
+        }
 
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+
+        }
+    };
+
+    ValueEventListener valueEventListener = new ValueEventListener() {
+        @Override
+        public void onDataChange(DataSnapshot dataSnapshot) {
+            if (dataSnapshot.exists()) {
+                found1 = 0;
+                Log.e("dsds", "first");
+                loginuser(mEmailField.getText().toString(), mPasswordField.getText().toString());
+            }
+            else{
+                Query q1 = FirebaseDatabase.getInstance().getReference("Tutors").orderByChild("emailAddress").equalTo(mEmailField.getText().toString());
+                q1.addListenerForSingleValueEvent(valueEventListener2);
+            }
+        }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+
+        }
+    };
     @Override
     public void onClick(View v) {
         int i = v.getId();
         if (i == R.id.loginButton) {
-            loginuser(mEmailField.getText().toString(), mPasswordField.getText().toString());
+            Query q = FirebaseDatabase.getInstance().getReference("Admin").orderByChild("emailAddress").equalTo(mEmailField.getText().toString());
+            q.addListenerForSingleValueEvent(valueEventListener);
+
         } else if (i == R.id.signupButton) {
             Intent myIntent = new Intent(LoginActivity.this, SignupEmailPasswordActivity.class);
             LoginActivity.this.startActivity(myIntent);
