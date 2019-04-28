@@ -60,6 +60,7 @@ public class SignupEmailPasswordActivity extends BaseActivity implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_email_password);
+        setTitle("SignUp");
 
         // Views
         mEmailField = findViewById(R.id.fieldEmail);

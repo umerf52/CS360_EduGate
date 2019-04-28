@@ -53,6 +53,7 @@ public class TutorSearchProfile extends AppCompatActivity {
 
         Tutorinfo x = (Tutorinfo) getIntent().getSerializableExtra("result");
         setContentView(R.layout.activity_tutor_search_profile);
+        setTitle("Profile");
         RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingBar);
         String sub = x.subject;
         String grad = x.grade;
@@ -90,7 +91,7 @@ public class TutorSearchProfile extends AppCompatActivity {
 
         FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
         Query q = FirebaseDatabase.getInstance().getReference("Admin")
-                .orderByChild("number");
+                .orderByChild("contactNo");
         q.addListenerForSingleValueEvent(valueEventListener);
 
         ArrayAdapter<String> adapter=new ArrayAdapter<String>(this,
@@ -133,7 +134,7 @@ public class TutorSearchProfile extends AppCompatActivity {
             if (dataSnapshot.exists()) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 //                    Admininfo admin = snapshot.getValue(Admininfo.class);
-                    String number = snapshot.child("number").getValue(String.class);
+                    String number = snapshot.child("contactNo").getValue(String.class);
                     adminNumbers.add(number);
                 }
             }

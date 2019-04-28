@@ -66,7 +66,7 @@ public class SignupEducationActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_education);
-
+        setTitle("Educational Details");
         addSpinners();
 
         Intent prevIntent = getIntent();

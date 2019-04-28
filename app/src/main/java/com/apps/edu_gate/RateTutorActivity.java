@@ -56,6 +56,7 @@ public class RateTutorActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rate_main);
+        setTitle("Rate Tutors");
         showProgressDialog();
         RecyclerView recyclerView = findViewById(R.id.rv);
         recyclerView.setHasFixedSize(true);

@@ -34,6 +34,7 @@ public class AdminMainPageActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_main_page);
+        setTitle("Admin Home");
 
         search = findViewById(R.id.search);
         verify_profile = findViewById(R.id.verify_profile);

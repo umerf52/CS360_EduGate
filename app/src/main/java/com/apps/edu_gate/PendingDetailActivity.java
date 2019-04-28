@@ -42,6 +42,7 @@ public class PendingDetailActivity extends AppCompatActivity {
         listView = new ListView(this);
         x = (Tutorinfo) getIntent().getSerializableExtra("result");
         setContentView(R.layout.activity_pending_detail);
+        setTitle("Profile");
         String sub = x.subject;
         String grad = x.grade;
         String[] splited = sub.split("-");

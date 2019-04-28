@@ -36,6 +36,7 @@ public class AddNewAdminActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_admin);
+        setTitle("New Admin");
 
         // Views
         mfirst_name = findViewById(R.id.first_name);
