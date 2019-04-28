@@ -35,8 +35,8 @@ import java.util.Iterator;
 
 public class SignupEducationActivity extends BaseActivity {
 
-    ArrayList<Spinner> grade_spinners = new ArrayList<Spinner>();
-    ArrayList<Spinner> subject_spinners = new ArrayList<Spinner>();
+    private ArrayList<Spinner> grade_spinners = new ArrayList<Spinner>();
+    private ArrayList<Spinner> subject_spinners = new ArrayList<Spinner>();
 
     private static final int PICK_IMAGE_REQUEST = 1;
     Uri profileImageUri;
