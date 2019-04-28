@@ -1,33 +1,31 @@
 package com.apps.edu_gate;
 
 public class Admin {
-    private String mFirstName;
-    private String mLastName;
-    private String mEmailAddress;
-    private String mContactNo;
+    private String FirstName;
+    private String LastName;
+    private String EmailAddress;
+    private String ContactNo;
 
-    public Admin(){
 
-    }
 
     public Admin(String first_name, String last_name, String email, String contact_no) {
-        this.mFirstName = first_name.toLowerCase();
-        this.mLastName = last_name.toLowerCase();
-        this.mContactNo = contact_no;
-        this.mEmailAddress = email;
+        this.FirstName = first_name.toLowerCase();
+        this.LastName = last_name.toLowerCase();
+        this.ContactNo = contact_no;
+        this.EmailAddress = email;
         }
 
     public String getFirstName() {
-        return mFirstName;
+        return FirstName;
     }
     public String getLastName() {
-        return mLastName;
+        return LastName;
     }
     public String getmEmailAddress() {
-        return mEmailAddress;
+        return EmailAddress;
     }
     public String getmContactNo() {
-        return mContactNo;
+        return ContactNo;
     }
 
 

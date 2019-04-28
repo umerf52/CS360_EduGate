@@ -1,66 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="12dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
     tools:context=".AddNewAdminActivity">
 
     <EditText
         android:id="@+id/first_name"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="First Name"
-        tools:layout_editor_absoluteX="85dp"
-        tools:layout_editor_absoluteY="226dp" />
+        android:hint="First Name"
+        android:layout_marginTop="50dp" />
 
     <EditText
         android:id="@+id/last_name"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:layout_below="@id/first_name"
         android:inputType="textPersonName"
-        android:text="Last Name"
+        android:layout_marginBottom="12dp"
+        android:hint="Last Name"
         tools:layout_editor_absoluteX="85dp"
         tools:layout_editor_absoluteY="315dp" />
 
-    <EditText
-        android:id="@+id/email_address"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        android:text="Email Address"
-        tools:layout_editor_absoluteX="85dp"
-        tools:layout_editor_absoluteY="410dp" />
+   <EditText
+       android:id="@+id/email_address"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:inputType="textEmailAddress"
+       android:hint="Email"
+       android:layout_below="@id/last_name"
+       android:layout_marginBottom="12dp"/>
 
     <EditText
         android:id="@+id/password"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:layout_below="@id/email_address"
         android:inputType="textPassword"
-        android:text="Password"
-        tools:layout_editor_absoluteX="85dp"
-        tools:layout_editor_absoluteY="505dp" />
+        android:hint="Password"
+        android:layout_marginBottom="12dp"
+         />
 
     <EditText
         android:id="@+id/phone_number"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="number"
-        android:text="Phone Number"
-        tools:layout_editor_absoluteX="85dp"
-        tools:layout_editor_absoluteY="583dp" />
+        android:inputType="phone"
+        android:hint="Phone Number"
+        android:layout_below="@+id/password"
+        android:maxLength="11"
+        android:layout_marginBottom="12dp"/>
 
     <Button
         android:id="@+id/add_admin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp"
+
         android:text="Add Admin"
-        tools:layout_editor_absoluteX="146dp"
-        tools:layout_editor_absoluteY="666dp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_below="@id/phone_number" />
+</android.widget.RelativeLayout>

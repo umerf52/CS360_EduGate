@@ -21,6 +21,8 @@
             android:name=".ChangePasswordActivity"
             android:label="Change Password" />
         <activity android:name=".AdminMainPageActivity" />
+        <activity android:name=".AddNewAdminActivity" />
+        
         <activity
             android:name=".TutorSearchProfile"
             android:parentActivityName=".SearchPageActivity" />
