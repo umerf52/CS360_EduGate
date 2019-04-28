@@ -4,8 +4,10 @@ import java.io.Serializable;
 
 public class Admininfo implements Serializable {
 
-    public String number;
+
+    public String number, first_name, last_name, email;
 
     public Admininfo() {
     }
 }
+
