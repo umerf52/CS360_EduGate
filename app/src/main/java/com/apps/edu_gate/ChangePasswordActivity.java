@@ -21,7 +21,7 @@ import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class ChangePasswordActivity extends AppCompatActivity {
+public class ChangePasswordActivity extends BaseActivity {
 
     private EditText old_password;
     private EditText new_password;
@@ -48,7 +48,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
         change_password_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 //                Toast.makeText(getApplicationContext(), "Button Clicked", Toast.LENGTH_LONG).show();
-                changePassword();;
+                changePassword();
             }
         });
     }
@@ -58,6 +58,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
+        //showProgressDialog();
 
         if (user != null) {
             String email = user.getEmail();
@@ -72,8 +73,8 @@ public class ChangePasswordActivity extends AppCompatActivity {
                         String newpass = new_password.getText().toString();
                         String confirmpass = re_new_password.getText().toString();
 
-                        if(newpass != confirmpass){
-                            Toast.makeText(getApplicationContext(), "Passwords don't match", Toast.LENGTH_LONG).show();
+                        if(!newpass.equals(confirmpass)){
+                            Toast.makeText(getApplicationContext(), "New Password and Confirm Password don't match", Toast.LENGTH_LONG).show();
                             return;
                         }
 
@@ -90,7 +91,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                         });
 
                     } else {
-                        Toast.makeText(getApplicationContext(), "Authentication Failed", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Incorrect Old Password. Authentication Failed", Toast.LENGTH_LONG).show();
                     }
                 }
             });
