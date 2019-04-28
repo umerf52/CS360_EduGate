@@ -20,7 +20,15 @@ public class Tutorinfo implements Serializable {
         return profileImage;
     }
 
-    public String gettranscriptImage() {
+    public String getTranscriptImage() {
         return transcriptImage;
+    }
+
+    public String getContactNo() {
+        return contactNo;
+    }
+
+    public String getTuitionLocation() {
+        return tuitionLocation;
     }
 }

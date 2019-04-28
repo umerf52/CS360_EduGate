@@ -37,8 +37,6 @@ public class SignupEducationActivity extends BaseActivity {
 
     ArrayList<Spinner> grade_spinners = new ArrayList<Spinner>();
     ArrayList<Spinner> subject_spinners = new ArrayList<Spinner>();
-//    ArrayList<String> grade_values = new ArrayList<String>();
-//    ArrayList<String> subject_values = new ArrayList<String>();
 
     private static final int PICK_IMAGE_REQUEST = 1;
     Uri profileImageUri;
@@ -59,6 +57,8 @@ public class SignupEducationActivity extends BaseActivity {
     private String grade_values;
     private String subject_values;
     private TextView imageName;
+    private Spinner myEducationDegree;
+    private String degreeString;
 
     private DatabaseReference databaseReference;
 
@@ -88,6 +88,7 @@ public class SignupEducationActivity extends BaseActivity {
         FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
         Button imageButton = findViewById(R.id.image_button);
         imageName = findViewById(R.id.image_name);
+        myEducationDegree = findViewById(R.id.my_education_dropdown);
 
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,6 +108,7 @@ public class SignupEducationActivity extends BaseActivity {
 
         int i = v.getId();
         if (i == R.id.submit_button) {
+            degreeString = String.valueOf(myEducationDegree.getSelectedItem());
             if (!getSpinnerValues()) return;
             mAuth = FirebaseAuth.getInstance();
             addTutor();
@@ -122,7 +124,7 @@ public class SignupEducationActivity extends BaseActivity {
         String Location = mTuitionLocation.getText().toString().toLowerCase();
 
         Tutor tutor = new Tutor(FirstName, LastName, email, CnicNo, Address, ContactNo,
-                Gender, Institution, Location, grade_values, subject_values);
+                Gender, Institution, Location, grade_values, subject_values, degreeString);
 
         uploadFileProfile(profileImageUri, tutor);
     }

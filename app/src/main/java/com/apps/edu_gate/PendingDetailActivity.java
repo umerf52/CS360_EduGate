@@ -1,23 +1,19 @@
 package com.apps.edu_gate;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,7 +75,7 @@ public class PendingDetailActivity extends AppCompatActivity {
                 .centerCrop()
                 .into(prof);
         Picasso.get()
-                .load(x.gettranscriptImage())
+                .load(x.getTranscriptImage())
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .fit()
                 .centerCrop()

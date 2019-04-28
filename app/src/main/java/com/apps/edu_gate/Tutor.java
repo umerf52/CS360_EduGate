@@ -20,6 +20,7 @@ public class Tutor {
     private int timesRated;
     private String mProfileImage;
     private String mTranscriptImage;
+    private String mDegree;
 
     public Tutor() {
     }
@@ -27,7 +28,7 @@ public class Tutor {
 
     public Tutor(String first_name, String last_name, String email, String cnic_no, String address, String contact_no,
                  String gender, String recent_institution, String tuition_location, String grade,
-                 String subject) {
+                 String subject, String degree) {
         this.mFirstName = first_name.toLowerCase();
         this.mLastName = last_name.toLowerCase();
         this.mCnicNo = cnic_no;
@@ -42,6 +43,7 @@ public class Tutor {
         this.mSubject = subject;
         this.mRating.add(5.0);
         this.timesRated = 0;
+        this.mDegree = degree;
     }
 
     public String getFirstName() {
@@ -122,6 +124,10 @@ public class Tutor {
 
     public void setTranscriptImage(String file) {
         mTranscriptImage = file;
+    }
+
+    public String getDegree() {
+        return mDegree;
     }
 
 }
