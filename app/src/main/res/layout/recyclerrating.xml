@@ -17,7 +17,7 @@
                 android:id="@+id/rating_number"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:inputType="none"/>
+                android:inputType="numberDecimal" />
 
             <Button
                 android:id="@+id/edit_button"

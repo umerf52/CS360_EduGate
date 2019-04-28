@@ -1,10 +1,8 @@
 package com.apps.edu_gate;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.util.Log;
+import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -18,7 +16,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class RateDetailActivity extends BaseActivity {
 
@@ -40,7 +37,6 @@ public class RateDetailActivity extends BaseActivity {
                 x.lastName.substring(0, 1).toUpperCase() + x.lastName.substring(1));
         ratings = x.rating;
         mykey = x.key;
-        Log.e("wow", String.valueOf(x.rating.get(0)));
 
 
         mAdapter = new RateDetailAdapter(this, ratings, x.key);
@@ -50,7 +46,8 @@ public class RateDetailActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 final EditText edittext = new EditText(getBaseContext());
-                AlertDialog.Builder alert = new AlertDialog.Builder(RateDetailActivity.this);
+                edittext.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_CLASS_NUMBER);
+                final AlertDialog.Builder alert = new AlertDialog.Builder(RateDetailActivity.this);
                 alert.setMessage("Add a number between 1 and 5 inclusive");
                 alert.setTitle("Add New Rating");
                 alert.setView(edittext);
@@ -66,7 +63,7 @@ public class RateDetailActivity extends BaseActivity {
                     }
                 });
 
-                alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                     }
                 });
