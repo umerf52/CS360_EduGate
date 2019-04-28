@@ -1,24 +1,32 @@
 package com.apps.edu_gate;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RateDetailActivity extends BaseActivity {
 
-    private List<Double> ratings = new ArrayList<>();
+    private ArrayList<Double> ratings = new ArrayList<>();
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private RecyclerView recyclerView;
-
+    String mykey;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,16 +35,51 @@ public class RateDetailActivity extends BaseActivity {
         recyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
-
         Tutorinfo x = (Tutorinfo) getIntent().getSerializableExtra("result");
         setTitle((x.firstName.substring(0, 1).toUpperCase() + x.firstName.substring(1)) + " " +
                 x.lastName.substring(0, 1).toUpperCase() + x.firstName.substring(1));
         ratings = x.rating;
+        mykey = x.key;
         Log.e("wow", String.valueOf(x.rating.get(0)));
 
 
-        mAdapter = new RateDetailAdapter(this, ratings);
+        mAdapter = new RateDetailAdapter(this, ratings, x.key);
         recyclerView.setAdapter(mAdapter);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final EditText edittext = new EditText(getBaseContext());
+                AlertDialog.Builder alert = new AlertDialog.Builder(RateDetailActivity.this);
+                alert.setMessage("Add a number between 1 and 5 inclusive");
+                alert.setTitle("Add New Rating");
+                alert.setView(edittext);
+                alert.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        //What ever you want to do with the value
+                        //OR
+                        String YouEditTextValue = edittext.getText().toString();
+                        double p = Double.parseDouble(YouEditTextValue);
+                        ratings.add(p);
+                        DatabaseReference dbNode = FirebaseDatabase.getInstance().getReference("Tutors");
+                        dbNode.child(mykey).child("rating").setValue(ratings);
+                        Toast.makeText(getBaseContext(), "Rating Added", Toast.LENGTH_SHORT).show();
+                        updateUI();
+                    }
+                });
+
+                alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        // what ever you want to do with No option.
+                    }
+                });
+                alert.show();
+            }
+        });
+    }
+
+    private void updateUI() {
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override

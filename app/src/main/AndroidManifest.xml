@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".RateDetailActivity"></activity>
+        <activity android:name=".ProfileDeleteActivity" />
         <activity
             android:name=".RateTutorActivity"
             android:label="Rate Tutors"
