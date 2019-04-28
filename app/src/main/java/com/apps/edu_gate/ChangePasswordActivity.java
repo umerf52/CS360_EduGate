@@ -34,6 +34,7 @@ public class ChangePasswordActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
+        setTitle("New Password");
 
         //findViewById(R.id.change_password_button).setOnClickListener(this);
         old_password = findViewById(R.id.old_password);

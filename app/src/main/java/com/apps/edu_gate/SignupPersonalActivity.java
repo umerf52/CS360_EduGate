@@ -32,6 +32,7 @@ public class SignupPersonalActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_personal);
+        setTitle("Personal Details");
 
         Intent prevIntent = getIntent();
 

@@ -48,6 +48,7 @@
             android:label="Login"
             android:parentActivityName=".StartupActivity" />
         <activity android:name=".StartupActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

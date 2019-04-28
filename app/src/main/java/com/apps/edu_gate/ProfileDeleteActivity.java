@@ -63,6 +63,7 @@ public class ProfileDeleteActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_delete);
+        setTitle("Delete Tutor Profile");
         recyclerView = findViewById(R.id.rv);
         recyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);

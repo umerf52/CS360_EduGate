@@ -191,6 +191,7 @@ public class SearchPageActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_search_page);
+        setTitle("Search Tutors");
         recyclerView = findViewById(R.id.rv);
         recyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);

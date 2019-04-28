@@ -53,6 +53,7 @@ public class TutorSearchProfile extends AppCompatActivity {
 
         Tutorinfo x = (Tutorinfo) getIntent().getSerializableExtra("result");
         setContentView(R.layout.activity_tutor_search_profile);
+        setTitle("Profile");
         RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingBar);
         String sub = x.subject;
         String grad = x.grade;

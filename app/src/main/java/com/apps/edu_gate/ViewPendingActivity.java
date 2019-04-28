@@ -68,6 +68,7 @@ public class ViewPendingActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_pending);
+        setTitle("Pending Profiles");
         showProgressDialog();
         RecyclerView recyclerView = findViewById(R.id.rv);
         recyclerView.setHasFixedSize(true);

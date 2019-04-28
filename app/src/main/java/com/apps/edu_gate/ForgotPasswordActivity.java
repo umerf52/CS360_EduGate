@@ -25,6 +25,7 @@ public class ForgotPasswordActivity extends BaseActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
+        setTitle("Reset Password");
 
         findViewById(R.id.resetPasswordButton).setOnClickListener(this);
         userEmail = findViewById(R.id.userEmail);
