@@ -17,7 +17,6 @@ public class Tutor {
     ArrayList<Double> mRating = new ArrayList<Double>();
     private String mGrade;
     private String mSubject;
-    private int timesRated;
     private String mProfileImage;
     private String mTranscriptImage;
     private String mDegree;
@@ -42,7 +41,6 @@ public class Tutor {
         this.mGrade = grade;
         this.mSubject = subject;
         this.mRating.add(5.0);
-        this.timesRated = 0;
         this.mDegree = degree;
     }
 
@@ -104,10 +102,6 @@ public class Tutor {
 
     public ArrayList<Double> getRating() {
         return mRating;
-    }
-
-    public float getTimesRated() {
-        return timesRated;
     }
 
     public String getProfileImage() {

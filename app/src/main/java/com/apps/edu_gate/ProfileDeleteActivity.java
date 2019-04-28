@@ -96,7 +96,6 @@ public class ProfileDeleteActivity extends BaseActivity {
             @Override
             public void onItemClick(int position, View v) {
                 final Tutorinfo x = tutorList.get(position);
-                Toast.makeText(getBaseContext(),"Long Pressed!", Toast.LENGTH_LONG).show();
                 AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
                 builder.setMessage("Do you want to delete this profile?")
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
