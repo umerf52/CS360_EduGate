@@ -50,6 +50,15 @@
             android:id="@+id/tuition_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPostalAddress" />
+            android:inputType="textPostalAddress"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+
+        <Spinner
+            android:id="@+id/my_education_dropdown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/degreeOptions">
+
+        </Spinner>
     </LinearLayout>
 </ScrollView>

@@ -2,8 +2,10 @@ package com.apps.edu_gate;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +30,7 @@ public class ViewYourProfileActivity extends BaseActivity {
     ImageView profileImageView;
     EditText contactNumber;
     EditText tuitionLocation;
+    Spinner myEducationDropdown;
     String id;
     Tutorinfo tutor;
     FirebaseUser currentFirebaseUser;
@@ -39,31 +42,33 @@ public class ViewYourProfileActivity extends BaseActivity {
             if (dataSnapshot.exists()) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     int status = snapshot.child("profileStatus").getValue(int.class);
-                        Tutorinfo tutor = new Tutorinfo();
-                        tutor.grade = snapshot.child("grade").getValue(String.class);
-                        tutor.subject = snapshot.child("subject").getValue(String.class);
-                        tutor.address = snapshot.child("address").getValue(String.class);
-                        tutor.cnicNo = snapshot.child("cnicNo").getValue(String.class);
-                        tutor.contactNo = snapshot.child("contactNo").getValue(String.class);
-                        tutor.emailAddress = snapshot.child("emailAddress").getValue(String.class);
-                        tutor.firstName = snapshot.child("firstName").getValue(String.class);
-                        tutor.gender = snapshot.child("gender").getValue(String.class);
-                        tutor.lastName = snapshot.child("lastName").getValue(String.class);
-                        tutor.recentInstitution = snapshot.child("recentInstitution").getValue(String.class);
-                        tutor.tuitionLocation = snapshot.child("tuitionLocation").getValue(String.class);
-                        tutor.rating = (ArrayList<Double>) snapshot.child("rating").getValue();
-                        tutor.profileImage = snapshot.child("profileImage").getValue(String.class);
+                    Tutorinfo tutor = new Tutorinfo();
+                    tutor.grade = snapshot.child("grade").getValue(String.class);
+                    tutor.degree = snapshot.child("degree").getValue(String.class);
+                    tutor.subject = snapshot.child("subject").getValue(String.class);
+                    tutor.address = snapshot.child("address").getValue(String.class);
+                    tutor.cnicNo = snapshot.child("cnicNo").getValue(String.class);
+                    tutor.contactNo = snapshot.child("contactNo").getValue(String.class);
+                    tutor.emailAddress = snapshot.child("emailAddress").getValue(String.class);
+                    tutor.firstName = snapshot.child("firstName").getValue(String.class);
+                    tutor.gender = snapshot.child("gender").getValue(String.class);
+                    tutor.lastName = snapshot.child("lastName").getValue(String.class);
+                    tutor.recentInstitution = snapshot.child("recentInstitution").getValue(String.class);
+                    tutor.tuitionLocation = snapshot.child("tuitionLocation").getValue(String.class);
+                    tutor.rating = (ArrayList<Double>) snapshot.child("rating").getValue();
+                    tutor.profileImage = snapshot.child("profileImage").getValue(String.class);
                     Picasso.get()
                             .load(tutor.getProfileImage())
                             .placeholder(R.drawable.ic_launcher_foreground)
                             .fit()
                             .centerCrop()
                             .into(profileImageView);
-                        fname.setText(WordUtils.capitalizeFully(tutor.firstName));
-                        lname.setText(WordUtils.capitalizeFully(tutor.lastName));
-                        gender.setText(WordUtils.capitalizeFully(tutor.gender));
+                    fname.setText(WordUtils.capitalizeFully(tutor.firstName));
+                    lname.setText(WordUtils.capitalizeFully(tutor.lastName));
+                    gender.setText(WordUtils.capitalizeFully(tutor.gender));
                     contactNumber.setText(tutor.getContactNo());
                     tuitionLocation.setText(WordUtils.capitalizeFully(tutor.getTuitionLocation()));
+                    myEducationDropdown.setSelection(((ArrayAdapter) myEducationDropdown.getAdapter()).getPosition(tutor.getDegree()));
                 }
             }
             else{
@@ -88,6 +93,7 @@ public class ViewYourProfileActivity extends BaseActivity {
             profileImageView = findViewById(R.id.profile_picture);
             contactNumber = findViewById(R.id.contact_number);
             tuitionLocation = findViewById(R.id.tuition_location);
+            myEducationDropdown = findViewById(R.id.my_education_dropdown);
         currentFirebaseUser = AuthUI.getCurrentUser();
         String s = currentFirebaseUser.getEmail();
         Log.e("ssss",s );
