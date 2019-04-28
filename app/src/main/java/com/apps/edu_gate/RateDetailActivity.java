@@ -37,7 +37,7 @@ public class RateDetailActivity extends BaseActivity {
         recyclerView.setLayoutManager(mLayoutManager);
         Tutorinfo x = (Tutorinfo) getIntent().getSerializableExtra("result");
         setTitle((x.firstName.substring(0, 1).toUpperCase() + x.firstName.substring(1)) + " " +
-                x.lastName.substring(0, 1).toUpperCase() + x.firstName.substring(1));
+                x.lastName.substring(0, 1).toUpperCase() + x.lastName.substring(1));
         ratings = x.rating;
         mykey = x.key;
         Log.e("wow", String.valueOf(x.rating.get(0)));
