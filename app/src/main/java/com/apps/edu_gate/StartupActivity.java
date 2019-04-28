@@ -22,7 +22,7 @@ public class StartupActivity extends AppCompatActivity {
 
         tutor_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent myIntent = new Intent(StartupActivity.this, AdminMainPageActivity.class);
+                Intent myIntent = new Intent(StartupActivity.this, LoginActivity.class);
                 StartupActivity.this.startActivity(myIntent);
             }
         });

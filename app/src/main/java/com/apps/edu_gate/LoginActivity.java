@@ -1,6 +1,5 @@
 package com.apps.edu_gate;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -9,6 +8,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
@@ -16,9 +17,6 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
@@ -70,22 +68,21 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "Login:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            if (user.isEmailVerified()) {
-                                Log.d(TAG, "This was a verified user");
-                                updateUI(user);
-                            } else {
-                                Log.d(TAG, "UNVERIFIED USER");
-                                new AlertDialog.Builder(LoginActivity.this)
-                                        .setTitle("Email not verified")
-                                        .setMessage("Your account has not been verified yet.\nCheck the email sent to you to verify your account.")
-                                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog, int which) {
-                                            }
-                                        })
-                                        .show();
-                                mAuth.signOut();
-                                updateUI(null);
-                            }
+                            updateUI(user);
+//                            if (user.isEmailVerified()) {
+//                                updateUI(user);
+//                            } else {
+//                                new AlertDialog.Builder(LoginActivity.this)
+//                                        .setTitle("Email not verified")
+//                                        .setMessage("Your account has not been verified yet.\nCheck the email sent to you to verify your account.")
+//                                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                                            public void onClick(DialogInterface dialog, int which) {
+//                                            }
+//                                        })
+//                                        .show();
+//                                mAuth.signOut();
+//                                updateUI(null);
+//                            }
 
                         } else {
                             // If sign in fails, display a message to the user.
