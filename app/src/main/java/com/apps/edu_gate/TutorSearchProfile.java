@@ -3,17 +3,14 @@ package com.apps.edu_gate;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,7 +22,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
-
 
 import org.apache.commons.text.WordUtils;
 
@@ -67,8 +63,6 @@ public class TutorSearchProfile extends AppCompatActivity {
             gradesTur.add(split2[i].substring(0,1).toUpperCase()+split2[i].substring(1));
             String f = WordUtils.capitalizeFully(split2[i]) + ": " + WordUtils.capitalizeFully(splited[i]);
             lastList.add(f);
-            Log.e("grad",split2[i]);
-            Log.e("sub",splited[i]);
         }
         fname = (TextView) findViewById(R.id.fname);
         fname.setText(WordUtils.capitalizeFully(x.firstName));

@@ -58,7 +58,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:entries="@array/degreeOptions">
-
         </Spinner>
+
+        <LinearLayout
+            android:id="@+id/subjects_grades_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"></LinearLayout>
+
+        <Button
+            android:id="@+id/save_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SAVE" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="8dp"
+            android:src="@android:drawable/ic_input_add" />
+
     </LinearLayout>
 </ScrollView>

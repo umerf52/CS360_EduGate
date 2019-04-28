@@ -2,13 +2,17 @@ package com.apps.edu_gate;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -21,20 +25,28 @@ import com.squareup.picasso.Picasso;
 import org.apache.commons.text.WordUtils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ViewYourProfileActivity extends BaseActivity {
 
     EditText fname;
     EditText lname;
     TextView gender;
-    ImageView profileImageView;
-    EditText contactNumber;
-    EditText tuitionLocation;
-    Spinner myEducationDropdown;
+    private ImageView profileImageView;
+    private EditText contactNumber;
+    private EditText tuitionLocation;
+    private Spinner myEducationDropdown;
+    private List<String> subjectsTur = new ArrayList<>();
+    private List<String> gradesTur = new ArrayList<>();
+    private FloatingActionButton fab;
+    private Button saveButton;
     String id;
     Tutorinfo tutor;
     FirebaseUser currentFirebaseUser;
     FirebaseAuth AuthUI = FirebaseAuth.getInstance();
+
+    private ArrayList<Spinner> grade_spinners = new ArrayList<Spinner>();
+    private ArrayList<Spinner> subject_spinners = new ArrayList<Spinner>();
 
     ValueEventListener valueEventListener = new ValueEventListener() {
         @Override
@@ -69,6 +81,19 @@ public class ViewYourProfileActivity extends BaseActivity {
                     contactNumber.setText(tutor.getContactNo());
                     tuitionLocation.setText(WordUtils.capitalizeFully(tutor.getTuitionLocation()));
                     myEducationDropdown.setSelection(((ArrayAdapter) myEducationDropdown.getAdapter()).getPosition(tutor.getDegree()));
+
+                    String sub = tutor.subject;
+                    String grad = tutor.grade;
+                    String[] splited = sub.split("-");
+                    String[] split2 = grad.split("-");
+                    for (int i = 0; i < splited.length; i++) {
+                        subjectsTur.add(WordUtils.capitalizeFully(splited[i]));
+                        gradesTur.add(WordUtils.capitalizeFully(split2[i]));
+                        addSpinners();
+                        grade_spinners.get(i).setSelection(((ArrayAdapter) grade_spinners.get(i).getAdapter()).getPosition(gradesTur.get(i)));
+                        subject_spinners.get(i).setSelection(((ArrayAdapter) subject_spinners.get(i).getAdapter()).getPosition(subjectsTur.get(i)));
+                    }
+
                 }
             }
             else{
@@ -94,6 +119,17 @@ public class ViewYourProfileActivity extends BaseActivity {
             contactNumber = findViewById(R.id.contact_number);
             tuitionLocation = findViewById(R.id.tuition_location);
             myEducationDropdown = findViewById(R.id.my_education_dropdown);
+            saveButton = findViewById(R.id.save_button);
+            saveButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                }
+            });
+            fab = findViewById(R.id.fab);
+            fab.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    addSpinners();
+                }
+            });
         currentFirebaseUser = AuthUI.getCurrentUser();
         String s = currentFirebaseUser.getEmail();
         Log.e("ssss",s );
@@ -101,5 +137,33 @@ public class ViewYourProfileActivity extends BaseActivity {
                 .equalTo(s);
         q.addListenerForSingleValueEvent(valueEventListener);
         }
+
+    private void addSpinners() {
+        LinearLayout dropdown_layout = (LinearLayout) findViewById(R.id.subjects_grades_layout);
+
+        Spinner newSpinner = new Spinner(ViewYourProfileActivity.this);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                ViewYourProfileActivity.this, R.array.subjectOptions, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource
+                (android.R.layout.simple_spinner_dropdown_item);
+        newSpinner.setAdapter(adapter);
+
+        Spinner newSpinner1 = new Spinner(ViewYourProfileActivity.this);
+        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(
+                ViewYourProfileActivity.this, R.array.gradeOptions, android.R.layout.simple_spinner_item);
+        adapter1.setDropDownViewResource
+                (android.R.layout.simple_spinner_dropdown_item);
+        newSpinner1.setAdapter(adapter1);
+
+        LinearLayout temp_layout = new LinearLayout(this);
+
+        temp_layout.setOrientation(LinearLayout.HORIZONTAL);
+        temp_layout.addView(newSpinner1);
+        temp_layout.addView(newSpinner);
+        grade_spinners.add(newSpinner1);
+        subject_spinners.add(newSpinner);
+
+        dropdown_layout.addView(temp_layout);
+    }
 
 }
