@@ -1,26 +1,20 @@
 package com.apps.edu_gate;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import org.apache.commons.text.WordUtils;
 
@@ -31,6 +25,9 @@ public class ViewYourProfileActivity extends BaseActivity {
     EditText fname;
     EditText lname;
     TextView gender;
+    ImageView profileImageView;
+    EditText contactNumber;
+    EditText tuitionLocation;
     String id;
     Tutorinfo tutor;
     FirebaseUser currentFirebaseUser;
@@ -56,9 +53,17 @@ public class ViewYourProfileActivity extends BaseActivity {
                         tutor.tuitionLocation = snapshot.child("tuitionLocation").getValue(String.class);
                         tutor.rating = (ArrayList<Double>) snapshot.child("rating").getValue();
                         tutor.profileImage = snapshot.child("profileImage").getValue(String.class);
+                    Picasso.get()
+                            .load(tutor.getProfileImage())
+                            .placeholder(R.drawable.ic_launcher_foreground)
+                            .fit()
+                            .centerCrop()
+                            .into(profileImageView);
                         fname.setText(WordUtils.capitalizeFully(tutor.firstName));
                         lname.setText(WordUtils.capitalizeFully(tutor.lastName));
                         gender.setText(WordUtils.capitalizeFully(tutor.gender));
+                    contactNumber.setText(tutor.getContactNo());
+                    tuitionLocation.setText(WordUtils.capitalizeFully(tutor.getTuitionLocation()));
                 }
             }
             else{
@@ -80,6 +85,9 @@ public class ViewYourProfileActivity extends BaseActivity {
         fname = (EditText) findViewById(R.id.fname);
         lname = (EditText) findViewById(R.id.lname);
         gender = (TextView) findViewById(R.id.gender);
+            profileImageView = findViewById(R.id.profile_picture);
+            contactNumber = findViewById(R.id.contact_number);
+            tuitionLocation = findViewById(R.id.tuition_location);
         currentFirebaseUser = AuthUI.getCurrentUser();
         String s = currentFirebaseUser.getEmail();
         Log.e("ssss",s );
