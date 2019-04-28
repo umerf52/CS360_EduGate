@@ -1,8 +1,8 @@
 package com.apps.edu_gate;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
@@ -23,9 +24,10 @@ public class ChangePasswordActivity extends BaseActivity {
     private EditText old_password;
     private EditText new_password;
     private EditText re_new_password;
-    private FirebaseAuth firebaseAuth;
+    private TextInputLayout oldLayout;
+    private TextInputLayout newLayout;
+    private TextInputLayout reNewLayout;
     Button change_password_button;
-    ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,19 +35,20 @@ public class ChangePasswordActivity extends BaseActivity {
         setContentView(R.layout.activity_change_password);
         setTitle("Change Password");
 
-        //findViewById(R.id.change_password_button).setOnClickListener(this);
         old_password = findViewById(R.id.old_password);
         new_password = findViewById(R.id.new_password);
         re_new_password = findViewById(R.id.re_new_password);
+
+        oldLayout = findViewById(R.id.oldLayout);
+        newLayout = findViewById(R.id.newpassLayout);
+        reNewLayout = findViewById(R.id.renewLayout);
+
         change_password_button = findViewById(R.id.change_password_button);
-        dialog = new ProgressDialog(this);
 
         FirebaseApp.initializeApp(this);
-        firebaseAuth = FirebaseAuth.getInstance();
 
         change_password_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-//                Toast.makeText(getApplicationContext(), "Button Clicked", Toast.LENGTH_LONG).show();
                 changePassword();
             }
         });
@@ -56,11 +59,18 @@ public class ChangePasswordActivity extends BaseActivity {
 
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        showProgressDialog();
 
         if (user != null) {
             String email = user.getEmail();
             String oldpass = old_password.getText().toString();
+
+            if (email == null) {
+                Toast.makeText(this, "Error, Are you signed in?", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (!validateInputs()) return;
+
+            showProgressDialog();
 
             AuthCredential credential = EmailAuthProvider.getCredential(email, oldpass);
 
@@ -98,6 +108,34 @@ public class ChangePasswordActivity extends BaseActivity {
             });
 
         }
+    }
+
+    boolean validateInputs() {
+        String old_pass = old_password.getText().toString();
+        String new_pass = new_password.getText().toString();
+        String re_new_pass = re_new_password.getText().toString();
+        boolean valid = true;
+
+        if (TextUtils.isEmpty(old_pass)) {
+            oldLayout.setErrorEnabled(true);
+            oldLayout.setError("Required");
+            valid = false;
+        }
+
+        if (TextUtils.isEmpty(new_pass)) {
+            newLayout.setErrorEnabled(true);
+            newLayout.setError("Required");
+            valid = false;
+        }
+
+        if (TextUtils.isEmpty(re_new_pass)) {
+            reNewLayout.setErrorEnabled(true);
+            reNewLayout.setError("Required");
+            valid = false;
+        }
+
+        return valid;
+
     }
 
 
