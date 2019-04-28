@@ -8,10 +8,13 @@
         android:layout_height="wrap_content"
         android:layout_margin="3dp">
 
-        <LinearLayout
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:background="@drawable/et"
+            android:padding="7dp">
             <RelativeLayout
                 android:id="@+id/lin"
                 android:layout_width="120dp"
@@ -27,22 +30,38 @@
                     android:layout_marginRight="16dp"
                     />
             </RelativeLayout>
+
             <TextView
                 android:id="@+id/fname"
+                android:layout_toRightOf="@+id/lin"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"/>
+                android:layout_height="wrap_content"
+                android:text="First Name"
+                android:layout_marginRight="5dp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
             <TextView
                 android:id="@+id/lname"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"/>
+                android:layout_toRightOf="@id/fname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:text="Last Name"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Tap to view profile"/>
+                android:layout_toRightOf="@id/lin"
+                android:layout_width="match_parent"
+                android:layout_below="@id/lname"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:textSize="20sp"
+                android:layout_marginRight="5dp"
+                android:text="Tap to View Profile"
+                android:textColor="@color/colorAccent"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
-
-        </LinearLayout>
-
+        </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
 
