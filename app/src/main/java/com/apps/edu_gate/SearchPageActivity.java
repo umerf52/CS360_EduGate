@@ -193,7 +193,7 @@ public class SearchPageActivity extends BaseActivity {
             adminNumbers.clear();
             if (dataSnapshot.exists()) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    String number = snapshot.child("contactNo").getValue(String.class);
+                    String number = snapshot.child("mContactNo").getValue(String.class);
                     Log.e("hereee",number);
                     adminNumbers.add(number);
                 }
@@ -242,7 +242,7 @@ public class SearchPageActivity extends BaseActivity {
                         s = "grade";
                     }
                     Query q7 = FirebaseDatabase.getInstance().getReference("Admin")
-                            .orderByChild("contactNo");
+                            .orderByChild("mContactNo");
                     q7.addListenerForSingleValueEvent(valueEventListener5);
                     Toast.makeText(getBaseContext(), s+ query, Toast.LENGTH_LONG).show();
                     if(s.equals("firstName")||s.equals("tuitionLocation")){
