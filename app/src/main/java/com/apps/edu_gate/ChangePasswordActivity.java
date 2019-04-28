@@ -31,7 +31,7 @@ public class ChangePasswordActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
-        setTitle("New Password");
+        setTitle("Change Password");
 
         //findViewById(R.id.change_password_button).setOnClickListener(this);
         old_password = findViewById(R.id.old_password);
@@ -99,16 +99,6 @@ public class ChangePasswordActivity extends BaseActivity {
 
         }
     }
-
-
-//    public void onClick(View v) {
-//        int i = v.getId();
-//        if (i == R.id.change_password_button){
-//            Toast.makeText(getApplicationContext(), "Button Clicked", Toast.LENGTH_LONG).show();
-//            changePassword();
-//        }
-//
-//    }
 
 
 }
