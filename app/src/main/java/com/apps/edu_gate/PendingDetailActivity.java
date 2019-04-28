@@ -1,5 +1,6 @@
 package com.apps.edu_gate;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -87,11 +88,15 @@ public class PendingDetailActivity extends AppCompatActivity {
     public void acceptProfile(View view) {
         DatabaseReference dbNode = FirebaseDatabase.getInstance().getReference("Tutors");
         dbNode.child(x.key).child("profileStatus").setValue(1);
-        Toast.makeText(getBaseContext(), "Profile Verified!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getBaseContext(), "Profile Verified", Toast.LENGTH_SHORT).show();
+        Intent myIntent = new Intent(this, ViewPendingActivity.class);
+        this.startActivity(myIntent);
     }
     public void rejectProfile(View view) {
         DatabaseReference dbNode = FirebaseDatabase.getInstance().getReference("Tutors");
         dbNode.child(x.key).child("profileStatus").setValue(0);
-        Toast.makeText(getBaseContext(), "Profile Declined!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getBaseContext(), "Profile Declined", Toast.LENGTH_SHORT).show();
+        Intent myIntent = new Intent(this, ViewPendingActivity.class);
+        this.startActivity(myIntent);
     }
 }

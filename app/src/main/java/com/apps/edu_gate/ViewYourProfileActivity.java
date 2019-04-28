@@ -209,6 +209,7 @@ public class ViewYourProfileActivity extends BaseActivity {
         dbNode.child(tutorKey).child("tuitionLocation").setValue(locationNew);
         dbNode.child(tutorKey).child("subject").setValue(new_subject_values);
         dbNode.child(tutorKey).child("grade").setValue(new_grade_values);
+        dbNode.child(tutorKey).child("profileStatus").setValue(-1);
         hideProgressDialog();
     }
 
