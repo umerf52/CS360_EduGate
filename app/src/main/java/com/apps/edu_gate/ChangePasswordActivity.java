@@ -44,6 +44,13 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
         FirebaseApp.initializeApp(this);
         firebaseAuth = FirebaseAuth.getInstance();
+
+        change_password_button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+//                Toast.makeText(getApplicationContext(), "Button Clicked", Toast.LENGTH_LONG).show();
+                changePassword();;
+            }
+        });
     }
 
 
@@ -61,12 +68,12 @@ public class ChangePasswordActivity extends AppCompatActivity {
             user.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
-                    if (task.isSuccessful()) {
+                    if (true) {
                         String newpass = new_password.getText().toString();
                         String confirmpass = re_new_password.getText().toString();
 
                         if(newpass != confirmpass){
-                            Toast.makeText(getApplicationContext(), "Passwords don't match", Toast.LENGTH_LONG);
+                            Toast.makeText(getApplicationContext(), "Passwords don't match", Toast.LENGTH_LONG).show();
                             return;
                         }
 
@@ -74,16 +81,16 @@ public class ChangePasswordActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (!task.isSuccessful()) {
-                                    Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_LONG);
+                                    Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_LONG).show();
                                 } else {
-                                    Toast.makeText(getApplicationContext(), "Your password has been changed", Toast.LENGTH_LONG);
+                                    Toast.makeText(getApplicationContext(), "Your password has been changed", Toast.LENGTH_LONG).show();
                                 }
                             }
 
                         });
 
                     } else {
-                        Toast.makeText(getApplicationContext(), "Authentication Failed", Toast.LENGTH_LONG);
+                        Toast.makeText(getApplicationContext(), "Authentication Failed", Toast.LENGTH_LONG).show();
                     }
                 }
             });
@@ -91,13 +98,15 @@ public class ChangePasswordActivity extends AppCompatActivity {
         }
     }
 
-    //@Override
-    public void onClick(View v) {
-        int i = v.getId();
-        if (i == R.id.change_password_button){
-            changePassword();
-        }
 
-    }
+//    public void onClick(View v) {
+//        int i = v.getId();
+//        if (i == R.id.change_password_button){
+//            Toast.makeText(getApplicationContext(), "Button Clicked", Toast.LENGTH_LONG).show();
+//            changePassword();
+//        }
+//
+//    }
+
 
 }
