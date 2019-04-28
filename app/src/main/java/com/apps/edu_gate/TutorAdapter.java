@@ -87,17 +87,17 @@ public class TutorAdapter extends RecyclerView.Adapter<TutorAdapter.TutorViewHol
         double avgrate = x/count;
         tutor.tempr = avgrate;
         String rate = String.valueOf(avgrate);
+        Picasso.get()
+                .load(tutor.getProfileImage())
+                .placeholder(R.drawable.placeholder_profile_picture)
+                .fit()
+                .centerCrop()
+                .into(holder.profileImage);
         holder.fname.setText(WordUtils.capitalizeFully(tutor.firstName));
         holder.location.setText(WordUtils.capitalizeFully(tutor.tuitionLocation));
         holder.lname.setText(WordUtils.capitalizeFully(tutor.lastName));
         holder.institution.setText(WordUtils.capitalizeFully(tutor.recentInstitution));
         holder.rating.setRating((float)avgrate);
-        Picasso.get()
-                .load(tutor.getProfileImage())
-                .placeholder(R.drawable.ic_launcher_foreground)
-                .fit()
-                .centerCrop()
-                .into(holder.profileImage);
 
     }
 

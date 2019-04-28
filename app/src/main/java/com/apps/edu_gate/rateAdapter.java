@@ -83,15 +83,15 @@ class rateAdapter extends RecyclerView.Adapter<rateAdapter.rateViewHolder> {
                 .doubleValue();
         tutor.tempr = avgrate;
         String rate = String.valueOf(avgrate);
-        holder.fname.setText(tutor.firstName.substring(0,1).toUpperCase()+tutor.firstName.substring(1));
-        holder.lname.setText(tutor.lastName.substring(0,1).toUpperCase()+tutor.lastName.substring(1));
-        holder.rating.setText(rate);
         Picasso.get()
                 .load(tutor.getProfileImage())
-                .placeholder(R.drawable.ic_launcher_foreground)
+                .placeholder(R.drawable.placeholder_profile_picture)
                 .fit()
                 .centerCrop()
                 .into(holder.profileImage);
+        holder.fname.setText(tutor.firstName.substring(0,1).toUpperCase()+tutor.firstName.substring(1));
+        holder.lname.setText(tutor.lastName.substring(0,1).toUpperCase()+tutor.lastName.substring(1));
+        holder.rating.setText(rate);
     }
 
     @Override

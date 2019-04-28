@@ -100,7 +100,7 @@ public class ViewYourProfileActivity extends BaseActivity {
                     tutorKey = snapshot.child("key").getValue(String.class);
                     Picasso.get()
                             .load(tutor.getProfileImage())
-                            .placeholder(R.drawable.ic_launcher_foreground)
+                            .placeholder(R.drawable.placeholder_profile_picture)
                             .fit()
                             .centerCrop()
                             .into(profileImageView);

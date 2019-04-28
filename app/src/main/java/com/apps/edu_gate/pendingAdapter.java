@@ -5,18 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class pendingAdapter extends RecyclerView.Adapter<pendingAdapter.pendingViewHolder> {
@@ -65,14 +60,14 @@ public class pendingAdapter extends RecyclerView.Adapter<pendingAdapter.pendingV
     @Override
     public void onBindViewHolder(@NonNull pendingViewHolder holder, int position) {
         Tutorinfo tutor = tutorList.get(position);
-        holder.fname.setText(tutor.firstName.substring(0,1).toUpperCase()+tutor.firstName.substring(1));
-        holder.lname.setText(tutor.lastName.substring(0,1).toUpperCase()+tutor.lastName.substring(1));
         Picasso.get()
                 .load(tutor.getProfileImage())
-                .placeholder(R.drawable.ic_launcher_foreground)
+                .placeholder(R.drawable.placeholder_profile_picture)
                 .fit()
                 .centerCrop()
                 .into(holder.profileImage);
+        holder.fname.setText(tutor.firstName.substring(0,1).toUpperCase()+tutor.firstName.substring(1));
+        holder.lname.setText(tutor.lastName.substring(0,1).toUpperCase()+tutor.lastName.substring(1));
     }
 
     @Override

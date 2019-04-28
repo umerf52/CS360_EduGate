@@ -3,7 +3,6 @@ package com.apps.edu_gate;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -17,11 +16,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import org.apache.commons.text.WordUtils;
@@ -67,6 +61,12 @@ public class TutorSearchProfile extends AppCompatActivity {
             String f = WordUtils.capitalizeFully(split2[i]) + ": " + WordUtils.capitalizeFully(splited[i]);
             lastList.add(f);
         }
+        Picasso.get()
+                .load(x.getProfileImage())
+                .placeholder(R.drawable.placeholder_profile_picture)
+                .fit()
+                .centerCrop()
+                .into(imageTutor);
         fname = (TextView) findViewById(R.id.fname);
         fname.setText(WordUtils.capitalizeFully(x.firstName));
         gender = (TextView) findViewById(R.id.gender);
@@ -78,12 +78,6 @@ public class TutorSearchProfile extends AppCompatActivity {
         location = (TextView) findViewById(R.id.location);
         location.setText(WordUtils.capitalizeFully(x.tuitionLocation));
         imageTutor = findViewById(R.id.imageTutor);
-        Picasso.get()
-                .load(x.getProfileImage())
-                .placeholder(R.drawable.ic_launcher_foreground)
-                .fit()
-                .centerCrop()
-                .into(imageTutor);
         ratingBar.setRating((float)x.tempr);
         ArrayAdapter adapter1 = new ArrayAdapter<String>(this,
                 R.layout.listitem,R.id.txtitem, lastList);

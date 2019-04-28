@@ -1,13 +1,10 @@
 package com.apps.edu_gate;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,9 +14,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 class delAdapter extends RecyclerView.Adapter<delAdapter.delViewHolder> {
@@ -70,14 +64,14 @@ class delAdapter extends RecyclerView.Adapter<delAdapter.delViewHolder> {
     public void onBindViewHolder(@NonNull delAdapter.delViewHolder holder, int position) {
         Tutorinfo tutor = tutorList.get(position);
 
-        holder.fname.setText(tutor.firstName.substring(0,1).toUpperCase()+tutor.firstName.substring(1));
-        holder.lname.setText(tutor.lastName.substring(0,1).toUpperCase()+tutor.lastName.substring(1));
         Picasso.get()
                 .load(tutor.getProfileImage())
-                .placeholder(R.drawable.ic_launcher_foreground)
+                .placeholder(R.drawable.placeholder_profile_picture)
                 .fit()
                 .centerCrop()
                 .into(holder.profileImage);
+        holder.fname.setText(tutor.firstName.substring(0,1).toUpperCase()+tutor.firstName.substring(1));
+        holder.lname.setText(tutor.lastName.substring(0,1).toUpperCase()+tutor.lastName.substring(1));
     }
 
     @Override
