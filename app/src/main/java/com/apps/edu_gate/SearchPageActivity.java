@@ -37,27 +37,35 @@ public class SearchPageActivity extends BaseActivity {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
             tutorList.clear();
+            int count= 0;
             if (dataSnapshot.exists()) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Tutorinfo tutor = new Tutorinfo();
-                    tutor.grade = snapshot.child("grade").getValue(String.class);
-                    tutor.subject = snapshot.child("subject").getValue(String.class);
-                    tutor.address = snapshot.child("address").getValue(String.class);
-                    tutor.cnicNo = snapshot.child("cnicNo").getValue(String.class);
-                    tutor.contactNo = snapshot.child("contactNo").getValue(String.class);
-                    tutor.emailAddress = snapshot.child("emailAddress").getValue(String.class);
-                    tutor.firstName = snapshot.child("firstName").getValue(String.class);
-                    tutor.gender = snapshot.child("gender").getValue(String.class);
-                    tutor.lastName = snapshot.child("lastName").getValue(String.class);
-                    tutor.recentInstitution = snapshot.child("recentInstitution").getValue(String.class);
-                    tutor.tuitionLocation = snapshot.child("tuitionLocation").getValue(String.class);
-                    tutor.rating = (ArrayList<Double>) snapshot.child("rating").getValue();
-                    tutor.profileImage = snapshot.child("profileImage").getValue(String.class);
-                    tutorList.add(tutor);
+                    int status = snapshot.child("profileStatus").getValue(int.class);
+                    if(status==1){
+                        count++;
+                        Tutorinfo tutor = new Tutorinfo();
+                        tutor.grade = snapshot.child("grade").getValue(String.class);
+                        tutor.subject = snapshot.child("subject").getValue(String.class);
+                        tutor.address = snapshot.child("address").getValue(String.class);
+                        tutor.cnicNo = snapshot.child("cnicNo").getValue(String.class);
+                        tutor.contactNo = snapshot.child("contactNo").getValue(String.class);
+                        tutor.emailAddress = snapshot.child("emailAddress").getValue(String.class);
+                        tutor.firstName = snapshot.child("firstName").getValue(String.class);
+                        tutor.gender = snapshot.child("gender").getValue(String.class);
+                        tutor.lastName = snapshot.child("lastName").getValue(String.class);
+                        tutor.recentInstitution = snapshot.child("recentInstitution").getValue(String.class);
+                        tutor.tuitionLocation = snapshot.child("tuitionLocation").getValue(String.class);
+                        tutor.rating = (ArrayList<Double>) snapshot.child("rating").getValue();
+                        tutor.profileImage = snapshot.child("profileImage").getValue(String.class);
+                        tutorList.add(tutor);
+                    }
                 }
                 mAdapter.notifyDataSetChanged();
             }
             else{
+                Toast.makeText(getBaseContext(),"No such results!", Toast.LENGTH_LONG).show();
+            }
+            if(count==0){
                 Toast.makeText(getBaseContext(),"No such results!", Toast.LENGTH_LONG).show();
             }
             hideProgressDialog();
@@ -73,32 +81,36 @@ public class SearchPageActivity extends BaseActivity {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
             tutorList.clear();
+            int count=0;
             if (dataSnapshot.exists()) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    String subjects = snapshot.child("subject").getValue(String.class);
-//
-                    if(subjects.length()>0){
-                        Log.e("dsdasd", subjects);
-                        String[] splited = subjects.split("-");
-                        for(int i=0; i<splited.length; i++){
-                            Log.e("lolz", splited[i]);
-                            if(searching.equals(splited[i])){
-                                Tutorinfo tutor = new Tutorinfo();
-                                tutor.grade = snapshot.child("grade").getValue(String.class);
-                                tutor.subject = subjects;
-                                tutor.address = snapshot.child("address").getValue(String.class);
-                                tutor.cnicNo = snapshot.child("cnicNo").getValue(String.class);
-                                tutor.contactNo = snapshot.child("contactNo").getValue(String.class);
-                                tutor.emailAddress = snapshot.child("emailAddress").getValue(String.class);
-                                tutor.firstName = snapshot.child("firstName").getValue(String.class);
-                                tutor.gender = snapshot.child("gender").getValue(String.class);
-                                tutor.lastName = snapshot.child("lastName").getValue(String.class);
-                                tutor.recentInstitution = snapshot.child("recentInstitution").getValue(String.class);
-                                tutor.tuitionLocation = snapshot.child("tuitionLocation").getValue(String.class);
-                                tutor.rating = (ArrayList<Double>) snapshot.child("rating").getValue();
-                                tutor.profileImage = snapshot.child("profileImage").getValue(String.class);
-                                tutorList.add(tutor);
-                                break;
+                    int status = snapshot.child("profileStatus").getValue(int.class);
+                    if(status==1){
+                        String subjects = snapshot.child("subject").getValue(String.class);
+                        if(subjects.length()>0){
+                            Log.e("dsdasd", subjects);
+                            String[] splited = subjects.split("-");
+                            for(int i=0; i<splited.length; i++){
+                                Log.e("lolz", splited[i]);
+                                if(searching.equals(splited[i])){
+                                    Tutorinfo tutor = new Tutorinfo();
+                                    count++;
+                                    tutor.grade = snapshot.child("grade").getValue(String.class);
+                                    tutor.subject = subjects;
+                                    tutor.address = snapshot.child("address").getValue(String.class);
+                                    tutor.cnicNo = snapshot.child("cnicNo").getValue(String.class);
+                                    tutor.contactNo = snapshot.child("contactNo").getValue(String.class);
+                                    tutor.emailAddress = snapshot.child("emailAddress").getValue(String.class);
+                                    tutor.firstName = snapshot.child("firstName").getValue(String.class);
+                                    tutor.gender = snapshot.child("gender").getValue(String.class);
+                                    tutor.lastName = snapshot.child("lastName").getValue(String.class);
+                                    tutor.recentInstitution = snapshot.child("recentInstitution").getValue(String.class);
+                                    tutor.tuitionLocation = snapshot.child("tuitionLocation").getValue(String.class);
+                                    tutor.rating = (ArrayList<Double>) snapshot.child("rating").getValue();
+                                    tutor.profileImage = snapshot.child("profileImage").getValue(String.class);
+                                    tutorList.add(tutor);
+                                    break;
+                                }
                             }
                         }
                     }
@@ -106,6 +118,9 @@ public class SearchPageActivity extends BaseActivity {
                 mAdapter.notifyDataSetChanged();
             }
             else{
+                Toast.makeText(getBaseContext(),"No such results!", Toast.LENGTH_LONG).show();
+            }
+            if(count==0){
                 Toast.makeText(getBaseContext(),"No such results!", Toast.LENGTH_LONG).show();
             }
             hideProgressDialog();
@@ -121,29 +136,34 @@ public class SearchPageActivity extends BaseActivity {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
             tutorList.clear();
+            int count=0;
             if (dataSnapshot.exists()) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    String subjects = snapshot.child("grade").getValue(String.class);
-                    if(subjects.length()>0){
-                        String[] splited = subjects.split("-");
-                        for(int i=0; i<splited.length; i++){
-                            if(searching.equals(splited[i])){
-                                Tutorinfo tutor = new Tutorinfo();
-                                tutor.grade = subjects;
-                                tutor.subject = snapshot.child("subject").getValue(String.class);
-                                tutor.address = snapshot.child("address").getValue(String.class);
-                                tutor.cnicNo = snapshot.child("cnicNo").getValue(String.class);
-                                tutor.contactNo = snapshot.child("contactNo").getValue(String.class);
-                                tutor.emailAddress = snapshot.child("emailAddress").getValue(String.class);
-                                tutor.firstName = snapshot.child("firstName").getValue(String.class);
-                                tutor.gender = snapshot.child("gender").getValue(String.class);
-                                tutor.lastName = snapshot.child("lastName").getValue(String.class);
-                                tutor.recentInstitution = snapshot.child("recentInstitution").getValue(String.class);
-                                tutor.tuitionLocation = snapshot.child("tuitionLocation").getValue(String.class);
-                                tutor.rating = (ArrayList<Double>) snapshot.child("rating").getValue();
-                                tutor.profileImage = snapshot.child("profileImage").getValue(String.class);
-                                tutorList.add(tutor);
-                                break;
+                    int status = snapshot.child("profileStatus").getValue(int.class);
+                    if(status==1){
+                        String subjects = snapshot.child("grade").getValue(String.class);
+                        if(subjects.length()>0){
+                            String[] splited = subjects.split("-");
+                            for(int i=0; i<splited.length; i++){
+                                if(searching.equals(splited[i])){
+                                    Tutorinfo tutor = new Tutorinfo();
+                                    tutor.grade = subjects;
+                                    count++;
+                                    tutor.subject = snapshot.child("subject").getValue(String.class);
+                                    tutor.address = snapshot.child("address").getValue(String.class);
+                                    tutor.cnicNo = snapshot.child("cnicNo").getValue(String.class);
+                                    tutor.contactNo = snapshot.child("contactNo").getValue(String.class);
+                                    tutor.emailAddress = snapshot.child("emailAddress").getValue(String.class);
+                                    tutor.firstName = snapshot.child("firstName").getValue(String.class);
+                                    tutor.gender = snapshot.child("gender").getValue(String.class);
+                                    tutor.lastName = snapshot.child("lastName").getValue(String.class);
+                                    tutor.recentInstitution = snapshot.child("recentInstitution").getValue(String.class);
+                                    tutor.tuitionLocation = snapshot.child("tuitionLocation").getValue(String.class);
+                                    tutor.rating = (ArrayList<Double>) snapshot.child("rating").getValue();
+                                    tutor.profileImage = snapshot.child("profileImage").getValue(String.class);
+                                    tutorList.add(tutor);
+                                    break;
+                                }
                             }
                         }
                     }
@@ -151,6 +171,9 @@ public class SearchPageActivity extends BaseActivity {
                 mAdapter.notifyDataSetChanged();
             }
             else{
+                Toast.makeText(getBaseContext(),"No such results!", Toast.LENGTH_LONG).show();
+            }
+            if(count==0){
                 Toast.makeText(getBaseContext(),"No such results!", Toast.LENGTH_LONG).show();
             }
             hideProgressDialog();

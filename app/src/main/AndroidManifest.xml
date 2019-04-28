@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RateDetailActivity"></activity>
+        <activity android:name=".PendingDetailActivity"></activity>
+        <activity android:name=".ViewPendingActivity" />
+        <activity android:name=".RateDetailActivity" />
         <activity android:name=".ProfileDeleteActivity" />
         <activity
             android:name=".RateTutorActivity"

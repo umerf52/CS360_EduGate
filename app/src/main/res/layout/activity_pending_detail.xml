@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <TextView
+    android:id="@+id/address"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Address"
+    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+
+    <TextView
+    android:id="@+id/cnicNo"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="CNIC"
+    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
+    <TextView
+    android:id="@+id/contactNo"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Contact Number"
+    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
+    <TextView
+        android:id="@+id/fname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="First Name"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
+    <TextView
+        android:id="@+id/lname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Last Name"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
+    <TextView
+        android:id="@+id/institution"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Institution"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
+    <TextView
+        android:id="@+id/location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Location"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
+    <ListView
+        android:id="@+id/sub_list"
+
+        android:layout_marginRight="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
+
+    <ImageView
+        android:id="@+id/imageProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/imageTranscript"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/approve"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="acceptProfile"
+        android:text="Accept"/>
+    <Button
+        android:id="@+id/disapprove"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="rejectProfile"
+        android:text="Reject"/>
+
+
+</LinearLayout>

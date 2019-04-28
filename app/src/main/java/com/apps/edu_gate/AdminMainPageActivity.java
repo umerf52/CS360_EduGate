@@ -52,7 +52,7 @@ public class AdminMainPageActivity extends AppCompatActivity {
         });
         verify_profile.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent myIntent = new Intent(AdminMainPageActivity.this, LoginActivity.class);
+                Intent myIntent = new Intent(AdminMainPageActivity.this, ViewPendingActivity.class);
                 AdminMainPageActivity.this.startActivity(myIntent);
             }
         });
