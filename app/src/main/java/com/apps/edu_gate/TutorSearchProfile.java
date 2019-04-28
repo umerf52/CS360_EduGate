@@ -61,6 +61,7 @@ public class TutorSearchProfile extends AppCompatActivity {
             String f = WordUtils.capitalizeFully(split2[i]) + ": " + WordUtils.capitalizeFully(splited[i]);
             lastList.add(f);
         }
+        imageTutor = findViewById(R.id.imageTutor);
         Picasso.get()
                 .load(x.getProfileImage())
                 .placeholder(R.drawable.placeholder_profile_picture)
@@ -77,7 +78,6 @@ public class TutorSearchProfile extends AppCompatActivity {
         instituion.setText(WordUtils.capitalizeFully(x.recentInstitution));
         location = (TextView) findViewById(R.id.location);
         location.setText(WordUtils.capitalizeFully(x.tuitionLocation));
-        imageTutor = findViewById(R.id.imageTutor);
         ratingBar.setRating((float)x.tempr);
         ArrayAdapter adapter1 = new ArrayAdapter<String>(this,
                 R.layout.listitem,R.id.txtitem, lastList);

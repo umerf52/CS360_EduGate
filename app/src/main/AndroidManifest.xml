@@ -13,6 +13,7 @@
         <activity android:name=".ViewYourProfileActivity"></activity>
         <activity android:name=".ViewPendingActivity"></activity>
         <activity android:name=".ProfileDeleteActivity" />
+        <activity android:name=".PendingDetailActivity" />
         <activity
             android:name=".RateTutorActivity"
             android:label="Rate Tutors"

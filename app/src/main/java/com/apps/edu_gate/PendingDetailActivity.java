@@ -71,13 +71,13 @@ public class PendingDetailActivity extends AppCompatActivity {
         trans = (ImageView) findViewById(R.id.imageTranscript);
         Picasso.get()
                 .load(x.getProfileImage())
-                .placeholder(R.drawable.ic_launcher_foreground)
+                .placeholder(R.drawable.placeholder_profile_picture)
                 .fit()
                 .centerCrop()
                 .into(prof);
         Picasso.get()
                 .load(x.getTranscriptImage())
-                .placeholder(R.drawable.ic_launcher_foreground)
+                .placeholder(R.drawable.placeholder_profile_picture)
                 .fit()
                 .centerCrop()
                 .into(trans);
