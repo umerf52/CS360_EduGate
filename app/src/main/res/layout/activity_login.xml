@@ -104,7 +104,7 @@
             android:layout_below="@id/passwordLayout"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="40dp"
-            android:text="Sign in"
+            android:text="SignIn"
             android:textColor="@color/white"
             android:background="@drawable/btn"
             android:textAllCaps="false"
