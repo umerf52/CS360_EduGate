@@ -3,7 +3,6 @@ package com.apps.edu_gate;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -22,9 +21,7 @@ public class SignupPersonalActivity extends BaseActivity {
     private EditText mContact;
     private String email;
 
-    private Button mNextButton;
     private static final int PICK_IMAGE_REQUEST = 1;
-    private Button imageButton;
     private TextView imageName;
     private Uri mImageUri;
 
@@ -45,13 +42,10 @@ public class SignupPersonalActivity extends BaseActivity {
         mAddress = (EditText) findViewById(R.id.house_address);
         mGender = (Spinner) findViewById(R.id.my_education_dropdown);
         mContact = (EditText) findViewById(R.id.contact_number);
-        imageButton = findViewById(R.id.image_button);
+        Button imageButton = findViewById(R.id.image_button);
         imageName = findViewById(R.id.image_name);
 
-        mNextButton = findViewById(R.id.submit_button);
-
-
-        mContact.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
+        Button mNextButton = findViewById(R.id.submit_button);
 
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,7 +69,6 @@ public class SignupPersonalActivity extends BaseActivity {
 
         int i = v.getId();
         if (i == R.id.submit_button) {
-//            Dictionary<String, String> data = AddPresonalInfo();
             Intent myIntent = new Intent(SignupPersonalActivity.this, SignupEducationActivity.class);
             myIntent.putExtra("Fname", FirstName);
             myIntent.putExtra("Lname", LastName);
@@ -131,7 +124,6 @@ public class SignupPersonalActivity extends BaseActivity {
 
         String Gender = mGender.getSelectedItem().toString();
         if (TextUtils.isEmpty(Gender)) {
-            //mGender.setError("Required.");
             valid = false;
         }
 

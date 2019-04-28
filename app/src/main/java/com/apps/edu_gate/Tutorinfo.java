@@ -35,4 +35,12 @@ public class Tutorinfo implements Serializable {
     public String getDegree() {
         return degree;
     }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String newKey) {
+        key = newKey;
+    }
 }

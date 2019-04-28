@@ -130,4 +130,24 @@ public class Tutor {
         return mDegree;
     }
 
+    public void setContactNo(String newNum) {
+        mContactNo = newNum;
+    }
+
+    public void setDegree(String newDeg) {
+        mDegree = newDeg;
+    }
+
+    public void setTuitionLocation(String newLoc) {
+        mTuitionLocation = newLoc;
+    }
+
+    public void setSubject(String newSub) {
+        mSubject = newSub;
+    }
+
+    public void setGrade(String newGrade) {
+        mGrade = newGrade;
+    }
+
 }

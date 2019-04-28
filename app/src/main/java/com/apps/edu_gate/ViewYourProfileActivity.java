@@ -1,7 +1,6 @@
 package com.apps.edu_gate;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -17,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
@@ -25,6 +25,7 @@ import com.squareup.picasso.Picasso;
 import org.apache.commons.text.WordUtils;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class ViewYourProfileActivity extends BaseActivity {
@@ -38,8 +39,9 @@ public class ViewYourProfileActivity extends BaseActivity {
     private Spinner myEducationDropdown;
     private List<String> subjectsTur = new ArrayList<>();
     private List<String> gradesTur = new ArrayList<>();
-    private FloatingActionButton fab;
-    private Button saveButton;
+    private String new_subject_values = "";
+    private String new_grade_values = "";
+    private String tutorKey = "";
     String id;
     Tutorinfo tutor;
     FirebaseUser currentFirebaseUser;
@@ -69,6 +71,7 @@ public class ViewYourProfileActivity extends BaseActivity {
                     tutor.tuitionLocation = snapshot.child("tuitionLocation").getValue(String.class);
                     tutor.rating = (ArrayList<Double>) snapshot.child("rating").getValue();
                     tutor.profileImage = snapshot.child("profileImage").getValue(String.class);
+                    tutorKey = snapshot.child("key").getValue(String.class);
                     Picasso.get()
                             .load(tutor.getProfileImage())
                             .placeholder(R.drawable.ic_launcher_foreground)
@@ -104,7 +107,7 @@ public class ViewYourProfileActivity extends BaseActivity {
 
         @Override
         public void onCancelled(DatabaseError databaseError) {
-
+            Toast.makeText(getBaseContext(), databaseError.getMessage(), Toast.LENGTH_LONG).show();
         }
     };
         @Override
@@ -120,12 +123,13 @@ public class ViewYourProfileActivity extends BaseActivity {
             contactNumber = findViewById(R.id.contact_number);
             tuitionLocation = findViewById(R.id.tuition_location);
             myEducationDropdown = findViewById(R.id.my_education_dropdown);
-            saveButton = findViewById(R.id.save_button);
+            Button saveButton = findViewById(R.id.save_button);
             saveButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
+                    updateTutor();
                 }
             });
-            fab = findViewById(R.id.fab);
+            FloatingActionButton fab = findViewById(R.id.fab);
             fab.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     addSpinners();
@@ -133,7 +137,6 @@ public class ViewYourProfileActivity extends BaseActivity {
             });
         currentFirebaseUser = AuthUI.getCurrentUser();
         String s = currentFirebaseUser.getEmail();
-        Log.e("ssss",s );
         Query q = FirebaseDatabase.getInstance().getReference("Tutors").orderByChild("emailAddress")
                 .equalTo(s);
         q.addListenerForSingleValueEvent(valueEventListener);
@@ -165,6 +168,47 @@ public class ViewYourProfileActivity extends BaseActivity {
         subject_spinners.add(newSpinner);
 
         dropdown_layout.addView(temp_layout);
+    }
+
+    private void updateTutor() {
+        showProgressDialog();
+        String contactNew = contactNumber.getText().toString();
+        String locationNew = tuitionLocation.getText().toString();
+        String degreeNew = String.valueOf(myEducationDropdown.getSelectedItem());
+        getSpinnerValues();
+        DatabaseReference dbNode = FirebaseDatabase.getInstance().getReference("Tutors");
+        dbNode.child(tutorKey).child("contactNo").setValue(contactNew);
+        dbNode.child(tutorKey).child("degree").setValue(degreeNew);
+        dbNode.child(tutorKey).child("tuitionLocation").setValue(locationNew);
+        dbNode.child(tutorKey).child("subject").setValue(new_subject_values);
+        dbNode.child(tutorKey).child("grade").setValue(new_grade_values);
+        hideProgressDialog();
+    }
+
+    private boolean getSpinnerValues() {
+        new_subject_values = "";
+        new_grade_values = "";
+        Iterator i = grade_spinners.iterator();
+        while (i.hasNext()) {
+            Spinner tmp = (Spinner) i.next();
+            String val = String.valueOf(tmp.getSelectedItem());
+            if (val.equals("Grade")) {
+                continue;
+            }
+            new_grade_values += ((String.valueOf(tmp.getSelectedItem()).toLowerCase()) + "-");
+        }
+
+        Iterator j = subject_spinners.iterator();
+        while (j.hasNext()) {
+            Spinner tmp = (Spinner) j.next();
+            String val = String.valueOf(tmp.getSelectedItem());
+            if (val.equals("Subject")) {
+                continue;
+            }
+            new_subject_values += ((String.valueOf(tmp.getSelectedItem()).toLowerCase()) + "-");
+        }
+
+        return true;
     }
 
 }
