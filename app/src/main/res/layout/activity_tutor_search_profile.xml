@@ -1,144 +1,200 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".TutorSearchProfile">
-    <!--<TextView-->
-        <!--android:id="@+id/address"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Address"-->
-        <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/cnicNo"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="CNIC"-->
-        <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/contactNo"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Contact Number"-->
-        <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/email"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Email Address"-->
-        <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>-->
-
-    <TextView
-        android:id="@+id/fname"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="First Name"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
-
-    <TextView
-        android:id="@+id/gender"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Gender"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
-
-    <TextView
-        android:id="@+id/lname"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Last Name"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
-
-    <TextView
-        android:id="@+id/institution"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Institution"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
-
-    <TextView
-        android:id="@+id/location"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Location"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
-
-    <!--<TextView-->
-        <!--android:id="@+id/status"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Profile Status"-->
-        <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/grades"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Grades"-->
-        <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/subject"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Subjects"-->
-        <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>-->
-    <!--<ListView-->
-        <!--android:id="@+id/sub_list"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_weight="0.5" />-->
-
-    <!--<ListView-->
-        <!--android:id="@+id/grad_list"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_weight="0.5" />-->
-
-    <RatingBar
-        android:id="@+id/ratingBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:isIndicator="true"
-        android:numStars="5"
-        android:stepSize="0.5"/>
-        <!--android:rating="2.0" />-->
-
-    <ListView
-        android:id="@+id/sub_list"
-
-        android:layout_marginRight="40dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-    </ListView>
-
-    <!--<ListView-->
-        <!--android:id="@+id/grad_list"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content" >-->
-    <!--</ListView>-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/rating"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Rating"-->
-        <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>-->
-
-    <ImageView
-        android:id="@+id/imageTutor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
 
     <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/rel"
+        android:background="@color/navy"
+        android:layout_height="250dp">
+        <RelativeLayout
+            android:id="@+id/imagTutor"
+            android:layout_marginTop="30dp"
+            android:layout_width="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageTutor"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_margin="5dp"
+                android:padding="3dp"
+                android:src="@drawable/ye"
+                android:adjustViewBounds="true"
+                android:scaleType="centerInside"/>
+        </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/lin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imagTutor"
+            android:layout_centerInParent="true">
+            <TextView
+                android:id="@+id/fname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Naima"
+                android:paddingRight="10dp"
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+            <TextView
+                android:id="@+id/lname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Samreen"
+                android:layout_toRightOf="@id/fname"
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lin"
+            android:layout_centerInParent="true"
+            android:id="@+id/lin2">
+            <TextView
+                android:id="@+id/location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Township, Lahore"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lin2"
+            android:layout_centerInParent="true"
+            android:id="@+id/lin3">
+           <RatingBar
+                android:id="@+id/ratingBar"
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:stepSize="0.5"
+                android:theme="@style/RatingBar"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_height="match_parent"
+        android:layout_below="@id/rel">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Education"
+                    android:textColor="@color/gradEnd"
+                    android:textSize="15sp"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                <TextView
+                    android:id="@+id/institution"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="LUMS, Bachelor of Computer Science"
+                    android:textSize="15sp"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/hel"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gender"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/gradEnd"
+                    android:textSize="15sp"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                <TextView
+                    android:id="@+id/gender"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Female"
+                    android:textSize="15sp"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/hel"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Classes and Subjects"
+                    android:textColor="@color/gradEnd"
+                    android:textSize="15sp"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
+                <ListView
+                    android:id="@+id/sub_list"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+                </ListView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/hel"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
@@ -147,9 +203,9 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:padding="8dp"
+            app:backgroundTint="@color/navy"
             android:onClick="showDialogListView"
             android:src="@android:drawable/ic_menu_call" />
 
     </RelativeLayout>
-
-</LinearLayout>
+</RelativeLayout>
