@@ -5,12 +5,15 @@
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".SignupEducationActivity">
+
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
         android:src="@drawable/ye"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_centerInParent="true"
@@ -38,75 +41,147 @@
             android:orientation="vertical">
 
             <RelativeLayout
-                android:id="@+id/root_relative_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_marginLeft="40dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="40dp">
 
-                <LinearLayout
-                    android:id="@+id/image_stuff"
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Recent Institution"
+                    android:textStyle="bold"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/riLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity = "center_horizontal"
+                    android:layout_marginTop="20dp"
+                    android:hint=" "
+                    android:inputType="textPersonName"
+                    app:errorEnabled="true"
+                    app:hintEnabled="true">
+
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/institution"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="8dp"
+                        android:background="@drawable/et"
+                        android:inputType="textPostalAddress"
+                        android:maxLength="13"
+                        android:singleLine="true"
+                        android:padding="8dp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/riLayout"
+                    android:text="Tuition Location"
+                    android:textStyle="bold"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tlLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity = "center_horizontal"
+                    android:layout_marginTop="20dp"
+                    android:hint=" "
+                    android:layout_below="@+id/riLayout"
+                    android:inputType="textPostalAddress"
+                    app:errorEnabled="true"
+                    app:hintEnabled="true">
+
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tuition_location"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="8dp"
+                        android:background="@drawable/et"
+                        android:inputType="textPostalAddress"
+                        android:maxLength="13"
+                        android:singleLine="true"
+                        android:padding="8dp" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/li"
+                    android:layout_below="@id/tlLayout"
                     android:orientation="horizontal">
 
                     <Button
                         android:id="@+id/image_button"
+                        android:background="@drawable/et"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Add Image" />
+                        android:layout_height="40dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:text="ADD Transcript Photo"
+                        android:textColor="@color/navy"/>
 
                     <TextView
                         android:id="@+id/image_name"
+                        android:background="@drawable/et"
                         android:layout_width="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
                         android:layout_height="wrap_content"
-                        android:text="FILE NAME" />
+                        android:text="File Name" />
 
                 </LinearLayout>
 
-                <EditText
-                    android:layout_below="@id/image_stuff"
-                    android:id="@+id/institution"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:ems="10"
-                    android:hint="Institution"
-                    android:inputType="textPersonName"
-                    android:singleLine="true" />
-
-                <EditText
-                    android:id="@+id/tuition_location"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/institution"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:ems="10"
-                    android:hint="Tuition Location"
-                    android:inputType="textPersonName"
-                    android:singleLine="true" />
-
+                    android:text="Educational Degree"
+                    android:textStyle="bold"
+                    android:textAllCaps="false"
+                    android:layout_below="@id/tlLayout"
+                    android:layout_marginTop="60dp"
+                    android:id="@+id/some"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"/>
                 <Spinner
                     android:id="@+id/my_education_dropdown"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tuition_location"
+                    android:layout_below="@id/some"
                     android:layout_marginStart="8dp"
+                    android:layout_marginTop="15dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="20dp"
                     android:entries="@array/degreeOptions" />
 
                 <TextView
-                    android:id="@+id/subjects_grades"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="Subjects and Grades"
+                    android:textStyle="bold"
+                    android:textAllCaps="false"
                     android:layout_below="@id/my_education_dropdown"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="Subjects and Grades" />
-
-
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/subjects_grades"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"/>
                 <LinearLayout
                     android:id="@+id/subjects_grades_layout"
                     android:layout_width="match_parent"
@@ -125,28 +200,28 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="8dp"
                     android:onClick="onClick"
+                    android:textColor="@color/white"
+                    android:background="@drawable/btn"
                     android:text="Submit" />
 
 
             </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-            <!--<RelativeLayout-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content">-->
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_margin="8dp"
+                    android:onClick="onClick"
+                    app:backgroundTint="@color/navy"
+                    android:src="@android:drawable/ic_input_add" />
 
-                <!--<com.google.android.material.floatingactionbutton.FloatingActionButton-->
-                    <!--android:id="@+id/fab"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_alignParentEnd="true"-->
-                    <!--android:layout_alignParentBottom="true"-->
-                    <!--android:layout_margin="8dp"-->
-                    <!--android:onClick="onClick"-->
-                    <!--android:src="@android:drawable/ic_input_add" />-->
-
-            <!--</RelativeLayout>-->
-
+            </RelativeLayout>
         </LinearLayout>
-
     </ScrollView>
 </android.widget.RelativeLayout>
