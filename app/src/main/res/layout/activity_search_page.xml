@@ -1,29 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="16dp"
     android:orientation="vertical">
 
-    <SearchView
-        android:id="@+id/searchBar"
-        android:layout_width="match_parent"
-        android:elevation="2dp"
-        android:background="@drawable/et"
-        android:layout_height="wrap_content"
-        android:iconifiedByDefault="false">
 
-    </SearchView>
-    <Spinner
-        android:id="@+id/spinner1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:entries="@array/search_items"
-        android:prompt="@string/search_prompt" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ye"/>
 
-    <androidx.recyclerview.widget.RecyclerView
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_height="match_parent"
+            android:background="@color/greytrans">
+        </RelativeLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/rv"
-        />
-</LinearLayout>
+        android:layout_margin="20dp"
+        android:orientation="vertical">
+        <SearchView
+            android:id="@+id/searchBar"
+            android:layout_width="match_parent"
+            android:elevation="2dp"
+            android:background="@drawable/et2"
+            android:layout_height="wrap_content"
+            android:iconifiedByDefault="false">
+
+        </SearchView>
+        <Spinner
+            android:id="@+id/spinner1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/navy"
+            android:entries="@array/search_items"
+            android:prompt="@string/search_prompt" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/rv"/>
+    </LinearLayout>
+
+</RelativeLayout>
