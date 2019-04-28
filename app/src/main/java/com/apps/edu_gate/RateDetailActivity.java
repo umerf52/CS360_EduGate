@@ -56,8 +56,6 @@ public class RateDetailActivity extends BaseActivity {
                 alert.setView(edittext);
                 alert.setPositiveButton("Add", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        //What ever you want to do with the value
-                        //OR
                         String YouEditTextValue = edittext.getText().toString();
                         double p = Double.parseDouble(YouEditTextValue);
                         ratings.add(p);
@@ -70,7 +68,6 @@ public class RateDetailActivity extends BaseActivity {
 
                 alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        // what ever you want to do with No option.
                     }
                 });
                 alert.show();

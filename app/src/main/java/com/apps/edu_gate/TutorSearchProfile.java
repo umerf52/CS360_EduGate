@@ -30,7 +30,6 @@ import java.util.List;
 
 public class TutorSearchProfile extends AppCompatActivity {
 
-//    Button forcall;
     TextView fname;
     TextView gender;
     TextView lastname;
