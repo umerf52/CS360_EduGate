@@ -1,14 +1,14 @@
 package com.apps.edu_gate;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.speech.tts.Voice;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -17,6 +17,9 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
@@ -70,8 +73,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
 //                            if (user.isEmailVerified()) {
-//                                updateUI(user);
+//                                Log.d(TAG, "This was a verified user");
 //                            } else {
+//                                Log.d(TAG, "UNVERIFIED USER");
 //                                new AlertDialog.Builder(LoginActivity.this)
 //                                        .setTitle("Email not verified")
 //                                        .setMessage("Your account has not been verified yet.\nCheck the email sent to you to verify your account.")
@@ -130,7 +134,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         if (user != null) {
             Toast.makeText(LoginActivity.this,
                     "User signed in: " + user.getEmail(), Toast.LENGTH_SHORT).show();
-            Intent myIntent = new Intent(LoginActivity.this, TutorProfileActivity.class);
+            Intent myIntent = new Intent(LoginActivity.this, ViewYourProfileActivity.class);
             LoginActivity.this.startActivity(myIntent);
         } else {
 
