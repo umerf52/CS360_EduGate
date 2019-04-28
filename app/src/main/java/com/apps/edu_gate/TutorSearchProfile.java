@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,6 +25,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
+
+
+import org.apache.commons.text.WordUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,21 +65,21 @@ public class TutorSearchProfile extends AppCompatActivity {
         for(int i=0; i<splited.length; i++){
             subjectsTur.add(splited[i].substring(0,1).toUpperCase()+splited[i].substring(1));
             gradesTur.add(split2[i].substring(0,1).toUpperCase()+split2[i].substring(1));
-            String f = split2[i].substring(0,1).toUpperCase()+split2[i].substring(1) + ": " + splited[i].substring(0,1).toUpperCase()+splited[i].substring(1);
+            String f = WordUtils.capitalizeFully(split2[i]) + ": " + WordUtils.capitalizeFully(splited[i]);
             lastList.add(f);
             Log.e("grad",split2[i]);
             Log.e("sub",splited[i]);
         }
         fname = (TextView) findViewById(R.id.fname);
-        fname.setText(x.firstName.substring(0,1).toUpperCase()+x.firstName.substring(1));
+        fname.setText(WordUtils.capitalizeFully(x.firstName));
         gender = (TextView) findViewById(R.id.gender);
         gender.setText(x.gender);
         lastname = (TextView) findViewById(R.id.lname);
-        lastname.setText(x.lastName.substring(0,1).toUpperCase()+x.lastName.substring(1));
+        lastname.setText(WordUtils.capitalizeFully(x.lastName));
         instituion = (TextView) findViewById(R.id.institution);
-        instituion.setText(x.recentInstitution);
+        instituion.setText(WordUtils.capitalizeFully(x.recentInstitution));
         location = (TextView) findViewById(R.id.location);
-        location.setText(x.tuitionLocation.substring(0,1).toUpperCase()+x.tuitionLocation.substring(1));
+        location.setText(WordUtils.capitalizeFully(x.tuitionLocation));
         imageTutor = findViewById(R.id.imageTutor);
         Picasso.get()
                 .load(x.getProfileImage())

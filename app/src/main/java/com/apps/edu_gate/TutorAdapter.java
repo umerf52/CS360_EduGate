@@ -15,6 +15,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import org.apache.commons.text.WordUtils;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -85,10 +87,10 @@ public class TutorAdapter extends RecyclerView.Adapter<TutorAdapter.TutorViewHol
         double avgrate = x/count;
         tutor.tempr = avgrate;
         String rate = String.valueOf(avgrate);
-        holder.fname.setText(tutor.firstName.substring(0,1).toUpperCase()+tutor.firstName.substring(1));
-        holder.location.setText(tutor.tuitionLocation.substring(0,1).toUpperCase()+tutor.tuitionLocation.substring(1));
-        holder.lname.setText(tutor.lastName.substring(0,1).toUpperCase()+tutor.lastName.substring(1));
-        holder.institution.setText(tutor.recentInstitution);
+        holder.fname.setText(WordUtils.capitalizeFully(tutor.firstName));
+        holder.location.setText(WordUtils.capitalizeFully(tutor.tuitionLocation));
+        holder.lname.setText(WordUtils.capitalizeFully(tutor.lastName));
+        holder.institution.setText(WordUtils.capitalizeFully(tutor.recentInstitution));
         holder.rating.setRating((float)avgrate);
         Picasso.get()
                 .load(tutor.getProfileImage())
@@ -96,17 +98,7 @@ public class TutorAdapter extends RecyclerView.Adapter<TutorAdapter.TutorViewHol
                 .fit()
                 .centerCrop()
                 .into(holder.profileImage);
-//        storageReference = FirebaseStorage.getInstance().getReference();
-//        mDatabase = FirebaseDatabase.getInstance().getReference(tutor.profileImage);
-//        try {
-//            Bitmap bitmap = MediaStore.Images.Media.getBitmap(mCtx.getContentResolver(), android.net.Uri.parse((tutor.profileImage).toString()));
-//            holder.profileImage.setImageBitmap(bitmap);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
 
-//        holder.profileImage.setImageResource(tutor.profileImage);
-//        holder.instituttion.setText(tutor.urlImage);
     }
 
     @Override
