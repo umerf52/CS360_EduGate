@@ -64,10 +64,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private void loginuser(String email, String password){
         Log.d(TAG, "Login:" + email);
         if (!validateForm()) {
+            hideProgressDialog();
             return;
         }
 
-        showProgressDialog();
+//        showProgressDialog();
 
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -193,6 +194,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     public void onClick(View v) {
         int i = v.getId();
         if (i == R.id.loginButton) {
+            showProgressDialog();
             Query q = FirebaseDatabase.getInstance().getReference("Admin").orderByChild("emailAddress").equalTo(mEmailField.getText().toString());
             q.addListenerForSingleValueEvent(valueEventListener);
 
