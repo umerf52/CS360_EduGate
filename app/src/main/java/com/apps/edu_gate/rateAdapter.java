@@ -14,6 +14,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -76,6 +78,9 @@ class rateAdapter extends RecyclerView.Adapter<rateAdapter.rateViewHolder> {
 //            it.remove(); // avoids a ConcurrentModificationException
         }
         double avgrate = x/count;
+        avgrate = BigDecimal.valueOf(avgrate)
+                .setScale(3, RoundingMode.HALF_UP)
+                .doubleValue();
         tutor.tempr = avgrate;
         String rate = String.valueOf(avgrate);
         holder.fname.setText(tutor.firstName.substring(0,1).toUpperCase()+tutor.firstName.substring(1));
