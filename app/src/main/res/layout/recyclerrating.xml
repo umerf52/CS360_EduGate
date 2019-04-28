@@ -8,25 +8,47 @@
         android:layout_height="wrap_content"
         android:layout_margin="3dp">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:background="@drawable/et"
+            android:padding="7dp">
 
-            <EditText
-                android:id="@+id/rating_number"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:inputType="numberDecimal" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/rateLayout"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="25dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/rating_number"
+                    android:layout_width="40dp"
+                    android:layout_alignParentLeft="true"
+                    android:background="@drawable/et"
+                    android:layout_height="match_parent"
+                    android:inputType="numberDecimal"
+                    android:padding="8dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <Button
                 android:id="@+id/edit_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:focusable="true"
-                android:clickable="true"
+                android:layout_toRightOf="@+id/rateLayout"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="140dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/white"
+                android:background="@drawable/btn"
                 android:text="Update" />
-        </LinearLayout>
+
+        </RelativeLayout>
 
 
     </androidx.cardview.widget.CardView>
