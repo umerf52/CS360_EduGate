@@ -1,5 +1,6 @@
 package com.apps.edu_gate;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -12,7 +13,6 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
@@ -24,31 +24,32 @@ public class ChangePasswordActivity extends BaseActivity {
     private EditText old_password;
     private EditText new_password;
     private EditText re_new_password;
-    private TextInputLayout oldLayout;
-    private TextInputLayout newLayout;
-    private TextInputLayout reNewLayout;
+    private FirebaseAuth firebaseAuth;
     Button change_password_button;
+    ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
-        setTitle("Change Password");
+        setTitle("New Password");
 
+        //findViewById(R.id.change_password_button).setOnClickListener(this);
         old_password = findViewById(R.id.old_password);
         new_password = findViewById(R.id.new_password);
         re_new_password = findViewById(R.id.re_new_password);
-
-        oldLayout = findViewById(R.id.oldLayout);
-        newLayout = findViewById(R.id.newpassLayout);
-        reNewLayout = findViewById(R.id.renewLayout);
-
         change_password_button = findViewById(R.id.change_password_button);
+        dialog = new ProgressDialog(this);
 
         FirebaseApp.initializeApp(this);
+        firebaseAuth = FirebaseAuth.getInstance();
 
         change_password_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                if(!validateForm()){
+                    return;
+                }
+//                Toast.makeText(getApplicationContext(), "Button Clicked", Toast.LENGTH_LONG).show();
                 changePassword();
             }
         });
@@ -56,45 +57,32 @@ public class ChangePasswordActivity extends BaseActivity {
 
 
     public void changePassword() {
-
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
+        showProgressDialog();
 
         if (user != null) {
             String email = user.getEmail();
             String oldpass = old_password.getText().toString();
-
-            if (email == null) {
-                Toast.makeText(this, "Error, Are you signed in?", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            if (!validateInputs()) return;
-
-            showProgressDialog();
 
             AuthCredential credential = EmailAuthProvider.getCredential(email, oldpass);
 
             user.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
-                    hideProgressDialog();
-                    if (true) {
+                    //hideProgressDialog();
+                    if (task.isSuccessful()) {
+                        old_password.setError(null);
                         String newpass = new_password.getText().toString();
-                        String confirmpass = re_new_password.getText().toString();
-
-                        if(!newpass.equals(confirmpass)){
-                            Toast.makeText(getApplicationContext(), "New Password and Confirm Password don't match", Toast.LENGTH_LONG).show();
-                            return;
-                        }
-
                         user.updatePassword(newpass).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (!task.isSuccessful()) {
+                                    hideProgressDialog();
                                     Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_LONG).show();
                                 } else {
+                                    hideProgressDialog();
                                     Toast.makeText(getApplicationContext(), "Your password has been changed", Toast.LENGTH_LONG).show();
-                                    Intent myIntent = new Intent(ChangePasswordActivity.this, ViewYourProfileActivity.class);
+                                    Intent myIntent = new Intent(ChangePasswordActivity.this, AdminMainPageActivity.class);
                                     ChangePasswordActivity.this.startActivity(myIntent);
                                 }
                             }
@@ -102,7 +90,9 @@ public class ChangePasswordActivity extends BaseActivity {
                         });
 
                     } else {
-                        Toast.makeText(getApplicationContext(), "Incorrect Old Password. Authentication Failed", Toast.LENGTH_LONG).show();
+                        hideProgressDialog();
+                        old_password.setError("Incorrect Old Password");
+                        Toast.makeText(getApplicationContext(), "Account Authentication Failed", Toast.LENGTH_LONG).show();
                     }
                 }
             });
@@ -110,33 +100,74 @@ public class ChangePasswordActivity extends BaseActivity {
         }
     }
 
-    boolean validateInputs() {
-        String old_pass = old_password.getText().toString();
-        String new_pass = new_password.getText().toString();
-        String re_new_pass = re_new_password.getText().toString();
+
+    private boolean validateForm(){
         boolean valid = true;
 
-        if (TextUtils.isEmpty(old_pass)) {
-            oldLayout.setErrorEnabled(true);
-            oldLayout.setError("Required");
+        String oldpass = old_password.getText().toString();
+        if (TextUtils.isEmpty(oldpass)){
+            old_password.setError("Required");
+            valid = false;
+        }
+        else{
+            old_password.setError(null);
+        }
+
+        if (old_password.length() < 8) {
+            old_password.setError("Incorrect Old Password");
             valid = false;
         }
 
-        if (TextUtils.isEmpty(new_pass)) {
-            newLayout.setErrorEnabled(true);
-            newLayout.setError("Required");
+        String newpass = new_password.getText().toString();
+        if (TextUtils.isEmpty(newpass)){
+            new_password.setError("Required");
+            valid = false;
+        }
+        else{
+            new_password.setError(null);
+        }
+
+        boolean temp = true;
+        if (new_password.length() < 8) {
+            new_password.setError("Password should be 8 characters long.");
+            valid = false;
+            temp = false;
+        }
+
+        String renewpass = re_new_password.getText().toString();
+        if (TextUtils.isEmpty(renewpass)){
+            re_new_password.setError("Required");
+            valid = false;
+        }
+        else{
+            re_new_password.setError(null);
+        }
+
+        if (re_new_password.length() < 8) {
+            re_new_password.setError("Password should be 8 characters long.");
+            valid = false;
+            temp = false;
+        }
+
+        if(temp && (!newpass.equals(renewpass))){
+            re_new_password.setError("New Password and confirmation passwords Don't match");
             valid = false;
         }
 
-        if (TextUtils.isEmpty(re_new_pass)) {
-            reNewLayout.setErrorEnabled(true);
-            reNewLayout.setError("Required");
-            valid = false;
-        }
+
+
 
         return valid;
-
     }
+
+//    public void onClick(View v) {
+//        int i = v.getId();
+//        if (i == R.id.change_password_button){
+//            Toast.makeText(getApplicationContext(), "Button Clicked", Toast.LENGTH_LONG).show();
+//            changePassword();
+//        }
+//
+//    }
 
 
 }
