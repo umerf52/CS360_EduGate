@@ -6,29 +6,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
-        <ImageView
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
         android:src="@drawable/ye"/>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_centerInParent="true"
-            android:layout_height="match_parent"
-            android:background="@color/greytrans">
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_centerInParent="true"
-            android:layout_height="match_parent"
-            android:background="@color/ligwh">
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_centerInParent="true"
-            android:layout_height="match_parent"
-            android:background="@color/ligwh">
-        </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_height="match_parent"
+        android:background="@color/greytrans">
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_height="match_parent"
+        android:background="@color/ligwh">
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_height="match_parent"
+        android:background="@color/ligwh">
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -134,33 +134,37 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="30dp"/>
-        <View
-            android:id="@+id/v2"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="500dp"
-            android:layout_marginLeft="200dp"
-            android:background="@color/navy"/>
-        <TextView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_below="@id/forgotPassword"
-            android:text="OR"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/navy" />
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/forgotPassword"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:id="@+id/v3"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:text="OR"
+                android:layout_centerInParent="true"
+                android:layout_margin="5dp"
 
+                android:layout_marginTop="10dp"
+                android:textColor="@color/navy" />
 
-        <View
-            android:id="@+id/v"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="500dp"
-            android:layout_marginRight="200dp"
-            android:background="@color/navy"/>
+            <View
+                android:id="@+id/v2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/v3"
+                android:background="@color/navy"/>
 
+            <View
+                android:id="@+id/v"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/v3"
+                android:background="@color/navy"/>
+        </RelativeLayout>
     </RelativeLayout>
-
-
-
 </android.widget.RelativeLayout>

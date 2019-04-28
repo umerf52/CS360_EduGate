@@ -86,9 +86,6 @@ public class TutorSearchProfile extends AppCompatActivity {
         subList.setAdapter(adapter1);
 
         FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
-//        Query q = FirebaseDatabase.getInstance().getReference("Admin")
-//                .orderByChild("contactNo");
-//        q.addListenerForSingleValueEvent(valueEventListener);
 
         adapter=new ArrayAdapter<String>(this,
                 R.layout.listitem, R.id.txtitem,adminNumbers);
@@ -121,26 +118,4 @@ public class TutorSearchProfile extends AppCompatActivity {
 
         dialog.show();
     }
-
-//
-//    ValueEventListener valueEventListener = new ValueEventListener() {
-//        @Override
-//        public void onDataChange(DataSnapshot dataSnapshot) {
-//            adminNumbers.clear();
-//            if (dataSnapshot.exists()) {
-//                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-////                    Admininfo admin = snapshot.getValue(Admininfo.class);
-//                    Log.e("hereee", "heree");
-//                    String number = snapshot.child("contactNo").getValue(String.class);
-//                    adminNumbers.add(number);
-//                }
-//                adapter.notifyDataSetChanged();
-//            }
-//        }
-//
-//        @Override
-//        public void onCancelled(DatabaseError databaseError) {
-//
-//        }
-//    };
 }

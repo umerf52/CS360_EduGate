@@ -148,6 +148,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         public void onDataChange(DataSnapshot dataSnapshot) {
             if (dataSnapshot.exists()) {
                 found1 = 1;
+                Log.e(TAG, "Tutor");
                 loginuser(mEmailField.getText().toString(), mPasswordField.getText().toString());
             }
             else{
@@ -169,6 +170,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         public void onDataChange(DataSnapshot dataSnapshot) {
             if (dataSnapshot.exists()) {
                 found1 = 0;
+                Log.e(TAG, "Admin");
                 loginuser(mEmailField.getText().toString(), mPasswordField.getText().toString());
             }
             else{
@@ -184,11 +186,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     };
     @Override
     public void onClick(View v) {
-        if (!validateForm()) {
-            return;
-        }
         int i = v.getId();
         if (i == R.id.loginButton) {
+            if (!validateForm()) {
+                return;
+            }
             showProgressDialog();
             Query q = FirebaseDatabase.getInstance().getReference("Admin").orderByChild("mEmailAddress").equalTo(mEmailField.getText().toString());
             q.addListenerForSingleValueEvent(valueEventListener);
