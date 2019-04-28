@@ -17,6 +17,19 @@
             android:layout_height="match_parent"
             android:background="@color/greytrans">
         </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_height="match_parent"
+            android:background="@color/ligwh">
+        </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_height="match_parent"
+        android:background="@color/ligwh">
+    </RelativeLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
