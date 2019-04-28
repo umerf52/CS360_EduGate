@@ -3,7 +3,10 @@ package com.apps.edu_gate;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -20,6 +23,8 @@ public class AddNewAdminActivity extends AppCompatActivity {
     private EditText memail_address;
     private EditText mpassword;
     private EditText mphone_number;
+
+    Button add_admin;
 
 
     // [START declare_auth]
@@ -40,7 +45,14 @@ public class AddNewAdminActivity extends AppCompatActivity {
         mphone_number = findViewById(R.id.phone_number);
 
         // Buttons
-//        findViewById(R.id.add_admin).setOnClickListener(this);
+        add_admin = findViewById(R.id.add_admin);;
+
+        add_admin.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+//                Toast.makeText(getApplicationContext(), "Button Clicked", Toast.LENGTH_LONG).show();
+                add_new_admin();
+            }
+        });
 
         // [START initialize_auth]
         // Initialize Firebase Auth
@@ -50,14 +62,20 @@ public class AddNewAdminActivity extends AppCompatActivity {
     }
 
 
-//    private void addAdmin() {
-////        showProgressDialog();
+    private void add_new_admin() {
+//        showProgressDialog();
+
+//        if (isValidPassword(mpassword) && isEmailValid(memail_address))
+//        {
+//            Admin admin = new Admin(mfirst_name, mlast_name, memail_address, mphone_number);
 //
-//        Tutor tutor = new Tutor(FirstName, LastName, email, CnicNo, Address, ContactNo,
-//                Gender, Institution, Location, grade_values, subject_values);
-//
-//        uploadFileProfile(profileImageUri, tutor);
-//    }
+////            uploadFileProfile(profileImageUri, tutor);
+//        }
+//        else if (!isEmailValid(memail_address)  || !isValidPassword(mpassword))
+//        {
+//            Toast.makeText(getApplicationContext(), "Email or Password not valid", Toast.LENGTH_LONG).show();
+//        }
+    }
 
     public static boolean isValidPassword(final String password) {
 
