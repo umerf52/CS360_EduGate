@@ -1,6 +1,7 @@
 package com.apps.edu_gate;
 
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -29,6 +30,11 @@ import java.util.Iterator;
 import java.util.List;
 
 public class ViewYourProfileActivity extends BaseActivity {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.mymenu, menu);
+        return true;
+    }
 
     EditText fname;
     EditText lname;
@@ -110,7 +116,7 @@ public class ViewYourProfileActivity extends BaseActivity {
             Toast.makeText(getBaseContext(), databaseError.getMessage(), Toast.LENGTH_LONG).show();
         }
     };
-        @Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_your_profile);
@@ -140,6 +146,7 @@ public class ViewYourProfileActivity extends BaseActivity {
         Query q = FirebaseDatabase.getInstance().getReference("Tutors").orderByChild("emailAddress")
                 .equalTo(s);
         q.addListenerForSingleValueEvent(valueEventListener);
+
         }
 
     private void addSpinners() {
@@ -210,5 +217,6 @@ public class ViewYourProfileActivity extends BaseActivity {
 
         return true;
     }
+
 
 }
