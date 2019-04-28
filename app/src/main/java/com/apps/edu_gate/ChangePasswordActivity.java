@@ -1,20 +1,17 @@
 package com.apps.edu_gate;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
@@ -59,7 +56,7 @@ public class ChangePasswordActivity extends BaseActivity {
 
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        //showProgressDialog();
+        showProgressDialog();
 
         if (user != null) {
             String email = user.getEmail();
@@ -70,6 +67,7 @@ public class ChangePasswordActivity extends BaseActivity {
             user.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
+                    hideProgressDialog();
                     if (true) {
                         String newpass = new_password.getText().toString();
                         String confirmpass = re_new_password.getText().toString();
@@ -86,6 +84,8 @@ public class ChangePasswordActivity extends BaseActivity {
                                     Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_LONG).show();
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Your password has been changed", Toast.LENGTH_LONG).show();
+                                    Intent myIntent = new Intent(ChangePasswordActivity.this, ViewYourProfileActivity.class);
+                                    ChangePasswordActivity.this.startActivity(myIntent);
                                 }
                             }
 

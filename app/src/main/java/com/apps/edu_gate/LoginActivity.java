@@ -153,7 +153,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
             if (dataSnapshot.exists()) {
-                Log.e("dsds", "second");
                 found1 = 1;
                 loginuser(mEmailField.getText().toString(), mPasswordField.getText().toString());
             }
@@ -176,7 +175,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         public void onDataChange(DataSnapshot dataSnapshot) {
             if (dataSnapshot.exists()) {
                 found1 = 0;
-                Log.e("dsds", "first");
                 loginuser(mEmailField.getText().toString(), mPasswordField.getText().toString());
             }
             else{

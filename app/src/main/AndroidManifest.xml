@@ -17,7 +17,9 @@
             android:name=".RateTutorActivity"
             android:label="Rate Tutors"
             android:parentActivityName=".AdminMainPageActivity" />
-        <activity android:name=".ChangePasswordActivity" />
+        <activity
+            android:name=".ChangePasswordActivity"
+            android:label="Change Password" />
         <activity android:name=".AdminMainPageActivity" />
         <activity
             android:name=".TutorSearchProfile"

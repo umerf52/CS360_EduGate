@@ -1,7 +1,9 @@
 package com.apps.edu_gate;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -32,7 +34,25 @@ import java.util.List;
 public class ViewYourProfileActivity extends BaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.mymenu, menu);
+        getMenuInflater().inflate(R.menu.view_your_profile_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_change_password: {
+                Intent myIntent = new Intent(ViewYourProfileActivity.this, ChangePasswordActivity.class);
+                ViewYourProfileActivity.this.startActivity(myIntent);
+                break;
+            }
+            case R.id.action_sign_out: {
+                FirebaseAuth.getInstance().signOut();
+                Intent myIntent = new Intent(ViewYourProfileActivity.this, LoginActivity.class);
+                ViewYourProfileActivity.this.startActivity(myIntent);
+                break;
+            }
+        }
         return true;
     }
 
@@ -216,6 +236,14 @@ public class ViewYourProfileActivity extends BaseActivity {
         }
 
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
 
