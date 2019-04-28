@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Tutorinfo implements Serializable {
 
-    public String key, subject, grade, address, cnicNo, contactNo, emailAddress, firstName, gender, lastName, recentInstitution, tuitionLocation, profileImage, transcriptImage;
+    public String key, subject, grade, address, cnicNo, contactNo, emailAddress, firstName, gender, lastName, recentInstitution, tuitionLocation, profileImage, transcriptImage, degree;
     public int profileStatus;
 //    public HashMap<String, String> grade;
 
@@ -30,5 +30,9 @@ public class Tutorinfo implements Serializable {
 
     public String getTuitionLocation() {
         return tuitionLocation;
+    }
+
+    public String getDegree() {
+        return degree;
     }
 }
