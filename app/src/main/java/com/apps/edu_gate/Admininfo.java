@@ -9,5 +9,9 @@ public class Admininfo implements Serializable {
 
     public Admininfo() {
     }
+
+//    public String getemail_address() {
+//        return email;
+//    }
 }
 

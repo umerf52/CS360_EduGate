@@ -40,7 +40,7 @@ public class AddNewAdminActivity extends AppCompatActivity {
         mphone_number = findViewById(R.id.phone_number);
 
         // Buttons
-        findViewById(R.id.add_admin).setOnClickListener(this);
+//        findViewById(R.id.add_admin).setOnClickListener(this);
 
         // [START initialize_auth]
         // Initialize Firebase Auth
@@ -48,6 +48,16 @@ public class AddNewAdminActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         // [END initialize_auth]
     }
+
+
+//    private void addAdmin() {
+////        showProgressDialog();
+//
+//        Tutor tutor = new Tutor(FirstName, LastName, email, CnicNo, Address, ContactNo,
+//                Gender, Institution, Location, grade_values, subject_values);
+//
+//        uploadFileProfile(profileImageUri, tutor);
+//    }
 
     public static boolean isValidPassword(final String password) {
 
