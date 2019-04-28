@@ -3,6 +3,7 @@ package com.apps.edu_gate;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -37,11 +38,11 @@ public class TutorSearchProfile extends AppCompatActivity {
     TextView location;
     ImageView imageTutor;
 
-    private List<String> adminNumbers = new ArrayList<>();
+    private ArrayList<String> adminNumbers = new ArrayList<>();
     private  List<String> subjectsTur = new ArrayList<>();
     private  List<String> gradesTur = new ArrayList<>();
     private  List<String> lastList = new ArrayList<>();
-
+    ArrayAdapter<String> adapter;
     ListView listView = null;
     ListView subList = null;
 
@@ -52,6 +53,7 @@ public class TutorSearchProfile extends AppCompatActivity {
 
 
         Tutorinfo x = (Tutorinfo) getIntent().getSerializableExtra("result");
+        adminNumbers = getIntent().getStringArrayListExtra("num");
         setContentView(R.layout.activity_tutor_search_profile);
         setTitle("Profile");
         RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingBar);
@@ -90,11 +92,11 @@ public class TutorSearchProfile extends AppCompatActivity {
         subList.setAdapter(adapter1);
 
         FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
-        Query q = FirebaseDatabase.getInstance().getReference("Admin")
-                .orderByChild("contactNo");
-        q.addListenerForSingleValueEvent(valueEventListener);
+//        Query q = FirebaseDatabase.getInstance().getReference("Admin")
+//                .orderByChild("contactNo");
+//        q.addListenerForSingleValueEvent(valueEventListener);
 
-        ArrayAdapter<String> adapter=new ArrayAdapter<String>(this,
+        adapter=new ArrayAdapter<String>(this,
                 R.layout.listitem, R.id.txtitem,adminNumbers);
 
         listView.setAdapter(adapter);
@@ -126,23 +128,25 @@ public class TutorSearchProfile extends AppCompatActivity {
         dialog.show();
     }
 
-
-    ValueEventListener valueEventListener = new ValueEventListener() {
-        @Override
-        public void onDataChange(DataSnapshot dataSnapshot) {
-            adminNumbers.clear();
-            if (dataSnapshot.exists()) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-//                    Admininfo admin = snapshot.getValue(Admininfo.class);
-                    String number = snapshot.child("contactNo").getValue(String.class);
-                    adminNumbers.add(number);
-                }
-            }
-        }
-
-        @Override
-        public void onCancelled(DatabaseError databaseError) {
-
-        }
-    };
+//
+//    ValueEventListener valueEventListener = new ValueEventListener() {
+//        @Override
+//        public void onDataChange(DataSnapshot dataSnapshot) {
+//            adminNumbers.clear();
+//            if (dataSnapshot.exists()) {
+//                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+////                    Admininfo admin = snapshot.getValue(Admininfo.class);
+//                    Log.e("hereee", "heree");
+//                    String number = snapshot.child("contactNo").getValue(String.class);
+//                    adminNumbers.add(number);
+//                }
+//                adapter.notifyDataSetChanged();
+//            }
+//        }
+//
+//        @Override
+//        public void onCancelled(DatabaseError databaseError) {
+//
+//        }
+//    };
 }

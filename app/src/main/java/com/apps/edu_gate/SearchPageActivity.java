@@ -30,6 +30,8 @@ public class SearchPageActivity extends BaseActivity {
     String searching;
     private RecyclerView recyclerView;
     private List<Tutorinfo> tutorList;
+    private ArrayList<String> adminNumbers = new ArrayList<>();
+
 
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -185,6 +187,25 @@ public class SearchPageActivity extends BaseActivity {
         }
     };
 
+    ValueEventListener valueEventListener5 = new ValueEventListener() {
+        @Override
+        public void onDataChange(DataSnapshot dataSnapshot) {
+            adminNumbers.clear();
+            if (dataSnapshot.exists()) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    String number = snapshot.child("contactNo").getValue(String.class);
+                    Log.e("hereee",number);
+                    adminNumbers.add(number);
+                }
+            }
+        }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+
+        }
+    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -220,6 +241,9 @@ public class SearchPageActivity extends BaseActivity {
                     if(s.equals("class")){
                         s = "grade";
                     }
+                    Query q7 = FirebaseDatabase.getInstance().getReference("Admin")
+                            .orderByChild("contactNo");
+                    q7.addListenerForSingleValueEvent(valueEventListener5);
                     Toast.makeText(getBaseContext(), s+ query, Toast.LENGTH_LONG).show();
                     if(s.equals("firstName")||s.equals("tuitionLocation")){
                         Query q = FirebaseDatabase.getInstance().getReference("Tutors")
@@ -260,6 +284,7 @@ public class SearchPageActivity extends BaseActivity {
                 Tutorinfo x = tutorList.get(position);
                 Intent myIntent = new Intent(SearchPageActivity.this, TutorSearchProfile.class);
                 myIntent.putExtra("result",x);
+                myIntent.putStringArrayListExtra("num",adminNumbers);
                 Log.d(TAG, "I'm here");
                 SearchPageActivity.this.startActivity(myIntent);
             }
