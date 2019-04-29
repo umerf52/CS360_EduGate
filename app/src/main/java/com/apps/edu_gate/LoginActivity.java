@@ -40,7 +40,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        setTitle("SignIn");
+        setTitle("Sign In");
         mEmailField = findViewById(R.id.email);
         mPasswordField = findViewById(R.id.password);
         emailLayout = (TextInputLayout) findViewById(R.id.emailLayout);

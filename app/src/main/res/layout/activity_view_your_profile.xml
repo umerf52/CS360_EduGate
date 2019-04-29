@@ -188,13 +188,35 @@
                         android:textColor="@color/gradEnd"
                         android:textSize="15sp" />
 
-                    <Spinner
-                        android:id="@+id/my_education_dropdown"
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:entries="@array/degreeOptions"
-                        android:paddingBottom="8dp">
-                    </Spinner>
+                        android:layout_height="50dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/background"
+                        android:orientation="horizontal">
+
+                        <Spinner
+                            android:id="@+id/my_education_dropdown"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center"
+                            android:background="@android:color/white"
+                            android:entries="@array/degreeOptions"
+                            android:gravity="center"
+                            android:prompt="@string/search_prompt"
+                            android:spinnerMode="dropdown" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center"
+                            android:src="@drawable/dro" />
+
+                    </RelativeLayout>
+
 
                     <TextView
                         android:id="@+id/subjects_I_teach_textView"
