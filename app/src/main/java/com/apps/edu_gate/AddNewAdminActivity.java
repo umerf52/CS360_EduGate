@@ -38,7 +38,6 @@ public class AddNewAdminActivity extends BaseActivity {
 
     Button add_admin;
 
-
     private FirebaseAuth mAuth;
     private FirebaseAuth tempAuth;
     private DatabaseReference databaseAdmin;
@@ -169,25 +168,6 @@ public class AddNewAdminActivity extends BaseActivity {
     boolean isEmailValid(CharSequence email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
-
-
-//    public void onClick(View v) {
-//        if (!validateForm()) {
-//            return;
-//        }
-//
-//        int i = v.getId();
-//        if (i == R.id.add_admin) {
-//            mAuth = FirebaseAuth.getInstance();
-//            Toast.makeText(AddNewAdminActivity.this, "Create Account called",
-//                    Toast.LENGTH_LONG).show();
-//            createAccount(memail_address.getText().toString(), mpassword.getText().toString());
-//            Toast.makeText(AddNewAdminActivity.this, "Create Account returned",
-//                    Toast.LENGTH_LONG).show();
-//            return;
-//            //add_new_admin();
-//        }
-//    }
 
 
     private boolean validateForm() {

@@ -178,18 +178,40 @@
                             <!--android:background="@color/hel"/>-->
 
                     </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/my_degree_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="My Latest Degree"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                        android:textColor="@color/gradEnd"
+                        android:textSize="15sp" />
+
                     <Spinner
                         android:id="@+id/my_education_dropdown"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:entries="@array/degreeOptions">
+                        android:entries="@array/degreeOptions"
+                        android:paddingBottom="8dp">
                     </Spinner>
+
+                    <TextView
+                        android:id="@+id/subjects_I_teach_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Grades and Subjects"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                        android:textColor="@color/gradEnd"
+                        android:textSize="15sp" />
 
                     <LinearLayout
                         android:id="@+id/subjects_grades_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical" />
+
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
