@@ -28,7 +28,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import org.apache.commons.text.WordUtils;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -230,6 +229,8 @@ public class ViewYourProfileActivity extends BaseActivity {
         dbNode.child(tutorKey).child("grade").setValue(new_grade_values);
         dbNode.child(tutorKey).child("profileStatus").setValue(-1);
         hideProgressDialog();
+        Toast.makeText(this, "Database update", Toast.LENGTH_SHORT);
+        recreate();
     }
 
     private boolean getSpinnerValues() {
