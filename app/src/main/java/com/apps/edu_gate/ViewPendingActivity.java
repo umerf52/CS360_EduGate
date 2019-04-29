@@ -42,7 +42,7 @@ public class ViewPendingActivity extends BaseActivity {
                         tutor.subject = snapshot.child("subject").getValue(String.class);
                         tutor.grade = snapshot.child("grade").getValue(String.class);
                         tutor.recentInstitution = snapshot.child("recentInstitution").getValue(String.class);
-                        tutor.tuitionLocation = snapshot.child("tuition").getValue(String.class);
+                        tutor.tuitionLocation = snapshot.child("tuitionLocation").getValue(String.class);
                         tutor.address = snapshot.child("address").getValue(String.class);
                         tutor.transcriptImage = snapshot.child("transcriptImage").getValue(String.class);
                         tutorList.add(tutor);
