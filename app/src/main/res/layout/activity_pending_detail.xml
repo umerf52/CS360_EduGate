@@ -247,7 +247,7 @@ tools:context=".PendingDetailActivity">
                         android:id="@+id/sub_list"
                         android:layout_marginTop="10dp"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" >
+                        android:layout_height="150dp" >
                     </ListView>
 
                     <View
@@ -282,7 +282,8 @@ tools:context=".PendingDetailActivity">
 
                 <Button
                     android:id="@+id/approve"
-                    android:layout_below="@id/lal"
+                    android:layout_below="@id/lal2"
+                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/btn"

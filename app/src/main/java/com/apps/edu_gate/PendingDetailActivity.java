@@ -66,7 +66,7 @@ public class PendingDetailActivity extends AppCompatActivity {
         contact = (TextView) findViewById(R.id.contactNo);
         contact.setText(x.contactNo);
         address = (TextView) findViewById(R.id.address);
-        address.setText(x.address);
+        address.setText(WordUtils.capitalizeFully(x.address));
         location = (TextView) findViewById(R.id.location);
         location.setText(WordUtils.capitalizeFully(x.tuitionLocation));
         institution = (TextView) findViewById(R.id.institution);
