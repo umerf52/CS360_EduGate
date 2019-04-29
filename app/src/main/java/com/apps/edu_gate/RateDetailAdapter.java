@@ -75,7 +75,11 @@ class RateDetailAdapter extends RecyclerView.Adapter<RateDetailAdapter.RateDetai
                 if(s.length()>0){
                     String t = String.valueOf(s);
                     double p = Double.parseDouble(t);
-                    ratings.set(position,p);
+                    if(p<=5){
+                        ratings.set(position,p);
+                    }else{
+                        Toast.makeText(mCtx, "Invalid Entry, between 0 and 5 only!", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });

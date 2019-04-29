@@ -54,12 +54,22 @@ public class RateDetailActivity extends BaseActivity {
                 alert.setPositiveButton("Add", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         String YouEditTextValue = edittext.getText().toString();
-                        double p = Double.parseDouble(YouEditTextValue);
-                        ratings.add(p);
-                        DatabaseReference dbNode = FirebaseDatabase.getInstance().getReference("Tutors");
-                        dbNode.child(mykey).child("rating").setValue(ratings);
-                        Toast.makeText(getBaseContext(), "Rating Added", Toast.LENGTH_SHORT).show();
-                        updateUI();
+                        if(YouEditTextValue.length()>0){
+                            double p = Double.parseDouble(YouEditTextValue);
+                            if(p<=5){
+                                ratings.add(p);
+                                DatabaseReference dbNode = FirebaseDatabase.getInstance().getReference("Tutors");
+                                dbNode.child(mykey).child("rating").setValue(ratings);
+                                Toast.makeText(getBaseContext(), "Rating Added", Toast.LENGTH_SHORT).show();
+                                updateUI();
+                            }
+                            else{
+                                Toast.makeText(getBaseContext(), "Invalid Entry!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        else{
+                            Toast.makeText(getBaseContext(), "Try Again!", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
 
@@ -82,7 +92,7 @@ public class RateDetailActivity extends BaseActivity {
         ((RateDetailAdapter) mAdapter).setOnItemClickListener(new RateDetailAdapter.MyClickListener() {
             @Override
             public void onItemClick(int position, View v) {
-                Toast.makeText(getBaseContext(),"Clicked!", Toast.LENGTH_LONG).show();
+//                Toast.makeText(getBaseContext(),"Clicked!", Toast.LENGTH_LONG).show();
             }
         });
     }
