@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".ViewYourProfileActivity">
 
@@ -31,6 +32,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Gender"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
         <EditText
@@ -74,12 +81,13 @@
             android:layout_height="wrap_content"
             android:text="SAVE" />
 
-        <!--<com.google.android.material.floatingactionbutton.FloatingActionButton-->
-            <!--android:id="@+id/fab"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_margin="8dp"-->
-            <!--android:src="@android:drawable/ic_input_add" />-->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:backgroundTint="@color/navy"
+            android:src="@android:drawable/ic_input_add" />
 
     </LinearLayout>
 </ScrollView>

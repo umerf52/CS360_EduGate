@@ -34,7 +34,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private EditText mPasswordField;
     private TextInputLayout emailLayout;
     private TextInputLayout passwordLayout;
-    private int found1 = 0;
+    private int found1 = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,6 +137,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 LoginActivity.this.startActivity(myIntent);
             }else if(found1==0){
                 Intent myIntent = new Intent(LoginActivity.this, AdminMainPageActivity.class);
+                LoginActivity.this.startActivity(myIntent);
+            }else{
+                Toast.makeText(LoginActivity.this,
+                        "Signed Out: " + user.getEmail(), Toast.LENGTH_SHORT).show();
+
+                mAuth.signOut();
+                Intent myIntent = new Intent(LoginActivity.this, LoginActivity.class);
                 LoginActivity.this.startActivity(myIntent);
             }
         } else {

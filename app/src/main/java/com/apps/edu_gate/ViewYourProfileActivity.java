@@ -1,7 +1,9 @@
 package com.apps.edu_gate;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import org.apache.commons.text.WordUtils;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -60,6 +63,7 @@ public class ViewYourProfileActivity extends BaseActivity {
     EditText lname;
     TextView gender;
     private ImageView profileImageView;
+    private TextView profileStatus;
     private EditText contactNumber;
     private EditText tuitionLocation;
     private Spinner myEducationDropdown;
@@ -87,6 +91,8 @@ public class ViewYourProfileActivity extends BaseActivity {
                     tutor.degree = snapshot.child("degree").getValue(String.class);
                     tutor.subject = snapshot.child("subject").getValue(String.class);
                     tutor.address = snapshot.child("address").getValue(String.class);
+                    tutor.profileStatus = snapshot.child("profileStatus").getValue(int.class);
+                    Log.e("adsa", String.valueOf(tutor.profileStatus));
                     tutor.cnicNo = snapshot.child("cnicNo").getValue(String.class);
                     tutor.contactNo = snapshot.child("contactNo").getValue(String.class);
                     tutor.emailAddress = snapshot.child("emailAddress").getValue(String.class);
@@ -107,6 +113,18 @@ public class ViewYourProfileActivity extends BaseActivity {
                     fname.setText(WordUtils.capitalizeFully(tutor.firstName));
                     lname.setText(WordUtils.capitalizeFully(tutor.lastName));
                     gender.setText(WordUtils.capitalizeFully(tutor.gender));
+                    if(tutor.profileStatus == 0){
+                        profileStatus.setText("Rejected");
+                        profileStatus.setTextColor(Color.parseColor("#ff0000"));
+                    }
+                    else if(tutor.profileStatus == 1){
+                        profileStatus.setText("Verified");
+                        profileStatus.setTextColor(Color.parseColor("#00ff00"));
+                    }
+                    else if(tutor.profileStatus == -1){
+                        profileStatus.setText("Pending");
+                        profileStatus.setTextColor(Color.parseColor("#2f4f4f4"));
+                    }
                     contactNumber.setText(tutor.getContactNo());
                     tuitionLocation.setText(WordUtils.capitalizeFully(tutor.getTuitionLocation()));
                     myEducationDropdown.setSelection(((ArrayAdapter) myEducationDropdown.getAdapter()).getPosition(tutor.getDegree()));
@@ -143,6 +161,7 @@ public class ViewYourProfileActivity extends BaseActivity {
         setTitle("Your Profile");
         showProgressDialog();
         fname = (EditText) findViewById(R.id.fname);
+        profileStatus = (TextView) findViewById(R.id.status);
         lname = (EditText) findViewById(R.id.lname);
         gender = (TextView) findViewById(R.id.gender);
             profileImageView = findViewById(R.id.profile_picture);
