@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -15,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
+
+import org.apache.commons.text.WordUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +52,7 @@ public class PendingDetailActivity extends AppCompatActivity {
         String[] splited = sub.split("-");
         String[] split2 = grad.split("-");
         for(int i=0; i<splited.length; i++){
-            String f = split2[i].substring(0,1).toUpperCase()+split2[i].substring(1) + ": " + splited[i].substring(0,1).toUpperCase()+splited[i].substring(1);
+            String f = WordUtils.capitalizeFully(split2[i]) + ": " + WordUtils.capitalizeFully(splited[i]);
             lastList.add(f);
             Log.e("grad",split2[i]);
             Log.e("sub",splited[i]);
@@ -65,11 +68,15 @@ public class PendingDetailActivity extends AppCompatActivity {
         address = (TextView) findViewById(R.id.address);
         address.setText(x.address);
         location = (TextView) findViewById(R.id.location);
-        location.setText(x.tuitionLocation);
+        location.setText(WordUtils.capitalizeFully(x.tuitionLocation));
         institution = (TextView) findViewById(R.id.institution);
         institution.setText(x.recentInstitution);
         prof = (ImageView) findViewById(R.id.imageProfile);
         trans = (ImageView) findViewById(R.id.imageTranscript);
+        ArrayAdapter adapter = new ArrayAdapter<String>(this,
+                R.layout.listitem3,R.id.txtitem, lastList);
+        listView = (ListView) findViewById(R.id.sub_list);
+        listView.setAdapter(adapter);
         Picasso.get()
                 .load(x.getProfileImage())
                 .placeholder(R.drawable.placeholder_profile_picture)
@@ -84,6 +91,7 @@ public class PendingDetailActivity extends AppCompatActivity {
                 .into(trans);
         yes = (Button) findViewById(R.id.approve);
         no = (Button) findViewById(R.id.disapprove);
+
     }
     public void acceptProfile(View view) {
         DatabaseReference dbNode = FirebaseDatabase.getInstance().getReference("Tutors");
