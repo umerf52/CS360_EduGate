@@ -1,398 +1,308 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+tools:context=".PendingDetailActivity">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".PendingDetailActivity">
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical">
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:id="@+id/rel"
+            android:layout_height="wrap_content">
             <RelativeLayout
+                android:id="@+id/prof"
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
-                android:id="@+id/rel"
+                android:layout_centerHorizontal="true"
                 android:layout_height="wrap_content">
-                <RelativeLayout
-                    android:id="@+id/prof"
-                    android:layout_marginTop="10dp"
+
+                <ImageView
+                    android:id="@+id/imageProfile"
                     android:layout_width="match_parent"
-                    android:layout_centerHorizontal="true"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true" />
+            </RelativeLayout>
 
-                    <ImageView
-                        android:id="@+id/imageProfile"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:adjustViewBounds="true" />
-                </RelativeLayout>
-
-                <LinearLayout
-                    android:id="@+id/lin"
+            <LinearLayout
+                android:id="@+id/lin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/prof"
+                android:layout_centerInParent="true">
+                <TextView
+                    android:id="@+id/fname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/prof"
-                    android:layout_centerInParent="true">
-                    <TextView
-                        android:id="@+id/fname"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Naima"
-                        android:paddingRight="10dp"
-                        android:textColor="@color/black"
-                        android:textSize="32sp"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
-                    <TextView
-                        android:id="@+id/lname"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Samreen"
-                        android:layout_toRightOf="@id/fname"
-                        android:textColor="@color/black"
-                        android:textSize="32sp"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                    android:text="Naima"
+                    android:paddingRight="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="32sp"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                <TextView
+                    android:id="@+id/lname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Samreen"
+                    android:layout_toRightOf="@id/fname"
+                    android:textColor="@color/black"
+                    android:textSize="32sp"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
-                </LinearLayout>
-                <!--<LinearLayout-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_below="@id/lin"-->
-                    <!--android:layout_marginTop="10dp"-->
-                    <!--android:layout_centerInParent="true"-->
-                    <!--android:id="@+id/lin2">-->
-                    <!--<TextView-->
-                        <!--android:id="@+id/location"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:text="Township, Lahore"-->
-                        <!--android:textColor="@color/black"-->
-                        <!--android:textSize="14sp"-->
-                        <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>-->
+            </LinearLayout>
+            <!--<LinearLayout-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@id/lin"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:id="@+id/lin2">-->
+            <!--<TextView-->
+            <!--android:id="@+id/location"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Township, Lahore"-->
+            <!--android:textColor="@color/black"-->
+            <!--android:textSize="14sp"-->
+            <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>-->
 
-                <!--</LinearLayout>-->
+            <!--</LinearLayout>-->
 
-            </RelativeLayout>
+        </RelativeLayout>
 
-            <RelativeLayout
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="match_parent"
+            android:layout_below="@id/rel">
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="10dp"
-                android:layout_height="match_parent"
-                android:layout_below="@id/rel">
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
                     android:layout_height="wrap_content"
+                    android:id="@+id/fi3"
                     android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/fi3"
-                        android:orientation="vertical">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Tuition Location"
-                            android:textColor="@color/gradEnd"
-                            android:textSize="15sp"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
-                        <TextView
-                            android:id="@+id/location"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:text="LUMS, Bachelor of Computer Science"
-                            android:textSize="15sp"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginTop="10dp"
-                            android:background="@color/hel"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                        android:text="Tuition Location"
+                        android:textColor="@color/gradEnd"
+                        android:textSize="15sp"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                    <TextView
+                        android:id="@+id/location"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/fi"
-                        android:orientation="vertical">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Education"
-                            android:textColor="@color/gradEnd"
-                            android:textSize="15sp"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
-                        <TextView
-                            android:id="@+id/institution"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:text="LUMS, Bachelor of Computer Science"
-                            android:textSize="15sp"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginTop="10dp"
-                            android:background="@color/hel"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/si"
-                        android:orientation="vertical">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="CNIC"
-                            android:textColor="@color/gradEnd"
-                            android:textSize="15sp"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
-                        <TextView
-                            android:id="@+id/cnicNo"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:text="LUMS, Bachelor of Computer Science"
-                            android:textSize="15sp"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginTop="10dp"
-                            android:background="@color/hel"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/di"
-                        android:orientation="vertical">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Contact No"
-                            android:textColor="@color/gradEnd"
-                            android:textSize="15sp"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
-                        <TextView
-                            android:id="@+id/contactNo"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:text="LUMS, Bachelor of Computer Science"
-                            android:textSize="15sp"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginTop="10dp"
-                            android:background="@color/hel"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/ki"
-                        android:orientation="vertical">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Address"
-                            android:textColor="@color/gradEnd"
-                            android:textSize="15sp"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
-                        <TextView
-                            android:id="@+id/address"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:text="LUMS, Bachelor of Computer Science"
-                            android:textSize="15sp"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginTop="10dp"
-                            android:background="@color/hel"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
                         android:layout_marginTop="10dp"
-                        android:id="@+id/lal"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Classes and Subjects"
-                            android:textColor="@color/gradEnd"
-                            android:textSize="15sp"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
-
-                        <ListView
-                            android:id="@+id/sub_list"
-                            android:layout_marginTop="10dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" >
-                        </ListView>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginTop="10dp"
-                            android:background="@color/hel"/>
-                    </LinearLayout>
-
-                    <LinearLayout
+                        android:text="LUMS, Bachelor of Computer Science"
+                        android:textSize="15sp"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                    <View
                         android:layout_width="match_parent"
+                        android:layout_height="1dp"
                         android:layout_marginTop="10dp"
-                        android:id="@+id/lal2"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Transcript"
-                            android:textColor="@color/gradEnd"
-                            android:textSize="15sp"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
-                        <ImageView
-                            android:id="@+id/imageTranscript"
-                            android:layout_below="@id/imageTranscript"
-                            android:layout_width="match_parent"
-                            android:layout_marginTop="20dp"
-                            android:layout_height="wrap_content"
-                            android:adjustViewBounds="true" />
+                        android:background="@color/hel"/>
 
-                    </LinearLayout>
-
-                    <Button
-                        android:id="@+id/approve"
-                        android:layout_below="@id/lal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/btn"
-                        android:textColor="@color/white"
-                        android:onClick="acceptProfile"
-                        android:text="Accept" />
-
-                    <Button
-                        android:id="@+id/disapprove"
-                        android:background="@color/design_default_color_error"
-                        android:textColor="@color/white"
-                        android:layout_below="@id/approve"
-                        android:layout_marginTop="5dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:onClick="rejectProfile"
-                        android:text="Reject" />
                 </LinearLayout>
 
-            </RelativeLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/fi"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Education"
+                        android:textColor="@color/gradEnd"
+                        android:textSize="15sp"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                    <TextView
+                        android:id="@+id/institution"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="LUMS, Bachelor of Computer Science"
+                        android:textSize="15sp"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/hel"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/si"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CNIC"
+                        android:textColor="@color/gradEnd"
+                        android:textSize="15sp"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                    <TextView
+                        android:id="@+id/cnicNo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="LUMS, Bachelor of Computer Science"
+                        android:textSize="15sp"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/hel"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/di"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Contact No"
+                        android:textColor="@color/gradEnd"
+                        android:textSize="15sp"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                    <TextView
+                        android:id="@+id/contactNo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="LUMS, Bachelor of Computer Science"
+                        android:textSize="15sp"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/hel"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ki"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Address"
+                        android:textColor="@color/gradEnd"
+                        android:textSize="15sp"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                    <TextView
+                        android:id="@+id/address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="LUMS, Bachelor of Computer Science"
+                        android:textSize="15sp"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/hel"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/lal"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Classes and Subjects"
+                        android:textColor="@color/gradEnd"
+                        android:textSize="15sp"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
+                    <ListView
+                        android:id="@+id/sub_list"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" >
+                    </ListView>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/hel"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/lal2"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Transcript"
+                        android:textColor="@color/gradEnd"
+                        android:textSize="15sp"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                    <ImageView
+                        android:id="@+id/imageTranscript"
+                        android:layout_below="@id/imageTranscript"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="20dp"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true" />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/approve"
+                    android:layout_below="@id/lal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn"
+                    android:textColor="@color/white"
+                    android:onClick="acceptProfile"
+                    android:text="Accept" />
+
+                <Button
+                    android:id="@+id/disapprove"
+                    android:background="@color/design_default_color_error"
+                    android:textColor="@color/white"
+                    android:layout_below="@id/approve"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="rejectProfile"
+                    android:text="Reject" />
+            </LinearLayout>
+
         </RelativeLayout>
-    </ScrollView>
+    </RelativeLayout>
+</ScrollView>
 </RelativeLayout>
-
-
-
-
-
-
-
-
-
-
-
-
-<!--<?xml version="1.0" encoding="utf-8"?>-->
-
-    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:orientation="vertical">-->
-
-
-        <!--<ImageView-->
-            <!--android:id="@+id/imageProfile"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content" />-->
-
-        <!--<ImageView-->
-            <!--android:id="@+id/imageTranscript"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content" />-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/address"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="Address"-->
-            <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/cnicNo"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="CNIC"-->
-            <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/contactNo"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="Contact Number"-->
-            <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/fname"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="First Name"-->
-            <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/lname"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="Last Name"-->
-            <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/institution"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="Institution"-->
-            <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/location"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="Location"-->
-            <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />-->
-
-        <!--<ListView-->
-            <!--android:id="@+id/sub_list"-->
-
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginRight="40dp"></ListView>-->
-
-
-
-    <!--</LinearLayout>-->
-<!--</ScrollView>-->

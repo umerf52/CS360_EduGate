@@ -123,7 +123,7 @@ public class ViewYourProfileActivity extends BaseActivity {
                     }
                     else if(tutor.profileStatus == -1){
                         profileStatus.setText("Pending");
-                        profileStatus.setTextColor(Color.parseColor("#2f4f4f4"));
+                        profileStatus.setTextColor(Color.parseColor("#8b4513"));
                     }
                     contactNumber.setText(tutor.getContactNo());
                     tuitionLocation.setText(WordUtils.capitalizeFully(tutor.getTuitionLocation()));

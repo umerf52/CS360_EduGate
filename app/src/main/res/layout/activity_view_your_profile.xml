@@ -1,93 +1,292 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".ViewYourProfileActivity">
-
-    <LinearLayout
+    tools:context=".PendingDetailActivity">
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="16dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ye"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_height="match_parent"
+        android:background="@color/greytrans">
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_height="match_parent"
+        android:background="@color/ligwh">
+    </RelativeLayout>
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical">
-
-        <ImageView
-            android:id="@+id/profile_picture"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:contentDescription="Profile Picture" />
-
-        <EditText
-            android:id="@+id/fname"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="First Name"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:id="@+id/rel"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:id="@+id/prof"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_centerHorizontal="true"
+                    android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/gender"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Gender"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                    <ImageView
+                        android:id="@+id/profile_picture"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true" />
+                </RelativeLayout>
 
-        <TextView
-            android:id="@+id/status"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                <LinearLayout
+                    android:id="@+id/lin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/prof"
+                    android:layout_centerInParent="true">
+                    <EditText
+                        android:id="@+id/fname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="10dp"
+                        android:textColor="@color/black"
+                        android:textSize="32sp"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                    <EditText
+                        android:id="@+id/lname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/fname"
+                        android:textColor="@color/black"
+                        android:textSize="32sp"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
-        <EditText
-            android:id="@+id/lname"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Last Name"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/lin"
+                    android:layout_marginTop="10dp"
+                    android:layout_centerInParent="true"
+                    android:id="@+id/lin2">
+                    <TextView
+                        android:id="@+id/status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Township, Lahore"
+                        android:textColor="@color/black"
+                        android:textSize="25sp"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
-        <EditText
-            android:id="@+id/contact_number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="phone"
-            android:maxLength="11"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                </LinearLayout>
 
-        <EditText
-            android:id="@+id/tuition_location"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPostalAddress"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/lin2"
+                    android:layout_marginTop="10dp"
+                    android:layout_centerInParent="true"
+                    android:id="@+id/lin3">
+                    <TextView
+                        android:id="@+id/gender"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Township, Lahore"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
-        <Spinner
-            android:id="@+id/my_education_dropdown"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:entries="@array/degreeOptions">
-        </Spinner>
+                </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/subjects_grades_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
 
-        <Button
-            android:id="@+id/save_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="SAVE" />
+            </RelativeLayout>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            app:backgroundTint="@color/navy"
-            android:src="@android:drawable/ic_input_add" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="match_parent"
+                android:layout_below="@id/rel">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-    </LinearLayout>
-</ScrollView>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/fi3"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Contact Number"
+                            android:textColor="@color/gradEnd"
+                            android:textSize="15sp"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                        <EditText
+                            android:id="@+id/contact_number"
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="10dp"
+                            android:layout_height="wrap_content"
+                            android:inputType="phone"
+                            android:maxLength="11"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                        <!--<View-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="1dp"-->
+                            <!--android:layout_marginTop="10dp"-->
+                            <!--android:background="@color/hel"/>-->
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/fi"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tuition Location"
+                            android:textColor="@color/gradEnd"
+                            android:textSize="15sp"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                        <EditText
+                            android:id="@+id/tuition_location"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:inputType="textPostalAddress"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                        <!--<View-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="1dp"-->
+                            <!--android:layout_marginTop="10dp"-->
+                            <!--android:background="@color/hel"/>-->
+
+                    </LinearLayout>
+                    <Spinner
+                        android:id="@+id/my_education_dropdown"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/degreeOptions">
+                    </Spinner>
+
+                    <LinearLayout
+                        android:id="@+id/subjects_grades_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        >
+                        <Button
+                            android:id="@+id/save_button"
+                            android:layout_below="@id/lal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/btn"
+                            android:textColor="@color/white"
+                            android:layout_alignParentLeft="true"
+                            android:onClick="acceptProfile"
+                            android:layout_marginTop="40dp"
+                            android:text="SAVE" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </RelativeLayout>
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                app:backgroundTint="@color/navy"
+                android:src="@android:drawable/ic_input_add" />
+
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"-->
+
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--android:orientation="vertical"-->
+    <!--tools:context=".ViewYourProfileActivity">-->
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_margin="16dp"-->
+        <!--android:orientation="vertical">-->
+
+        <!---->
+
+        <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/gender"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:text="Gender"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />&ndash;&gt;-->
+
+        <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/status"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />&ndash;&gt;-->
+
+        <!---->
+        <!---->
+
+        <!---->
+
+        <!---->
+
+        <!--<Button-->
+            <!--android:id="@+id/save_button"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="SAVE" />-->
+
+        <!---->
+    <!--</LinearLayout>-->
+<!--</ScrollView>-->
