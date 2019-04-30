@@ -1,15 +1,16 @@
 package com.apps.edu_gate;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -24,32 +25,48 @@ public class ChangePasswordActivity extends BaseActivity {
     private EditText old_password;
     private EditText new_password;
     private EditText re_new_password;
-    private FirebaseAuth firebaseAuth;
-    Button change_password_button;
-    ProgressDialog dialog;
+    private String sendingActivity;
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            if (sendingActivity.equals("AdminMainPageActivity")) {
+                Intent myIntent = new Intent(ChangePasswordActivity.this, AdminMainPageActivity.class);
+                ChangePasswordActivity.this.startActivity(myIntent);
+            } else if (sendingActivity.equals("ViewYourProfileActivity")) {
+                Intent myIntent = new Intent(ChangePasswordActivity.this, ViewYourProfileActivity.class);
+                ChangePasswordActivity.this.startActivity(myIntent);
+            }
+        }
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
-        setTitle("New Password");
+        Intent prevIntent = getIntent();
+        sendingActivity = prevIntent.getStringExtra("Sender");
+        setTitle("Change Password");
+        // Get a support ActionBar corresponding to this toolbar
+        ActionBar ab = getSupportActionBar();
 
-        //findViewById(R.id.change_password_button).setOnClickListener(this);
+        // Enable the Up button
+        ab.setDisplayHomeAsUpEnabled(true);
+
+
         old_password = findViewById(R.id.old_password);
         new_password = findViewById(R.id.new_password);
         re_new_password = findViewById(R.id.re_new_password);
-        change_password_button = findViewById(R.id.change_password_button);
-        dialog = new ProgressDialog(this);
+        Button change_password_button = findViewById(R.id.change_password_button);
 
         FirebaseApp.initializeApp(this);
-        firebaseAuth = FirebaseAuth.getInstance();
 
         change_password_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(!validateForm()){
                     return;
                 }
-//                Toast.makeText(getApplicationContext(), "Button Clicked", Toast.LENGTH_LONG).show();
                 changePassword();
             }
         });
@@ -82,8 +99,13 @@ public class ChangePasswordActivity extends BaseActivity {
                                 } else {
                                     hideProgressDialog();
                                     Toast.makeText(getApplicationContext(), "Your password has been changed", Toast.LENGTH_LONG).show();
-                                    Intent myIntent = new Intent(ChangePasswordActivity.this, AdminMainPageActivity.class);
-                                    ChangePasswordActivity.this.startActivity(myIntent);
+                                    if (sendingActivity.equals("AdminMainPageActivity")) {
+                                        Intent myIntent = new Intent(ChangePasswordActivity.this, AdminMainPageActivity.class);
+                                        ChangePasswordActivity.this.startActivity(myIntent);
+                                    } else if (sendingActivity.equals("ViewYourProfileActivity")) {
+                                        Intent myIntent = new Intent(ChangePasswordActivity.this, ViewYourProfileActivity.class);
+                                        ChangePasswordActivity.this.startActivity(myIntent);
+                                    }
                                 }
                             }
 
@@ -154,20 +176,8 @@ public class ChangePasswordActivity extends BaseActivity {
             valid = false;
         }
 
-
-
-
         return valid;
     }
-
-//    public void onClick(View v) {
-//        int i = v.getId();
-//        if (i == R.id.change_password_button){
-//            Toast.makeText(getApplicationContext(), "Button Clicked", Toast.LENGTH_LONG).show();
-//            changePassword();
-//        }
-//
-//    }
 
 
 }
