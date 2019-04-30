@@ -1,5 +1,6 @@
 package com.apps.edu_gate;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -15,6 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -39,45 +42,6 @@ public class ViewYourProfileActivity extends BaseActivity {
         getMenuInflater().inflate(R.menu.view_your_profile_menu, menu);
         return true;
     }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_change_password: {
-                Intent myIntent = new Intent(ViewYourProfileActivity.this, ChangePasswordActivity.class);
-                ViewYourProfileActivity.this.startActivity(myIntent);
-                break;
-            }
-            case R.id.action_sign_out: {
-                FirebaseAuth.getInstance().signOut();
-                Intent myIntent = new Intent(ViewYourProfileActivity.this, LoginActivity.class);
-                ViewYourProfileActivity.this.startActivity(myIntent);
-                break;
-            }
-        }
-        return true;
-    }
-
-    EditText fname;
-    EditText lname;
-    TextView gender;
-    private ImageView profileImageView;
-    private TextView profileStatus;
-    private EditText contactNumber;
-    private EditText tuitionLocation;
-    private Spinner myEducationDropdown;
-    private List<String> subjectsTur = new ArrayList<>();
-    private List<String> gradesTur = new ArrayList<>();
-    private String new_subject_values = "";
-    private String new_grade_values = "";
-    private String tutorKey = "";
-    String id;
-    Tutorinfo tutor;
-    FirebaseUser currentFirebaseUser;
-    FirebaseAuth AuthUI = FirebaseAuth.getInstance();
-
-    private ArrayList<Spinner> grade_spinners = new ArrayList<Spinner>();
-    private ArrayList<Spinner> subject_spinners = new ArrayList<Spinner>();
 
     ValueEventListener valueEventListener = new ValueEventListener() {
         @Override
@@ -112,15 +76,13 @@ public class ViewYourProfileActivity extends BaseActivity {
                     fname.setText(WordUtils.capitalizeFully(tutor.firstName));
                     lname.setText(WordUtils.capitalizeFully(tutor.lastName));
                     gender.setText(WordUtils.capitalizeFully(tutor.gender));
-                    if(tutor.profileStatus == 0){
+                    if (tutor.profileStatus == 0) {
                         profileStatus.setText("Rejected");
                         profileStatus.setTextColor(Color.parseColor("#ff0000"));
-                    }
-                    else if(tutor.profileStatus == 1){
+                    } else if (tutor.profileStatus == 1) {
                         profileStatus.setText("Verified");
                         profileStatus.setTextColor(Color.parseColor("#00ff00"));
-                    }
-                    else if(tutor.profileStatus == -1){
+                    } else if (tutor.profileStatus == -1) {
                         profileStatus.setText("Pending");
                         profileStatus.setTextColor(Color.parseColor("#8b4513"));
                     }
@@ -141,9 +103,8 @@ public class ViewYourProfileActivity extends BaseActivity {
                     }
 
                 }
-            }
-            else{
-                Toast.makeText(getBaseContext(),"No such results!", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(getBaseContext(), "No such results!", Toast.LENGTH_LONG).show();
             }
             hideProgressDialog();
         }
@@ -153,6 +114,44 @@ public class ViewYourProfileActivity extends BaseActivity {
             Toast.makeText(getBaseContext(), databaseError.getMessage(), Toast.LENGTH_LONG).show();
         }
     };
+
+    EditText fname;
+    EditText lname;
+    TextView gender;
+    private ImageView profileImageView;
+    private TextView profileStatus;
+    private EditText contactNumber;
+    private EditText tuitionLocation;
+    private Spinner myEducationDropdown;
+    private List<String> subjectsTur = new ArrayList<>();
+    private List<String> gradesTur = new ArrayList<>();
+    private String new_subject_values = "";
+    private String new_grade_values = "";
+    private String tutorKey = "";
+    String id;
+    Tutorinfo tutor;
+    FirebaseUser currentFirebaseUser;
+    FirebaseAuth AuthUI = FirebaseAuth.getInstance();
+
+    private ArrayList<Spinner> grade_spinners = new ArrayList<Spinner>();
+    private ArrayList<Spinner> subject_spinners = new ArrayList<Spinner>();
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_change_password: {
+                Intent myIntent = new Intent(ViewYourProfileActivity.this, ChangePasswordActivity.class);
+                ViewYourProfileActivity.this.startActivity(myIntent);
+                break;
+            }
+            case R.id.action_sign_out: {
+                signOut();
+                break;
+            }
+        }
+        return true;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -163,29 +162,29 @@ public class ViewYourProfileActivity extends BaseActivity {
         profileStatus = (TextView) findViewById(R.id.status);
         lname = (EditText) findViewById(R.id.lname);
         gender = (TextView) findViewById(R.id.gender);
-            profileImageView = findViewById(R.id.profile_picture);
-            contactNumber = findViewById(R.id.contact_number);
-            tuitionLocation = findViewById(R.id.tuition_location);
-            myEducationDropdown = findViewById(R.id.my_education_dropdown);
-            Button saveButton = findViewById(R.id.save_button);
-            saveButton.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    updateTutor();
-                }
-            });
-            FloatingActionButton fab = findViewById(R.id.fab);
-            fab.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    addSpinners();
-                }
-            });
+        profileImageView = findViewById(R.id.profile_picture);
+        contactNumber = findViewById(R.id.contact_number);
+        tuitionLocation = findViewById(R.id.tuition_location);
+        myEducationDropdown = findViewById(R.id.my_education_dropdown);
+        Button saveButton = findViewById(R.id.save_button);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                updateTutor();
+            }
+        });
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                addSpinners();
+            }
+        });
         currentFirebaseUser = AuthUI.getCurrentUser();
         String s = currentFirebaseUser.getEmail();
         Query q = FirebaseDatabase.getInstance().getReference("Tutors").orderByChild("emailAddress")
                 .equalTo(s);
         q.addListenerForSingleValueEvent(valueEventListener);
 
-        }
+    }
 
     private void addSpinners() {
         LinearLayout dropdown_layout = (LinearLayout) findViewById(R.id.subjects_grades_layout);
@@ -267,5 +266,26 @@ public class ViewYourProfileActivity extends BaseActivity {
         startActivity(intent);
     }
 
+    private void signOut() {
+        AlertDialog alertDialog = new AlertDialog.Builder(ViewYourProfileActivity.this).create();
+        alertDialog.setTitle("Sign Out?");
+        alertDialog.setMessage("Are you sure you want to sign out?");
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "YES",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        FirebaseAuth.getInstance().signOut();
+                        Intent myIntent = new Intent(ViewYourProfileActivity.this, LoginActivity.class);
+                        ViewYourProfileActivity.this.startActivity(myIntent);
+                    }
+                });
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "NO",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+        alertDialog.show();
 
+    }
 }
