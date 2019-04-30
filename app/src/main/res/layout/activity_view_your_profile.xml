@@ -10,7 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/ye"/>
+        android:src="@drawable/ye" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_centerInParent="true"
@@ -23,7 +24,8 @@
         android:layout_height="match_parent"
         android:background="@color/ligwh">
     </RelativeLayout>
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -41,11 +43,19 @@
                     android:layout_centerHorizontal="true"
                     android:layout_height="wrap_content">
 
+                    <Button
+                        android:id="@+id/change_profile_picture"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:text="Edit Picture" />
+
                     <ImageView
                         android:id="@+id/profile_picture"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:adjustViewBounds="true" />
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/placeholder_profile_picture" />
                 </RelativeLayout>
 
                 <LinearLayout
@@ -54,7 +64,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/prof"
                     android:layout_centerInParent="true">
-                    <EditText
+
+                    <TextView
                         android:id="@+id/fname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -62,7 +73,8 @@
                         android:textColor="@color/black"
                         android:textSize="32sp"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
-                    <EditText
+
+                    <TextView
                         android:id="@+id/lname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -83,7 +95,6 @@
                         android:id="@+id/status"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Township, Lahore"
                         android:textColor="@color/black"
                         android:textSize="25sp"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
@@ -101,7 +112,6 @@
                         android:id="@+id/gender"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Township, Lahore"
                         android:textColor="@color/black"
                         android:textSize="20sp"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
@@ -144,12 +154,6 @@
                             android:inputType="phone"
                             android:maxLength="11"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
-                        <!--<View-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="1dp"-->
-                            <!--android:layout_marginTop="10dp"-->
-                            <!--android:background="@color/hel"/>-->
-
                     </LinearLayout>
 
                     <LinearLayout
@@ -171,11 +175,6 @@
                             android:layout_marginTop="10dp"
                             android:inputType="textPostalAddress"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
-                        <!--<View-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="1dp"-->
-                            <!--android:layout_marginTop="10dp"-->
-                            <!--android:background="@color/hel"/>-->
 
                     </LinearLayout>
 

@@ -1,13 +1,16 @@
 package com.apps.edu_gate;
 
+import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,8 +20,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -28,6 +35,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import org.apache.commons.text.WordUtils;
@@ -37,12 +50,33 @@ import java.util.Iterator;
 import java.util.List;
 
 public class ViewYourProfileActivity extends BaseActivity {
+    private static final int PICK_IMAGE_REQUEST = 1;
+
+    private TextView fname;
+    private TextView lname;
+    private TextView gender;
+    private ImageView profileImageView;
+    private TextView profileStatus;
+    private EditText contactNumber;
+    private EditText tuitionLocation;
+    private Spinner myEducationDropdown;
+    private List<String> subjectsTur = new ArrayList<>();
+    private List<String> gradesTur = new ArrayList<>();
+    private String new_subject_values = "";
+    private String new_grade_values = "";
+    private String tutorKey = "";
+    private FirebaseAuth AuthUI = FirebaseAuth.getInstance();
+    private boolean hasProfilePictureChanged = false;
+    private Uri mImageUri;
+
+    private ArrayList<Spinner> grade_spinners = new ArrayList<Spinner>();
+    private ArrayList<Spinner> subject_spinners = new ArrayList<Spinner>();
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.view_your_profile_menu, menu);
         return true;
     }
-
     ValueEventListener valueEventListener = new ValueEventListener() {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
@@ -69,6 +103,8 @@ public class ViewYourProfileActivity extends BaseActivity {
                     tutorKey = snapshot.child("key").getValue(String.class);
                     Picasso.get()
                             .load(tutor.getProfileImage())
+                            .memoryPolicy(MemoryPolicy.NO_CACHE)
+                            .networkPolicy(NetworkPolicy.NO_CACHE)
                             .placeholder(R.drawable.placeholder_profile_picture)
                             .fit()
                             .centerCrop()
@@ -115,26 +151,6 @@ public class ViewYourProfileActivity extends BaseActivity {
         }
     };
 
-    EditText fname;
-    EditText lname;
-    TextView gender;
-    private ImageView profileImageView;
-    private TextView profileStatus;
-    private EditText contactNumber;
-    private EditText tuitionLocation;
-    private Spinner myEducationDropdown;
-    private List<String> subjectsTur = new ArrayList<>();
-    private List<String> gradesTur = new ArrayList<>();
-    private String new_subject_values = "";
-    private String new_grade_values = "";
-    private String tutorKey = "";
-    String id;
-    Tutorinfo tutor;
-    FirebaseUser currentFirebaseUser;
-    FirebaseAuth AuthUI = FirebaseAuth.getInstance();
-
-    private ArrayList<Spinner> grade_spinners = new ArrayList<Spinner>();
-    private ArrayList<Spinner> subject_spinners = new ArrayList<Spinner>();
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -159,9 +175,9 @@ public class ViewYourProfileActivity extends BaseActivity {
         setContentView(R.layout.activity_view_your_profile);
         setTitle("Your Profile");
         showProgressDialog();
-        fname = (EditText) findViewById(R.id.fname);
+        fname = findViewById(R.id.fname);
         profileStatus = (TextView) findViewById(R.id.status);
-        lname = (EditText) findViewById(R.id.lname);
+        lname = findViewById(R.id.lname);
         gender = (TextView) findViewById(R.id.gender);
         profileImageView = findViewById(R.id.profile_picture);
         contactNumber = findViewById(R.id.contact_number);
@@ -179,7 +195,13 @@ public class ViewYourProfileActivity extends BaseActivity {
                 addSpinners();
             }
         });
-        currentFirebaseUser = AuthUI.getCurrentUser();
+        Button changeImageButton = findViewById(R.id.change_profile_picture);
+        changeImageButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                openFileChooser();
+            }
+        });
+        FirebaseUser currentFirebaseUser = AuthUI.getCurrentUser();
         String s = currentFirebaseUser.getEmail();
         Query q = FirebaseDatabase.getInstance().getReference("Tutors").orderByChild("emailAddress")
                 .equalTo(s);
@@ -217,23 +239,44 @@ public class ViewYourProfileActivity extends BaseActivity {
 
     private void updateTutor() {
         showProgressDialog();
-        String contactNew = contactNumber.getText().toString();
-        String locationNew = tuitionLocation.getText().toString();
-        String degreeNew = String.valueOf(myEducationDropdown.getSelectedItem());
-        getSpinnerValues();
-        DatabaseReference dbNode = FirebaseDatabase.getInstance().getReference("Tutors");
-        dbNode.child(tutorKey).child("contactNo").setValue(contactNew);
-        dbNode.child(tutorKey).child("degree").setValue(degreeNew);
-        dbNode.child(tutorKey).child("tuitionLocation").setValue(locationNew);
-        dbNode.child(tutorKey).child("subject").setValue(new_subject_values);
-        dbNode.child(tutorKey).child("grade").setValue(new_grade_values);
-        dbNode.child(tutorKey).child("profileStatus").setValue(-1);
-        hideProgressDialog();
-        Toast.makeText(this, "Database update", Toast.LENGTH_SHORT);
-        recreate();
+        if (hasProfilePictureChanged) {
+            StorageReference mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
+            final DatabaseReference tempDbNode = FirebaseDatabase.getInstance().getReference("Tutors");
+            final StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
+                    + "." + getFileExtension(mImageUri));
+
+            StorageTask mUploadTask = fileReference.putFile(mImageUri);
+            ;
+            Task<Uri> urlTask = mUploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                @Override
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    if (!task.isSuccessful()) {
+                        throw task.getException();
+                    }
+                    return fileReference.getDownloadUrl();
+                }
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    if (task.isSuccessful()) {
+                        Uri downloadUri = task.getResult();
+                        tempDbNode.child(tutorKey).child("profileImage").setValue(downloadUri.toString());
+                        Toast.makeText(ViewYourProfileActivity.this, "Profile Picture Updated", Toast.LENGTH_SHORT);
+                        updateDatabase();
+
+                    } else {
+                        hideProgressDialog();
+                        Toast.makeText(ViewYourProfileActivity.this, "Error uploading Profile Image",
+                                Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+        } else {
+            updateDatabase();
+        }
     }
 
-    private boolean getSpinnerValues() {
+    private void getSpinnerValues() {
         new_subject_values = "";
         new_grade_values = "";
         Iterator i = grade_spinners.iterator();
@@ -256,7 +299,6 @@ public class ViewYourProfileActivity extends BaseActivity {
             new_subject_values += ((String.valueOf(tmp.getSelectedItem()).toLowerCase()) + "-");
         }
 
-        return true;
     }
 
     @Override
@@ -289,4 +331,54 @@ public class ViewYourProfileActivity extends BaseActivity {
         alertDialog.show();
 
     }
+
+    private void openFileChooser() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, PICK_IMAGE_REQUEST);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
+                && data != null && data.getData() != null) {
+            mImageUri = data.getData();
+            Picasso.get()
+                    .load(mImageUri)
+                    .memoryPolicy(MemoryPolicy.NO_CACHE)
+                    .networkPolicy(NetworkPolicy.NO_CACHE)
+                    .placeholder(R.drawable.placeholder_profile_picture)
+                    .fit()
+                    .centerCrop()
+                    .into(profileImageView);
+            hasProfilePictureChanged = true;
+        }
+    }
+
+    private String getFileExtension(Uri uri) {
+        ContentResolver cR = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(cR.getType(uri));
+    }
+
+    private void updateDatabase() {
+        DatabaseReference dbNode = FirebaseDatabase.getInstance().getReference("Tutors");
+        String contactNew = contactNumber.getText().toString();
+        String locationNew = tuitionLocation.getText().toString();
+        String degreeNew = String.valueOf(myEducationDropdown.getSelectedItem());
+        getSpinnerValues();
+        dbNode.child(tutorKey).child("contactNo").setValue(contactNew);
+        dbNode.child(tutorKey).child("degree").setValue(degreeNew);
+        dbNode.child(tutorKey).child("tuitionLocation").setValue(locationNew);
+        dbNode.child(tutorKey).child("subject").setValue(new_subject_values);
+        dbNode.child(tutorKey).child("grade").setValue(new_grade_values);
+        dbNode.child(tutorKey).child("profileStatus").setValue(-1);
+        hideProgressDialog();
+        Toast.makeText(this, "Database updated", Toast.LENGTH_SHORT).show();
+        recreate();
+    }
+
 }
