@@ -157,7 +157,6 @@ public class ViewYourProfileActivity extends BaseActivity {
         switch (item.getItemId()) {
             case R.id.action_change_password: {
                 Intent myIntent = new Intent(ViewYourProfileActivity.this, ChangePasswordActivity.class);
-                myIntent.putExtra("Sender", "ViewYourProfileActivity");
                 ViewYourProfileActivity.this.startActivity(myIntent);
                 break;
             }

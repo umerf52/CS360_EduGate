@@ -28,7 +28,7 @@ import java.util.regex.Pattern;
 
 public class AddNewAdminActivity extends BaseActivity {
 
-    private static final String TAG = "EmailPassword";
+    private static final String TAG = "AddNewAdminActivity";
 
     private EditText mfirst_name;
     private EditText mlast_name;
@@ -39,7 +39,6 @@ public class AddNewAdminActivity extends BaseActivity {
     Button add_admin;
 
     private FirebaseAuth mAuth;
-    private FirebaseAuth tempAuth;
     private DatabaseReference databaseAdmin;
 
     @Override
@@ -47,7 +46,7 @@ public class AddNewAdminActivity extends BaseActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_admin);
-        setTitle("Add New Adminstrator");
+        setTitle("Add New Administrator");
 
         // Views
         mfirst_name = findViewById(R.id.first_name);

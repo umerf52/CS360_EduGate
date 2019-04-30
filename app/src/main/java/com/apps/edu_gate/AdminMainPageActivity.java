@@ -66,7 +66,6 @@ public class AdminMainPageActivity extends AppCompatActivity {
         change_password.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent myIntent = new Intent(AdminMainPageActivity.this, ChangePasswordActivity.class);
-                myIntent.putExtra("Sender", "AdminMainPageActivity");
                 AdminMainPageActivity.this.startActivity(myIntent);
             }
         });

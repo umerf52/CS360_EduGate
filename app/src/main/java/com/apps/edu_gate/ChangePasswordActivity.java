@@ -1,6 +1,5 @@
 package com.apps.edu_gate;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MenuItem;
@@ -25,18 +24,11 @@ public class ChangePasswordActivity extends BaseActivity {
     private EditText old_password;
     private EditText new_password;
     private EditText re_new_password;
-    private String sendingActivity;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            if (sendingActivity.equals("AdminMainPageActivity")) {
-                Intent myIntent = new Intent(ChangePasswordActivity.this, AdminMainPageActivity.class);
-                ChangePasswordActivity.this.startActivity(myIntent);
-            } else if (sendingActivity.equals("ViewYourProfileActivity")) {
-                Intent myIntent = new Intent(ChangePasswordActivity.this, ViewYourProfileActivity.class);
-                ChangePasswordActivity.this.startActivity(myIntent);
-            }
+            finish();
         }
         return true;
     }
@@ -45,8 +37,6 @@ public class ChangePasswordActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
-        Intent prevIntent = getIntent();
-        sendingActivity = prevIntent.getStringExtra("Sender");
         setTitle("Change Password");
         // Get a support ActionBar corresponding to this toolbar
         ActionBar ab = getSupportActionBar();
@@ -99,13 +89,7 @@ public class ChangePasswordActivity extends BaseActivity {
                                 } else {
                                     hideProgressDialog();
                                     Toast.makeText(getApplicationContext(), "Your password has been changed", Toast.LENGTH_LONG).show();
-                                    if (sendingActivity.equals("AdminMainPageActivity")) {
-                                        Intent myIntent = new Intent(ChangePasswordActivity.this, AdminMainPageActivity.class);
-                                        ChangePasswordActivity.this.startActivity(myIntent);
-                                    } else if (sendingActivity.equals("ViewYourProfileActivity")) {
-                                        Intent myIntent = new Intent(ChangePasswordActivity.this, ViewYourProfileActivity.class);
-                                        ChangePasswordActivity.this.startActivity(myIntent);
-                                    }
+                                    finish();
                                 }
                             }
 
