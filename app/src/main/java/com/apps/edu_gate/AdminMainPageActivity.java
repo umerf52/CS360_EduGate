@@ -101,8 +101,7 @@ public class AdminMainPageActivity extends AppCompatActivity {
         if (user == null) {
             Toast.makeText(AdminMainPageActivity.this, "Signed Out",
                     Toast.LENGTH_SHORT).show();
-            Intent myIntent = new Intent(AdminMainPageActivity.this, StartupActivity.class);
-            AdminMainPageActivity.this.startActivity(myIntent);
+            finish();
         }
     }
 

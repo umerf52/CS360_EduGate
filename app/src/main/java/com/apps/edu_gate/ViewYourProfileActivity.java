@@ -77,6 +77,7 @@ public class ViewYourProfileActivity extends BaseActivity {
         getMenuInflater().inflate(R.menu.view_your_profile_menu, menu);
         return true;
     }
+
     ValueEventListener valueEventListener = new ValueEventListener() {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
@@ -316,8 +317,7 @@ public class ViewYourProfileActivity extends BaseActivity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         FirebaseAuth.getInstance().signOut();
-                        Intent myIntent = new Intent(ViewYourProfileActivity.this, LoginActivity.class);
-                        ViewYourProfileActivity.this.startActivity(myIntent);
+                        finish();
                     }
                 });
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "NO",
