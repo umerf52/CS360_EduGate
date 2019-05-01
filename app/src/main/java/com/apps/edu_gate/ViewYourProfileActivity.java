@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +24,8 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -68,29 +69,18 @@ public class ViewYourProfileActivity extends BaseActivity {
     private FirebaseAuth AuthUI = FirebaseAuth.getInstance();
     private boolean hasProfilePictureChanged = false;
     private Uri mImageUri;
-
-    private ArrayList<Spinner> grade_spinners = new ArrayList<Spinner>();
-    private ArrayList<Spinner> subject_spinners = new ArrayList<Spinner>();
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.view_your_profile_menu, menu);
-        return true;
-    }
-
+    private Tutorinfo tutor;
     ValueEventListener valueEventListener = new ValueEventListener() {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
             if (dataSnapshot.exists()) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    int status = snapshot.child("profileStatus").getValue(int.class);
-                    Tutorinfo tutor = new Tutorinfo();
+                    tutor = new Tutorinfo();
                     tutor.grade = snapshot.child("grade").getValue(String.class);
                     tutor.degree = snapshot.child("degree").getValue(String.class);
                     tutor.subject = snapshot.child("subject").getValue(String.class);
                     tutor.address = snapshot.child("address").getValue(String.class);
                     tutor.profileStatus = snapshot.child("profileStatus").getValue(int.class);
-                    Log.e("adsa", String.valueOf(tutor.profileStatus));
                     tutor.cnicNo = snapshot.child("cnicNo").getValue(String.class);
                     tutor.contactNo = snapshot.child("contactNo").getValue(String.class);
                     tutor.emailAddress = snapshot.child("emailAddress").getValue(String.class);
@@ -151,6 +141,17 @@ public class ViewYourProfileActivity extends BaseActivity {
             Toast.makeText(getBaseContext(), databaseError.getMessage(), Toast.LENGTH_LONG).show();
         }
     };
+
+    private ArrayList<Spinner> grade_spinners = new ArrayList<Spinner>();
+    private ArrayList<Spinner> subject_spinners = new ArrayList<Spinner>();
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.view_your_profile_menu, menu);
+        return true;
+    }
+
+    private FirebaseStorage mStorage;
 
 
     @Override
@@ -259,10 +260,25 @@ public class ViewYourProfileActivity extends BaseActivity {
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
                     if (task.isSuccessful()) {
-                        Uri downloadUri = task.getResult();
-                        tempDbNode.child(tutorKey).child("profileImage").setValue(downloadUri.toString());
-                        Toast.makeText(ViewYourProfileActivity.this, "Profile Picture Updated", Toast.LENGTH_SHORT);
-                        updateDatabase();
+                        final Uri downloadUri = task.getResult();
+                        mStorage = FirebaseStorage.getInstance();
+                        StorageReference imageRef = mStorage.getReferenceFromUrl(tutor.getProfileImage());
+                        imageRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(ViewYourProfileActivity.this, "Old Profile picture deleted",
+                                        Toast.LENGTH_SHORT).show();
+                                tempDbNode.child(tutorKey).child("profileImage").setValue(downloadUri.toString());
+                                Toast.makeText(ViewYourProfileActivity.this, "Profile Picture Updated", Toast.LENGTH_SHORT);
+                                updateDatabase();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(ViewYourProfileActivity.this, "Failed to delete old profile picture",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        });
 
                     } else {
                         hideProgressDialog();
