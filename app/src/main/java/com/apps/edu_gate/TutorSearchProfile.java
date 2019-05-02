@@ -1,11 +1,10 @@
 package com.apps.edu_gate;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -25,97 +24,91 @@ import java.util.List;
 
 public class TutorSearchProfile extends AppCompatActivity {
 
-    TextView fname;
-    TextView gender;
-    TextView lastname;
-    TextView instituion;
-    TextView location;
-    ImageView imageTutor;
-
     private ArrayList<String> adminNumbers = new ArrayList<>();
     private  List<String> subjectsTur = new ArrayList<>();
     private  List<String> gradesTur = new ArrayList<>();
     private  List<String> lastList = new ArrayList<>();
     ArrayAdapter<String> adapter;
-    ListView listView = null;
     ListView subList = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        listView = new ListView(this);
-
 
         Tutorinfo x = (Tutorinfo) getIntent().getSerializableExtra("result");
         adminNumbers = getIntent().getStringArrayListExtra("num");
         setContentView(R.layout.activity_tutor_search_profile);
         setTitle("Profile");
-        RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+        RatingBar ratingBar = findViewById(R.id.ratingBar);
         String sub = x.subject;
         String grad = x.grade;
-        String[] splited = sub.split("-");
+        String[] split = sub.split("-");
         String[] split2 = grad.split("-");
-        for(int i=0; i<splited.length; i++){
-            subjectsTur.add(splited[i].substring(0,1).toUpperCase()+splited[i].substring(1));
+        for (int i = 0; i < split.length; i++) {
+            subjectsTur.add(split[i].substring(0, 1).toUpperCase() + split[i].substring(1));
             gradesTur.add(split2[i].substring(0,1).toUpperCase()+split2[i].substring(1));
-            String f = WordUtils.capitalizeFully(split2[i]) + ": " + WordUtils.capitalizeFully(splited[i]);
+            String f = WordUtils.capitalizeFully(split2[i]) + ": " + WordUtils.capitalizeFully(split[i]);
             lastList.add(f);
         }
-        imageTutor = findViewById(R.id.imageTutor);
+        ImageView imageTutor = findViewById(R.id.imageTutor);
         Picasso.get()
                 .load(x.getProfileImage())
                 .placeholder(R.drawable.placeholder_profile_picture)
                 .fit()
                 .centerCrop()
                 .into(imageTutor);
-        fname = (TextView) findViewById(R.id.fname);
-        fname.setText(WordUtils.capitalizeFully(x.firstName));
-        gender = (TextView) findViewById(R.id.gender);
+        TextView firstName = findViewById(R.id.fname);
+        firstName.setText(WordUtils.capitalizeFully(x.firstName));
+        TextView gender = findViewById(R.id.gender);
         gender.setText(x.gender);
-        lastname = (TextView) findViewById(R.id.lname);
-        lastname.setText(WordUtils.capitalizeFully(x.lastName));
-        instituion = (TextView) findViewById(R.id.institution);
-        instituion.setText(WordUtils.capitalizeFully(x.recentInstitution));
-        location = (TextView) findViewById(R.id.location);
+        TextView lastName = findViewById(R.id.lname);
+        lastName.setText(WordUtils.capitalizeFully(x.lastName));
+        TextView institution = findViewById(R.id.institution);
+        institution.setText(WordUtils.capitalizeFully(x.recentInstitution));
+        TextView location = findViewById(R.id.location);
         location.setText(WordUtils.capitalizeFully(x.tuitionLocation));
         ratingBar.setRating((float)x.tempr);
-        ArrayAdapter adapter1 = new ArrayAdapter<String>(this,
-                R.layout.listitem,R.id.txtitem, lastList);
+        ArrayAdapter adapter1 = new ArrayAdapter<>(this,
+                R.layout.listitem, R.id.txtitem, lastList);
 
-        subList = (ListView) findViewById(R.id.sub_list);
+        subList = findViewById(R.id.sub_list);
         subList.setAdapter(adapter1);
 
-        FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
-
-        adapter=new ArrayAdapter<String>(this,
-                R.layout.listitem, R.id.txtitem,adminNumbers);
-
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        FloatingActionButton floatingActionButton = findViewById(R.id.fab);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int
-                    position, long id) {
-                ViewGroup vg=(ViewGroup)view;
-                TextView txt=(TextView)vg.findViewById(R.id.txtitem);
-                Uri u = Uri.parse("tel:" + txt.getText().toString());
-                Intent i = new Intent(Intent.ACTION_DIAL, u);
-                startActivity(i);
+            public void onClick(View view) {
+                showDialogListView();
             }
         });
     }
-    public void showDialogListView(View view) {
 
-        AlertDialog.Builder builder = new
-                AlertDialog.Builder(TutorSearchProfile.this);
+    public void showDialogListView() {
 
-        builder.setCancelable(true);
+        AlertDialog.Builder builderSingle = new AlertDialog.Builder(TutorSearchProfile.this);
+        builderSingle.setTitle("Call Administrator");
 
-        builder.setPositiveButton("OK", null);
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(TutorSearchProfile.this, android.R.layout.select_dialog_item);
+        for (String adminNumber : adminNumbers) {
+            arrayAdapter.add(adminNumber);
+        }
 
-        builder.setView(listView);
+        builderSingle.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
 
-        AlertDialog dialog = builder.create();
-
-        dialog.show();
+        builderSingle.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String strName = arrayAdapter.getItem(which);
+                Uri uri = Uri.parse("tel:" + strName);
+                Intent myIntent = new Intent(Intent.ACTION_DIAL, uri);
+                startActivity(myIntent);
+            }
+        });
+        builderSingle.show();
     }
 }
