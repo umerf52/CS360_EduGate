@@ -15,34 +15,28 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class AdminMainPageActivity extends AppCompatActivity {
 
-    private FirebaseAuth mAuth;
+    private static final int TIME_INTERVAL = 2000; // # milliseconds, desired time passed between two back presses.
+    private long mBackPressed;
 
-    Button search;
-    Button verify_profile;
-    Button rate_tutor;
-    Button change_password;
-    Button add_new_administrator;
-    Button delete_tutor_profile;
-    Button signoutButton;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        FirebaseApp.initializeApp(this);
-        mAuth = FirebaseAuth.getInstance();
-
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_main_page);
         setTitle("Administrator Home");
 
-        search = findViewById(R.id.search);
-        verify_profile = findViewById(R.id.verify_profile);
-        rate_tutor = findViewById(R.id.rate_tutor);
-        change_password = findViewById(R.id.change_password);
-        add_new_administrator = findViewById(R.id.add_new_administrator);
-        delete_tutor_profile = findViewById(R.id.delete_tutor_profile);
-        signoutButton = findViewById(R.id.signoutButton);
+        FirebaseApp.initializeApp(this);
+        mAuth = FirebaseAuth.getInstance();
+
+        Button search = findViewById(R.id.search);
+        Button verify_profile = findViewById(R.id.verify_profile);
+        Button rate_tutor = findViewById(R.id.rate_tutor);
+        Button change_password = findViewById(R.id.change_password);
+        Button add_new_administrator = findViewById(R.id.add_new_administrator);
+        Button delete_tutor_profile = findViewById(R.id.delete_tutor_profile);
+        Button signout_button = findViewById(R.id.signoutButton);
 
 
         search.setOnClickListener(new View.OnClickListener() {
@@ -81,7 +75,7 @@ public class AdminMainPageActivity extends AppCompatActivity {
                 AdminMainPageActivity.this.startActivity(myIntent);
             }
         });
-        signoutButton.setOnClickListener(new View.OnClickListener() {
+        signout_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                signOut();
             }
@@ -90,10 +84,15 @@ public class AdminMainPageActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.addCategory(Intent.CATEGORY_HOME);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
+        if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis()) {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        } else
+            Toast.makeText(getBaseContext(), "Press back again in order to exit", Toast.LENGTH_SHORT).show();
+
+        mBackPressed = System.currentTimeMillis();
     }
 
 

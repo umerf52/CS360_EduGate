@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -47,14 +48,15 @@ import com.squareup.picasso.Picasso;
 import org.apache.commons.text.WordUtils;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class ViewYourProfileActivity extends BaseActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
-
-    private TextView fname;
-    private TextView lname;
+    private static final int TIME_INTERVAL = 2000; // # milliseconds, desired time passed between two back presses.
+    private static final String TAG = "ViewYourProfileActivity";
+    private long mBackPressed;
+    private TextView first_name;
+    private TextView last_name;
     private TextView gender;
     private ImageView profileImageView;
     private TextView profileStatus;
@@ -70,6 +72,8 @@ public class ViewYourProfileActivity extends BaseActivity {
     private boolean hasProfilePictureChanged = false;
     private Uri mImageUri;
     private Tutorinfo tutor;
+    private ArrayList<Spinner> grade_spinners = new ArrayList<>();
+    private ArrayList<Spinner> subject_spinners = new ArrayList<>();
     ValueEventListener valueEventListener = new ValueEventListener() {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
@@ -100,8 +104,8 @@ public class ViewYourProfileActivity extends BaseActivity {
                             .fit()
                             .centerCrop()
                             .into(profileImageView);
-                    fname.setText(WordUtils.capitalizeFully(tutor.firstName));
-                    lname.setText(WordUtils.capitalizeFully(tutor.lastName));
+                    first_name.setText(WordUtils.capitalizeFully(tutor.firstName));
+                    last_name.setText(WordUtils.capitalizeFully(tutor.lastName));
                     gender.setText(WordUtils.capitalizeFully(tutor.gender));
                     if (tutor.profileStatus == 0) {
                         profileStatus.setText("Rejected");
@@ -142,9 +146,6 @@ public class ViewYourProfileActivity extends BaseActivity {
         }
     };
 
-    private ArrayList<Spinner> grade_spinners = new ArrayList<Spinner>();
-    private ArrayList<Spinner> subject_spinners = new ArrayList<Spinner>();
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.view_your_profile_menu, menu);
@@ -176,10 +177,10 @@ public class ViewYourProfileActivity extends BaseActivity {
         setContentView(R.layout.activity_view_your_profile);
         setTitle("Your Profile");
         showProgressDialog();
-        fname = findViewById(R.id.fname);
-        profileStatus = (TextView) findViewById(R.id.status);
-        lname = findViewById(R.id.lname);
-        gender = (TextView) findViewById(R.id.gender);
+        first_name = findViewById(R.id.fname);
+        profileStatus = findViewById(R.id.status);
+        last_name = findViewById(R.id.lname);
+        gender = findViewById(R.id.gender);
         profileImageView = findViewById(R.id.profile_picture);
         contactNumber = findViewById(R.id.contact_number);
         tuitionLocation = findViewById(R.id.tuition_location);
@@ -203,15 +204,20 @@ public class ViewYourProfileActivity extends BaseActivity {
             }
         });
         FirebaseUser currentFirebaseUser = AuthUI.getCurrentUser();
-        String s = currentFirebaseUser.getEmail();
-        Query q = FirebaseDatabase.getInstance().getReference("Tutors").orderByChild("emailAddress")
-                .equalTo(s);
-        q.addListenerForSingleValueEvent(valueEventListener);
+        if (currentFirebaseUser != null) {
+            String s = currentFirebaseUser.getEmail();
+            Query q = FirebaseDatabase.getInstance().getReference("Tutors").orderByChild("emailAddress")
+                    .equalTo(s);
+            q.addListenerForSingleValueEvent(valueEventListener);
+        } else {
+            Toast.makeText(getApplicationContext(), "Firebase user is null", Toast.LENGTH_SHORT).show();
+            Log.e(TAG, "Firebase user is null");
+        }
 
     }
 
     private void addSpinners() {
-        LinearLayout dropdown_layout = (LinearLayout) findViewById(R.id.subjects_grades_layout);
+        LinearLayout dropdown_layout = findViewById(R.id.subjects_grades_layout);
 
         Spinner newSpinner = new Spinner(ViewYourProfileActivity.this);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
@@ -295,9 +301,7 @@ public class ViewYourProfileActivity extends BaseActivity {
     private void getSpinnerValues() {
         new_subject_values = "";
         new_grade_values = "";
-        Iterator i = grade_spinners.iterator();
-        while (i.hasNext()) {
-            Spinner tmp = (Spinner) i.next();
+        for (Spinner tmp : grade_spinners) {
             String val = String.valueOf(tmp.getSelectedItem());
             if (val.equals("Grade")) {
                 continue;
@@ -305,9 +309,7 @@ public class ViewYourProfileActivity extends BaseActivity {
             new_grade_values += ((String.valueOf(tmp.getSelectedItem()).toLowerCase()) + "-");
         }
 
-        Iterator j = subject_spinners.iterator();
-        while (j.hasNext()) {
-            Spinner tmp = (Spinner) j.next();
+        for (Spinner tmp : subject_spinners) {
             String val = String.valueOf(tmp.getSelectedItem());
             if (val.equals("Subject")) {
                 continue;
@@ -319,10 +321,15 @@ public class ViewYourProfileActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.addCategory(Intent.CATEGORY_HOME);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
+        if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis()) {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        } else
+            Toast.makeText(getBaseContext(), "Press back again in order to exit", Toast.LENGTH_SHORT).show();
+
+        mBackPressed = System.currentTimeMillis();
     }
 
     private void signOut() {
