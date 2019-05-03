@@ -20,7 +20,7 @@ import java.util.List;
 public class RateTutorActivity extends BaseActivity {
 
 
-    private List<Tutorinfo> tutorList;
+    private List<TutorInfo> tutorList;
     private RecyclerView.Adapter mAdapter;
 
     ValueEventListener valueEventListener = new ValueEventListener() {
@@ -29,7 +29,7 @@ public class RateTutorActivity extends BaseActivity {
             tutorList.clear();
             if (dataSnapshot.exists()) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Tutorinfo tutor = new Tutorinfo();
+                    TutorInfo tutor = new TutorInfo();
                     tutor.firstName = snapshot.child("firstName").getValue(String.class);
                     tutor.lastName = snapshot.child("lastName").getValue(String.class);
                     tutor.rating = (ArrayList<Double>) snapshot.child("rating").getValue();
@@ -63,7 +63,7 @@ public class RateTutorActivity extends BaseActivity {
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
         tutorList = new ArrayList<>();
-        mAdapter = new rateAdapter(this, tutorList);
+        mAdapter = new RateAdapter(this, tutorList);
         recyclerView.setAdapter(mAdapter);
 
         Query q = FirebaseDatabase.getInstance().getReference("Tutors");
@@ -73,10 +73,10 @@ public class RateTutorActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        ((rateAdapter) mAdapter).setOnItemClickListener(new rateAdapter.MyClickListener() {
+        ((RateAdapter) mAdapter).setOnItemClickListener(new RateAdapter.MyClickListener() {
             @Override
             public void onItemClick(int position, View v) {
-                Tutorinfo x = tutorList.get(position);
+                TutorInfo x = tutorList.get(position);
                 Intent myIntent = new Intent(RateTutorActivity.this, RateDetailActivity.class);
                 myIntent.putExtra("result", x);
 

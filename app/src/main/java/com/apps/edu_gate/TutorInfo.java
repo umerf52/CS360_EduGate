@@ -5,15 +5,15 @@ import java.util.ArrayList;
 
 //import java.util.HashMap;
 
-public class Tutorinfo implements Serializable {
+public class TutorInfo implements Serializable {
 
     public String key, subject, grade, address, cnicNo, contactNo, emailAddress, firstName, gender, lastName, recentInstitution, tuitionLocation, profileImage, transcriptImage, degree;
     public int profileStatus;
-//    public HashMap<String, String> grade;
 
     public ArrayList<Double> rating;
     public double tempr = 0;
-    public Tutorinfo() {
+
+    public TutorInfo() {
     }
 
     public String getProfileImage() {

@@ -24,7 +24,7 @@ import java.util.List;
 public class TutorAdapter extends RecyclerView.Adapter<TutorAdapter.TutorViewHolder> {
 
     private Context mCtx;
-    private List<Tutorinfo> tutorList;
+    private List<TutorInfo> tutorList;
     private static MyClickListener myClickListener;
     private StorageReference storageReference;
     private DatabaseReference mDatabase;
@@ -60,7 +60,7 @@ public class TutorAdapter extends RecyclerView.Adapter<TutorAdapter.TutorViewHol
         this.myClickListener = myClickListener;
     }
 
-    public TutorAdapter(Context mCtx, List<Tutorinfo> tutorList) {
+    public TutorAdapter(Context mCtx, List<TutorInfo> tutorList) {
         this.mCtx = mCtx;
         this.tutorList = tutorList;
     }
@@ -68,13 +68,13 @@ public class TutorAdapter extends RecyclerView.Adapter<TutorAdapter.TutorViewHol
     @NonNull
     @Override
     public TutorViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mCtx).inflate(R.layout.recyclertutor, parent, false);
+        View view = LayoutInflater.from(mCtx).inflate(R.layout.recycler_tutor, parent, false);
         return new TutorViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull TutorViewHolder holder, int position) {
-        Tutorinfo tutor = tutorList.get(position);
+        TutorInfo tutor = tutorList.get(position);
         ArrayList<Double> temp = tutor.rating;
         double x = 0;
         double count = 0;

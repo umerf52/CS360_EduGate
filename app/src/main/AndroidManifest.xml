@@ -29,7 +29,7 @@
             android:parentActivityName=".AdminMainPageActivity" />
 
         <activity
-            android:name=".TutorSearchProfile"
+            android:name=".TutorSearchProfileActivity"
             android:parentActivityName=".SearchPageActivity" />
         <activity
             android:name=".SignupEducationActivity"

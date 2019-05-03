@@ -36,14 +36,14 @@ public class PendingDetailActivity extends AppCompatActivity {
     ImageView trans;
     ListView listView = null;
     private List<String> lastList = new ArrayList<>();
-    private Tutorinfo x;
+    private TutorInfo x;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         listView = new ListView(this);
-        x = (Tutorinfo) getIntent().getSerializableExtra("result");
+        x = (TutorInfo) getIntent().getSerializableExtra("result");
         setContentView(R.layout.activity_pending_detail);
         setTitle("Profile");
         String sub = x.subject;
@@ -73,7 +73,7 @@ public class PendingDetailActivity extends AppCompatActivity {
         prof = (ImageView) findViewById(R.id.imageProfile);
         trans = (ImageView) findViewById(R.id.imageTranscript);
         ArrayAdapter adapter = new ArrayAdapter<String>(this,
-                R.layout.listitem3,R.id.txtitem, lastList);
+                R.layout.list_item_3, R.id.txtitem, lastList);
         listView = (ListView) findViewById(R.id.sub_list);
         listView.setAdapter(adapter);
         Picasso.get()

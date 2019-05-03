@@ -14,10 +14,10 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class pendingAdapter extends RecyclerView.Adapter<pendingAdapter.pendingViewHolder> {
+public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.pendingViewHolder> {
 
     private Context mCtx;
-    private List<Tutorinfo> tutorList;
+    private List<TutorInfo> tutorList;
     private static MyClickListener myClickListener;
 
     public static class pendingViewHolder extends RecyclerView.ViewHolder
@@ -45,7 +45,7 @@ public class pendingAdapter extends RecyclerView.Adapter<pendingAdapter.pendingV
         this.myClickListener = myClickListener;
     }
 
-    public pendingAdapter(Context mCtx, List<Tutorinfo> tutorList) {
+    public PendingAdapter(Context mCtx, List<TutorInfo> tutorList) {
         this.mCtx = mCtx;
         this.tutorList = tutorList;
     }
@@ -53,13 +53,13 @@ public class pendingAdapter extends RecyclerView.Adapter<pendingAdapter.pendingV
     @NonNull
     @Override
     public pendingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mCtx).inflate(R.layout.recyclerpending, parent, false);
+        View view = LayoutInflater.from(mCtx).inflate(R.layout.recycler_pending, parent, false);
         return new pendingViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull pendingViewHolder holder, int position) {
-        Tutorinfo tutor = tutorList.get(position);
+        TutorInfo tutor = tutorList.get(position);
         Picasso.get()
                 .load(tutor.getProfileImage())
                 .placeholder(R.drawable.placeholder_profile_picture)

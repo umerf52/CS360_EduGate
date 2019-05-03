@@ -19,7 +19,7 @@ import java.util.List;
 
 public class ViewPendingActivity extends BaseActivity {
 
-    private List<Tutorinfo> tutorList;
+    private List<TutorInfo> tutorList;
     private RecyclerView.Adapter mAdapter;
 
     ValueEventListener valueEventListener = new ValueEventListener() {
@@ -30,7 +30,7 @@ public class ViewPendingActivity extends BaseActivity {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     int status = snapshot.child("profileStatus").getValue(int.class);
                     if (status==-1){
-                        Tutorinfo tutor = new Tutorinfo();
+                        TutorInfo tutor = new TutorInfo();
                         tutor.firstName = snapshot.child("firstName").getValue(String.class);
                         tutor.lastName = snapshot.child("lastName").getValue(String.class);
                         tutor.rating = (ArrayList<Double>) snapshot.child("rating").getValue();
@@ -73,7 +73,7 @@ public class ViewPendingActivity extends BaseActivity {
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
         tutorList = new ArrayList<>();
-        mAdapter = new pendingAdapter(this, tutorList);
+        mAdapter = new PendingAdapter(this, tutorList);
         recyclerView.setAdapter(mAdapter);
         Query q = FirebaseDatabase.getInstance().getReference("Tutors");
         q.addListenerForSingleValueEvent(valueEventListener);
@@ -82,10 +82,10 @@ public class ViewPendingActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        ((pendingAdapter) mAdapter).setOnItemClickListener(new pendingAdapter.MyClickListener() {
+        ((PendingAdapter) mAdapter).setOnItemClickListener(new PendingAdapter.MyClickListener() {
             @Override
             public void onItemClick(int position, View v) {
-                Tutorinfo x = tutorList.get(position);
+                TutorInfo x = tutorList.get(position);
                 Intent myIntent = new Intent(ViewPendingActivity.this, PendingDetailActivity.class);
                 myIntent.putExtra("result",x);
                 ViewPendingActivity.this.startActivity(myIntent);

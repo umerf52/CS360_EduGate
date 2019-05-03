@@ -55,7 +55,7 @@ class RateDetailAdapter extends RecyclerView.Adapter<RateDetailAdapter.RateDetai
     @NonNull
     @Override
     public RateDetailAdapter.RateDetailViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mCtx).inflate(R.layout.recyclerrating, parent, false);
+        View view = LayoutInflater.from(mCtx).inflate(R.layout.recycler_rate_detail, parent, false);
         return new RateDetailAdapter.RateDetailViewHolder(view);
     }
 

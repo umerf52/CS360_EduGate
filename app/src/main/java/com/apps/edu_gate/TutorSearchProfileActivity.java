@@ -22,7 +22,7 @@ import org.apache.commons.text.WordUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TutorSearchProfile extends AppCompatActivity {
+public class TutorSearchProfileActivity extends AppCompatActivity {
 
     private ArrayList<String> adminNumbers = new ArrayList<>();
     private  List<String> subjectsTur = new ArrayList<>();
@@ -35,7 +35,7 @@ public class TutorSearchProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Tutorinfo x = (Tutorinfo) getIntent().getSerializableExtra("result");
+        TutorInfo x = (TutorInfo) getIntent().getSerializableExtra("result");
         adminNumbers = getIntent().getStringArrayListExtra("num");
         setContentView(R.layout.activity_tutor_search_profile);
         setTitle("Profile");
@@ -69,7 +69,7 @@ public class TutorSearchProfile extends AppCompatActivity {
         location.setText(WordUtils.capitalizeFully(x.tuitionLocation));
         ratingBar.setRating((float)x.tempr);
         ArrayAdapter adapter1 = new ArrayAdapter<>(this,
-                R.layout.listitem, R.id.txtitem, lastList);
+                R.layout.list_item, R.id.txtitem, lastList);
 
         subList = findViewById(R.id.sub_list);
         subList.setAdapter(adapter1);
@@ -85,10 +85,10 @@ public class TutorSearchProfile extends AppCompatActivity {
 
     public void showDialogListView() {
 
-        AlertDialog.Builder builderSingle = new AlertDialog.Builder(TutorSearchProfile.this);
+        AlertDialog.Builder builderSingle = new AlertDialog.Builder(TutorSearchProfileActivity.this);
         builderSingle.setTitle("Call Administrator");
 
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(TutorSearchProfile.this, android.R.layout.select_dialog_item);
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(TutorSearchProfileActivity.this, android.R.layout.select_dialog_item);
         for (String adminNumber : adminNumbers) {
             arrayAdapter.add(adminNumber);
         }

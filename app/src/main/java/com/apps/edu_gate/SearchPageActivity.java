@@ -29,7 +29,7 @@ public class SearchPageActivity extends BaseActivity {
     private Spinner spinner1;
     String searching;
     private RecyclerView recyclerView;
-    private List<Tutorinfo> tutorList;
+    private List<TutorInfo> tutorList;
     private ArrayList<String> adminNumbers = new ArrayList<>();
 
 
@@ -45,7 +45,7 @@ public class SearchPageActivity extends BaseActivity {
                     int status = snapshot.child("profileStatus").getValue(int.class);
                     if(status==1){
                         count++;
-                        Tutorinfo tutor = new Tutorinfo();
+                        TutorInfo tutor = new TutorInfo();
                         tutor.grade = snapshot.child("grade").getValue(String.class);
                         tutor.subject = snapshot.child("subject").getValue(String.class);
                         tutor.address = snapshot.child("address").getValue(String.class);
@@ -95,7 +95,7 @@ public class SearchPageActivity extends BaseActivity {
                             for(int i=0; i<splited.length; i++){
                                 Log.e("lolz", splited[i]);
                                 if(searching.equals(splited[i])){
-                                    Tutorinfo tutor = new Tutorinfo();
+                                    TutorInfo tutor = new TutorInfo();
                                     count++;
                                     tutor.grade = snapshot.child("grade").getValue(String.class);
                                     tutor.subject = subjects;
@@ -148,7 +148,7 @@ public class SearchPageActivity extends BaseActivity {
                             String[] splited = subjects.split("-");
                             for(int i=0; i<splited.length; i++){
                                 if(searching.equals(splited[i])){
-                                    Tutorinfo tutor = new Tutorinfo();
+                                    TutorInfo tutor = new TutorInfo();
                                     tutor.grade = subjects;
                                     count++;
                                     tutor.subject = snapshot.child("subject").getValue(String.class);
@@ -281,8 +281,8 @@ public class SearchPageActivity extends BaseActivity {
         ((TutorAdapter) mAdapter).setOnItemClickListener(new TutorAdapter.MyClickListener() {
             @Override
             public void onItemClick(int position, View v) {
-                Tutorinfo x = tutorList.get(position);
-                Intent myIntent = new Intent(SearchPageActivity.this, TutorSearchProfile.class);
+                TutorInfo x = tutorList.get(position);
+                Intent myIntent = new Intent(SearchPageActivity.this, TutorSearchProfileActivity.class);
                 myIntent.putExtra("result",x);
                 myIntent.putStringArrayListExtra("num",adminNumbers);
                 Log.d(TAG, "I'm here");

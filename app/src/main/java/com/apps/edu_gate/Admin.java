@@ -6,8 +6,6 @@ public class Admin {
     private String EmailAddress;
     private String ContactNo;
 
-
-
     public Admin(String first_name, String last_name, String email, String contact_no) {
         this.FirstName = first_name.toLowerCase();
         this.LastName = last_name.toLowerCase();
@@ -21,13 +19,13 @@ public class Admin {
     public String getLastName() {
         return LastName;
     }
-    public String getmEmailAddress() {
+
+    public String getEmailAddress() {
         return EmailAddress;
     }
-    public String getmContactNo() {
+
+    public String getContactNo() {
         return ContactNo;
     }
-
-
 
 }

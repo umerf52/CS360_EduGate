@@ -71,7 +71,7 @@ public class ViewYourProfileActivity extends BaseActivity {
     private FirebaseAuth AuthUI = FirebaseAuth.getInstance();
     private boolean hasProfilePictureChanged = false;
     private Uri mImageUri;
-    private Tutorinfo tutor;
+    private TutorInfo tutor;
     private ArrayList<Spinner> grade_spinners = new ArrayList<>();
     private ArrayList<Spinner> subject_spinners = new ArrayList<>();
     ValueEventListener valueEventListener = new ValueEventListener() {
@@ -79,7 +79,7 @@ public class ViewYourProfileActivity extends BaseActivity {
         public void onDataChange(DataSnapshot dataSnapshot) {
             if (dataSnapshot.exists()) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    tutor = new Tutorinfo();
+                    tutor = new TutorInfo();
                     tutor.grade = snapshot.child("grade").getValue(String.class);
                     tutor.degree = snapshot.child("degree").getValue(String.class);
                     tutor.subject = snapshot.child("subject").getValue(String.class);

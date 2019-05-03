@@ -24,7 +24,7 @@ import static com.google.firebase.database.FirebaseDatabase.getInstance;
 public class ProfileDeleteActivity extends BaseActivity {
 
     private RecyclerView recyclerView;
-    private List<Tutorinfo> tutorList;
+    private List<TutorInfo> tutorList;
 
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -35,7 +35,7 @@ public class ProfileDeleteActivity extends BaseActivity {
             tutorList.clear();
             if (dataSnapshot.exists()) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Tutorinfo tutor = new Tutorinfo();
+                    TutorInfo tutor = new TutorInfo();
                     tutor.firstName = snapshot.child("firstName").getValue(String.class);
                     tutor.lastName = snapshot.child("lastName").getValue(String.class);
                     tutor.profileImage = snapshot.child("profileImage").getValue(String.class);
@@ -68,7 +68,7 @@ public class ProfileDeleteActivity extends BaseActivity {
         mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
         tutorList = new ArrayList<>();
-        mAdapter = new delAdapter(this, tutorList);
+        mAdapter = new DeleteAdapter(this, tutorList);
         recyclerView.setAdapter(mAdapter);
 
         Query q = getInstance().getReference("Tutors");
@@ -92,10 +92,10 @@ public class ProfileDeleteActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        ((delAdapter) mAdapter).setOnItemClickListener(new delAdapter.MyClickListener() {
+        ((DeleteAdapter) mAdapter).setOnItemClickListener(new DeleteAdapter.MyClickListener() {
             @Override
             public void onItemClick(int position, View v) {
-                final Tutorinfo x = tutorList.get(position);
+                final TutorInfo x = tutorList.get(position);
                 AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
                 builder.setMessage("Do you want to delete this profile?")
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
