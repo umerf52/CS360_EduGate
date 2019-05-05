@@ -45,11 +45,17 @@
                 android:id="@+id/searchBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/et2"
-                android:elevation="2dp"
+                android:backgroundTint="@color/lightnavy"
+                android:hapticFeedbackEnabled="true"
+                android:background="@color/gr"
+                android:queryHint="Start typing here"
+                android:searchHintIcon="@color/white"
+                android:elevation="10dp"
+
                 android:iconifiedByDefault="false">
 
             </SearchView>
+
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -64,7 +70,6 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
-                    android:background="@android:color/white"
                     android:entries="@array/search_items"
                     android:gravity="center"
                     android:prompt="@string/search_prompt"
@@ -79,13 +84,6 @@
                     android:src="@drawable/dro" />
 
             </RelativeLayout>
-            <!--<Spinner-->
-            <!--android:id="@+id/spinner1"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_marginTop="20dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:entries="@array/search_items"-->
-            <!--android:prompt="@string/search_prompt" />-->
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv"

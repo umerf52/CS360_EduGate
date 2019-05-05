@@ -210,6 +210,11 @@ public class SearchPageActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        try
+        {
+            this.getSupportActionBar().hide();
+        }
+        catch (NullPointerException e){}
 
         setContentView(R.layout.activity_search_page);
         setTitle("Search Tutors");
