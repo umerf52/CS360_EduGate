@@ -1,19 +1,20 @@
 package com.apps.edu_gate;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AlertDialog;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 
-public class AdminMainPageActivity extends AppCompatActivity {
+public class AdminMainPageActivity extends BaseActivity {
 
     private static final int TIME_INTERVAL = 2000; // # milliseconds, desired time passed between two back presses.
     private long mBackPressed;
@@ -95,7 +96,6 @@ public class AdminMainPageActivity extends AppCompatActivity {
         mBackPressed = System.currentTimeMillis();
     }
 
-
     private void updateUI(FirebaseUser user) {
         if (user == null) {
             Toast.makeText(AdminMainPageActivity.this, "Signed Out",
@@ -105,8 +105,24 @@ public class AdminMainPageActivity extends AppCompatActivity {
     }
 
     private void signOut() {
-        mAuth.signOut();
-        updateUI(null);
+        AlertDialog alertDialog = new AlertDialog.Builder(AdminMainPageActivity.this).create();
+        alertDialog.setTitle("Sign Out?");
+        alertDialog.setMessage("Are you sure you want to sign out?");
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "YES",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        FirebaseAuth.getInstance().signOut();
+                        finish();
+                    }
+                });
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "NO",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+        alertDialog.show();
     }
 }
 
