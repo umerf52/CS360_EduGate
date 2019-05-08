@@ -59,19 +59,4 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         lstfragment.add(fragment);
         lstTitles.add(title);
     }
-
-    public CharSequence getVisibleFragment(){
-        int count = 0;
-        if(lstfragment != null){
-            for(Fragment fragment : lstfragment){
-                if(fragment != null && fragment.isVisible()){
-                    Log.e("hi", String.valueOf(count));
-                    return getPageTitle(count);
-                }
-                count++;
-            }
-        }
-        return null;
-    }
-
 }
