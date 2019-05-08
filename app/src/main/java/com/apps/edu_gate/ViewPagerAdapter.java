@@ -1,6 +1,8 @@
 package com.apps.edu_gate;
 
 import android.util.Log;
+import android.util.SparseArray;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -9,12 +11,27 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.StreamHandler;
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     private final List<Fragment> lstfragment = new ArrayList<>();
     private final List<String> lstTitles = new ArrayList<>();
+    SparseArray<Fragment> registeredFragments = new SparseArray<>();
+
+    @Override
+    public Object instantiateItem(ViewGroup container, int position) {
+        Fragment fragment = (Fragment) super.instantiateItem(container, position);
+        registeredFragments.put(position, fragment);
+        return fragment;
+    }
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+        registeredFragments.remove(position);
+        super.destroyItem(container, position, object);
+    }
+    public Fragment getRegisteredFragment(int position) {
+        return registeredFragments.get(position);
+    }
 
 
 
@@ -45,36 +62,16 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     public CharSequence getVisibleFragment(){
         int count = 0;
-
-        List<Fragment> fragments = lstfragment;
-        int x = lstfragment.size();
-        String t = String.valueOf(x);
-        Log.e("Aasa", t);
-        if(fragments != null){
-            for(Fragment fragment : fragments){
-                Log.e("sa",String.valueOf(count));
-                if(fragment != null && fragment.isVisible())
+        if(lstfragment != null){
+            for(Fragment fragment : lstfragment){
+                if(fragment != null && fragment.isVisible()){
+                    Log.e("hi", String.valueOf(count));
                     return getPageTitle(count);
+                }
                 count++;
             }
         }
         return null;
     }
-
-    public Fragment getVisibleFragment2(){
-        List<Fragment> fragments = lstfragment;
-        int x = lstfragment.size();
-        String t = String.valueOf(x);
-        Log.e("Aasa", t);
-        if(fragments != null){
-            int count = 0;
-            for(Fragment fragment : fragments){
-                if(fragment != null && fragment.isVisible())
-                    return fragment;
-            }
-        }
-        return null;
-    }
-
 
 }

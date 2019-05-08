@@ -64,7 +64,8 @@ public class SearchWithFragments extends BaseActivity {
                 searching = query;
                 searching = searching.toLowerCase();
                 if (searching != null && !searching.isEmpty()) {
-                    String x = (String)vadapter.getVisibleFragment();
+                    int position = viewPager.getCurrentItem();
+                    String x = (String)vadapter.getPageTitle(position);
                     Log.e(TAG, x );
 //                    Toast.makeText(getBaseContext(), searching + x, Toast.LENGTH_LONG).show();
                     dataUpdated(searching, x);
@@ -95,15 +96,15 @@ public class SearchWithFragments extends BaseActivity {
         tabLayout = (TabLayout) findViewById(R.id.tablayout);
         viewPager = (ViewPager) findViewById(R.id.pager);
         frag1 = new FragmentName();
-        frag2 = new FragmentLocation();
-        frag3 = new FragmentSubject();
+        frag2 = new FragmentSubject();
+        frag3 = new FragmentLocation();
         frag4 = new FragmentGrade();
         mListeners = new ArrayList<>();
         fm = getSupportFragmentManager();
         vadapter = new ViewPagerAdapter(fm);
         vadapter.AddFragment(frag1, "Name");
-        vadapter.AddFragment(frag2, "Location");
-        vadapter.AddFragment(frag3, "Subject");
+        vadapter.AddFragment(frag2, "Subject");
+        vadapter.AddFragment(frag3, "Location");
         vadapter.AddFragment(frag4, "Grade");
 
         viewPager.setAdapter(vadapter);
