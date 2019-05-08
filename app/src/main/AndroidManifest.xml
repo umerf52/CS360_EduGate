@@ -9,11 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RateDetailActivity"></activity>
-        <activity android:name=".ViewYourProfileActivity"></activity>
+        <activity android:name=".SearchWithFragments" android:theme="@style/MySearch"></activity>
+        <activity android:name=".RateDetailActivity" />
+        <activity android:name=".ViewYourProfileActivity" />
         <activity
             android:name=".ViewPendingActivity"
-            android:parentActivityName=".AdminMainPageActivity"></activity>
+            android:parentActivityName=".AdminMainPageActivity" />
         <activity
             android:name=".ProfileDeleteActivity"
             android:parentActivityName=".AdminMainPageActivity" />
@@ -27,7 +28,6 @@
         <activity
             android:name=".AddNewAdminActivity"
             android:parentActivityName=".AdminMainPageActivity" />
-
         <activity
             android:name=".TutorSearchProfileActivity"
             android:parentActivityName=".SearchPageActivity" />
@@ -54,7 +54,6 @@
             android:label="Login"
             android:parentActivityName=".StartupActivity" />
         <activity android:name=".StartupActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
