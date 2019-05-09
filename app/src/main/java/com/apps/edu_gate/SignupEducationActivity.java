@@ -35,19 +35,19 @@ import java.util.Iterator;
 
 public class SignupEducationActivity extends BaseActivity {
 
-    private ArrayList<Spinner> grade_spinners = new ArrayList<Spinner>();
-    private ArrayList<Spinner> subject_spinners = new ArrayList<Spinner>();
+    private ArrayList<Spinner> grade_spinners = new ArrayList<>();
+    private ArrayList<Spinner> subject_spinners = new ArrayList<>();
 
     private static final int PICK_IMAGE_REQUEST = 1;
-    Uri profileImageUri;
-    Uri transcriptImageUri;
+    private Uri profileImageUri;
+    private Uri transcriptImageUri;
 
-    String FirstName;
-    String LastName;
-    String CnicNo;
-    String Address;
-    String Gender;
-    String ContactNo;
+    private String FirstName;
+    private String LastName;
+    private String CnicNo;
+    private String Address;
+    private String Gender;
+    private String ContactNo;
     private StorageReference mStorageRef;
     private StorageTask mUploadTask;
     private String email;
@@ -83,13 +83,19 @@ public class SignupEducationActivity extends BaseActivity {
 
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
 
-        mInstitution = (EditText) findViewById(R.id.institution);
-        mTuitionLocation = (EditText) findViewById(R.id.tuition_location);
-        FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
+        mInstitution = findViewById(R.id.institution);
+        mTuitionLocation = findViewById(R.id.tuition_location);
+        FloatingActionButton floatingActionButton = findViewById(R.id.fab);
         Button imageButton = findViewById(R.id.image_button);
         imageName = findViewById(R.id.image_name);
         myEducationDegree = findViewById(R.id.my_education_dropdown);
 
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addSpinners();
+            }
+        });
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,8 +118,6 @@ public class SignupEducationActivity extends BaseActivity {
             if (!getSpinnerValues()) return;
             mAuth = FirebaseAuth.getInstance();
             addTutor();
-        } else if (i == R.id.fab) {
-            addSpinners();
         }
     }
 
@@ -157,26 +161,38 @@ public class SignupEducationActivity extends BaseActivity {
     }
 
     private void addSpinners() {
-        LinearLayout dropdown_layout = (LinearLayout) findViewById(R.id.subjects_grades_layout);
+        LinearLayout dropdown_layout = findViewById(R.id.subjects_grades_layout);
 
-        Spinner newSpinner = new Spinner(SignupEducationActivity.this);
+        Spinner newSpinner = new Spinner(this);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-                SignupEducationActivity.this, R.array.subjectOptions, android.R.layout.simple_spinner_item);
+                this, R.array.subjectOptions, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource
                 (android.R.layout.simple_spinner_dropdown_item);
         newSpinner.setAdapter(adapter);
 
-        Spinner newSpinner1 = new Spinner(SignupEducationActivity.this);
+        Spinner newSpinner1 = new Spinner(this);
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(
-                SignupEducationActivity.this, R.array.gradeOptions, android.R.layout.simple_spinner_item);
+                this, R.array.gradeOptions, android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource
                 (android.R.layout.simple_spinner_dropdown_item);
         newSpinner1.setAdapter(adapter1);
 
-        LinearLayout temp_layout = new LinearLayout(this);
+        TextView temp_text_view = new TextView(this);
+        temp_text_view.setText("|");
 
+        LinearLayout temp_layout = new LinearLayout(this);
         temp_layout.setOrientation(LinearLayout.HORIZONTAL);
+        temp_layout.setBackground(getDrawable(R.drawable.background));
+        temp_layout.setPadding(0, 8, 0, 8);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        params.setMargins(0, 8, 0, 8);
+        temp_layout.setLayoutParams(params);
+
         temp_layout.addView(newSpinner1);
+        temp_layout.addView(temp_text_view);
         temp_layout.addView(newSpinner);
         grade_spinners.add(newSpinner1);
         subject_spinners.add(newSpinner);
@@ -230,8 +246,10 @@ public class SignupEducationActivity extends BaseActivity {
             transcriptImageUri = data.getData();
 
             String temp_filename = data.getData().getPath();
-            temp_filename = temp_filename.substring(temp_filename.lastIndexOf("/") + 1);
-            imageName.setText(temp_filename);
+            if (temp_filename != null) {
+                temp_filename = temp_filename.substring(temp_filename.lastIndexOf("/") + 1);
+                imageName.setText(temp_filename);
+            }
         }
     }
 
