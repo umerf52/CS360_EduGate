@@ -3,7 +3,6 @@ package com.apps.edu_gate;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,7 +23,7 @@ public class StartupActivity extends AppCompatActivity {
 
         tutor_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent myIntent = new Intent(StartupActivity.this, LoginActivity.class);
+                Intent myIntent = new Intent(StartupActivity.this, SignupPersonalActivity.class);
                 StartupActivity.this.startActivity(myIntent);
             }
         });

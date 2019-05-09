@@ -1,291 +1,289 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SignupPersonalActivity">
 
+    <android.widget.RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ye"/>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_centerInParent="true"
-        android:layout_height="match_parent"
-        android:background="@color/greytrans">
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_centerInParent="true"
-        android:layout_height="match_parent"
-        android:background="@color/ligwh">
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_centerInParent="true"
-        android:layout_height="match_parent"
-        android:background="@color/ligwh">
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="40dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="40dp">
-
-        <LinearLayout
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/li"
-            android:layout_below="@id/contact_numberLayout"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ye" />
 
-            <Button
-                android:id="@+id/image_button"
-                android:background="@drawable/et"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="Add Profile Photo"
-                android:textColor="@color/navy"/>
-
-            <TextView
-                android:id="@+id/image_name"
-                android:background="@drawable/et"
-                android:layout_width="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:layout_height="wrap_content"
-                android:text="FILE NAME" />
-
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
-            android:text="Name"
-            android:textStyle="bold"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
-            android:textSize="15sp"/>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/first_nameLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity = "center_horizontal"
-            android:layout_marginTop="100dp"
-            android:hint=" "
-            android:layout_marginRight="170dp"
-            android:inputType="textPersonName"
-            app:errorEnabled="true"
-            >
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/first_name"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="8dp"
-                android:background="@drawable/et"
-                android:inputType="textPersonName"
-                android:singleLine="true"
-                android:padding="8dp" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/last_nameLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity = "center_horizontal"
-            android:layout_marginTop="100dp"
-            android:layout_marginLeft="170dp"
-            android:hint=" "
-            android:inputType="textPersonName"
-            app:errorEnabled="true"
-            app:hintEnabled="true"
-            >
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/last_name"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="8dp"
-                android:background="@drawable/et"
-                android:inputType="textPersonName"
-                android:singleLine="true"
-                android:padding="8dp" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/first_nameLayout"
-            android:text="Gender"
-            android:textStyle="bold"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
-            android:textSize="15sp"/>
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="20dp"
-            android:id="@+id/spinnerrel"
-            android:layout_below="@+id/first_nameLayout"
-            android:background="@drawable/background"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:background="@color/greytrans"></RelativeLayout>
 
-            <Spinner
-                android:id="@+id/my_education_dropdown"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:background="@color/ligwh"></RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:background="@color/ligwh"></RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginBottom="20dp">
+
+            <LinearLayout
+                android:id="@+id/li"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center"
-                android:entries="@array/genderOptions"
-                android:gravity="center"
-                android:spinnerMode="dropdown" />
-        </RelativeLayout>
+                android:layout_below="@id/contact_numberLayout"
+                android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/spinnerrel"
-            android:text="CNIC Number"
-            android:layout_marginTop="10dp"
-            android:textStyle="bold"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
-            android:textSize="15sp"/>
+                <Button
+                    android:id="@+id/image_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="@drawable/et"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:text="Add Profile Photo"
+                    android:textColor="@color/navy" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/cnic_numberLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity = "center_horizontal"
-            android:layout_marginTop="30dp"
-            android:hint=" "
-            android:layout_below="@+id/spinnerrel"
-            android:inputType="phone"
-            app:errorEnabled="true"
-            app:hintEnabled="true"
-            >
+                <TextView
+                    android:id="@+id/image_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/et"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="FILE NAME" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/cnic_number"
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="80dp"
+                android:text="Name"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/first_nameLayout"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="8dp"
-                android:background="@drawable/et"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="100dp"
+                android:layout_marginRight="170dp"
+                android:hint=" "
+                android:inputType="textPersonName"
+                android:orientation="vertical"
+                app:errorEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/first_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="8dp"
+                    android:background="@drawable/background"
+                    android:inputType="textPersonName"
+                    android:padding="8dp"
+                    android:singleLine="true" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/last_nameLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="170dp"
+                android:layout_marginTop="100dp"
+                android:hint=" "
+                android:inputType="textPersonName"
+                android:orientation="vertical"
+                app:errorEnabled="true"
+                app:hintEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/last_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="8dp"
+                    android:background="@drawable/background"
+                    android:inputType="textPersonName"
+                    android:padding="8dp"
+                    android:singleLine="true" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/first_nameLayout"
+                android:text="Gender"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:id="@+id/spinnerrel"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@+id/first_nameLayout"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/background"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/my_education_dropdown"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:entries="@array/genderOptions"
+                    android:gravity="center"
+                    android:spinnerMode="dropdown" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinnerrel"
+                android:layout_marginTop="10dp"
+                android:text="CNIC Number"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/cnic_numberLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinnerrel"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:hint=" "
                 android:inputType="phone"
-                android:maxLength="13"
-                android:singleLine="true"
-                android:padding="8dp" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:orientation="vertical"
+                app:errorEnabled="true"
+                app:hintEnabled="true">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/cnic_numberLayout"
-            android:text="Address"
-            android:textStyle="bold"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
-            android:textSize="15sp"/>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/cnic_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="8dp"
+                    android:background="@drawable/background"
+                    android:inputType="phone"
+                    android:maxLength="13"
+                    android:padding="8dp"
+                    android:singleLine="true" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/house_addressLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity = "center_horizontal"
-            android:layout_marginTop="20dp"
-            android:hint=" "
-            android:layout_below="@+id/cnic_numberLayout"
-            android:inputType="textPostalAddress"
-            app:errorEnabled="true"
-            app:hintEnabled="true">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cnic_numberLayout"
+                android:text="Address"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/house_address"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/house_addressLayout"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="8dp"
-                android:background="@drawable/et"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cnic_numberLayout"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:hint=" "
                 android:inputType="textPostalAddress"
-                android:maxLength="13"
-                android:singleLine="true"
-                android:padding="8dp" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/house_addressLayout"
-            android:text="Contact Number"
-            android:textStyle="bold"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
-            android:textSize="15sp"/>
+                android:orientation="vertical"
+                app:errorEnabled="true"
+                app:hintEnabled="true">
 
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/house_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="8dp"
+                    android:background="@drawable/background"
+                    android:inputType="textPostalAddress"
+                    android:maxLength="13"
+                    android:padding="8dp"
+                    android:singleLine="true" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/contact_numberLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity = "center_horizontal"
-            android:layout_marginTop="20dp"
-            android:hint=" "
-            android:layout_below="@+id/house_addressLayout"
-            android:inputType="phone"
-            app:errorEnabled="true"
-            app:hintEnabled="true"
-            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/house_addressLayout"
+                android:text="Contact Number"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/contact_number"
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/contact_numberLayout"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="8dp"
-                android:background="@drawable/et"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/house_addressLayout"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:hint=" "
                 android:inputType="phone"
-                android:maxLength="11"
-                android:singleLine="true"
-                android:padding="8dp" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:orientation="vertical"
+                app:errorEnabled="true"
+                app:hintEnabled="true">
 
-        <Button
-            android:id="@+id/submit_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="70dp"
-            android:layout_marginRight="70dp"
-            android:onClick="onClick"
-            android:background="@drawable/btn"
-            android:text="Next"
-            android:textColor="@color/white"
-            android:layout_below="@id/li"/>
-    </RelativeLayout>
-</android.widget.RelativeLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/contact_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="8dp"
+                    android:background="@drawable/background"
+                    android:inputType="phone"
+                    android:maxLength="11"
+                    android:padding="8dp"
+                    android:singleLine="true" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/submit_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/li"
+                android:layout_marginLeft="70dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="70dp"
+                android:background="@drawable/btn"
+                android:text="Next"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+    </android.widget.RelativeLayout>
+</ScrollView>

@@ -11,6 +11,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputLayout;
+
 public class SignupPersonalActivity extends BaseActivity {
 
     private EditText mFirstName;
@@ -20,6 +22,11 @@ public class SignupPersonalActivity extends BaseActivity {
     private Spinner mGender;
     private EditText mContact;
     private String email;
+    private TextInputLayout mFirstNameLayout;
+    private TextInputLayout mLastNameLayout;
+    private TextInputLayout mCnicLayout;
+    private TextInputLayout mAddressLayout;
+    private TextInputLayout mContactNoLayout;
 
     private static final int PICK_IMAGE_REQUEST = 1;
     private TextView imageName;
@@ -36,17 +43,27 @@ public class SignupPersonalActivity extends BaseActivity {
         email = prevIntent.getStringExtra("email");
         Toast.makeText(this, email, Toast.LENGTH_LONG).show();
 
-        mFirstName = (EditText) findViewById(R.id.first_name);
-        mLastName = (EditText) findViewById(R.id.last_name);
-        mCnicNumber = (EditText) findViewById(R.id.cnic_number);
-        mAddress = (EditText) findViewById(R.id.house_address);
-        mGender = (Spinner) findViewById(R.id.my_education_dropdown);
-        mContact = (EditText) findViewById(R.id.contact_number);
+        mFirstName = findViewById(R.id.first_name);
+        mLastName = findViewById(R.id.last_name);
+        mCnicNumber = findViewById(R.id.cnic_number);
+        mAddress = findViewById(R.id.house_address);
+        mGender = findViewById(R.id.my_education_dropdown);
+        mContact = findViewById(R.id.contact_number);
         Button imageButton = findViewById(R.id.image_button);
         imageName = findViewById(R.id.image_name);
-
         Button mNextButton = findViewById(R.id.submit_button);
+        mFirstNameLayout = findViewById(R.id.first_nameLayout);
+        mLastNameLayout = findViewById(R.id.last_nameLayout);
+        mCnicLayout = findViewById(R.id.cnic_numberLayout);
+        mAddressLayout = findViewById(R.id.house_addressLayout);
+        mContactNoLayout = findViewById(R.id.contact_numberLayout);
 
+        mNextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                submitForm();
+            }
+        });
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,7 +72,7 @@ public class SignupPersonalActivity extends BaseActivity {
         });
     }
 
-    public void onClick(View v) {
+    public void submitForm() {
         if (!validateForm()) {
             return;
         }
@@ -67,19 +84,16 @@ public class SignupPersonalActivity extends BaseActivity {
         String Gender = mGender.getSelectedItem().toString();
         String Contact = mContact.getText().toString();
 
-        int i = v.getId();
-        if (i == R.id.submit_button) {
-            Intent myIntent = new Intent(SignupPersonalActivity.this, SignupEducationActivity.class);
-            myIntent.putExtra("Fname", FirstName);
-            myIntent.putExtra("Lname", LastName);
-            myIntent.putExtra("email", email);
-            myIntent.putExtra("Cnic", CnicNo);
-            myIntent.putExtra("Address", Address);
-            myIntent.putExtra("Gender", Gender);
-            myIntent.putExtra("Contact", Contact);
-            myIntent.putExtra("myImageUriString", mImageUri.toString());
-            SignupPersonalActivity.this.startActivity(myIntent);
-        }
+        Intent myIntent = new Intent(SignupPersonalActivity.this, SignupEducationActivity.class);
+        myIntent.putExtra("Fname", FirstName);
+        myIntent.putExtra("Lname", LastName);
+        myIntent.putExtra("email", email);
+        myIntent.putExtra("Cnic", CnicNo);
+        myIntent.putExtra("Address", Address);
+        myIntent.putExtra("Gender", Gender);
+        myIntent.putExtra("Contact", Contact);
+        myIntent.putExtra("myImageUriString", mImageUri.toString());
+        SignupPersonalActivity.this.startActivity(myIntent);
     }
 
 
@@ -88,37 +102,46 @@ public class SignupPersonalActivity extends BaseActivity {
 
         if (mImageUri == null) {
             valid = false;
+            Toast.makeText(getApplicationContext(), "No picture added", Toast.LENGTH_SHORT).show();
         }
 
         String FName = mFirstName.getText().toString();
         if (TextUtils.isEmpty(FName)) {
-            mFirstName.setError("Required.");
+            mFirstNameLayout.setErrorEnabled(true);
+            mFirstNameLayout.setError("Required.");
             valid = false;
         } else {
+            mFirstNameLayout.setErrorEnabled(false);
             mFirstName.setError(null);
         }
 
         String LName = mLastName.getText().toString();
         if (TextUtils.isEmpty(LName)) {
-            mLastName.setError("Required.");
+            mLastNameLayout.setErrorEnabled(true);
+            mLastNameLayout.setError("Required.");
             valid = false;
         } else {
+            mLastNameLayout.setErrorEnabled(false);
             mLastName.setError(null);
         }
 
         String Cnic = mCnicNumber.getText().toString();
         if (TextUtils.isEmpty(Cnic)) {
-            mCnicNumber.setError("Required.");
+            mCnicLayout.setErrorEnabled(true);
+            mCnicLayout.setError("Required.");
             valid = false;
         } else {
+            mCnicLayout.setErrorEnabled(false);
             mCnicNumber.setError(null);
         }
 
         String Address = mAddress.getText().toString();
         if (TextUtils.isEmpty(Address)) {
-            mAddress.setError("Required.");
+            mAddressLayout.setErrorEnabled(true);
+            mAddressLayout.setError("Required.");
             valid = false;
         } else {
+            mAddressLayout.setErrorEnabled(false);
             mAddress.setError(null);
         }
 
@@ -129,9 +152,11 @@ public class SignupPersonalActivity extends BaseActivity {
 
         String Contact = mContact.getText().toString();
         if (TextUtils.isEmpty(Contact)) {
-            mContact.setError("Required.");
+            mContactNoLayout.setErrorEnabled(true);
+            mContactNoLayout.setError("Required.");
             valid = false;
         } else {
+            mContactNoLayout.setErrorEnabled(false);
             mContact.setError(null);
         }
 
