@@ -158,16 +158,27 @@
                     android:id="@+id/some"
                     android:textColor="@color/black"
                     android:textSize="15sp"/>
-                <Spinner
-                    android:id="@+id/my_education_dropdown"
+
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/spinnerrel"
                     android:layout_below="@id/some"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="20dp"
-                    android:entries="@array/degreeOptions" />
+                    android:background="@drawable/background"
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:id="@+id/my_education_dropdown"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:entries="@array/degreeOptions"
+                        android:gravity="center"
+                        android:spinnerMode="dropdown" />
+
+                </RelativeLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -175,7 +186,7 @@
                     android:text="Subjects and Grades"
                     android:textStyle="bold"
                     android:textAllCaps="false"
-                    android:layout_below="@id/my_education_dropdown"
+                    android:layout_below="@id/spinnerrel"
                     android:layout_marginTop="8dp"
                     android:id="@+id/subjects_grades"
                     android:textColor="@color/black"

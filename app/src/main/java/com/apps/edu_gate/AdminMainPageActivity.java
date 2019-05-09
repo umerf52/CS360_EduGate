@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -31,7 +32,7 @@ public class AdminMainPageActivity extends BaseActivity {
         FirebaseApp.initializeApp(this);
         mAuth = FirebaseAuth.getInstance();
 
-        Button search = findViewById(R.id.search);
+        ImageButton search = findViewById(R.id.search);
         Button verify_profile = findViewById(R.id.verify_profile);
         Button rate_tutor = findViewById(R.id.rate_tutor);
         Button change_password = findViewById(R.id.change_password);
