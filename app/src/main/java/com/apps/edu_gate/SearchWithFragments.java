@@ -32,6 +32,7 @@ public class SearchWithFragments extends BaseActivity {
 
     SearchView searchView;
     String searching;
+    String x;
 
     private List<DataUpdateListener> mListeners;
 
@@ -65,9 +66,8 @@ public class SearchWithFragments extends BaseActivity {
                 searching = searching.toLowerCase();
                 if (searching != null && !searching.isEmpty()) {
                     int position = viewPager.getCurrentItem();
-                    String x = (String)vadapter.getPageTitle(position);
+                    x = (String)vadapter.getPageTitle(position);
                     Log.e(TAG, x );
-//                    Toast.makeText(getBaseContext(), searching + x, Toast.LENGTH_LONG).show();
                     dataUpdated(searching, x);
                     if( ! searchView.isIconified()) {
                         searchView.setIconified(false);
@@ -81,6 +81,8 @@ public class SearchWithFragments extends BaseActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
                 searching = newText;
+                int position = viewPager.getCurrentItem();
+                x = (String)vadapter.getPageTitle(position);
                 return false;
             }
         });

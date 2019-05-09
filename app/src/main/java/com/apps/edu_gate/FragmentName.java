@@ -33,6 +33,7 @@ public class FragmentName extends Fragment implements SearchWithFragments.DataUp
     private ArrayList<String> adminNumbers = new ArrayList<>();
 
     String s;
+    String check;
 
 
     public FragmentName(){
@@ -56,7 +57,6 @@ public class FragmentName extends Fragment implements SearchWithFragments.DataUp
             if (dataSnapshot.exists()) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     String number = snapshot.child("mContactNo").getValue(String.class);
-                    Log.e("hereee",number);
                     adminNumbers.add(number);
                 }
             }
@@ -117,10 +117,12 @@ public class FragmentName extends Fragment implements SearchWithFragments.DataUp
         super.onCreate(savedInstanceState);
         tutorList = new ArrayList<>();
         s = "";
+        check = "";
     }
     @Override
     public void onDataUpdate(String xyz, String ident) {
         s = xyz;
+        check = ident;
         if(ident.equals("Name")){
             Toast.makeText(getActivity().getBaseContext(), xyz, Toast.LENGTH_LONG).show();
             Log.e("Name", xyz);
@@ -147,17 +149,18 @@ public class FragmentName extends Fragment implements SearchWithFragments.DataUp
     @Override
     public void onResume() {
         super.onResume();
-        ((TutorAdapter) mAdapter).setOnItemClickListener(new TutorAdapter.MyClickListener() {
-            @Override
-            public void onItemClick(int position, View v) {
-                TutorInfo x = tutorList.get(position);
-                Intent myIntent = new Intent(getActivity().getBaseContext(), TutorSearchProfileActivity.class);
-                myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                myIntent.putExtra("result",x);
-                myIntent.putStringArrayListExtra("num",adminNumbers);
-                getActivity().getBaseContext().startActivity(myIntent);
-            }
-        });
+            ((TutorAdapter) mAdapter).setOnItemClickListener(new TutorAdapter.MyClickListener() {
+                @Override
+                public void onItemClick(int position, View v) {
+                    Log.e("Name","clinersss");
+                    TutorInfo x = tutorList.get(position);
+                    Intent myIntent = new Intent(getActivity().getBaseContext(), TutorSearchProfileActivity.class);
+                    myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    myIntent.putExtra("result",x);
+                    myIntent.putStringArrayListExtra("num",adminNumbers);
+                    getActivity().getBaseContext().startActivity(myIntent);
+                }
+            });
     }
 
 }

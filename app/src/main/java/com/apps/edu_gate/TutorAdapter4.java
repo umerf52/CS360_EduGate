@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class TutorAdapter extends RecyclerView.Adapter<TutorAdapter.TutorViewHolder> {
+public class TutorAdapter4 extends RecyclerView.Adapter<TutorAdapter4.TutorViewHolder> {
 
     private Context mCtx;
     private List<TutorInfo> tutorList;
@@ -62,7 +62,7 @@ public class TutorAdapter extends RecyclerView.Adapter<TutorAdapter.TutorViewHol
         this.myClickListener = myClickListener;
     }
 
-    public TutorAdapter(Context mCtx, List<TutorInfo> tutorList) {
+    public TutorAdapter4(Context mCtx, List<TutorInfo> tutorList) {
         this.mCtx = mCtx;
         this.tutorList = tutorList;
     }

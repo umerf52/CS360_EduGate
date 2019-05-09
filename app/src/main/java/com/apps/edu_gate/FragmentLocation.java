@@ -33,6 +33,7 @@ public class FragmentLocation extends Fragment implements SearchWithFragments.Da
     private ArrayList<String> adminNumbers = new ArrayList<>();
 
     String s;
+    String check;
 
 
     public FragmentLocation(){
@@ -43,7 +44,7 @@ public class FragmentLocation extends Fragment implements SearchWithFragments.Da
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
         v = inflater.inflate(R.layout.fragment_layout,container, false);
         recyclerView = (RecyclerView) v.findViewById(R.id.rv);
-        mAdapter = new TutorAdapter(getContext(), tutorList);
+        mAdapter = new TutorAdapter3(getContext(), tutorList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(mAdapter);
         return v;
@@ -56,7 +57,6 @@ public class FragmentLocation extends Fragment implements SearchWithFragments.Da
             if (dataSnapshot.exists()) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     String number = snapshot.child("mContactNo").getValue(String.class);
-                    Log.e("hereee",number);
                     adminNumbers.add(number);
                 }
             }
@@ -117,10 +117,12 @@ public class FragmentLocation extends Fragment implements SearchWithFragments.Da
         super.onCreate(savedInstanceState);
         tutorList = new ArrayList<>();
         s = "";
+        check = "";
     }
     @Override
     public void onDataUpdate(String xyz, String ident) {
         s = xyz;
+        check = ident;
         if(ident.equals("Location")){
             Toast.makeText(getActivity().getBaseContext(), xyz, Toast.LENGTH_LONG).show();
             Log.e("Name", xyz);
@@ -147,17 +149,18 @@ public class FragmentLocation extends Fragment implements SearchWithFragments.Da
     @Override
     public void onResume() {
         super.onResume();
-        ((TutorAdapter) mAdapter).setOnItemClickListener(new TutorAdapter.MyClickListener() {
-            @Override
-            public void onItemClick(int position, View v) {
-                TutorInfo x = tutorList.get(position);
-                Intent myIntent = new Intent(getActivity().getBaseContext(), TutorSearchProfileActivity.class);
-                myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                myIntent.putExtra("result",x);
-                myIntent.putStringArrayListExtra("num",adminNumbers);
-                getActivity().getBaseContext().startActivity(myIntent);
-            }
-        });
+            ((TutorAdapter3) mAdapter).setOnItemClickListener(new TutorAdapter3.MyClickListener() {
+                @Override
+                public void onItemClick(int position, View v) {
+                    TutorInfo x = tutorList.get(position);
+                    Log.e("Location","clinersss");
+                    Intent myIntent = new Intent(getActivity().getBaseContext(), TutorSearchProfileActivity.class);
+                    myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    myIntent.putExtra("result",x);
+                    myIntent.putStringArrayListExtra("num",adminNumbers);
+                    getActivity().getBaseContext().startActivity(myIntent);
+                }
+            });
     }
 
 }

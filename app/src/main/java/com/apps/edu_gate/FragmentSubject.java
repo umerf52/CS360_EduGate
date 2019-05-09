@@ -32,6 +32,7 @@ public class FragmentSubject extends Fragment implements SearchWithFragments.Dat
     RecyclerView.Adapter mAdapter;
     private ArrayList<String> adminNumbers = new ArrayList<>();
     String s;
+    String check;
 
     ValueEventListener valueEventListener5 = new ValueEventListener() {
         @Override
@@ -40,7 +41,6 @@ public class FragmentSubject extends Fragment implements SearchWithFragments.Dat
             if (dataSnapshot.exists()) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     String number = snapshot.child("mContactNo").getValue(String.class);
-                    Log.e("hereee",number);
                     adminNumbers.add(number);
                 }
             }
@@ -114,7 +114,7 @@ public class FragmentSubject extends Fragment implements SearchWithFragments.Dat
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
         v = inflater.inflate(R.layout.fragment_layout,container, false);
         recyclerView = (RecyclerView) v.findViewById(R.id.rv);
-        mAdapter = new TutorAdapter(getContext(), tutorList);
+        mAdapter = new TutorAdapter2(getContext(), tutorList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(mAdapter);
         return v;
@@ -123,12 +123,15 @@ public class FragmentSubject extends Fragment implements SearchWithFragments.Dat
     public void onCreate(@Nullable Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         tutorList = new ArrayList<>();
+        check = "";
+        s = "";
         //need from main activity
     }
 
     @Override
     public void onDataUpdate(String xyz, String ident) {
         s = xyz;
+        check = ident;
         if(ident.equals("Subject")){
             Toast.makeText(getContext(), s, Toast.LENGTH_LONG).show();
             Log.e("Subject", s);
@@ -155,18 +158,17 @@ public class FragmentSubject extends Fragment implements SearchWithFragments.Dat
     @Override
     public void onResume() {
         super.onResume();
-        ((TutorAdapter) mAdapter).setOnItemClickListener(new TutorAdapter.MyClickListener() {
-            @Override
-            public void onItemClick(int position, View v) {
-                TutorInfo x = tutorList.get(position);
-                Intent myIntent = new Intent(getActivity().getBaseContext(), TutorSearchProfileActivity.class);
-                myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                myIntent.putExtra("result",x);
-                myIntent.putStringArrayListExtra("num",adminNumbers);
-                getActivity().getBaseContext().startActivity(myIntent);
-            }
-        });
-    }
-
-
+            ((TutorAdapter2) mAdapter).setOnItemClickListener(new TutorAdapter2.MyClickListener() {
+                @Override
+                public void onItemClick(int position, View v) {
+                    TutorInfo x = tutorList.get(position);
+                    Log.e("Subject","clinersss");
+                    Intent myIntent = new Intent(getActivity().getBaseContext(), TutorSearchProfileActivity.class);
+                    myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    myIntent.putExtra("result",x);
+                    myIntent.putStringArrayListExtra("num",adminNumbers);
+                    getActivity().getBaseContext().startActivity(myIntent);
+                }
+            });
+        }
 }
