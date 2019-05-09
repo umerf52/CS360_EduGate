@@ -20,8 +20,6 @@ public class AdminMainPageActivity extends BaseActivity {
     private static final int TIME_INTERVAL = 2000; // # milliseconds, desired time passed between two back presses.
     private long mBackPressed;
 
-    private FirebaseAuth mAuth;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -30,7 +28,6 @@ public class AdminMainPageActivity extends BaseActivity {
         setTitle("Administrator Home");
 
         FirebaseApp.initializeApp(this);
-        mAuth = FirebaseAuth.getInstance();
 
         ImageButton search = findViewById(R.id.search);
         Button verify_profile = findViewById(R.id.verify_profile);
@@ -43,7 +40,7 @@ public class AdminMainPageActivity extends BaseActivity {
 
         search.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent myIntent = new Intent(AdminMainPageActivity.this, SearchPageActivity.class);
+                Intent myIntent = new Intent(AdminMainPageActivity.this, SearchWithFragments.class);
                 AdminMainPageActivity.this.startActivity(myIntent);
             }
         });

@@ -222,15 +222,15 @@ public class ViewYourProfileActivity extends BaseActivity {
         Spinner newSpinner = new Spinner(ViewYourProfileActivity.this);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 ViewYourProfileActivity.this, R.array.subjectOptions, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource
-                (android.R.layout.simple_spinner_dropdown_item);
+//        adapter.setDropDownViewResource
+//                (android.R.layout.simple_spinner_dropdown_item);
         newSpinner.setAdapter(adapter);
 
         Spinner newSpinner1 = new Spinner(ViewYourProfileActivity.this);
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(
                 ViewYourProfileActivity.this, R.array.gradeOptions, android.R.layout.simple_spinner_item);
-        adapter1.setDropDownViewResource
-                (android.R.layout.simple_spinner_dropdown_item);
+//        adapter1.setDropDownViewResource
+//                (android.R.layout.simple_spinner_dropdown_item);
         newSpinner1.setAdapter(adapter1);
 
         LinearLayout temp_layout = new LinearLayout(this);

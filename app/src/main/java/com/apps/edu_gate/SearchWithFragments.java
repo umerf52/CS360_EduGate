@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
@@ -21,14 +22,8 @@ public class SearchWithFragments extends BaseActivity {
 
     private static final String TAG = "SearchPageActivity";
 
-    private TabLayout tabLayout;
     private ViewPager viewPager;
     private ViewPagerAdapter vadapter;
-    private Fragment frag1;
-    private Fragment frag2;
-    private Fragment frag3;
-    private Fragment frag4;
-    private FragmentManager fm;
 
     SearchView searchView;
     String searching;
@@ -64,7 +59,7 @@ public class SearchWithFragments extends BaseActivity {
             public boolean onQueryTextSubmit(String query) {
                 searching = query;
                 searching = searching.toLowerCase();
-                if (searching != null && !searching.isEmpty()) {
+                if (!searching.isEmpty()) {
                     int position = viewPager.getCurrentItem();
                     x = (String)vadapter.getPageTitle(position);
                     Log.e(TAG, x );
@@ -90,19 +85,32 @@ public class SearchWithFragments extends BaseActivity {
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return true;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_search_with_fragments);
         setTitle("Search Tutors");
-        tabLayout = (TabLayout) findViewById(R.id.tablayout);
-        viewPager = (ViewPager) findViewById(R.id.pager);
-        frag1 = new FragmentName();
-        frag2 = new FragmentSubject();
-        frag3 = new FragmentLocation();
-        frag4 = new FragmentGrade();
+
+        ActionBar ab = getSupportActionBar();
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
+        }
+
+        TabLayout tabLayout = findViewById(R.id.tablayout);
+        viewPager = findViewById(R.id.pager);
+        Fragment frag1 = new FragmentName();
+        Fragment frag2 = new FragmentSubject();
+        Fragment frag3 = new FragmentLocation();
+        Fragment frag4 = new FragmentGrade();
         mListeners = new ArrayList<>();
-        fm = getSupportFragmentManager();
+        FragmentManager fm = getSupportFragmentManager();
         vadapter = new ViewPagerAdapter(fm);
         vadapter.AddFragment(frag1, "Name");
         vadapter.AddFragment(frag2, "Subject");
