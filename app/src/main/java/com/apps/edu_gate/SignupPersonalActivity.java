@@ -64,12 +64,15 @@ public class SignupPersonalActivity extends BaseActivity {
                 submitForm();
             }
         });
+
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openFileChooser();
             }
         });
+
+
     }
 
     public void submitForm() {
@@ -179,8 +182,10 @@ public class SignupPersonalActivity extends BaseActivity {
             mImageUri = data.getData();
 
             String temp_filename = data.getData().getPath();
-            temp_filename = temp_filename.substring(temp_filename.lastIndexOf("/") + 1);
-            imageName.setText(temp_filename);
+            if (temp_filename != null) {
+                temp_filename = temp_filename.substring(temp_filename.lastIndexOf("/") + 1);
+                imageName.setText(temp_filename);
+            }
         }
     }
 

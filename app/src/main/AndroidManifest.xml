@@ -36,7 +36,7 @@
             android:parentActivityName=".AdminMainPageActivity" />
         <activity
             android:name=".TutorSearchProfileActivity"
-            android:parentActivityName=".SearchWithFragments" />
+            android:parentActivityName=".SearchPageActivity" />
         <activity
             android:name=".SignupEducationActivity"
             android:label="Educational Information"

@@ -1,12 +1,13 @@
 package com.apps.edu_gate;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.squareup.picasso.Picasso;
 
@@ -15,14 +16,15 @@ import org.apache.commons.text.WordUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchTutorAdmin extends AppCompatActivity {
+public class SearchTutorAdmin extends BaseActivity {
 
+    private TutorInfo x;
     private List<String> lastList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        TutorInfo x = (TutorInfo) getIntent().getSerializableExtra("result");
+        x = (TutorInfo) getIntent().getSerializableExtra("result");
         setContentView(R.layout.activity_search_tutor_admin);
         setTitle("Profile");
         String sub = x.subject;
@@ -65,5 +67,14 @@ public class SearchTutorAdmin extends AppCompatActivity {
                 R.layout.list_item_3, R.id.txtitem, lastList);
         ListView listView = findViewById(R.id.sub_list);
         listView.setAdapter(adapter);
+
+        contact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Uri uri = Uri.parse("tel:" + x.contactNo);
+                Intent myIntent = new Intent(Intent.ACTION_DIAL, uri);
+                startActivity(myIntent);
+            }
+        });
     }
 }
