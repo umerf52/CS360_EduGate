@@ -1,19 +1,13 @@
 package com.apps.edu_gate;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import org.apache.commons.text.WordUtils;
@@ -23,25 +17,12 @@ import java.util.List;
 
 public class SearchTutorAdmin extends AppCompatActivity {
 
-    TextView fname;
-    TextView lname;
-    TextView cnic;
-    TextView address;
-    TextView location;
-    TextView contact;
-    TextView institution;
-    ImageView prof;
-    ImageView trans;
-    ListView listView = null;
     private List<String> lastList = new ArrayList<>();
-    private TutorInfo x;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        listView = new ListView(this);
-        x = (TutorInfo) getIntent().getSerializableExtra("result");
+        TutorInfo x = (TutorInfo) getIntent().getSerializableExtra("result");
         setContentView(R.layout.activity_search_tutor_admin);
         setTitle("Profile");
         String sub = x.subject;
@@ -51,29 +32,9 @@ public class SearchTutorAdmin extends AppCompatActivity {
         for(int i=0; i<splited.length; i++){
             String f = WordUtils.capitalizeFully(split2[i]) + ": " + WordUtils.capitalizeFully(splited[i]);
             lastList.add(f);
-            Log.e("grad",split2[i]);
-            Log.e("sub",splited[i]);
         }
-        fname = (TextView) findViewById(R.id.fname);
-        fname.setText(x.firstName.substring(0,1).toUpperCase()+x.firstName.substring(1));
-        lname = (TextView) findViewById(R.id.lname);
-        lname.setText(x.lastName.substring(0,1).toUpperCase()+x.lastName.substring(1));
-        cnic = (TextView) findViewById(R.id.cnicNo);
-        cnic.setText(x.cnicNo);
-        contact = (TextView) findViewById(R.id.contactNo);
-        contact.setText(x.contactNo);
-        address = (TextView) findViewById(R.id.address);
-        address.setText(WordUtils.capitalizeFully(x.address));
-        location = (TextView) findViewById(R.id.location);
-        location.setText(WordUtils.capitalizeFully(x.tuitionLocation));
-        institution = (TextView) findViewById(R.id.institution);
-        institution.setText(x.recentInstitution);
-        prof = (ImageView) findViewById(R.id.imageProfile);
-        trans = (ImageView) findViewById(R.id.imageTranscript);
-        ArrayAdapter adapter = new ArrayAdapter<String>(this,
-                R.layout.list_item_3, R.id.txtitem, lastList);
-        listView = (ListView) findViewById(R.id.sub_list);
-        listView.setAdapter(adapter);
+        ImageView prof = findViewById(R.id.imageProfile);
+        ImageView trans = findViewById(R.id.imageTranscript);
         Picasso.get()
                 .load(x.getProfileImage())
                 .placeholder(R.drawable.placeholder_profile_picture)
@@ -86,5 +47,23 @@ public class SearchTutorAdmin extends AppCompatActivity {
                 .fit()
                 .centerCrop()
                 .into(trans);
+        TextView fname = findViewById(R.id.fname);
+        fname.setText(WordUtils.capitalizeFully(x.firstName));
+        TextView lname = findViewById(R.id.lname);
+        lname.setText(WordUtils.capitalizeFully(x.lastName));
+        TextView cnic = findViewById(R.id.cnicNo);
+        cnic.setText(x.cnicNo);
+        TextView contact = findViewById(R.id.contactNo);
+        contact.setText(x.contactNo);
+        TextView address = findViewById(R.id.address);
+        address.setText(WordUtils.capitalizeFully(x.address));
+        TextView location = findViewById(R.id.location);
+        location.setText(WordUtils.capitalizeFully(x.tuitionLocation));
+        TextView institution = findViewById(R.id.institution);
+        institution.setText(x.recentInstitution);
+        ArrayAdapter adapter = new ArrayAdapter<>(this,
+                R.layout.list_item_3, R.id.txtitem, lastList);
+        ListView listView = findViewById(R.id.sub_list);
+        listView.setAdapter(adapter);
     }
 }

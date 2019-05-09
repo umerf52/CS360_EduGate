@@ -5,13 +5,14 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:orientation="vertical"
 tools:context=".PendingDetailActivity">
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
         <RelativeLayout
             android:layout_width="match_parent"
             android:id="@+id/rel"
@@ -271,7 +272,6 @@ tools:context=".PendingDetailActivity">
                     android:layout_height="wrap_content"
                     android:background="@drawable/btn"
                     android:textColor="@color/white"
-                    android:onClick="acceptProfile"
                     android:text="Accept" />
 
                 <Button
@@ -282,7 +282,6 @@ tools:context=".PendingDetailActivity">
                     android:layout_marginTop="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:onClick="rejectProfile"
                     android:text="Reject" />
             </LinearLayout>
 
