@@ -30,8 +30,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".SignupEducationActivity">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,7 +56,7 @@
                     android:textSize="15sp"/>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/riLayout"
+                    android:id="@+id/institution_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -75,7 +74,7 @@
                         android:layout_height="40dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginRight="8dp"
-                        android:background="@drawable/et"
+                        android:background="@drawable/background"
                         android:inputType="textPostalAddress"
                         android:maxLength="13"
                         android:singleLine="true"
@@ -85,7 +84,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/riLayout"
+                    android:layout_below="@+id/institution_layout"
                     android:text="Tuition Location"
                     android:textStyle="bold"
                     android:textAllCaps="false"
@@ -93,14 +92,14 @@
                     android:textSize="15sp"/>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tlLayout"
+                    android:id="@+id/location_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_gravity = "center_horizontal"
                     android:layout_marginTop="20dp"
                     android:hint=" "
-                    android:layout_below="@+id/riLayout"
+                    android:layout_below="@+id/institution_layout"
                     android:inputType="textPostalAddress"
                     app:errorEnabled="true"
                     app:hintEnabled="true">
@@ -112,7 +111,7 @@
                         android:layout_height="40dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginRight="8dp"
-                        android:background="@drawable/et"
+                        android:background="@drawable/background"
                         android:inputType="textPostalAddress"
                         android:maxLength="13"
                         android:singleLine="true"
@@ -122,7 +121,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/li"
-                    android:layout_below="@id/tlLayout"
+                    android:layout_below="@id/location_layout"
                     android:orientation="horizontal">
 
                     <Button
@@ -153,7 +152,7 @@
                     android:text="Educational Degree"
                     android:textStyle="bold"
                     android:textAllCaps="false"
-                    android:layout_below="@id/tlLayout"
+                    android:layout_below="@id/location_layout"
                     android:layout_marginTop="60dp"
                     android:id="@+id/some"
                     android:textColor="@color/black"
@@ -208,7 +207,6 @@
                     android:layout_below="@id/subjects_grades_layout"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="8dp"
-                    android:onClick="onClick"
                     android:textColor="@color/white"
                     android:background="@drawable/btn"
                     android:text="Submit" />
@@ -216,6 +214,7 @@
 
             </RelativeLayout>
             <RelativeLayout
+                android:id="@+id/fab_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 

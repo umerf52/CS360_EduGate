@@ -5,25 +5,26 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class StartupActivity extends AppCompatActivity {
 
-    Button student_button;
-    Button tutor_button;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.getSupportActionBar().hide();
+        ActionBar ab = getSupportActionBar();
+        if (ab != null) {
+            ab.hide();
+        }
         setContentView(R.layout.activity_startup);
 
-        student_button = findViewById(R.id.student_button);
-        tutor_button = findViewById(R.id.tutor_button);
+        Button student_button = findViewById(R.id.student_button);
+        Button tutor_button = findViewById(R.id.tutor_button);
 
         tutor_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent myIntent = new Intent(StartupActivity.this, SignupPersonalActivity.class);
+                Intent myIntent = new Intent(StartupActivity.this, LoginActivity.class);
                 StartupActivity.this.startActivity(myIntent);
             }
         });
@@ -44,6 +45,5 @@ public class StartupActivity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
-
 
 }

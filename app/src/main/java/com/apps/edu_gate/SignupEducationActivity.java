@@ -21,6 +21,7 @@ import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -59,6 +60,8 @@ public class SignupEducationActivity extends BaseActivity {
     private TextView imageName;
     private Spinner myEducationDegree;
     private String degreeString;
+    private TextInputLayout mInstituteLayout;
+    private TextInputLayout mLocationLayout;
 
     private DatabaseReference databaseReference;
 
@@ -89,6 +92,9 @@ public class SignupEducationActivity extends BaseActivity {
         Button imageButton = findViewById(R.id.image_button);
         imageName = findViewById(R.id.image_name);
         myEducationDegree = findViewById(R.id.my_education_dropdown);
+        mInstituteLayout = findViewById(R.id.institution_layout);
+        mLocationLayout = findViewById(R.id.location_layout);
+        Button mSubmitButton = findViewById(R.id.submit_button);
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,23 +108,26 @@ public class SignupEducationActivity extends BaseActivity {
                 openFileChooser();
             }
         });
+        mSubmitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                submitForm();
+            }
+        });
 
         FirebaseApp.initializeApp(this);
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Tutors");
     }
 
-    public void onClick(View v) {
+    public void submitForm() {
         if (!validateForm()) {
             return;
         }
 
-        int i = v.getId();
-        if (i == R.id.submit_button) {
-            degreeString = String.valueOf(myEducationDegree.getSelectedItem());
-            if (!getSpinnerValues()) return;
-            mAuth = FirebaseAuth.getInstance();
-            addTutor();
-        }
+        degreeString = String.valueOf(myEducationDegree.getSelectedItem());
+        if (!getSpinnerValues()) return;
+        mAuth = FirebaseAuth.getInstance();
+        addTutor();
     }
 
 
@@ -138,22 +147,27 @@ public class SignupEducationActivity extends BaseActivity {
         boolean valid = true;
 
         if (transcriptImageUri == null) {
+            Toast.makeText(getApplicationContext(), "Transcript image not added", Toast.LENGTH_SHORT).show();
             valid = false;
         }
 
         String Institute = mInstitution.getText().toString();
         if (TextUtils.isEmpty(Institute)) {
-            mInstitution.setError("Required.");
+            mInstituteLayout.setErrorEnabled(true);
+            mInstituteLayout.setError("Required.");
             valid = false;
         } else {
+            mInstituteLayout.setErrorEnabled(false);
             mInstitution.setError(null);
         }
 
         String Location = mTuitionLocation.getText().toString();
         if (TextUtils.isEmpty(Location)) {
-            mTuitionLocation.setError("Required.");
+            mLocationLayout.setErrorEnabled(true);
+            mLocationLayout.setError("Required.");
             valid = false;
         } else {
+            mLocationLayout.setErrorEnabled(false);
             mTuitionLocation.setError(null);
         }
 
