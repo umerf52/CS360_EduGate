@@ -34,6 +34,7 @@ public class FragmentLocation extends Fragment implements SearchWithFragments.Da
 
     String s;
     String check;
+    String c;
 
 
     public FragmentLocation(){
@@ -120,9 +121,10 @@ public class FragmentLocation extends Fragment implements SearchWithFragments.Da
         check = "";
     }
     @Override
-    public void onDataUpdate(String xyz, String ident) {
+    public void onDataUpdate(String xyz, String ident, String checker) {
         s = xyz;
         check = ident;
+        c = checker;
         if(ident.equals("Location")){
             Toast.makeText(getActivity().getBaseContext(), xyz, Toast.LENGTH_LONG).show();
             Log.e("Name", xyz);
@@ -154,11 +156,19 @@ public class FragmentLocation extends Fragment implements SearchWithFragments.Da
                 public void onItemClick(int position, View v) {
                     TutorInfo x = tutorList.get(position);
                     Log.e("Location","clinersss");
-                    Intent myIntent = new Intent(getActivity().getBaseContext(), TutorSearchProfileActivity.class);
-                    myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    myIntent.putExtra("result",x);
-                    myIntent.putStringArrayListExtra("num",adminNumbers);
-                    getActivity().getBaseContext().startActivity(myIntent);
+                    if (c.equals("startup")){
+                        Intent myIntent = new Intent(getActivity().getBaseContext(), TutorSearchProfileActivity.class);
+                        myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        myIntent.putExtra("result",x);
+                        myIntent.putStringArrayListExtra("num",adminNumbers);
+                        getActivity().getBaseContext().startActivity(myIntent);
+                    }else{
+                        Intent myIntent = new Intent(getActivity().getBaseContext(), SearchTutorAdmin.class);
+                        myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        myIntent.putExtra("result",x);
+                        myIntent.putStringArrayListExtra("num",adminNumbers);
+                        getActivity().getBaseContext().startActivity(myIntent);
+                    }
                 }
             });
     }

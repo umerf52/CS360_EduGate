@@ -56,23 +56,6 @@ tools:context=".PendingDetailActivity">
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
             </LinearLayout>
-            <!--<LinearLayout-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_below="@id/lin"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_centerInParent="true"-->
-            <!--android:id="@+id/lin2">-->
-            <!--<TextView-->
-            <!--android:id="@+id/location"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="Township, Lahore"-->
-            <!--android:textColor="@color/black"-->
-            <!--android:textSize="14sp"-->
-            <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>-->
-
-            <!--</LinearLayout>-->
 
         </RelativeLayout>
 

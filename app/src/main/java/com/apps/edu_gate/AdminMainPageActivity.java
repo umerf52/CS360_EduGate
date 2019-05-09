@@ -41,6 +41,7 @@ public class AdminMainPageActivity extends BaseActivity {
         search.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent myIntent = new Intent(AdminMainPageActivity.this, SearchWithFragments.class);
+                myIntent.putExtra("who","admin");
                 AdminMainPageActivity.this.startActivity(myIntent);
             }
         });

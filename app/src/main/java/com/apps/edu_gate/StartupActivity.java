@@ -31,6 +31,7 @@ public class StartupActivity extends AppCompatActivity {
         student_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent myIntent = new Intent(StartupActivity.this, SearchWithFragments.class);
+                myIntent.putExtra("who","startup");
                 StartupActivity.this.startActivity(myIntent);
             }
         });

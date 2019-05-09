@@ -33,6 +33,7 @@ public class FragmentGrade extends Fragment implements SearchWithFragments.DataU
     private ArrayList<String> adminNumbers = new ArrayList<>();
     String s;
     String check;
+    String c;
 
 
     ValueEventListener valueEventListener5 = new ValueEventListener() {
@@ -129,9 +130,10 @@ public class FragmentGrade extends Fragment implements SearchWithFragments.DataU
     }
 
     @Override
-    public void onDataUpdate(String xyz, String ident) {
+    public void onDataUpdate(String xyz, String ident, String checker) {
         s = xyz;
         check = ident;
+        c = checker;
         if(ident.equals("Grade")){
             Query q7 = FirebaseDatabase.getInstance().getReference("Admin").orderByChild("mContactNo");
             q7.addListenerForSingleValueEvent(valueEventListener5);
@@ -163,11 +165,19 @@ public class FragmentGrade extends Fragment implements SearchWithFragments.DataU
                 public void onItemClick(int position, View v) {
                     TutorInfo x = tutorList.get(position);
                     Log.e("Grade","clinersss");
-                    Intent myIntent = new Intent(getActivity().getBaseContext(), TutorSearchProfileActivity.class);
-                    myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    myIntent.putExtra("result",x);
-                    myIntent.putStringArrayListExtra("num",adminNumbers);
-                    getActivity().getBaseContext().startActivity(myIntent);
+                    if (c.equals("startup")){
+                        Intent myIntent = new Intent(getActivity().getBaseContext(), TutorSearchProfileActivity.class);
+                        myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        myIntent.putExtra("result",x);
+                        myIntent.putStringArrayListExtra("num",adminNumbers);
+                        getActivity().getBaseContext().startActivity(myIntent);
+                    }else{
+                        Intent myIntent = new Intent(getActivity().getBaseContext(), SearchTutorAdmin.class);
+                        myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        myIntent.putExtra("result",x);
+                        myIntent.putStringArrayListExtra("num",adminNumbers);
+                        getActivity().getBaseContext().startActivity(myIntent);
+                    }
                 }
             });
     }

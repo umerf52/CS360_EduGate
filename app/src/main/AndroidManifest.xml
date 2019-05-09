@@ -8,7 +8,10 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SearchWithFragments" android:theme="@style/MySearch"></activity>
+        <activity android:name=".SearchTutorAdmin"></activity>
+        <activity
+            android:name=".SearchWithFragments"
+            android:theme="@style/MySearch" />
         <activity android:name=".RateDetailActivity" />
         <activity android:name=".ViewYourProfileActivity" />
         <activity

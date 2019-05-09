@@ -28,11 +28,12 @@ public class SearchWithFragments extends BaseActivity {
     SearchView searchView;
     String searching;
     String x;
+    String checker;
 
     private List<DataUpdateListener> mListeners;
 
     public interface DataUpdateListener {
-        void onDataUpdate(String query, String ident);
+        void onDataUpdate(String query, String ident, String c);
     }
 
     public synchronized void registerDataUpdateListener(DataUpdateListener listener) {
@@ -43,9 +44,9 @@ public class SearchWithFragments extends BaseActivity {
         mListeners.remove(listener);
     }
 
-    public synchronized void dataUpdated(String query, String ident) {
+    public synchronized void dataUpdated(String query, String ident, String c) {
         for (DataUpdateListener listener : mListeners) {
-            listener.onDataUpdate(query, ident);
+            listener.onDataUpdate(query, ident, c);
         }
     }
 
@@ -63,7 +64,7 @@ public class SearchWithFragments extends BaseActivity {
                     int position = viewPager.getCurrentItem();
                     x = (String)vadapter.getPageTitle(position);
                     Log.e(TAG, x );
-                    dataUpdated(searching, x);
+                    dataUpdated(searching, x, checker);
                     if( ! searchView.isIconified()) {
                         searchView.setIconified(false);
                     }return false;
@@ -102,7 +103,7 @@ public class SearchWithFragments extends BaseActivity {
         if (ab != null) {
             ab.setDisplayHomeAsUpEnabled(true);
         }
-
+        checker = (String) getIntent().getExtras().getString("who");
         TabLayout tabLayout = findViewById(R.id.tablayout);
         viewPager = findViewById(R.id.pager);
         Fragment frag1 = new FragmentName();
