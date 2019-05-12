@@ -74,6 +74,8 @@ public class ViewYourProfileActivity extends BaseActivity {
     private TutorInfo tutor;
     private ArrayList<Spinner> grade_spinners = new ArrayList<>();
     private ArrayList<Spinner> subject_spinners = new ArrayList<>();
+    private ArrayList<ImageView> buttons_list = new ArrayList<>();
+    private ArrayList<LinearLayout> layout_list = new ArrayList<>();
     ValueEventListener valueEventListener = new ValueEventListener() {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
@@ -217,7 +219,7 @@ public class ViewYourProfileActivity extends BaseActivity {
     }
 
     private void addSpinners() {
-        LinearLayout dropdown_layout = findViewById(R.id.subjects_grades_layout);
+        final LinearLayout dropdown_layout = findViewById(R.id.subjects_grades_layout);
 
         Spinner newSpinner = new Spinner(this);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
@@ -233,25 +235,39 @@ public class ViewYourProfileActivity extends BaseActivity {
                 (android.R.layout.simple_spinner_dropdown_item);
         newSpinner1.setAdapter(adapter1);
 
-        TextView temp_text_view = new TextView(this);
-        temp_text_view.setText("|");
-
-        LinearLayout temp_layout = new LinearLayout(this);
-        temp_layout.setOrientation(LinearLayout.HORIZONTAL);
-        temp_layout.setBackground(getDrawable(R.drawable.background));
-        temp_layout.setPadding(0, 8, 0, 8);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
+
+        ImageView button = new ImageView(this);
+        button.setBackground(getResources().getDrawable(R.drawable.baseline_cancel));
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final LinearLayout inv = findViewById(R.id.subjects_grades_layout);
+                int index = buttons_list.indexOf(view);
+                inv.removeView(layout_list.get(index));
+                subject_spinners.remove(index);
+                grade_spinners.remove(index);
+                buttons_list.remove(index);
+            }
+        });
+
+        LinearLayout temp_layout = new LinearLayout(this);
+        layout_list.add(temp_layout);
+        temp_layout.setOrientation(LinearLayout.HORIZONTAL);
+        temp_layout.setBackground(getDrawable(R.drawable.background));
+        temp_layout.setPadding(0, 8, 0, 8);
         params.setMargins(0, 8, 0, 8);
         temp_layout.setLayoutParams(params);
 
+        temp_layout.addView(button);
         temp_layout.addView(newSpinner1);
-        temp_layout.addView(temp_text_view);
         temp_layout.addView(newSpinner);
         grade_spinners.add(newSpinner1);
         subject_spinners.add(newSpinner);
+        buttons_list.add(button);
 
         dropdown_layout.addView(temp_layout);
     }
