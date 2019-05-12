@@ -59,7 +59,9 @@
             android:name=".LoginActivity"
             android:label="Login"
             android:parentActivityName=".StartupActivity" />
-        <activity android:name=".StartupActivity">
+        <activity
+            android:name=".StartupActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

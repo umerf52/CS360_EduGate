@@ -36,6 +36,8 @@
         <item name="colorControlActivated">@color/duskYellow</item>
     </style>
 
-    <!--<item name="materialAlertDialogTheme">@style/ThemeOverlay.MaterialComponents.MaterialAlertDialog</item>-->
+    <style name="SplashTheme" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+    </style>
 
 </resources>
