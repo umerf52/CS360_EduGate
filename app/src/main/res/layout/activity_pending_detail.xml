@@ -19,7 +19,6 @@ tools:context=".PendingDetailActivity">
             android:layout_height="wrap_content">
             <RelativeLayout
                 android:id="@+id/prof"
-                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_centerHorizontal="true"
                 android:layout_height="wrap_content">
@@ -276,7 +275,7 @@ tools:context=".PendingDetailActivity">
 
                 <Button
                     android:id="@+id/disapprove"
-                    android:background="@color/design_default_color_error"
+                    android:background="@drawable/btn4"
                     android:textColor="@color/white"
                     android:layout_below="@id/approve"
                     android:layout_marginTop="5dp"

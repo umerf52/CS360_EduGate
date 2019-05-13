@@ -20,15 +20,16 @@
                 android:id="@+id/rateLayout"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
                 android:layout_alignParentLeft="true"
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="25dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/rating_number"
-                    android:layout_width="40dp"
-                    android:layout_alignParentLeft="true"
+                    android:layout_width="100dp"
                     android:background="@drawable/et"
+                    android:layout_alignParentLeft="true"
                     android:layout_height="match_parent"
                     android:inputType="numberDecimal"
                     android:padding="8dp" />
@@ -37,13 +38,11 @@
 
             <Button
                 android:id="@+id/edit_button"
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/rateLayout"
-                android:layout_alignParentRight="true"
                 android:layout_marginLeft="140dp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="8dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
                 android:textColor="@color/white"
                 android:background="@drawable/btn"
                 android:text="Update" />
