@@ -207,6 +207,7 @@ public class SignupEducationActivity extends BaseActivity {
                 final LinearLayout inv = findViewById(R.id.subjects_grades_layout);
                 int index = buttons_list.indexOf(view);
                 inv.removeView(layout_list.get(index));
+                layout_list.remove(index);
                 subject_spinners.remove(index);
                 grade_spinners.remove(index);
                 buttons_list.remove(index);
