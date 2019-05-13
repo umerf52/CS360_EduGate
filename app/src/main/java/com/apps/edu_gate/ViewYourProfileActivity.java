@@ -237,7 +237,8 @@ public class ViewYourProfileActivity extends BaseActivity {
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                1.0f
         );
 
         ImageView button = new ImageView(this);
@@ -262,6 +263,8 @@ public class ViewYourProfileActivity extends BaseActivity {
         temp_layout.setPadding(0, 8, 0, 8);
         params.setMargins(0, 8, 0, 8);
         temp_layout.setLayoutParams(params);
+        newSpinner.setLayoutParams(params);
+        newSpinner1.setLayoutParams(params);
 
         temp_layout.addView(button);
         temp_layout.addView(newSpinner1);
