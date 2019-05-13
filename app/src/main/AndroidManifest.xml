@@ -14,7 +14,9 @@
         <activity
             android:name=".SearchWithFragments"
             android:theme="@style/MySearch" />
-        <activity android:name=".RateDetailActivity" />
+        <activity
+            android:name=".RateDetailActivity"
+            android:parentActivityName=".RateTutorActivity" />
         <activity android:name=".ViewYourProfileActivity" />
         <activity
             android:name=".ViewPendingActivity"
