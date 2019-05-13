@@ -6,24 +6,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".PendingDetailActivity">
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ye" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_centerInParent="true"
-        android:layout_height="match_parent"
-        android:background="@color/greytrans">
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_centerInParent="true"
-        android:layout_height="match_parent"
-        android:background="@color/ligwh">
-    </RelativeLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -38,7 +20,6 @@
                 android:layout_height="wrap_content">
                 <RelativeLayout
                     android:id="@+id/prof"
-                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_centerHorizontal="true"
                     android:layout_height="wrap_content">
@@ -47,7 +28,13 @@
                         android:id="@+id/change_profile_picture"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/btn3"
+                        android:textColor="@color/white"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="20dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
                         android:text="Edit Picture" />
 
                     <ImageView
@@ -189,7 +176,7 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="40dp"
                         android:layout_marginTop="20dp"
                         android:background="@drawable/background"
                         android:orientation="horizontal">
@@ -209,6 +196,7 @@
 
                     <TextView
                         android:id="@+id/subjects_I_teach_textView"
+                        android:layout_marginTop="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Grades and Subjects"
@@ -219,6 +207,7 @@
                     <LinearLayout
                         android:id="@+id/subjects_grades_layout"
                         android:layout_width="match_parent"
+                        android:layout_marginTop="20dp"
                         android:layout_height="wrap_content"
                         android:orientation="vertical" />
 
@@ -235,7 +224,6 @@
                             android:background="@drawable/btn"
                             android:textColor="@color/white"
                             android:layout_alignParentLeft="true"
-                            android:onClick="acceptProfile"
                             android:layout_marginTop="40dp"
                             android:text="SAVE" />
 

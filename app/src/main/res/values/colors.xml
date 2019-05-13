@@ -19,5 +19,6 @@
     <color name="duskYellow">#ffd700</color>
     <color name="lightGrey">#d3d3d3</color>
     <color name="lightnavy">#003366</color>
+    <color name="blacktrans">#87000000</color>
 
 </resources>
