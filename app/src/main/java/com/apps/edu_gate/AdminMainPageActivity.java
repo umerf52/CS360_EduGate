@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 
 import com.google.firebase.FirebaseApp;
@@ -24,17 +25,20 @@ public class AdminMainPageActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        ActionBar ab = getSupportActionBar();
+        if (ab != null) {
+            ab.hide();
+        }
         setContentView(R.layout.activity_admin_main_page);
-        setTitle("Administrator Home");
 
         FirebaseApp.initializeApp(this);
 
         ImageButton search = findViewById(R.id.search);
-        Button verify_profile = findViewById(R.id.verify_profile);
-        Button rate_tutor = findViewById(R.id.rate_tutor);
-        Button change_password = findViewById(R.id.change_password);
-        Button add_new_administrator = findViewById(R.id.add_new_administrator);
-        Button delete_tutor_profile = findViewById(R.id.delete_tutor_profile);
+        ImageButton verify_profile = findViewById(R.id.verify_profile);
+        ImageButton rate_tutor = findViewById(R.id.rate_tutor);
+        ImageButton change_password = findViewById(R.id.change_password);
+        ImageButton add_new_administrator = findViewById(R.id.add_new_administrator);
+        ImageButton delete_tutor_profile = findViewById(R.id.delete_tutor_profile);
         Button signout_button = findViewById(R.id.signoutButton);
 
 
