@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -23,41 +24,6 @@ class RateDetailAdapter extends RecyclerView.Adapter<RateDetailAdapter.RateDetai
     private ArrayList<Double> ratings;
     private String keys;
     private static RateDetailAdapter.MyClickListener myClickListener;
-
-    public static class RateDetailViewHolder extends RecyclerView.ViewHolder
-            implements View
-            .OnClickListener {
-        EditText rate;
-        Button button;
-
-        public RateDetailViewHolder(View itemView) {
-            super(itemView);
-            rate = (EditText) itemView.findViewById(R.id.rating_number);
-            button = (Button) itemView.findViewById(R.id.edit_button);
-            itemView.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View v) {
-            myClickListener.onItemClick(getAdapterPosition(), v);
-        }
-    }
-
-    public void setOnItemClickListener(RateDetailAdapter.MyClickListener myClickListener) {
-        this.myClickListener = myClickListener;
-    }
-
-    public RateDetailAdapter(Context mCtx, ArrayList<Double> ratings, String itskey) {
-        this.mCtx = mCtx;
-        this.ratings = ratings;
-        this.keys=itskey;
-    }
-    @NonNull
-    @Override
-    public RateDetailAdapter.RateDetailViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mCtx).inflate(R.layout.recycler_rate_detail, parent, false);
-        return new RateDetailAdapter.RateDetailViewHolder(view);
-    }
 
     @Override
     public void onBindViewHolder(@NonNull RateDetailAdapter.RateDetailViewHolder holder, final int position) {
@@ -75,8 +41,8 @@ class RateDetailAdapter extends RecyclerView.Adapter<RateDetailAdapter.RateDetai
                 if(s.length()>0){
                     String t = String.valueOf(s);
                     double p = Double.parseDouble(t);
-                    if(p<=5){
-                        ratings.set(position,p);
+                    if (p <= 5) {
+                        ratings.set(position, p);
                     }else{
                         Toast.makeText(mCtx, "Invalid Entry, between 0 and 5 only!", Toast.LENGTH_SHORT).show();
                     }
@@ -87,18 +53,59 @@ class RateDetailAdapter extends RecyclerView.Adapter<RateDetailAdapter.RateDetai
             @Override
             public void onClick(View v) {
                 DatabaseReference dbNode = FirebaseDatabase.getInstance().getReference("Tutors");
-                dbNode.child(keys).child("rating").setValue(ratings);
-                Toast.makeText(mCtx, "Rating updated!", Toast.LENGTH_SHORT).show();
+                dbNode.child(keys).child("rating").setValue(ratings).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(mCtx, "Rating updated!", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
+    }
+
+    public void setOnItemClickListener(RateDetailAdapter.MyClickListener myClickListener) {
+        this.myClickListener = myClickListener;
+    }
+
+    public RateDetailAdapter(Context mCtx, ArrayList<Double> ratings, String itskey) {
+        this.mCtx = mCtx;
+        this.ratings = ratings;
+        this.keys = itskey;
+    }
+
+    @NonNull
+    @Override
+    public RateDetailAdapter.RateDetailViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(mCtx).inflate(R.layout.recycler_rate_detail, parent, false);
+        return new RateDetailAdapter.RateDetailViewHolder(view);
+    }
+
+    public interface MyClickListener {
+        void onItemClick(int position, View v);
     }
 
     @Override
     public int getItemCount() {
         return ratings.size();
     }
-    public interface MyClickListener {
-        public void onItemClick(int position, View v);
+
+    public static class RateDetailViewHolder extends RecyclerView.ViewHolder
+            implements View
+            .OnClickListener {
+        EditText rate;
+        Button button;
+
+        public RateDetailViewHolder(View itemView) {
+            super(itemView);
+            rate = itemView.findViewById(R.id.rating_number);
+            button = itemView.findViewById(R.id.edit_button);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            myClickListener.onItemClick(getAdapterPosition(), v);
+        }
     }
 
 

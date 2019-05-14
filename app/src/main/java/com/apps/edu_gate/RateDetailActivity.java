@@ -21,16 +21,14 @@ public class RateDetailActivity extends BaseActivity {
 
     private ArrayList<Double> ratings = new ArrayList<>();
     private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
-    private RecyclerView recyclerView;
     String mykey;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rate_detail);
-        recyclerView = findViewById(R.id.recycler_view);
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
         TutorInfo x = (TutorInfo) getIntent().getSerializableExtra("result");
         setTitle((x.firstName.substring(0, 1).toUpperCase() + x.firstName.substring(1)) + " " +
@@ -38,10 +36,9 @@ public class RateDetailActivity extends BaseActivity {
         ratings = x.rating;
         mykey = x.key;
 
-
         mAdapter = new RateDetailAdapter(this, ratings, x.key);
         recyclerView.setAdapter(mAdapter);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,7 +89,6 @@ public class RateDetailActivity extends BaseActivity {
         ((RateDetailAdapter) mAdapter).setOnItemClickListener(new RateDetailAdapter.MyClickListener() {
             @Override
             public void onItemClick(int position, View v) {
-//                Toast.makeText(getBaseContext(),"Clicked!", Toast.LENGTH_LONG).show();
             }
         });
     }

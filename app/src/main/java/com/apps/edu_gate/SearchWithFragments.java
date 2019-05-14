@@ -1,7 +1,6 @@
 package com.apps.edu_gate;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.SearchView;
@@ -63,7 +62,6 @@ public class SearchWithFragments extends BaseActivity {
                 if (!searching.isEmpty()) {
                     int position = viewPager.getCurrentItem();
                     x = (String)vadapter.getPageTitle(position);
-                    Log.e(TAG, x );
                     dataUpdated(searching, x, checker);
                     if( ! searchView.isIconified()) {
                         searchView.setIconified(false);
@@ -103,7 +101,14 @@ public class SearchWithFragments extends BaseActivity {
         if (ab != null) {
             ab.setDisplayHomeAsUpEnabled(true);
         }
-        checker = (String) getIntent().getExtras().getString("who");
+        try {
+            if (getIntent().getExtras() != null) {
+                checker = getIntent().getExtras().getString("who");
+            }
+        } catch (Exception e) {
+            checker = "admin";
+        }
+
         TabLayout tabLayout = findViewById(R.id.tablayout);
         viewPager = findViewById(R.id.pager);
         Fragment frag1 = new FragmentName();

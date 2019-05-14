@@ -13,7 +13,6 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 
 public class AdminMainPageActivity extends BaseActivity {
@@ -97,14 +96,6 @@ public class AdminMainPageActivity extends BaseActivity {
             Toast.makeText(getBaseContext(), "Press back again in order to exit", Toast.LENGTH_SHORT).show();
 
         mBackPressed = System.currentTimeMillis();
-    }
-
-    private void updateUI(FirebaseUser user) {
-        if (user == null) {
-            Toast.makeText(AdminMainPageActivity.this, "Signed Out",
-                    Toast.LENGTH_SHORT).show();
-            finish();
-        }
     }
 
     private void signOut() {
