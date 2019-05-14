@@ -7,13 +7,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
-
-import androidx.annotation.NonNull;
 
 public class ForgotPasswordActivity extends BaseActivity implements View.OnClickListener {
 
@@ -29,7 +29,7 @@ public class ForgotPasswordActivity extends BaseActivity implements View.OnClick
 
         findViewById(R.id.resetPasswordButton).setOnClickListener(this);
         userEmail = findViewById(R.id.userEmail);
-        inputLayoutEmail = (TextInputLayout) findViewById(R.id.userEmailLayout);
+        inputLayoutEmail = findViewById(R.id.userEmailLayout);
 
         FirebaseApp.initializeApp(this);
         firebaseAuth = FirebaseAuth.getInstance();
@@ -53,8 +53,10 @@ public class ForgotPasswordActivity extends BaseActivity implements View.OnClick
                             ForgotPasswordActivity.this.startActivity(myIntent);
                         }
                         else{
-                            Toast.makeText(ForgotPasswordActivity.this,
-                                    task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                            if (task.getException() != null) {
+                                Toast.makeText(ForgotPasswordActivity.this,
+                                        task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                            }
                         }
                     }
                 });

@@ -36,8 +36,6 @@ public class AddNewAdminActivity extends BaseActivity {
     private EditText mpassword;
     private EditText mphone_number;
 
-    Button add_admin;
-
     private FirebaseAuth mAuth;
     private DatabaseReference databaseAdmin;
 
@@ -56,7 +54,7 @@ public class AddNewAdminActivity extends BaseActivity {
         mphone_number = findViewById(R.id.phone_number);
 
         // Buttons
-        add_admin = findViewById(R.id.add_admin);;
+        Button add_admin = findViewById(R.id.add_admin);
 
         add_admin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -122,7 +120,6 @@ public class AddNewAdminActivity extends BaseActivity {
 
 
     private void add_new_admin() {
-        //showProgressDialog();
         String firstname = mfirst_name.getText().toString();
         String lastname = mlast_name.getText().toString();
         String email = memail_address.getText().toString();
@@ -131,7 +128,9 @@ public class AddNewAdminActivity extends BaseActivity {
         String id = databaseAdmin.push().getKey();
         Admin newadmin = new Admin(firstname, lastname, email, contactNo);
 
-        databaseAdmin.child(id).setValue(newadmin);
+        if (id != null) {
+            databaseAdmin.child(id).setValue(newadmin);
+        }
     }
 
 
@@ -142,7 +141,6 @@ public class AddNewAdminActivity extends BaseActivity {
                     "New Admin added", Toast.LENGTH_LONG).show();
             Intent myIntent = new Intent(AddNewAdminActivity.this, AdminMainPageActivity.class);
             AddNewAdminActivity.this.startActivity(myIntent);
-            //SignupEmailPasswordActivity.this.startActivity(myIntent);
         } else {
             mAuth.signOut();
             Toast.makeText(AddNewAdminActivity.this, "Signed Out",
@@ -230,25 +228,27 @@ public class AddNewAdminActivity extends BaseActivity {
 
     private void sendEmailVerification() {
         final FirebaseUser user = mAuth.getCurrentUser();
-        user.sendEmailVerification()
-                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        // [START_EXCLUDE]
-                        // Re-enable button
+        if (user != null) {
+            user.sendEmailVerification()
+                    .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            // [START_EXCLUDE]
+                            // Re-enable button
 
-                        if (task.isSuccessful()) {
-//                            Toast.makeText(SignupEmailPasswordActivity.this,
-//                                    "Verification email sent to " + user.getEmail(),
-//                                    Toast.LENGTH_SHORT).show();
-                        } else {
-                            Log.e(TAG, "sendEmailVerification", task.getException());
-                            Toast.makeText(AddNewAdminActivity.this,
-                                    "Failed to send verification email.",
-                                    Toast.LENGTH_SHORT).show();
+                            if (task.isSuccessful()) {
+                                Toast.makeText(getApplicationContext(),
+                                        "Verification email sent to " + user.getEmail(),
+                                        Toast.LENGTH_SHORT).show();
+                            } else {
+                                Log.e(TAG, "sendEmailVerification", task.getException());
+                                Toast.makeText(AddNewAdminActivity.this,
+                                        "Failed to send verification email.",
+                                        Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
-                });
+                    });
+        }
     }
 
 }

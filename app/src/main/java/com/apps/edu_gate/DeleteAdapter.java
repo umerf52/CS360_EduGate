@@ -21,13 +21,13 @@ class DeleteAdapter extends RecyclerView.Adapter<DeleteAdapter.delViewHolder> {
     private static DeleteAdapter.MyClickListener myClickListener;
     private List<TutorInfo> tutorList;
 
-    public DeleteAdapter(Context mCtx, List<TutorInfo> tutorList) {
+    DeleteAdapter(Context mCtx, List<TutorInfo> tutorList) {
         this.mCtx = mCtx;
         this.tutorList = tutorList;
     }
 
     public void setOnItemClickListener(DeleteAdapter.MyClickListener myClickListener) {
-        this.myClickListener = myClickListener;
+        DeleteAdapter.myClickListener = myClickListener;
     }
 
     @NonNull
@@ -67,7 +67,7 @@ class DeleteAdapter extends RecyclerView.Adapter<DeleteAdapter.delViewHolder> {
         TextView lastName;
         ImageView profileImage;
 
-        public delViewHolder(View itemView) {
+        delViewHolder(View itemView) {
             super(itemView);
             firstName = itemView.findViewById(R.id.fname);
             lastName = itemView.findViewById(R.id.lname);

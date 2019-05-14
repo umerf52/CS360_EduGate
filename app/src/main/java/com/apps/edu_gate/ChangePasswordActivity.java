@@ -2,6 +2,7 @@ package com.apps.edu_gate;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -42,7 +43,9 @@ public class ChangePasswordActivity extends BaseActivity {
         ActionBar ab = getSupportActionBar();
 
         // Enable the Up button
-        ab.setDisplayHomeAsUpEnabled(true);
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
+        }
 
 
         old_password = findViewById(R.id.old_password);
@@ -71,37 +74,44 @@ public class ChangePasswordActivity extends BaseActivity {
             String email = user.getEmail();
             String oldpass = old_password.getText().toString();
 
-            AuthCredential credential = EmailAuthProvider.getCredential(email, oldpass);
+            AuthCredential credential = null;
+            if (email != null) {
+                credential = EmailAuthProvider.getCredential(email, oldpass);
+            } else {
+                Log.e("ChangePasswordActivity", "email is null");
+                Toast.makeText(getApplicationContext(), "email is null", Toast.LENGTH_SHORT).show();
+            }
 
-            user.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    //hideProgressDialog();
-                    if (task.isSuccessful()) {
-                        old_password.setError(null);
-                        String newpass = new_password.getText().toString();
-                        user.updatePassword(newpass).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (!task.isSuccessful()) {
-                                    hideProgressDialog();
-                                    Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_LONG).show();
-                                } else {
-                                    hideProgressDialog();
-                                    Toast.makeText(getApplicationContext(), "Your password has been changed", Toast.LENGTH_LONG).show();
-                                    finish();
+            if (credential != null) {
+                user.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            old_password.setError(null);
+                            String newpass = new_password.getText().toString();
+                            user.updatePassword(newpass).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (!task.isSuccessful()) {
+                                        hideProgressDialog();
+                                        Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_LONG).show();
+                                    } else {
+                                        hideProgressDialog();
+                                        Toast.makeText(getApplicationContext(), "Your password has been changed", Toast.LENGTH_LONG).show();
+                                        finish();
+                                    }
                                 }
-                            }
 
-                        });
+                            });
 
-                    } else {
-                        hideProgressDialog();
-                        old_password.setError("Incorrect Old Password");
-                        Toast.makeText(getApplicationContext(), "Account Authentication Failed", Toast.LENGTH_LONG).show();
+                        } else {
+                            hideProgressDialog();
+                            old_password.setError("Incorrect Old Password");
+                            Toast.makeText(getApplicationContext(), "Account Authentication Failed", Toast.LENGTH_LONG).show();
+                        }
                     }
-                }
-            });
+                });
+            }
 
         }
     }

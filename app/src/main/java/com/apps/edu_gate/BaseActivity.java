@@ -1,13 +1,12 @@
 package com.apps.edu_gate;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AppCompatActivity;
 
+@SuppressLint("Registered")
 public class BaseActivity extends AppCompatActivity {
 
     @VisibleForTesting
@@ -26,13 +25,6 @@ public class BaseActivity extends AppCompatActivity {
     public void hideProgressDialog() {
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
             mProgressDialog.dismiss();
-        }
-    }
-
-    public void hideKeyboard(View view) {
-        final InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (imm != null) {
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
 
