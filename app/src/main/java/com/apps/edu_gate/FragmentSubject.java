@@ -1,8 +1,10 @@
 package com.apps.edu_gate;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -91,11 +93,14 @@ public class FragmentSubject extends Fragment implements SearchWithFragments.Dat
                     }
                 }
                 mAdapter.notifyDataSetChanged();
+                hideProgressDialog();
             }
             else{
+                hideProgressDialog();
                 Toast.makeText(getActivity().getBaseContext(),"No such results!", Toast.LENGTH_LONG).show();
             }
             if(count==0){
+                hideProgressDialog();
                 Toast.makeText(getActivity().getBaseContext(),"No such results!", Toast.LENGTH_LONG).show();
             }
         }
@@ -135,7 +140,8 @@ public class FragmentSubject extends Fragment implements SearchWithFragments.Dat
         check = ident;
         c = checker;
         if(ident.equals("Subject")){
-            Toast.makeText(getContext(), s, Toast.LENGTH_LONG).show();
+            showProgressDialog();
+//            Toast.makeText(getContext(), s, Toast.LENGTH_LONG).show();
             Log.e("Subject", s);
             Query q7 = FirebaseDatabase.getInstance().getReference("Admin").orderByChild("mContactNo");
             q7.addListenerForSingleValueEvent(valueEventListener5);
@@ -180,5 +186,31 @@ public class FragmentSubject extends Fragment implements SearchWithFragments.Dat
                     }
                 }
             });
+    }
+
+    @VisibleForTesting
+    public ProgressDialog mProgressDialog;
+
+    public void showProgressDialog() {
+        if (mProgressDialog == null) {
+            mProgressDialog = new ProgressDialog(getActivity());
+            mProgressDialog.setMessage("Looking for Tutors...");
+            mProgressDialog.setIndeterminate(true);
         }
+
+        mProgressDialog.show();
+    }
+
+    public void hideProgressDialog() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        hideProgressDialog();
+    }
+
 }

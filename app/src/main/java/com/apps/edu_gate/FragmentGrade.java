@@ -1,8 +1,10 @@
 package com.apps.edu_gate;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -90,11 +92,14 @@ public class FragmentGrade extends Fragment implements SearchWithFragments.DataU
                     }
                 }
                 mAdapter.notifyDataSetChanged();
+                hideProgressDialog();
             }
             else{
+                hideProgressDialog();
                 Toast.makeText(getActivity().getBaseContext(),"No such results!", Toast.LENGTH_LONG).show();
             }
             if(count==0){
+                hideProgressDialog();
                 Toast.makeText(getActivity().getBaseContext(),"No such results!", Toast.LENGTH_LONG).show();
             }
         }
@@ -135,9 +140,10 @@ public class FragmentGrade extends Fragment implements SearchWithFragments.DataU
         check = ident;
         c = checker;
         if(ident.equals("Grade")){
+            showProgressDialog();
             Query q7 = FirebaseDatabase.getInstance().getReference("Admin").orderByChild("mContactNo");
             q7.addListenerForSingleValueEvent(valueEventListener5);
-            Toast.makeText(getActivity().getBaseContext(), s, Toast.LENGTH_LONG).show();
+//            Toast.makeText(getActivity().getBaseContext(), s, Toast.LENGTH_LONG).show();
             Log.e("Grade", s);
             Query q = FirebaseDatabase.getInstance().getReference("Tutors");
             q.addListenerForSingleValueEvent(valueEventListener3);
@@ -180,5 +186,31 @@ public class FragmentGrade extends Fragment implements SearchWithFragments.DataU
                     }
                 }
             });
+    }
+
+
+    @VisibleForTesting
+    public ProgressDialog mProgressDialog;
+
+    public void showProgressDialog() {
+        if (mProgressDialog == null) {
+            mProgressDialog = new ProgressDialog(getActivity());
+            mProgressDialog.setMessage("Looking for Tutors...");
+            mProgressDialog.setIndeterminate(true);
+        }
+
+        mProgressDialog.show();
+    }
+
+    public void hideProgressDialog() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        hideProgressDialog();
     }
 }
