@@ -28,8 +28,6 @@ public class TutorSearchProfileActivity extends AppCompatActivity {
     private  List<String> subjectsTur = new ArrayList<>();
     private  List<String> gradesTur = new ArrayList<>();
     private  List<String> lastList = new ArrayList<>();
-    ArrayAdapter<String> adapter;
-    ListView subList = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +69,7 @@ public class TutorSearchProfileActivity extends AppCompatActivity {
         ArrayAdapter adapter1 = new ArrayAdapter<>(this,
                 R.layout.list_item, R.id.txtitem, lastList);
 
-        subList = findViewById(R.id.sub_list);
+        ListView subList = findViewById(R.id.sub_list);
         subList.setAdapter(adapter1);
 
         FloatingActionButton floatingActionButton = findViewById(R.id.fab);

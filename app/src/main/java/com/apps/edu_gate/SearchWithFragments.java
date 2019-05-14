@@ -19,15 +19,13 @@ import java.util.List;
 
 public class SearchWithFragments extends BaseActivity {
 
-    private static final String TAG = "SearchPageActivity";
-
     private ViewPager viewPager;
     private ViewPagerAdapter vadapter;
 
-    SearchView searchView;
-    String searching;
-    String x;
-    String checker;
+    private SearchView searchView;
+    private String searching;
+    private String x;
+    private String checker;
 
     private List<DataUpdateListener> mListeners;
 
