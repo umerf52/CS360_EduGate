@@ -1,196 +1,218 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdminMainPageActivity">
+    tools:context=".SignupEducationActivity">
 
-    <RelativeLayout
+
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/dest"/>
+
+        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".AdminMainPageActivity">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:background="@color/navy"></RelativeLayout>
+            android:layout_height="wrap_content">
 
-        <RelativeLayout
-            android:id="@+id/re"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginRight="40dp">
-
-            <LinearLayout
-                android:id="@+id/lik"
-                android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="80dp"
-                android:layout_marginRight="10dp"
-                android:gravity="center"
-                android:orientation="horizontal">
+            <RelativeLayout
+                android:id="@+id/re"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="35dp"
+                android:layout_marginRight="40dp">
 
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:id="@+id/lik"
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="80dp"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/et2"
+                        android:orientation="vertical">
+
+                        <ImageButton
+                            android:id="@+id/search"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/search_icon"
+                            android:backgroundTint="@color/navy" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/et2"
+
+                        android:orientation="vertical">
+
+                        <ImageButton
+                            android:id="@+id/verify_profile"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/approval128"
+                            android:backgroundTint="@color/navy" />
+
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/re"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/et2"
+                        android:orientation="vertical">
+
+                        <ImageButton
+                            android:id="@+id/rate_tutor"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/rate128"
+                            android:backgroundTint="@color/navy" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/et2"
+                        android:orientation="vertical">
+
+                        <ImageButton
+                            android:id="@+id/change_password"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/pass128"
+                            android:backgroundTint="@color/navy" />
+
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/olp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rel"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/et2"
+                        android:orientation="vertical">
+
+                        <ImageButton
+                            android:id="@+id/add_new_administrator"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/add128"
+                            android:backgroundTint="@color/navy" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/et2"
+
+                        android:orientation="vertical">
+
+                        <ImageButton
+                            android:id="@+id/delete_tutor_profile"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/disapprove128"
+                            android:backgroundTint="@color/navy" />
+
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/olp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
-                    android:background="@drawable/et2"
                     android:orientation="vertical">
-
-                    <ImageButton
-                        android:id="@+id/search"
+                    <Button
+                        android:id="@+id/signoutButton"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/search_icon"
-                        android:backgroundTint="@color/navy" />
-
+                        android:layout_centerInParent="true"
+                        android:layout_marginTop="35dp"
+                        android:background="@drawable/btn"
+                        android:text="Signout"
+                        android:textColor="@color/white" />
                 </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/et2"
-
-                    android:orientation="vertical">
-
-                    <ImageButton
-                        android:id="@+id/verify_profile"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/approval128"
-                        android:backgroundTint="@color/navy" />
-
-
-                </LinearLayout>
-            </LinearLayout>
+            </RelativeLayout>
 
         </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/rel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/re"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/et2"
-                    android:orientation="vertical">
-
-                    <ImageButton
-                        android:id="@+id/rate_tutor"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/rate128"
-                        android:backgroundTint="@color/navy" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/et2"
-
-                    android:orientation="vertical">
-
-                    <ImageButton
-                        android:id="@+id/change_password"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/pass128"
-                        android:backgroundTint="@color/navy" />
-
-
-                </LinearLayout>
-            </LinearLayout>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/olp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/rel"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp">
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/et2"
-                    android:orientation="vertical">
-
-                    <ImageButton
-                        android:id="@+id/add_new_administrator"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/add128"
-                        android:backgroundTint="@color/navy" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/et2"
-
-                    android:orientation="vertical">
-
-                    <ImageButton
-                        android:id="@+id/delete_tutor_profile"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/disapprove128"
-                        android:backgroundTint="@color/navy" />
-
-
-                </LinearLayout>
-            </LinearLayout>
-
-        </RelativeLayout>
-
-        <Button
-            android:id="@+id/signoutButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/olp"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/btn"
-            android:text="Signout"
-            android:textColor="@color/white" />
-
-    </RelativeLayout>
-</ScrollView>
+    </ScrollView>
+</android.widget.RelativeLayout>
