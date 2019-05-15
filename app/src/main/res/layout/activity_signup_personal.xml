@@ -230,7 +230,6 @@
                         android:layout_marginRight="8dp"
                         android:background="@drawable/background"
                         android:inputType="text"
-                        android:maxLength="13"
                         android:padding="8dp"
                         android:singleLine="true" />
                 </com.google.android.material.textfield.TextInputLayout>
