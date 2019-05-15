@@ -216,7 +216,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="20dp"
                     android:hint=" "
-                    android:inputType="text"
+                    android:inputType="textPostalAddress"
                     android:orientation="vertical"
                     app:errorEnabled="true"
                     app:hintEnabled="true">
@@ -229,8 +229,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginRight="8dp"
                         android:background="@drawable/background"
-                        android:inputType="text"
-                        android:maxLength="13"
+                        android:inputType="textPostalAddress"
                         android:padding="8dp"
                         android:singleLine="true" />
                 </com.google.android.material.textfield.TextInputLayout>

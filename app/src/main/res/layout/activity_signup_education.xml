@@ -203,9 +203,9 @@
                     android:id="@+id/fab"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/subjects_grades_layout"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
+                    android:layout_below="@id/subjects_grades_layout"
                     android:layout_margin="8dp"
                     android:src="@android:drawable/ic_input_add"
                     app:backgroundTint="@color/navy" />
@@ -222,7 +222,16 @@
                     android:background="@drawable/btn"
                     android:text="Submit" />
 
+
             </RelativeLayout>
+            <!--<RelativeLayout-->
+            <!--android:id="@+id/fab_layout"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content">-->
+
+            <!---->
+
+            <!--</RelativeLayout>-->
         </LinearLayout>
     </ScrollView>
 </android.widget.RelativeLayout>
