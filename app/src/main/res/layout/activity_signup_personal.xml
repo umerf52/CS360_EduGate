@@ -216,7 +216,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="20dp"
                     android:hint=" "
-                    android:inputType="textPostalAddress"
+                    android:inputType="text"
                     android:orientation="vertical"
                     app:errorEnabled="true"
                     app:hintEnabled="true">
