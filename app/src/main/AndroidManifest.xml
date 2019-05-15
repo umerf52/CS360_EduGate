@@ -49,9 +49,6 @@
             android:label="Sign Up"
             android:parentActivityName=".LoginActivity" />
         <activity
-            android:name=".SearchPageActivity"
-            android:parentActivityName=".StartupActivity" />
-        <activity
             android:name=".ForgotPasswordActivity"
             android:label="Forgot Password"
             android:parentActivityName=".LoginActivity" />
