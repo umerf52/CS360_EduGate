@@ -23,11 +23,9 @@ import static com.google.firebase.database.FirebaseDatabase.getInstance;
 
 public class ProfileDeleteActivity extends BaseActivity {
 
-    private RecyclerView recyclerView;
     private List<TutorInfo> tutorList;
 
     private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
 
     ValueEventListener valueEventListener = new ValueEventListener() {
         @Override
@@ -63,9 +61,9 @@ public class ProfileDeleteActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_delete);
         setTitle("Delete Tutor Profiles");
-        recyclerView = findViewById(R.id.rv);
+        RecyclerView recyclerView = findViewById(R.id.rv);
         recyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
         tutorList = new ArrayList<>();
         mAdapter = new DeleteAdapter(this, tutorList);
@@ -100,7 +98,6 @@ public class ProfileDeleteActivity extends BaseActivity {
                 builder.setMessage("Do you want to delete this profile?")
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        Toast.makeText(getBaseContext(),x.key, Toast.LENGTH_LONG).show();
                         DatabaseReference dbNode = FirebaseDatabase.getInstance().getReference("Tutors");
                         dbNode.child(x.key).removeValue();
                     }
