@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -63,6 +64,13 @@ public class ViewPendingActivity extends BaseActivity {
     };
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Toast.makeText(getApplicationContext(), "sup", Toast.LENGTH_LONG).show();
+        recreate();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_pending);
@@ -88,7 +96,8 @@ public class ViewPendingActivity extends BaseActivity {
                 TutorInfo x = tutorList.get(position);
                 Intent myIntent = new Intent(ViewPendingActivity.this, PendingDetailActivity.class);
                 myIntent.putExtra("result",x);
-                ViewPendingActivity.this.startActivity(myIntent);
+//                ViewPendingActivity.this.startActivity(myIntent);
+                startActivityForResult(myIntent, 2);
             }
         });
     }

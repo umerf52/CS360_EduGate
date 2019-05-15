@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import org.apache.commons.text.WordUtils;
+
 import java.util.List;
 
 public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.pendingViewHolder> {
@@ -20,41 +22,13 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.pendingV
     private List<TutorInfo> tutorList;
     private static MyClickListener myClickListener;
 
-    public static class pendingViewHolder extends RecyclerView.ViewHolder
-            implements View
-            .OnClickListener {
-        TextView fname;
-        TextView lname;
-        ImageView profileImage;
-
-        public pendingViewHolder(View itemView) {
-            super(itemView);
-            fname = (TextView) itemView.findViewById(R.id.fname);
-            lname = (TextView) itemView.findViewById(R.id.lname);
-            profileImage = (ImageView)itemView.findViewById(R.id.person_photo);
-            itemView.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View v) {
-            myClickListener.onItemClick(getAdapterPosition(), v);
-        }
-    }
-
-    public void setOnItemClickListener(MyClickListener myClickListener) {
-        this.myClickListener = myClickListener;
-    }
-
-    public PendingAdapter(Context mCtx, List<TutorInfo> tutorList) {
+    PendingAdapter(Context mCtx, List<TutorInfo> tutorList) {
         this.mCtx = mCtx;
         this.tutorList = tutorList;
     }
 
-    @NonNull
-    @Override
-    public pendingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mCtx).inflate(R.layout.recycler_pending, parent, false);
-        return new pendingViewHolder(view);
+    public void setOnItemClickListener(MyClickListener myClickListener) {
+        PendingAdapter.myClickListener = myClickListener;
     }
 
     @Override
@@ -66,15 +40,44 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.pendingV
                 .fit()
                 .centerCrop()
                 .into(holder.profileImage);
-        holder.fname.setText(tutor.firstName.substring(0,1).toUpperCase()+tutor.firstName.substring(1));
-        holder.lname.setText(tutor.lastName.substring(0,1).toUpperCase()+tutor.lastName.substring(1));
+        holder.fname.setText(WordUtils.capitalizeFully(tutor.firstName));
+        holder.lname.setText(WordUtils.capitalizeFully(tutor.lastName));
+    }
+
+    @NonNull
+    @Override
+    public pendingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(mCtx).inflate(R.layout.recycler_pending, parent, false);
+        return new pendingViewHolder(view);
+    }
+
+    public interface MyClickListener {
+        void onItemClick(int position, View v);
     }
 
     @Override
     public int getItemCount() {
         return tutorList.size();
     }
-    public interface MyClickListener {
-        public void onItemClick(int position, View v);
+
+    public static class pendingViewHolder extends RecyclerView.ViewHolder
+            implements View
+            .OnClickListener {
+        TextView fname;
+        TextView lname;
+        ImageView profileImage;
+
+        pendingViewHolder(View itemView) {
+            super(itemView);
+            fname = itemView.findViewById(R.id.fname);
+            lname = itemView.findViewById(R.id.lname);
+            profileImage = itemView.findViewById(R.id.person_photo);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            myClickListener.onItemClick(getAdapterPosition(), v);
+        }
     }
 }

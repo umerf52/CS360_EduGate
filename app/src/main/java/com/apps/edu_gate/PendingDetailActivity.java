@@ -1,5 +1,6 @@
 package com.apps.edu_gate;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -93,6 +94,9 @@ public class PendingDetailActivity extends AppCompatActivity {
         DatabaseReference dbNode = FirebaseDatabase.getInstance().getReference("Tutors");
         dbNode.child(x.key).child("profileStatus").setValue(1);
         Toast.makeText(getBaseContext(), "Profile Verified", Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent();
+        setResult(2, intent);
         finish();
     }
 
@@ -100,6 +104,9 @@ public class PendingDetailActivity extends AppCompatActivity {
         DatabaseReference dbNode = FirebaseDatabase.getInstance().getReference("Tutors");
         dbNode.child(x.key).child("profileStatus").setValue(0);
         Toast.makeText(getBaseContext(), "Profile Declined", Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent();
+        setResult(2, intent);
         finish();
     }
 }

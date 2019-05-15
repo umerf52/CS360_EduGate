@@ -9,6 +9,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,7 +25,6 @@ import static com.google.firebase.database.FirebaseDatabase.getInstance;
 public class ProfileDeleteActivity extends BaseActivity {
 
     private List<TutorInfo> tutorList;
-
     private RecyclerView.Adapter mAdapter;
 
     ValueEventListener valueEventListener = new ValueEventListener() {
@@ -99,7 +99,13 @@ public class ProfileDeleteActivity extends BaseActivity {
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         DatabaseReference dbNode = FirebaseDatabase.getInstance().getReference("Tutors");
-                        dbNode.child(x.key).removeValue();
+                        dbNode.child(x.key).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                recreate();
+                                Toast.makeText(getApplicationContext(), "Profile Deleted", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                 }).setNegativeButton("No", dialogClickListener).show();
             }
