@@ -14,7 +14,7 @@ public class Tutor {
     private String mEmailAddress;
     private int mProfileStatus;
     private String key;
-    ArrayList<Double> mRating = new ArrayList<Double>();
+    private ArrayList<Double> mRating = new ArrayList<>();
     private String mGrade;
     private String mSubject;
     private String mProfileImage;
@@ -35,7 +35,7 @@ public class Tutor {
         this.mContactNo = contact_no;
         this.mGender = gender;
         this.mRecentInstitution = recent_institution;
-        this.mTuitionLocation = tuition_location;
+        this.mTuitionLocation = tuition_location.toLowerCase();
         this.mProfileStatus = -1;
         this.mEmailAddress = email;
         this.mGrade = grade;
