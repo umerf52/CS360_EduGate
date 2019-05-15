@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/et"
+            android:padding="7dp">
+            <RelativeLayout
+                android:id="@+id/lin"
+                android:layout_width="120dp"
+                android:layout_height="120dp">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ye"
+                    android:cropToPadding="true"
+                    android:id="@+id/person_photo"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="16dp"
+                    />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/fname"
+                android:layout_toRightOf="@+id/lin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="First Name"
+                android:layout_marginRight="5dp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
+            <TextView
+                android:id="@+id/lname"
+                android:layout_toRightOf="@id/fname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:text="Last Name"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
+                <TextView
+                    android:id="@+id/institution"
+                    android:layout_toRightOf="@id/lin"
+                    android:layout_width="match_parent"
+                    android:layout_below="@id/lname"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:layout_marginRight="5dp"
+                    android:text="Institution"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
+                <TextView
+                    android:id="@+id/location"
+                    android:layout_toRightOf="@+id/lin"
+                    android:layout_below="@id/institution"
+                    android:textSize="18sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:text="Location"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    android:layout_marginTop="5dp"
+                    android:layout_toRightOf="@id/lin"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:layout_below="@id/location"
+                    android:isIndicator="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:numStars="5"
+                    android:stepSize="0.5"/>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

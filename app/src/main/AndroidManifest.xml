@@ -4,19 +4,41 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AdminMainPageActivity"></activity>
         <activity
-            android:name=".TutorSearchProfile"
+            android:name=".SearchTutorAdmin"
+            android:parentActivityName=".SearchWithFragments"></activity>
+        <activity
+            android:name=".SearchWithFragments"
+            android:theme="@style/MySearch" />
+        <activity
+            android:name=".RateDetailActivity"
+            android:parentActivityName=".RateTutorActivity" />
+        <activity android:name=".ViewYourProfileActivity" />
+        <activity
+            android:name=".ViewPendingActivity"
+            android:parentActivityName=".AdminMainPageActivity" />
+        <activity
+            android:name=".ProfileDeleteActivity"
+            android:parentActivityName=".AdminMainPageActivity" />
+        <activity
+            android:name=".PendingDetailActivity"
+            android:parentActivityName=".ViewPendingActivity" />
+        <activity
+            android:name=".RateTutorActivity"
+            android:label="Rate Tutors"
+            android:parentActivityName=".AdminMainPageActivity" />
+        <activity android:name=".ChangePasswordActivity" />
+        <activity android:name=".AdminMainPageActivity" />
+        <activity
+            android:name=".AddNewAdminActivity"
+            android:parentActivityName=".AdminMainPageActivity" />
+        <activity
+            android:name=".TutorSearchProfileActivity"
             android:parentActivityName=".SearchPageActivity" />
-        <activity
-            android:name=".TutorProfileActivity"
-            android:label="Tutor Profile"
-            android:parentActivityName=".StartupActivity" />
         <activity
             android:name=".SignupEducationActivity"
             android:label="Educational Information"
@@ -39,7 +61,9 @@
             android:name=".LoginActivity"
             android:label="Login"
             android:parentActivityName=".StartupActivity" />
-        <activity android:name=".StartupActivity">
+        <activity
+            android:name=".StartupActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
