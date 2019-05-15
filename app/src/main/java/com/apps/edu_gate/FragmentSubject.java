@@ -85,6 +85,7 @@ public class FragmentSubject extends Fragment implements SearchWithFragments.Dat
                                     tutor.tuitionLocation = snapshot.child("tuitionLocation").getValue(String.class);
                                     tutor.rating = (ArrayList<Double>) snapshot.child("rating").getValue();
                                     tutor.profileImage = snapshot.child("profileImage").getValue(String.class);
+                                    tutor.transcriptImage = snapshot.child("transcriptImage").getValue(String.class);
                                     tutorList.add(tutor);
                                     break;
                                 }

@@ -95,7 +95,10 @@ public class FragmentLocation extends Fragment implements SearchWithFragments.Da
                         tutor.tuitionLocation = snapshot.child("tuitionLocation").getValue(String.class);
                         tutor.rating = (ArrayList<Double>) snapshot.child("rating").getValue();
                         tutor.profileImage = snapshot.child("profileImage").getValue(String.class);
+                        tutor.transcriptImage = snapshot.child("transcriptImage").getValue(String.class);
                         tutorList.add(tutor);
+                    }else{
+                        continue;
                     }
                 }
                 mAdapter.notifyDataSetChanged();
@@ -133,7 +136,6 @@ public class FragmentLocation extends Fragment implements SearchWithFragments.Da
         if(ident.equals("Location")){
             showProgressDialog();
 //            Toast.makeText(getActivity().getBaseContext(), xyz, Toast.LENGTH_LONG).show();
-            Log.e("Name", xyz);
             Query q7 = FirebaseDatabase.getInstance().getReference("Admin").orderByChild("mContactNo");
             q7.addListenerForSingleValueEvent(valueEventListener5);
             Query q = FirebaseDatabase.getInstance().getReference("Tutors").orderByChild("tuitionLocation").equalTo(xyz);

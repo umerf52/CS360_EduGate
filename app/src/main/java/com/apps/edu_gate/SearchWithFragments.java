@@ -1,6 +1,7 @@
 package com.apps.edu_gate;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.SearchView;
