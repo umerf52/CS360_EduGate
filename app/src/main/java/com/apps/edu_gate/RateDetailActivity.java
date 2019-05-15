@@ -53,7 +53,9 @@ public class RateDetailActivity extends BaseActivity {
                         String YouEditTextValue = edittext.getText().toString();
                         if(YouEditTextValue.length()>0){
                             double p = Double.parseDouble(YouEditTextValue);
-                            if(p<=5){
+                            int x = (int) p;
+                            p = (double) x;
+                            if(p<=5 && p>=0){
                                 ratings.add(p);
                                 DatabaseReference dbNode = FirebaseDatabase.getInstance().getReference("Tutors");
                                 dbNode.child(mykey).child("rating").setValue(ratings);
