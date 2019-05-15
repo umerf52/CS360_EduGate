@@ -3,11 +3,14 @@ package com.apps.edu_gate;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.ActionBar;
 
 import com.squareup.picasso.Picasso;
 
@@ -22,7 +25,23 @@ public class SearchTutorAdmin extends BaseActivity {
     private List<String> lastList = new ArrayList<>();
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return true;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Get a support ActionBar corresponding to this toolbar
+        ActionBar ab = getSupportActionBar();
+
+        // Enable the Up button
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
+        }
+
         super.onCreate(savedInstanceState);
         x = (TutorInfo) getIntent().getSerializableExtra("result");
         setContentView(R.layout.activity_search_tutor_admin);
