@@ -76,7 +76,6 @@ public class TutorAdapter2 extends RecyclerView.Adapter<TutorAdapter2.TutorViewH
 
     @Override
     public void onBindViewHolder(@NonNull TutorViewHolder holder, int position) {
-//        setAnimation(holder.itemView, position);
         TutorInfo tutor = tutorList.get(position);
         ArrayList<Double> temp = tutor.rating;
         double x = 0;
@@ -101,7 +100,7 @@ public class TutorAdapter2 extends RecyclerView.Adapter<TutorAdapter2.TutorViewH
         holder.lname.setText(WordUtils.capitalizeFully(tutor.lastName));
         holder.institution.setText(WordUtils.capitalizeFully(tutor.recentInstitution));
         holder.rating.setRating((float)avgrate);
-
+        setAnimation(holder.itemView, position);
     }
 
     private void setAnimation(View viewToAnimate, int position)
