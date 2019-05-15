@@ -66,7 +66,6 @@ public class ViewPendingActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Toast.makeText(getApplicationContext(), "sup", Toast.LENGTH_LONG).show();
         recreate();
     }
 
@@ -96,7 +95,6 @@ public class ViewPendingActivity extends BaseActivity {
                 TutorInfo x = tutorList.get(position);
                 Intent myIntent = new Intent(ViewPendingActivity.this, PendingDetailActivity.class);
                 myIntent.putExtra("result",x);
-//                ViewPendingActivity.this.startActivity(myIntent);
                 startActivityForResult(myIntent, 2);
             }
         });

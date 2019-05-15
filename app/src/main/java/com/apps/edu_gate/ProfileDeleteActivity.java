@@ -102,7 +102,6 @@ public class ProfileDeleteActivity extends BaseActivity {
                         dbNode.child(x.key).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                recreate();
                                 Toast.makeText(getApplicationContext(), "Profile Deleted", Toast.LENGTH_SHORT).show();
                             }
                         });
