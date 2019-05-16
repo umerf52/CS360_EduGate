@@ -431,7 +431,7 @@ public class ViewYourProfileActivity extends BaseActivity {
         dbNode.child(tutorKey).child("grade").setValue(new_grade_values);
         dbNode.child(tutorKey).child("profileStatus").setValue(-1);
         hideProgressDialog();
-        Toast.makeText(this, "Database updated", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
         recreate();
     }
 
